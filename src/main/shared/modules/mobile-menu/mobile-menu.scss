@@ -1,0 +1,47 @@
+.mobile-menu {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	padding: 40px 20px 32px 20px;
+	width: 100%;
+	background-color: $white;
+	border-radius: 0 0 15px 15px;
+	opacity: 0;
+	visibility: hidden;
+	transition: 0.2s linear;
+
+	@include rmin($mobile + 1) {
+		display: none;
+	}
+
+	&.active {
+		z-index: 4;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-flow: row;
+		gap: 20px;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		font-size: 16px;
+		line-height: normal;
+		color: $c-text;
+	}
+}

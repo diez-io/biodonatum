@@ -1,0 +1,35 @@
+.specifications {
+  display: flex;
+  gap: 30px;
+
+  &__title {
+    margin-bottom: 20px;
+    @include h3($azure)
+  }
+
+  &__element {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__head {
+    @include h4($white);
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: minmax(270px, 370px) minmax(190px, 270px);
+    gap: 20px 30px;
+
+    @include r($mobile) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--col {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.licenses {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+
+  &--short {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include r($mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.column {
+    display: flex;
+    flex-direction: column;
+  }
+}

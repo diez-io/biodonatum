@@ -1,0 +1,34 @@
+.editor {
+  p {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    @include text-big($white);
+
+    &.small {
+      @include text-middle($white);
+    }
+  }
+
+  strong {
+    @include h4($white);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  ul {
+    padding-left: 10px;
+    li {
+      @include text-middle($c-text);
+      list-style: disc inside;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  @include h3($background);
+
+  &--white {
+    color: $white;
+  }
+
+  &--row {
+    flex-direction: row;
+
+    @include r($mobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      width: 100%;
+    }
+  }
+
+  &--reverse {
+    flex-direction: row-reverse;
+
+    @include r($mobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      width: 100%;
+    }
+  }
+
+  &--slim {
+    gap: 0;
+  }
+
+  span {
+    @include text-middle($c-text-accent);
+    text-decoration: line-through;
+  }
+}

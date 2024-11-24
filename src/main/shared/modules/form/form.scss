@@ -1,0 +1,122 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &--connection {
+    .form__content {
+      gap: 10px 20px;
+    }
+
+    .input--area {
+      height: 100%;
+    }
+
+    .form__footer {
+      max-width: 510px;
+    }
+  }
+
+  &--attention {
+    width: 100%;
+
+    .form__content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 30px;
+
+    @include r($mobile) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    grid-column: span 1;
+
+    &--wide {
+      grid-column: span 2;
+    }
+
+    span {
+      @include text-small($c-text-accent)
+    }
+  }
+
+  &__agree {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    span {
+      @include text-small($c-text);
+
+      a {
+        color: $blue;
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &__remember {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+
+    span {
+      @include text-middle(#000000);
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @include r($mobile) {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+
+    @include r($mobile) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__forgotten {
+    margin: -10px auto 0;
+  }
+
+  &__google {
+    gap: 8px;
+    color: $blue;
+    font-weight: 700;
+
+    svg {
+      display: flex;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

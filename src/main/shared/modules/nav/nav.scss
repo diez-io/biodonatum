@@ -1,0 +1,14 @@
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+
+	&__link {
+		@include text-big($c-text);
+		transition: 0.2s linear;
+
+		&:hover {
+			color: $azure;
+		}
+	}
+}

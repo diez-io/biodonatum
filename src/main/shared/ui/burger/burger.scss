@@ -1,0 +1,54 @@
+.burger {
+	position: relative;
+	display: none;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	background: $blue-light;
+	cursor: pointer;
+	margin-left: 15px;
+	border-radius: 10px;
+
+	@include r($mobile) {
+		display: flex;
+	}
+
+	&__item,
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		left: 9px;
+		width: 22px;
+		height: 2px;
+		background-color: $azure;
+		border-radius: 50px;
+		transition: 0.2s linear;
+	}
+
+	&::before {
+		top: 13px;
+	}
+
+	&__item {
+		top: 50%;
+	}
+
+	&::after {
+		bottom: 11px;
+	}
+
+	&.active {
+		.burger__item {
+			top: -5px;
+		}
+		&::before {
+			top: 19px;
+			transform: rotate(-45deg);
+		}
+		&::after {
+			top: 19px;
+			transform: rotate(45deg);
+		}
+	}
+}

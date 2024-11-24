@@ -1,0 +1,28 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #007EC1;
+  cursor: pointer;
+  transition: .2s linear;
+  
+  &::before {
+    content: '';
+    display: flex;
+    width: 8px;
+    height: 6px;
+    background-image: url('../assets/images/icon-accept.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  &:checked {
+    background-color: #007EC1;
+  }
+}

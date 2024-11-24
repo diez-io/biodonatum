@@ -1,0 +1,25 @@
+.input {
+	display: block;
+	padding: 12px 20px;
+
+	@include text-middle($gray);
+
+	background-color: $gray-light;
+	border: 1px solid $gray-light;
+	border-radius: 10px;
+	transition: 0.2s linear;
+
+	&--area {
+		min-height: 254px;
+	}
+
+	&:focus {
+		border-color: $azure;
+	}
+
+	&--transparent {
+		background-color: transparent;
+		color: $white;
+		border-color: $white;
+	}
+}

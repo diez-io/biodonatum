@@ -1,0 +1,23 @@
+.text {
+	@include text-big($c-text);
+
+	&--middle {
+		@include text-middle($white);
+	}
+
+	&--small {
+		@include text-small($white);
+	}
+
+	&--dark {
+		color: $c-text;
+	}
+
+	&--semi-bold {
+		font-weight: $semi-bold;
+	}
+
+	&--blue {
+		color: $azure;
+	}
+}

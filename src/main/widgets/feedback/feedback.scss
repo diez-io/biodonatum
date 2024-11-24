@@ -1,0 +1,118 @@
+.feedback {
+	display: grid;
+	grid-auto-flow: dense;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	gap: 28px;
+
+	@include r($mobile) {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+	}
+
+	&__contacts {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: 30px 0 64px 40px;
+		background-color: $white;
+		border-radius: 20px;
+	}
+
+	&__header {
+		display: flex;
+		gap: 30px;
+	}
+	&__logo {
+		max-width: 170px;
+	}
+	&__titles {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		color: $c-text;
+
+		h2 {
+			font-size: 50px;
+			line-height: 130%;
+			font-weight: $medium;
+		}
+
+		h3 {
+			font-size: 32px;
+			line-height: 100%;
+			font-weight: $semi-bold;
+		}
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+		gap: 20px;
+	}
+
+	&__text {
+		font-size: 24px;
+		line-height: 190%;
+		@include r($mobile) {
+			max-width: 100%;
+		}
+	}
+
+	&__phones {
+		display: flex;
+
+		gap: 20px;
+
+		&--icon {
+			display: flex;
+			align-items: center;
+			svg {
+				width: 100%;
+				max-width: 32px;
+				max-height: 32px;
+			}
+		}
+	}
+	&__email {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+
+		svg {
+			width: 32px;
+			height: 22.5px;
+		}
+	}
+	&__links {
+		display: flex;
+		flex-direction: column;
+	}
+	&__link {
+		font-weight: $semi-bold;
+		font-size: 24px;
+		line-height: 150%;
+	}
+	&__title {
+		font-size: 32px;
+		font-weight: $semi-bold;
+		line-height: auto;
+		color: $c-text;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		padding: 40px;
+		background-color: $white;
+		border-radius: 20px;
+		@include r($mobile) {
+			width: 100%;
+		}
+	}
+}

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <%= htmlWebpackPlugin.options.widgets.header %>
-    <div class="main">
-        <svg class="icon">
-            <use href="assets/sprite.svg#icon-ball"></use>
-        </svg>
-        <img class="image" src="./assets/images/404.webp" alt="">
-    </div>
-    <%= htmlWebpackPlugin.options.widgets.footer %>
-</body>
+<html lang="en">
+
+<%= htmlWebpackPlugin.options.widgets.head %>
+
+    <body>
+        <aside class="pre-header">ÉCONOMISEZ 10 % SUR VOTRE PREMIÈRE COMMANDE. Entrez le code HALLO10 à la caisse pour
+            10 % de
+            réduction sur votre première commande.</aside>
+        <%= htmlWebpackPlugin.options.widgets.header %>
+            <main class="main main--index" style="background-image: url('./assets/images/index-bg.png')">
+                <%= htmlWebpackPlugin.options.widgets.mainHero %>
+                    <%= htmlWebpackPlugin.options.widgets.teasers %>
+                        <%= htmlWebpackPlugin.options.widgets.productDetail %>
+                            <%= htmlWebpackPlugin.options.widgets.partners %>
+                                <%= htmlWebpackPlugin.options.widgets.feedback %>
+            </main>
+            <%= htmlWebpackPlugin.options.widgets.footer %>
+    </body>
+
 </html>

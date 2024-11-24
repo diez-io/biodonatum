@@ -1,0 +1,24 @@
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  &__icon {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    fill: $white;
+    transition: .2s linear;
+  }
+  
+  &__element {
+    cursor: pointer;
+
+    &.active {
+      .control__icon {
+        fill: $azure;
+      }
+    }
+  }
+}

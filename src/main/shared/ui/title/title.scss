@@ -1,0 +1,15 @@
+.title {
+	@include h1($c-text);
+
+	&--small {
+		@include h2($c-text);
+	}
+
+	&--extra-small {
+		@include h3($c-text);
+	}
+
+	&--blue {
+		color: $azure;
+	}
+}

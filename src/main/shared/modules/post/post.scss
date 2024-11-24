@@ -1,0 +1,29 @@
+.post {
+	display: flex;
+	flex-direction: column;
+
+	&__top {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+		margin-bottom: 20px;
+	}
+
+	&__labels {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 9px;
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	&__text {
+		@include text-small($blue-light);
+	}
+}

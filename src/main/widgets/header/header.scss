@@ -1,3 +1,152 @@
+.pre-header {
+	padding: 14px 0;
+	text-align: center;
+	color: $azure;
+	text-transform: uppercase;
+	font-size: 15px;
+	font-weight: $semi-bold;
+}
+
 .header {
-    background-color: blue;
+	position: relative;
+	border-radius: 20px;
+	margin: 0 30px;
+	padding: 10px 0;
+	background-color: $white;
+
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+
+		@include r($mobile) {
+			justify-content: center;
+			position: relative;
+			z-index: 5;
+		}
+	}
+
+	&__block {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+
+		&--full {
+			@include r($mobile) {
+				flex-grow: 1;
+			}
+		}
+
+		&--no-gap {
+			gap: 0;
+		}
+	}
+
+	&__personal {
+		display: flex;
+		position: relative;
+		gap: 8px;
+		padding: 0 0 0 14px;
+		@include r($mobile) {
+			padding: 0 14px 0 0;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			left: 0;
+			height: calc(100% - 14px);
+			width: 1px;
+			background: #f0f0f0;
+
+			@include r($mobile) {
+				right: 0;
+				left: unset;
+			}
+		}
+	}
+
+	&__user {
+		position: relative;
+
+		&:hover .menu {
+			opacity: 1;
+			visibility: visible;
+			transition-delay: 0s;
+		}
+	}
+
+	&__language {
+		position: relative;
+
+		&:hover .menu {
+			opacity: 1;
+			visibility: visible;
+			transition-delay: 0s;
+		}
+	}
+
+	&__element {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		background: $blue-light;
+		cursor: pointer;
+		border-radius: 10px;
+
+		&:hover {
+			span {
+				color: $blue-light;
+			}
+
+			svg {
+				fill: $azure;
+			}
+		}
+
+		span {
+			color: $azure;
+			transition: 0.2s linear;
+		}
+
+		svg {
+			fill: $azure;
+			transition: 0.2s linear;
+		}
+
+		.icon--small {
+			width: 8px;
+			height: 8px;
+		}
+	}
+
+	&__logout {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		@include text-middle($white);
+
+		svg {
+			display: flex;
+			width: 20px;
+			height: 20px;
+			fill: $white;
+		}
+	}
+
+	.socials {
+		padding-right: 14px;
+	}
+}
+
+.logo {
+	@include r($mobile) {
+		max-width: 67.86px;
+		max-height: 50px;
+	}
 }

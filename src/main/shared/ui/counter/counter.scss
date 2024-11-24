@@ -1,0 +1,28 @@
+.counter {
+  display: flex;
+  padding: 11px 20px;
+  width: 130px;
+  border-radius: 10px;
+  border: 1px solid #007EC1;
+
+  &__icon {
+    display: flex;
+    width: 18px;
+    height: 18px;
+  }
+
+  &__input {
+    width: 100%;
+    text-align: center;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  &__btn {
+    cursor: pointer;
+  }
+}

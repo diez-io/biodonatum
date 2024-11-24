@@ -1,0 +1,135 @@
+.columns {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 30px;
+
+  @include r($mobile) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  &__col {
+    &-1 {
+      grid-column: span 1;
+    }
+
+    &-2 {
+      grid-column: span 2;
+    }
+
+    &-3 {
+      grid-column: span 3;
+    }
+
+    &-4 {
+      grid-column: span 4;
+    }
+
+    &-5 {
+      grid-column: span 5;
+    }
+
+    &-6 {
+      grid-column: span 6;
+    }
+
+    &-7 {
+      grid-column: span 7;
+    }
+
+    &-8 {
+      grid-column: span 8;
+    }
+
+    &-9 {
+      grid-column: span 9;
+    }
+
+    &-10 {
+      grid-column: span 10;
+    }
+
+    &-11 {
+      grid-column: span 11;
+    }
+
+    &-12 {
+      grid-column: span 12;
+    }
+  }
+
+  &__col-mob {
+    &-1 {
+      @include r($mobile) {
+        grid-column: span 1;
+      }
+    }
+
+    &-2 {
+      @include r($mobile) {
+        grid-column: span 2;
+      }
+    }
+
+    &-3 {
+      @include r($mobile) {
+        grid-column: span 3;
+      }
+    }
+
+    &-4 {
+      @include r($mobile) {
+        grid-column: span 4;
+      }
+    }
+
+    &-5 {
+      @include r($mobile) {
+        grid-column: span 5;
+      }
+    }
+
+    &-6 {
+      @include r($mobile) {
+        grid-column: span 6;
+      }
+    }
+
+    &-7 {
+      @include r($mobile) {
+        grid-column: span 7;
+      }
+    }
+
+    &-8 {
+      @include r($mobile) {
+        grid-column: span 8;
+      }
+    }
+
+    &-9 {
+      @include r($mobile) {
+        grid-column: span 9;
+      }
+    }
+
+    &-10 {
+      @include r($mobile) {
+        grid-column: span 10;
+      }
+    }
+
+    &-11 {
+      @include r($mobile) {
+        grid-column: span 11;
+      }
+    }
+
+    &-12 {
+      @include r($mobile) {
+        grid-column: span 12;
+      }
+    }
+  }
+}

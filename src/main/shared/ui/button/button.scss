@@ -1,0 +1,76 @@
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 28px 0;
+	width: max-content;
+
+	@include text-middle($white);
+	border-radius: 10px;
+	background-color: $azure;
+	transition: 0.2s linear;
+	cursor: pointer;
+	text-transform: uppercase;
+
+	&:hover,
+	&:focus {
+		background-color: $azure;
+	}
+
+	&:active {
+		background-color: #44aeec;
+	}
+
+	&--transparent {
+		color: $white;
+		background-color: transparent;
+		border: 1px solid $blue;
+
+		&:hover,
+		&:focus {
+			background-color: $background;
+		}
+
+		&:active {
+			color: $azure;
+		}
+
+		&[disabled] {
+			pointer-events: none;
+			border-color: $dark-grey;
+			color: $blue-light;
+		}
+	}
+
+	&--green {
+		background-color: $pale-green;
+	}
+
+	&--wide {
+		width: 100%;
+	}
+
+	&--mob-wide {
+		@include r($mobile) {
+			width: 100%;
+		}
+	}
+
+	&--icon {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	&__icon {
+		display: flex;
+		width: 20px;
+		height: 20px;
+		fill: $white;
+	}
+
+	&[disabled] {
+		pointer-events: none;
+		background-color: $dark-grey;
+	}
+}

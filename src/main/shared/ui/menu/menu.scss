@@ -1,0 +1,29 @@
+.menu {
+	position: absolute;
+	top: calc(100% + 10px);
+	left: 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 128px;
+	padding: 20px 38px 20px 20px;
+	width: 100%;
+	border-radius: 20px;
+	background-color: $white;
+	opacity: 0;
+	visibility: hidden;
+	transition: 0.2s linear;
+	transition-delay: 0.2s;
+
+	&__item {
+		font-size: 15px;
+		line-height: 170%;
+		@include text-middle($c-text);
+		transition: 0.2s linear;
+
+		&:hover {
+			color: $azure;
+			font-weight: $semi-bold;
+		}
+	}
+}

@@ -1,0 +1,28 @@
+.more {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+
+	&:hover {
+		span {
+			color: $white;
+		}
+		.more__icon {
+			fill: $white;
+		}
+	}
+
+	span {
+		@include text-middle($blue);
+		transition: 0.2s linear;
+	}
+
+	&__icon {
+		display: flex;
+		width: 14px;
+		height: 14px;
+		fill: $blue;
+		transition: 0.2s linear;
+	}
+}

@@ -1,0 +1,19 @@
+.section {
+	&--bg {
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	&--light {
+		background-color: $gray-light;
+	}
+
+	&--white {
+		background-color: $white;
+	}
+
+	&--dark {
+		background-color: $gray;
+	}
+}

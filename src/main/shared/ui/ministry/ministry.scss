@@ -1,0 +1,19 @@
+.ministry {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 30px;
+  background-color: $white;
+  border-radius: 30px;
+
+  @include r($mobile) {
+    padding: 10px 20px;
+  }
+
+  &__picture {
+    display: flex;
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+  }
+}

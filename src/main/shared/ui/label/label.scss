@@ -1,0 +1,32 @@
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+
+  @include text-middle($white);
+
+  border-radius: 10px;
+  border: 1px solid $white;
+
+  transition: .2s linear;
+
+  &:hover,
+  &:focus {
+    color: $azure;
+  }
+
+  &--blue {
+    color: $azure;
+    border-color: $azure;
+
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+
+    &:active {
+      border-color: $white;
+    }
+  }
+}

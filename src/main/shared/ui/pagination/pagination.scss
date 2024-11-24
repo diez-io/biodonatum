@@ -1,0 +1,55 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  &__icon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    fill: $white;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &--prev {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__list {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    @include text-middle($azure);
+    border: 1px solid $azure;
+    border-radius: 10px;
+    transition: .2s linear;
+
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+
+    &:active {
+      border-color: $white;
+    }
+
+    &.active {
+      color: $white;
+      border-color: $white;
+    }
+  }
+}

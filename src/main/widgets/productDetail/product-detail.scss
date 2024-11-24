@@ -1,0 +1,156 @@
+.product-detail {
+	display: flex;
+	gap: 50px;
+	padding-bottom: 110px;
+	@include r($mobile) {
+		flex-direction: column;
+	}
+	&__right {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	&__left {
+		display: flex;
+		flex-direction: column;
+		gap: 25px;
+		max-width: 750px;
+
+		.swiper-pagination {
+			position: absolute;
+			bottom: 36px;
+			width: 100%;
+			justify-content: center;
+			z-index: 1;
+			.swiper-pagination-bullet {
+				width: 12px;
+				height: 12px;
+			}
+		}
+	}
+
+	&__header {
+		display: flex;
+		gap: 20px;
+		flex-direction: column;
+		p {
+			font-size: 22px;
+			line-height: 23px;
+		}
+	}
+
+	&__card {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		background-color: $white;
+		padding: 40px 20px 40px 40px;
+		border-radius: 20px;
+
+		.buttons {
+			display: flex;
+			gap: 20px;
+
+			.button {
+				width: calc(100% - 10px);
+			}
+		}
+	}
+
+	&__picture {
+		display: flex;
+		flex-shrink: 0;
+		width: 750px;
+		height: 660px;
+		border-radius: 20px;
+		overflow: hidden;
+
+		@include r($mobile) {
+			width: 100%;
+			height: auto;
+		}
+
+		img {
+			@include coverFull();
+		}
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		gap: 20px;
+	}
+
+	&__meta {
+		margin-top: auto;
+
+		@include r($mobile) {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+		}
+
+		&--row {
+			display: flex;
+			gap: 25px;
+
+			@include r($mobile) {
+				flex-direction: column-reverse;
+				align-items: flex-start;
+				gap: 10px;
+			}
+		}
+	}
+
+	&__desc {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	&__text {
+		@include text-middle($blue-light);
+	}
+
+	&__price {
+		align-items: flex-start;
+		margin-bottom: 10px;
+
+		@include r($mobile) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__list {
+		display: grid;
+		grid-auto-flow: dense;
+		grid-template-columns: repeat(3, minmax(200px, 1fr));
+		gap: 30px;
+
+		@include r($mobile) {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&--extended {
+			grid-template-columns: repeat(4, minmax(200px, 1fr));
+		}
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	&__title {
+		@include h3($azure);
+	}
+
+	&__accent {
+		@include h4($white);
+	}
+}

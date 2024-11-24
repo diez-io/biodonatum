@@ -1,0 +1,49 @@
+.tabs {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 17.5px;
+		@include r($mobile) {
+			overflow-x: auto;
+			overflow-y: hidden;
+		}
+	}
+
+	&__head {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: $white;
+		padding: 28px 0;
+		border-radius: 100px;
+		min-width: 300px;
+		font-size: 22px;
+		font-weight: $semi-bold;
+
+		transition: 0.2s linear;
+		cursor: pointer;
+
+		@include r($mobile) {
+			flex-shrink: 0;
+		}
+
+		&.active {
+			color: $blue;
+			background-color: $blue-light;
+		}
+	}
+
+	&__item {
+		padding: 40px;
+		border-radius: 20px;
+		background-color: $white;
+		&:not(.active) {
+			display: none;
+		}
+	}
+}

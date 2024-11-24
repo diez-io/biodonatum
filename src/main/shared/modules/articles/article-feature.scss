@@ -1,0 +1,14 @@
+.article-feature {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+
+	p {
+		text-align: center;
+		font-size: 14px;
+		line-height: 120%;
+		font-weight: $semi-bold;
+	}
+}
