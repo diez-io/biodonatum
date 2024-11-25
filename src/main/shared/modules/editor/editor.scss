@@ -9,6 +9,10 @@
 		&.small {
 			@include text-middle($c-text);
 		}
+
+		@include r($mobile) {
+			@include text-middle($c-text);
+		}
 	}
 
 	strong {

@@ -23,15 +23,17 @@
 		display: flex;
 		gap: 30px;
 		@include r($mobile) {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 16px;
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-auto-flow: row;
+			gap: 14px;
 		}
 	}
 
 	&__link {
-		@include text-big($white);
+		font-size: 15px;
+		color: $white;
+		line-height: 100%;
 		transition: 0.2s linear;
 		&:hover {
 			color: #49b2e3;
