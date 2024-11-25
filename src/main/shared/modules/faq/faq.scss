@@ -1,53 +1,54 @@
 .faq {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
 
-  &__item {
-    display: flex;
-    flex-direction: column;
-    padding: 30px 40px;
-    border-radius: 20px;
-    background-color: $white;
+	&__item {
+		display: flex;
+		flex-direction: column;
+		padding: 30px 40px;
+		border-radius: 20px;
+		background-color: $white;
+		cursor: pointer;
 
-    @include r($mobile) {
-      padding: 30px 20px;
-    }
+		@include r($mobile) {
+			padding: 30px 20px;
+		}
 
-    &.active {
-      .faq__content {
-        height: 100%;
-        overflow: visible;
-        margin-top: 16px;
-      }
-      .faq__icon {
-        transform: rotate(180deg);
-      }
-    }
-  }
+		&.active {
+			.faq__content {
+				height: 100%;
+				overflow: visible;
+				margin-top: 16px;
+			}
+			.faq__icon {
+				transform: rotate(180deg);
+			}
+		}
+	}
 
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-  }
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+	}
 
-  &__title {
-    color: $blue;
-  }
+	&__title {
+		color: $blue;
+	}
 
-  &__icon {
-    display: flex;
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    fill: $blue;
-  }
+	&__icon {
+		display: flex;
+		flex-shrink: 0;
+		width: 18px;
+		height: 18px;
+		fill: $blue;
+	}
 
-  &__content {
-    height: 0;
-    overflow: hidden;
-    max-width: 630px;
-  }
+	&__content {
+		height: 0;
+		overflow: hidden;
+		max-width: 630px;
+	}
 }

@@ -2,6 +2,7 @@ import Slider from "./slider";
 import Form from "./form";
 import inputmask from "inputmask";
 import Tabs from "./tabs";
+import Dropdown from "./dropdown";
 import MobileMenu from "./mobileMenu";
 class App {
     constructor() {
@@ -62,6 +63,15 @@ class App {
         if (!tabs) return
         tabs.forEach(tab => {
             new Tabs(tab)
+        })
+    }
+
+
+    createDropdown = () => {
+        const dropdown = document.querySelectorAll('[data-dropdown]')
+        if (!dropdown) return
+        dropdown.forEach(el => {
+            new Dropdown(el)
         })
     }
 

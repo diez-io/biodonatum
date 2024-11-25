@@ -71,9 +71,9 @@ $mobile: 1199;
 
 @mixin text-big($color) {
 	font-family: $font-main;
-	font-size: 16px;
-	font-weight: 500;
-	line-height: 19px;
+	font-size: 24px;
+	font-weight: $medium;
+	line-height: 190%;
 	color: $color;
 }
 

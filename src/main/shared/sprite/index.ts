@@ -8,3 +8,4 @@ import './icon-wa.svg';
 import './icon-chevrone.svg';
 import './icon-phone.svg';
 import './icon-email.svg';
+import './icon-star.svg';

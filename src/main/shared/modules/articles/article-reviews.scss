@@ -1,0 +1,62 @@
+.article-reviews {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 20px 30px 20px;
+	border-radius: 20px;
+	min-height: 370px;
+	border: 1px solid #f5f5f5;
+	background-color: $white;
+	overflow: hidden;
+
+	&__picture {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		max-height: 240px;
+		overflow: hidden;
+
+		img {
+			@include coverFull();
+		}
+	}
+
+	&__content {
+	}
+
+	&__date {
+		margin-bottom: 10px;
+		font-size: 18px;
+		color: #e0e0e0;
+	}
+
+	&__title {
+		margin-bottom: 10px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__author {
+		font-weight: $semi-bold;
+		font-size: 24px;
+	}
+
+	&__rating {
+		display: flex;
+		gap: 8px;
+		margin-bottom: 20px;
+		.star {
+			width: 20px;
+			height: 20px;
+			&--not-filled {
+				path {
+					fill: none;
+				}
+			}
+		}
+	}
+
+	&__text {
+		font-weight: 20px;
+		line-height: 170%;
+	}
+}

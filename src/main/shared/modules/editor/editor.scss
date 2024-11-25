@@ -1,34 +1,34 @@
 .editor {
-  p {
-    &:not(:last-child) {
-      margin-bottom: 20px;
-    }
+	p {
+		&:not(:last-child) {
+			margin-bottom: 30px;
+		}
 
-    @include text-big($white);
+		@include text-big($c-text);
 
-    &.small {
-      @include text-middle($white);
-    }
-  }
+		&.small {
+			@include text-middle($c-text);
+		}
+	}
 
-  strong {
-    @include h4($white);
-  }
+	strong {
+		@include h4($c-text);
+	}
 
-  img {
-    display: block;
-    width: 100%;
+	img {
+		display: block;
+		width: 100%;
 
-    &:not(:last-child) {
-      margin-bottom: 20px;
-    }
-  }
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+	}
 
-  ul {
-    padding-left: 10px;
-    li {
-      @include text-middle($c-text);
-      list-style: disc inside;
-    }
-  }
+	ul {
+		padding-left: 10px;
+		li {
+			@include text-middle($c-text);
+			list-style: disc inside;
+		}
+	}
 }

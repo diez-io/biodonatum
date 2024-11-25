@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<%= htmlWebpackPlugin.options.widgets.head %>
+
+    <body>
+        <%= htmlWebpackPlugin.options.widgets.header %>
+            <div class="main">
+                <section class="section pt-50">
+                    <div class="container">
+                        <div class="breadcrumbs mb-40">
+                            <a href="./index.html" class="breadcrumbs__link">to index</a>
+                            <span class="breadcrumbs__link">Reviews</span>
+                        </div>
+                        <div class="head">
+                            <h2 class="title">Reviews</h2>
+                        </div>
+                        <div class="filter mb-30">
+
+                            <div class="filter__button">
+
+                            </div>
+                        </div>
+                        <div class="reviews">
+                            <article class="article-reviews">
+                                <picture class="article-reviews__picture">
+                                    <img src="" alt="">
+                                </picture>
+                                <div class="article-reviews__content">
+                                    <div class="article-reviews__title">
+                                        <div class="article-reviews__author">
+                                            Peter N.
+                                        </div>
+                                        <div class="article-reviews__date">
+                                            03.09.2023
+                                        </div>
+
+                                    </div>
+                                    <div class="article-reviews__rating">
+                                        <svg class="star">
+                                            <use xlink:href="./assets/sprite.svg#icon-star"></use>
+                                        </svg>
+                                        <svg class="star">
+                                            <use xlink:href="./assets/sprite.svg#icon-star"></use>
+                                        </svg>
+                                        <svg class="star">
+                                            <use xlink:href="./assets/sprite.svg#icon-star"></use>
+                                        </svg>
+                                        <svg class="star">
+                                            <use xlink:href="./assets/sprite.svg#icon-star"></use>
+                                        </svg>
+                                        <svg class="star star--not-filled">
+                                            <use xlink:href="./assets/sprite.svg#icon-star"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="article-reviews__text">
+                                        I feel calm, more open and of course a little stress. Thank you very much.
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+                <%= htmlWebpackPlugin.options.widgets.feedback %>
+            </div>
+            <%= htmlWebpackPlugin.options.widgets.footer %>
+                <%= htmlWebpackPlugin.options.widgets.temp %>
+    </body>
+
+</html>
