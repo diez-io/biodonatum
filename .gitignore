@@ -122,14 +122,16 @@ wp-admin/*
 # Исключаем папку /wp-includes
 wp-includes/
 
-# Оставляем только пользовательские шаблоны в wp-content/themes,
-# исключая стандартные темы (twenty-twenty*), и файл index.php
+# Оставляем только пользовательские шаблоны в wp-content/themes
 !/wp-content/
 wp-content/*
 !/wp-content/themes/
 wp-content/themes/*
-wp-content/themes/twenty*/    # Исключаем стандартные темы
+wp-content/themes/twenty*/  # Исключаем стандартные темы
 wp-content/themes/*/index.php  # Исключаем index.php в других темах
+
+# Оставляем конкретную пользовательскую тему (например, diez_theme)
+!/wp-content/themes/diez_theme/
 
 # Исключаем wp-content/index.php и wp-content/languages/
 wp-content/index.php
