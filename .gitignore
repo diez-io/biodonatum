@@ -1,0 +1,145 @@
+# Исключаем настройки PHPStorm
+/.idea/
+/.git/
+
+# Исключаем папку /bitrix кроме некоторых подпапок
+!/bitrix
+/bitrix/*
+
+# оставляем печатные формы интернет-магазина
+!/bitrix/admin/
+/bitrix/admin/*
+!/bitrix/admin/reports/
+
+# оставляем нестандартные компоненты
+!/bitrix/components/
+/bitrix/components/bitrix/
+
+# сохраняем весь php_interface за редкими исключениями
+!/bitrix/php_interface/
+/bitrix/php_interface/dbconn*
+/bitrix/php_interface/after_connect*
+/bitrix/php_interface/logs/
+
+# сохраняем шаблоны сайта
+!/bitrix/templates/
+
+# исключаем логи
+/local/php_interface/logs/
+/local/logs/
+
+# исключаем загружаемые файлы
+/upload/
+
+# различные системные папки и файлы хостингов и операционных систем
+/cgi-bin/
+/awstats/
+/webstat/
+.DS_Store
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# исключаем все текстовые и подобные ресурсы
+*.xml
+*.html
+!/assets/*.html
+*.txt
+*.log
+*.css.map
+
+# архивы, включая многотомные
+*.zip
+*.zip*
+*.tar
+*.tar*
+*.7z
+*.7z*
+*.enc
+*.enc*
+*.gz
+*.gz*
+*.tgz
+*.tgz*
+*.sql
+!/backup_sql/*.sql
+*.rar
+.hg
+.ftpconfig
+*.doc
+*.docx
+*.pdf
+*.rtf
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.psd
+*.psb
+*.sketch
+*.mp4
+core.*
+
+# composer
+composer.phar
+/vendor/
+
+# исключаем всякое от node.js
+node_modules
+bower_components
+.grunt
+.npm
+.env
+
+# и логи xhprof
+/xhprof/logs
+
+# === WordPress ===
+# Исключаем файлы в корневой директории
+wp-activate.php
+wp-blog-header.php
+wp-comments-post.php
+wp-config.php
+wp-config-sample.php
+wp-cron.php
+wp-links-opml.php
+wp-load.php
+wp-login.php
+wp-mail.php
+wp-settings.php
+wp-signup.php
+wp-trackback.php
+xmlrpc.php
+
+# Исключаем wp-config.php
+wp-config.php
+
+# Исключаем папку /wp-admin кроме явно необходимых
+!/wp-admin/
+wp-admin/*
+
+# Исключаем папку /wp-includes
+wp-includes/
+
+# Оставляем только пользовательские шаблоны в wp-content/themes,
+# исключая стандартные темы (twenty-twenty*), и файл index.php
+!/wp-content/
+wp-content/*
+!/wp-content/themes/
+wp-content/themes/*
+wp-content/themes/twenty*/    # Исключаем стандартные темы
+wp-content/themes/*/index.php  # Исключаем index.php в других темах
+
+# Исключаем wp-content/index.php и wp-content/languages/
+wp-content/index.php
+wp-content/languages/
+
+# Исключаем все плагины
+wp-content/plugins/
+
+# Исключаем временные и кэшированные файлы
+wp-content/cache/
+wp-content/backup-db/
+wp-content/upgrade/
+wp-content/uploads/wp-content/cache/
