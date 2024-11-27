@@ -1,12 +1,13 @@
 .article-reviews {
-	display: flex;
-	flex-direction: column;
 	padding: 20px 20px 30px 20px;
 	border-radius: 20px;
-	min-height: 370px;
 	border: 1px solid #f5f5f5;
 	background-color: $white;
-	overflow: hidden;
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
 
 	&__picture {
 		display: flex;

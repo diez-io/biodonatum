@@ -5,8 +5,23 @@
     <body>
         <%= htmlWebpackPlugin.options.widgets.header %>
             <main class="main">
+                <%= htmlWebpackPlugin.options.widgets.mainHero %>
+                    <section class="section pt-50">
+                        <div class="container">
+                            <div class="breadcrumbs mb-40">
+                                <a href="./index.html" class="breadcrumbs__link">to index</a>
+                                <span class="breadcrumbs__link">About us</span>
+                            </div>
+                            <div class="head">
+                                <h2 class="title">About us</h2>
+                            </div>
+                            <div class="editor">
 
-                <%= htmlWebpackPlugin.options.widgets.feedback %>
+                            </div>
+                        </div>
+                    </section>
+
+                    <%= htmlWebpackPlugin.options.widgets.feedback %>
             </main>
             <%= htmlWebpackPlugin.options.widgets.footer %>
     </body>

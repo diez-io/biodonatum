@@ -1,9 +1,6 @@
 .reviews {
 	display: grid;
-	grid-template-columns: repeat(
-		4,
-		1fr
-	); /* Четыре колонки одинаковой ширины */
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: masonry;
 	gap: 30px; /* Расстояние между элементами */
-	width: 100%; /* Контейнер на всю ширину */
 }
