@@ -1,20 +1,21 @@
 import Swiper from "swiper";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
+import { SlidesPerViewType } from "../helpers/types";
 
 class Slider {
     el;
-    sliderType;
-    buttonPrev;
-    buttonNext;
-    slidesCount;
-    pagination;
+    sliderType:string;
+    slidesCount:SlidesPerViewType;
+    buttonPrev:HTMLElement;
+    buttonNext:HTMLElement;
+    pagination:HTMLElement;
     desktopOnly;
     media;
 
     constructor(el: Element) {
         this.el = el;
         this.sliderType = this.el.getAttribute('data-slider');
-        this.slidesCount = this.el.getAttribute('data-slides')
+        this.slidesCount = parseInt(this.el.getAttribute('data-slides'));
 
         this.buttonPrev = this.el.querySelector('.slider__btn--prev');
         this.buttonNext = this.el.querySelector('.slider__btn--next');
@@ -43,10 +44,46 @@ class Slider {
             case 'thumbs':
                 this.initThumbsSlider();
                 break;
+            case 'scientists':
+                this.initScientistsSlider();
+                break;
         }
     }
+    initScientistsSlider() {
+        const slider:HTMLElement = this.el.querySelector('.swiper');
+        new Swiper(slider, {
+            modules: [Navigation, Pagination],
+            slidesPerView: 1,
+            allowTouchMove: false, // Disable swiping
+            pagination: {
+                el: this.pagination,
+                clickable: true,
+                enabled: false,
+            },
+            navigation: {
+                prevEl: this.buttonPrev,
+                nextEl: this.buttonNext,
+                disabledClass: 'slider__btn--disabled',
+                enabled: false,
+            },
+            spaceBetween: 30,
+            breakpoints: {
+                1199: {
+                    slidesPerView: 4,
+                    allowTouchMove: true,
+                    pagination: {
+                        enabled: true,
+                    },
+                    navigation: {
+                        enabled: true,
+                    },
+
+                }
+            }
+        })
+    }
     initProductDetailSlider() {
-        const slider = this.el.querySelector('.swiper');
+        const slider:HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
             modules: [Navigation, Pagination],
             slidesPerView: 'auto',
@@ -67,7 +104,7 @@ class Slider {
         })
     }
     initDetailTeasersSlider() {
-        const slider = this.el.querySelector('.swiper');
+        const slider:HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
             modules: [Pagination],
             slidesPerView: 2.5,
@@ -84,7 +121,7 @@ class Slider {
     }
 
     initPartnersSlider() {
-        const slider = this.el.querySelector('.swiper');
+        const slider:HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
             modules: [Navigation, Pagination],
             slidesPerView: 2.5,
@@ -107,10 +144,10 @@ class Slider {
     }
 
     initDefaultSlider() {
-        const slider = this.el.querySelector('.swiper');
+        const slider:HTMLElement = this.el.querySelector('.swiper');
         const swiperOptions = {
             modules: [Navigation],
-            slidesPerView: 'auto',
+            slidesPerView: 'auto' as SlidesPerViewType,
             spaceBetween: 30,
             navigation: {
                 prevEl: this.buttonPrev,
@@ -139,15 +176,15 @@ class Slider {
     }
 
     initThumbsSlider() {
-        const slider = this.el.querySelector('.swiper');
+        const slider:HTMLElement = this.el.querySelector('.swiper');
         const thumb = document.querySelector('[data-slider="thumb"]');
         const thumbMobile = document.querySelector('[data-slider-mob]');
-        const thumbSwiper = thumb.querySelector('.swiper');
+        const thumbSwiper:HTMLElement = thumb.querySelector('.swiper');
 
         let thumbSlider = null
 
         if (this.media.matches) {
-            thumbSlider = new Swiper(thumbMobile.querySelector('.swiper'), {
+            thumbSlider = new Swiper(thumbMobile.querySelector('.swiper') as HTMLElement, {
                 slidesPerView: 1,
                 spaceBetween: 0,
             })

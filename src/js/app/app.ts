@@ -4,6 +4,9 @@ import inputmask from "inputmask";
 import Tabs from "./tabs";
 import Dropdown from "./dropdown";
 import MobileMenu from "./mobileMenu";
+import LoadMore from "./loadMore";
+
+
 class App {
     constructor() {
         this.init();
@@ -14,7 +17,16 @@ class App {
         this.createMask()
         this.createTabs()
         this.createMobileMenu()
+        this.createLoadMore();
     }
+
+    createLoadMore = () => {
+        const loadMoreBtns:NodeListOf<HTMLElement> = document.querySelectorAll('.load-more-items');
+
+        loadMoreBtns && loadMoreBtns.forEach(element => {
+            new LoadMore(element);
+        });
+    };
 
     createSlider = () => {
         const sliders = document.querySelectorAll('[data-slider]')
