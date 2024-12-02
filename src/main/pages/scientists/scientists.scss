@@ -1,18 +1,19 @@
-.head {
-    @include r($mobile) {
-        display: none;
-    }
-}
-
 .scientists {
+    .head {
+        @include r($mobile) {
+            display: none;
+        }
+    }
+
     display: flex;
     flex-direction: column;
-    margin-top: 60px;
+    gap: 60px;
 
     .swiper-pagination {
         margin-top: 30px;
         width: 100%;
         justify-content: center;
+
         .swiper-pagination-bullet {
             width: 12px;
             height: 12px;
@@ -29,9 +30,11 @@
                 @include r($mobile) {
                     flex-direction: column;
                     gap: 30px;
+                }
 
-                    img {
-                        width: 100%;
+                & > *:not(:nth-child(-n+4)) {
+                    @include r($mobile) {
+                        display: none;
                     }
                 }
             }
@@ -49,41 +52,4 @@
             display: flex;
         }
     }
-
-	&__card {
-		display: flex;
-		flex-direction: column;
-		background-color: $white;
-		border-radius: 20px;
-        height: auto;
-        overflow: hidden;
-
-        &:not(:nth-child(-n+4)) {
-            @include r($mobile) {
-                display: none;
-            }
-        }
-
-        &__description {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 30px;
-
-            &-name {
-                font-size: 24px;
-                font-weight: 600;
-                line-height: 29.26px;
-            }
-
-            &-text {
-                font-size: 20px;
-                font-weight: 500;
-                line-height: 34px;
-                text-align: left;
-                color: #838383;
-            }
-        }
-	}
-
 }

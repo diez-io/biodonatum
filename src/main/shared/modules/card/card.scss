@@ -1,0 +1,66 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	background-color: $white;
+	border-radius: 20px;
+	height: auto;
+	overflow: hidden;
+
+	picture img{
+		width: 100%;
+	}
+
+	&__text {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		padding: 30px;
+		height: 100%;
+
+		@include r($mobile) {
+			padding: 20px;
+		}
+
+		&-title {
+			font-size: 24px;
+			font-weight: 600;
+			line-height: 29.26px;
+		}
+
+		&-description {
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 34px;
+			text-align: left;
+			color: #838383;
+		}
+
+		&-link {
+			color: #27AAE2;
+			text-transform: uppercase;
+			display: flex;
+			gap: 20px;
+			align-items: center;
+			font-size: 20px;
+			font-weight: 600;
+			line-height: 23px;
+
+			@include r($mobile) {
+				font-size: 14px;
+			}
+
+			svg {
+				height: 1em;
+				width: 1em;
+			}
+		}
+
+		&-timestamp {
+			color: #D3D3D3;
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 19.5px;
+			margin-top: auto;
+		}
+	}
+}

@@ -1,0 +1,51 @@
+.blog {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    &__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 30px;
+
+        picture img {
+            aspect-ratio: 5/4;
+            object-fit: cover;
+        }
+
+        .card__text-title {
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 39.01px;
+
+            @include r($mobile) {
+                font-size: 20px;
+                line-height: 24.38px;
+            }
+        }
+
+        & > *:not(:nth-child(-n+9)) {
+            display: none;
+        }
+
+        & > *:not(:nth-child(-n+3)) {
+            @include r($mobile) {
+                display: none;
+            }
+        }
+
+        @include r($mobile) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__load-more {
+        padding-left: 30px;
+        padding-right: 30px;
+        align-self: center;
+
+        @include r($mobile) {
+            width: 100%;
+        }
+    }
+}
