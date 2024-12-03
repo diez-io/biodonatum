@@ -1,0 +1,107 @@
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    @include r($mobile) {
+        gap: 30px;
+    }
+
+    &__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+
+        svg {
+            width: 1.3em;
+            height: 1.3em;
+        }
+
+        .card {
+            &__text {
+                gap: 26px;
+
+                @include r($mobile) {
+                    gap: 16px;
+                }
+
+                &-title {
+                    font-size: 32px;
+                    font-weight: 600;
+                    line-height: 39.01px;
+
+                    @include r($mobile) {
+                        font-size: 20px;
+                        line-height: 24.38px;
+                    }
+                }
+
+                &-description {
+                    color: inherit;
+                    font-size: 24px;
+                    line-height: 38.4px;
+
+                    @include r($mobile) {
+                        font-size: 18px;
+                        line-height: 27px;
+                    }
+                }
+
+                &-link {
+                    text-transform: none;
+                    color: inherit;
+                    font-size: 24px;
+
+                    @include r($mobile) {
+                        font-size: 20px;
+                    }
+
+                    &_multiple {
+                        & > *:not(:first-child) {
+                            svg {
+                                display: none;
+
+                                @include r($mobile) {
+                                    display: block;
+                                }
+                            }
+                        }
+
+                        @include r($mobile) {
+                            flex-direction: column;
+                            align-items: start;
+                        }
+                    }
+                }
+            }
+        }
+
+        @include r($mobile) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+
+        @include r($mobile) {
+            gap: 16px;
+        }
+
+        & > *:first-child {
+            text-decoration: underline;
+        }
+    }
+
+    .editor p {
+        font-size: 28px;
+        line-height: 42px;
+
+        @include r($mobile) {
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+}
