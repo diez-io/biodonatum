@@ -2,4 +2,12 @@
 	padding: 40px;
 	border-radius: 20px;
 	background-color: $white;
+	line-height: 45.6px;
+	font-size: 18px;
+
+	@include r($mobile) {
+		line-height: 34.2px;
+		padding: 20px;
+		font-size: 16px;
+	}
 }

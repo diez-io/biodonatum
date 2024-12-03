@@ -1,9 +1,25 @@
 .blog-detail {
     &__hero {
         aspect-ratio: 186/85;
+
+        @include r($mobile) {
+            aspect-ratio: 327/300;
+        }
     }
 
     display: flex;
     flex-direction: column;
     gap: 60px;
+
+    @include r($mobile) {
+        gap: 30px
+    }
+
+    .editor p {
+        font-size: 20px;
+
+        @include r($mobile) {
+            font-size: 16px;
+        }
+    }
 }
