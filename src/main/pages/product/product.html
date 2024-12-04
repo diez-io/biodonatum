@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%= htmlWebpackPlugin.options.widgets.head %>
+<%= htmlWebpackPlugin.options.widgets.head %>
 
     <body>
         <%= htmlWebpackPlugin.options.widgets.header %>
-        <div class="main">
+        <main class="main">
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
                         <a href="./index.html" class="breadcrumbs__link">to index</a>
-                        <span class="breadcrumbs__link">Reviews</span>
+                        <span class="breadcrumbs__link">Biodonatum</span>
                     </div>
                 </div>
             </section>
-            <%= htmlWebpackPlugin.options.widgets.reviews %>
+            <div class="product">
+                <%= htmlWebpackPlugin.options.widgets.productDetail %>
+                <%= htmlWebpackPlugin.options.widgets.reviews %>
+            </div>
             <%= htmlWebpackPlugin.options.widgets.feedback %>
-        </div>
+        </main>
+
         <%= htmlWebpackPlugin.options.widgets.footer %>
         <%= htmlWebpackPlugin.options.widgets.temp %>
     </body>
