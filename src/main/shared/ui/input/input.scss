@@ -2,7 +2,7 @@
 	display: block;
 	padding: 12px 20px;
 
-	@include text-middle($gray);
+	@include text-middle($c-text);
 
 	background-color: $gray-light;
 	border: 1px solid $gray-light;
@@ -15,6 +15,10 @@
 
 	&:focus {
 		border-color: $azure;
+	}
+
+	&::placeholder {
+		@include text-middle($gray);
 	}
 
 	&--transparent {
