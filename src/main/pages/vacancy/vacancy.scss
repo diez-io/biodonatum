@@ -1,0 +1,205 @@
+.vacancy {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    @include r($mobile) {
+        gap: 30px;
+    }
+
+    &__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+
+        @include r($mobile) {
+            grid-template-columns: 1fr;
+        }
+
+        svg {
+            width: 1.3em;
+            height: 1.3em;
+        }
+
+        .card {
+            &__text {
+                gap: 30px;
+
+                @include r($mobile) {
+                    gap: 16px;
+                }
+
+                &-title {
+                    color: #27AAE2;
+                    font-size: 24px;
+                    font-weight: 600;
+                }
+
+                &-description {
+                    font-size: 14px;
+                    line-height: 22.4px;
+
+                    @include r($mobile) {
+                        font-size: 16px;
+                        line-height: 27.2px;
+                    }
+
+                    h3 {
+                        color: #242424;
+                        margin-bottom: 15px;
+                        font-size: 18px;
+
+                        @include r($mobile) {
+                            font-size: 20px;
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+
+                &-link {
+                    text-transform: none;
+                    color: inherit;
+                    font-size: 18px;
+
+                    @include r($mobile) {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        & > *:not(:nth-child(-n+4)) {
+            display: none;
+        }
+
+        & > *:not(:nth-child(-n+2)) {
+            @include r($mobile) {
+                display: none;
+            }
+        }
+    }
+
+    &__links {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+
+        @include r($mobile) {
+            flex-direction: column;
+        }
+    }
+
+    .load-more-btn {
+        align-self: center;
+        padding: 25px 30px;
+
+        @include r($mobile) {
+            width: 100%;
+        }
+    }
+
+    .editor p {
+        font-size: 20px;
+        line-height: 30px;
+
+        @include r($mobile) {
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+
+    &__section-wrapper {
+        position: relative;
+
+        .section--hero {
+            aspect-ratio: 186/70;
+            margin-top: 60px;
+            margin-bottom: 100px;
+
+            @include r($mobile) {
+                aspect-ratio: 327/217;
+                margin: 40px 20px -20px 20px;
+            }
+        }
+
+        &__form {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -100px;
+
+            @include r($mobile) {
+                position: static;
+            }
+
+            svg {
+                width: 1.3em;
+                height: 1.3em;
+            }
+
+            .form__content {
+                grid-template-columns: repeat(4, 1fr);
+
+                input {
+                    padding: 20px 20px;
+                }
+
+                button {
+                    width: 100%;
+                    grid-column: 4/5;
+                    grid-row: 1/2;
+                }
+
+                [data-agree-custom] {
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                    grid-column: 4/5;
+                    grid-row: 2/3;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 20px;
+
+                    @include r($mobile) {
+                        gap: 15px;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                    }
+
+                    svg {
+                        flex-shrink: 0;
+                    }
+
+                    span {
+                        color: #27AAE2;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    &__upload {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        grid-column: 1/4;
+
+        @include r($mobile) {
+            gap: 15px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        &-text {
+            color: #27AAE2;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        &-format {
+            color: #C0C0C0;
+        }
+    }
+}

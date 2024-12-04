@@ -4,6 +4,7 @@ class Form {
     el;
     submit;
     agreeCheckbox: HTMLInputElement;
+    customCheckbox: HTMLElement;
     url;
     inputs;
 
@@ -11,6 +12,7 @@ class Form {
         this.el = el;
         this.submit = this.el.querySelector('button[type="submit"]');
         this.agreeCheckbox = this.el.querySelector('[data-agree]');
+        this.customCheckbox = this.el.querySelector('[data-agree-custom]');
         this.url = this.el.getAttribute('action');
         this.inputs = [...Array.from(this.el.querySelectorAll('input')),
         ...Array.from(this.el.querySelectorAll('textarea'))];
@@ -24,6 +26,15 @@ class Form {
         this.submit.addEventListener('click', (evt) => {
             evt.preventDefault();
             this.validate();
+        });
+
+        this.customCheckbox && this.customCheckbox.addEventListener('click', e => {
+            if ((e.target as HTMLElement).tagName === 'SPAN') {
+                // open privacy policy
+            }
+            else {
+                this.toggleAgreeCustom();
+            }
         });
     }
 
@@ -105,7 +116,8 @@ class Form {
         if (this.agreeCheckbox) {
             if (this.agreeCheckbox.checked) {
                 this.submit.removeAttribute('disabled');
-            } else {
+            }
+            else {
                 this.submit.setAttribute('disabled', 'true');
             }
         }
@@ -117,6 +129,15 @@ class Form {
                 this.changeBtnStatus();
             });
         }
+    }
+
+    toggleAgreeCustom() {
+        this.customCheckbox.querySelectorAll('svg').forEach(svg => {
+            svg.style.display = svg.style.display === 'none' ? '' : 'none';
+        });
+
+        this.agreeCheckbox.checked = !this.agreeCheckbox.checked;
+        this.changeBtnStatus();
     }
 }
 

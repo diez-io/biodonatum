@@ -4,6 +4,7 @@
 
         @include r($mobile) {
             aspect-ratio: 327/300;
+            margin: 40px 20px;
         }
     }
 
