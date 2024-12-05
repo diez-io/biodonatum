@@ -9,6 +9,7 @@ import './icon-chevrone.svg';
 import './icon-phone.svg';
 import './icon-email.svg';
 import './icon-star.svg';
+import './icon-star-not-filled.svg';
 import './icon-vector.svg';
 import './icon-globe.svg';
 import './icon-document.svg';

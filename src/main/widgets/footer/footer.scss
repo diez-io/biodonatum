@@ -5,17 +5,50 @@
 	background-color: $blue-black;
 
 	@include r($mobile) {
-		padding: 20px 32px;
+		padding: 20px 0;
+
+		.socials{
+			&__link {
+				width: 28px;
+				height: 28px;
+
+				padding: 5px;
+
+				&--fb {
+					padding-bottom: 0;
+				}
+
+				svg {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
 	}
 
 	&__wrapper {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
 		@include r($mobile) {
-			flex-direction: column;
+			//flex-direction: column;
 			align-items: center;
+			flex-wrap: wrap;
 			gap: 29px;
+
+			& > *:nth-child(1) {
+				order: 1;
+			}
+
+			& > *:nth-child(2) {
+				order: 3;
+				width: 100%;
+			}
+
+			& > *:nth-child(3) {
+				order: 2;
+			}
 		}
 	}
 
@@ -38,11 +71,23 @@
 		&:hover {
 			color: #49b2e3;
 		}
+
+		@include r($mobile) {
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 17.07px;
+		}
 	}
 
 	&__copyright {
 		@include text-middle($c-text);
 		text-align: center;
 		padding: 20px 0 22px 0;
+	}
+
+	&__logo img {
+		@include r($mobile) {
+			height: 50px;
+		}
 	}
 }

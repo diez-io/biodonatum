@@ -32,5 +32,10 @@
 		font-size: 20px;
 		line-height: 30px;
 		text-align: center;
+
+		@include r($mobile) {
+			font-size: 8px;
+			line-height: 13px;
+		}
 	}
 }

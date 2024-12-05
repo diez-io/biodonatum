@@ -28,6 +28,28 @@
 				height: 12px;
 			}
 		}
+
+		.teasers-pagination-wrapper {
+			display: flex;
+			margin-top: 30px;
+			justify-content: space-between;
+			@include text-middle($c-text);
+
+			& > *:first-child {
+				flex-shrink: 0;
+			}
+
+			.swiper-pagination {
+				position: static;
+				justify-content: end;
+				gap: 20px;
+
+				.swiper-pagination-bullet {
+					width: 12px;
+					height: 12px;
+				}
+			}
+		}
 	}
 
 	&__header {
@@ -51,6 +73,10 @@
 		.buttons {
 			display: flex;
 			gap: 20px;
+
+			@include r($mobile) {
+				flex-direction: column;
+			}
 
 			.button {
 				width: calc(100% - 10px);
@@ -152,5 +178,17 @@
 
 	&__accent {
 		@include h4($white);
+	}
+
+	.slider {
+		&__control {
+			width: calc(100% - 20px);
+			z-index: 1;
+		}
+
+		&__btn {
+			background-color: #ffffff3d;
+			color: $azure;
+		}
 	}
 }

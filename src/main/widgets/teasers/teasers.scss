@@ -1,8 +1,10 @@
 .teasers {
 	display: flex;
 	gap: 57px;
+
 	@include r($mobile) {
 		display: grid;
-		grid: repeat(2, 1fr) / repeat(2, 1fr);
+		grid-template-columns: repeat(2, 1fr);
+		gap: 16px;
 	}
 }

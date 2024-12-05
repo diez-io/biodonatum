@@ -45,5 +45,11 @@
 		&:not(.active) {
 			display: none;
 		}
+
+		@include r($mobile) {
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 30.4px;
+		}
 	}
 }

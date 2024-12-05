@@ -4,6 +4,7 @@
 	grid-template-columns: 1fr 1fr;
 	align-items: center;
 	gap: 28px;
+	overflow: hidden;
 
 	@include r($mobile) {
 		display: flex;
@@ -19,6 +20,10 @@
 		padding: 30px 0 64px 40px;
 		background-color: $white;
 		border-radius: 20px;
+
+		@include r($mobile) {
+			padding: 20px;
+		}
 	}
 
 	&__header {
@@ -27,6 +32,10 @@
 	}
 	&__logo {
 		max-width: 170px;
+
+		@include r($mobile) {
+			display: none;
+		}
 	}
 	&__titles {
 		display: flex;
@@ -38,12 +47,22 @@
 			font-size: 50px;
 			line-height: 130%;
 			font-weight: $medium;
+
+			@include r($mobile) {
+				font-size: 32px;
+				line-height: 41.6px;
+			}
 		}
 
 		h3 {
 			font-size: 32px;
 			line-height: 100%;
 			font-weight: $semi-bold;
+
+			@include r($mobile) {
+				font-size: 22px;
+				line-height: 26.82px;
+			}
 		}
 	}
 
@@ -53,13 +72,26 @@
 		justify-content: center;
 		height: 100%;
 		gap: 20px;
+
+		svg {
+			width: 32px;
+			height: 32px;
+
+			@include r($mobile) {
+				width: 24px;
+				height: 24px;
+			}
+		}
 	}
 
 	&__text {
 		font-size: 24px;
 		line-height: 190%;
+
 		@include r($mobile) {
 			max-width: 100%;
+			font-size: 18px;
+			line-height: 27px;
 		}
 	}
 
@@ -71,22 +103,12 @@
 		&--icon {
 			display: flex;
 			align-items: center;
-			svg {
-				width: 100%;
-				max-width: 32px;
-				max-height: 32px;
-			}
 		}
 	}
 	&__email {
 		display: flex;
 		align-items: center;
 		gap: 20px;
-
-		svg {
-			width: 32px;
-			height: 22.5px;
-		}
 	}
 	&__links {
 		display: flex;
@@ -96,12 +118,22 @@
 		font-weight: $semi-bold;
 		font-size: 24px;
 		line-height: 150%;
+
+		@include r($mobile) {
+			font-size: 20px;
+			line-height: 30px;
+		}
 	}
 	&__title {
 		font-size: 32px;
 		font-weight: $semi-bold;
 		line-height: auto;
 		color: $c-text;
+
+		@include r($mobile) {
+			font-size: 22px;
+			line-height: 26.82px;
+		}
 	}
 
 	&__form {
@@ -113,6 +145,7 @@
 		border-radius: 20px;
 		@include r($mobile) {
 			width: 100%;
+			padding: 20px;
 		}
 	}
 }

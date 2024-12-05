@@ -1,7 +1,11 @@
 .section--hero {
 	margin: 10px 30px 0;
 	border-radius: 20px;
+	background-position: left;
+	position: relative;
+	overflow: hidden;
 }
+
 .main-hero {
 	display: flex;
 	flex-direction: column;
@@ -9,12 +13,14 @@
 	align-items: center;
 	min-height: 850px;
 	margin-top: 100px;
+	text-align: center;
 
 	@include r($mobile) {
-		padding-top: 60px;
+		padding-top: 50px;
 		justify-content: flex-start;
 		align-items: center;
-		text-align: center;
+
+		margin-top: 0px;
 	}
 
 	&__title {
@@ -24,6 +30,14 @@
 		text-align: center;
 		font-weight: $medium;
 		color: $white;
+
+		@include r($mobile) {
+			font-size: 26px;
+			font-weight: 500;
+			line-height: 33.8px;
+			letter-spacing: -0.03em;
+			margin-bottom: 20px;
+		}
 	}
 
 	.text {
@@ -31,8 +45,70 @@
 		font-size: 32px;
 		line-height: 130%;
 		letter-spacing: -3%;
+		color: $white;
+
+		@include r($mobile) {
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 18.2px;
+			letter-spacing: -0.03em;
+			margin-bottom: 40px;
+		}
 	}
 	.button {
 		min-width: 320px;
+
+		@include r($mobile) {
+			min-width: 250px;
+		}
+	}
+
+	&__circle {
+		display: none;
+		position: absolute;
+		border-radius: 100%;
+		background-color: #3caee170;
+		height: 800px;
+		width: 800px;
+		top: 55%;
+
+		@include r($mobile) {
+			display: block;
+		}
+
+		&__content {
+			display: none;
+			position: absolute;
+			top: 55%;
+			padding-top: 10px;
+
+			@include r($mobile) {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				row-gap: 20px;
+			}
+
+			& > *:first-child {
+				grid-column: 1/3;
+			}
+
+			& > * {
+				overflow: hidden;
+				@include text-small($white);
+				line-height: 1em;
+
+				p {
+					margin-top: 10px;
+					text-shadow: 0px 0px 4px black;
+				}
+
+				picture img {
+					width: 80px;
+					position: relative;
+					background-color: $white;
+					border-radius: 100%;
+				}
+			}
+		}
 	}
 }
