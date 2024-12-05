@@ -18,3 +18,4 @@ import './icon-coins.svg';
 import './icon-checkbox-checked.svg';
 import './icon-checkbox.svg';
 import './icon-upload.svg';
+import './icon-filter.svg';

@@ -15,6 +15,7 @@
 		justify-content: center;
 		max-height: 240px;
 		overflow: hidden;
+		border-radius: 15px;
 
 		img {
 			@include coverFull();

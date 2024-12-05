@@ -5,6 +5,7 @@ import Tabs from "./tabs";
 import Dropdown from "./dropdown";
 import MobileMenu from "./mobileMenu";
 import LoadMore from "./loadMore";
+import Popup from "./popup";
 
 
 class App {
@@ -18,10 +19,19 @@ class App {
         this.createTabs()
         this.createMobileMenu()
         this.createLoadMore();
+        this.createPopup();
+    }
+
+    createPopup = () => {
+        const popups = document.querySelectorAll('.popup');
+
+        popups && popups.forEach(popup => {
+            new Popup(popup as HTMLElement);
+        });
     }
 
     createLoadMore = () => {
-        const loadMoreBtns:NodeListOf<HTMLElement> = document.querySelectorAll('.load-more-items');
+        const loadMoreBtns:NodeListOf<HTMLElement> = document.querySelectorAll('.load-more-btn');
 
         loadMoreBtns && loadMoreBtns.forEach(element => {
             new LoadMore(element);

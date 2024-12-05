@@ -1,10 +1,12 @@
 class LoadMore {
     loadMoreBtn:HTMLElement;
-    items:HTMLElement[];
+    items:NodeListOf<HTMLElement>;
+    display:string;
 
     constructor(el:HTMLElement) {
-        this.items = Array.from(el.children) as HTMLElement[];
-        this.loadMoreBtn = el.parentElement.querySelector('.load-more-btn');
+        this.loadMoreBtn = el;
+        this.items = el.parentElement.querySelectorAll('.load-more-items');
+        this.display = getComputedStyle(this.items[0].firstElementChild).display;
 
         this.init();
     }
@@ -17,8 +19,10 @@ class LoadMore {
     }
 
     showAll() {
-        this.items.forEach(item => {
-            item.style.display = 'flex';
+        this.items.forEach(items => {
+            (Array.from(items.children) as HTMLElement[]).forEach(item => {
+                item.style.display = this.display;
+            });
         });
     }
 }
