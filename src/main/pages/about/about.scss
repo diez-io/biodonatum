@@ -1,0 +1,209 @@
+.about {
+    &__wide {
+        aspect-ratio: 186/90;
+        margin: 60px 30px;
+        border-radius: 20px;
+        overflow: hidden;
+
+        @include r($mobile) {
+            aspect-ratio: 327/616;
+            margin: 30px 20px;
+        }
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+            padding: 30px 5% 5% 5%;
+            width: 100%;
+            height: 100%;
+            justify-content: flex-end;
+            align-items: center;
+            color: $white;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35.58%, rgba(0, 0, 0, 0.4) 81.62%);
+            gap: 20px;
+
+            @include r($mobile) {
+                padding: 25px;
+                gap: 16px;
+            }
+
+            &-big {
+                font-size: 60px;
+                font-weight: 500;
+                line-height: 78px;
+                text-transform: uppercase;
+
+                @include r($mobile) {
+                    font-size: 26px;
+                    font-weight: 500;
+                    line-height: 33.8px;
+                }
+            }
+
+            &-small {
+                font-size: 32px;
+                font-weight: 500;
+                line-height: 41.6px;
+
+                @include r($mobile) {
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 18.2px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    .editor p {
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 53.2px;
+
+        @include r($mobile) {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 30.4px;
+        }
+    }
+
+    &__stories {
+        margin-top: 60px;
+        display: flex;
+        flex-direction: column;
+        gap: 120px;
+
+        @include r($mobile) {
+            gap: 50px;
+        }
+
+        &__block {
+            display: flex;
+            gap: 110px;
+            align-items: center;
+
+            @include r($mobile) {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+
+            &:nth-child(2n) &__text {
+                order: -1;
+
+                @include r($mobile) {
+                    order: unset;
+                }
+            }
+
+            &:not(:nth-child(even)):not(:last-child) &__picture {
+                @include r($mobile) {
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                }
+            }
+
+            &__picture {
+                position: relative;
+                flex: 3;
+                height: fit-content;
+
+                @include r($mobile) {
+                    flex: unset;
+                }
+
+                img {
+                    border-radius: 20px;
+                }
+
+                &--main img {
+                    width: 100%;
+                }
+
+                &--sub img {
+                    position: absolute;
+                    bottom: -50px;
+                    right: -50px;
+                    height: 55%;
+                    object-fit: cover;
+                    padding: 10px;
+                    background-color: #F9F9FB;
+
+                    @include r($mobile) {
+                        bottom: -20px;
+                        right: -20px;
+                        height: 50%;
+                        padding: 6px;
+                    }
+                }
+            }
+
+            &__text {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                flex: 5;
+
+                @include r($mobile) {
+                    flex: unset;
+                    gap: 16px;
+                }
+
+                &--title {
+                    font-size: 40px;
+                    font-weight: 500;
+                    line-height: 60px;
+                    text-transform: uppercase;
+
+                    @include r($mobile) {
+                        font-size: 22px;
+                        line-height: 33px;
+                    }
+                }
+
+                &--epigraph {
+                    font-size: 26px;
+                    font-weight: 500;
+                    line-height: 49.4px;
+
+                    @include r($mobile) {
+                        font-size: 18px;
+                        line-height: 34.2px;
+                    }
+                }
+
+                &--text {
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 38px;
+
+                    @include r($mobile) {
+                        font-size: 16px;
+                        line-height: 30.4px;
+                    }
+                }
+
+                &--quote {
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 38px;
+                    color: $azure;
+
+                    @include r($mobile) {
+                        font-size: 16px;
+                        line-height: 30.4px;
+                    }
+                }
+
+                p {
+                    margin-bottom: 20px;
+
+                    @include r($mobile) {
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
