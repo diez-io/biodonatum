@@ -11,7 +11,7 @@
                 [
                     'key'     => $post_type_prefix . 'woo_id',
                     'value'   => $product_id,
-                    'compare' => '='
+                    'compare' => '=',
                 ],
             ],
             'tax_query' => [
