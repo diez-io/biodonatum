@@ -5,7 +5,7 @@
                 <div class="feedback__header">
                     <img class="feedback__logo" src="<?= get_template_directory_uri(); ?>/assets/images/feedback-logo.png" alt="">
                     <div class="feedback__titles">
-                        <h2 class="feedback__title">Contacts</h2>
+                        <h2 class="feedback__title"><?= get_static_content('contacts') ?></h2>
                         <h3 class="feedback__title">Distributor in Uzbekistan</h3>
                     </div>
                 </div>
@@ -35,22 +35,7 @@
             </div>
             <div class="feedback__form">
                 <h3 class="feedback__title">Write to us</h3>
-                <form action="#" class="form" data-form>
-                    <div class="form__content">
-                        <label class="form__item">
-                            <input type="text" class="input" placeholder="Name*" required>
-                        </label>
-                        <label class="form__item">
-                            <input type="text" class="input" placeholder="E-mail*" data-email required>
-                        </label>
-                        <label class="form__item form__item--wide">
-                            <textarea class="input input--area" name="" placeholder="Your message here"></textarea>
-                        </label>
-                    </div>
-                    <div class="form__footer">
-                        <button class="button button--wide" type="submit">send message</button>
-                    </div>
-                </form>
+                <?= get_cf7_form_by_title('message') ?>
             </div>
         </div>
     </div>

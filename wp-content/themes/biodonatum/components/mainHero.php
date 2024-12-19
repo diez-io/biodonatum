@@ -4,13 +4,12 @@
             <div class="columns__col-12 columns__col-mob-4">
                 <div class="main-hero">
                     <h1 class="main-hero__title">
-                        ORGANIC JAPANESE<br>
-                        MICROBIOTIC
+                        <?= get_static_content('main_hero_title') ?>
                     </h1>
                     <p class="text">
-                        FOR HEALTH, BEAUTY<br> AND ACTIVE LONGEVITY
+                        <?= get_static_content('main_hero_text') ?>
                     </p>
-                    <a href="#" class="button">Buy now</a>
+                    <a href="#" class="button"><?= get_static_content('buy_now') ?></a>
                     <div class="main-hero__circle container">
                     </div>
                     <div class="main-hero__circle__content">

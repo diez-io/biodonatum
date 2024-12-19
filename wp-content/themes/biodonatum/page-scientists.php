@@ -20,116 +20,43 @@
                         <div class="slider" data-slider="scientists">
                             <div class="swiper">
                                 <div class="swiper-wrapper load-more-items">
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/Katya-Khammad.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Katya Khammad
+                                    <? $args = array(
+                                        'post_type' => 'scientist',
+                                        'tax_query' => [
+                                            [
+                                                'taxonomy' => 'taxonomy_language',
+                                                'field'    => 'slug',
+                                                'terms'    => $_SESSION['lang'],
+                                            ],
+                                        ],
+                                        //'posts_per_page' => 10,
+                                    );
+
+                                    $loop = new WP_Query($args);
+
+                                    if ($loop->have_posts()):
+                                        while ($loop->have_posts()):
+                                            $loop->the_post(); ?>
+
+                                            <div class="swiper-slide card">
+                                                <picture>
+                                                    <? $card_image = get_field('scientist_photo'); ?>
+                                                    <img src="<?= esc_url($card_image['url']) ?>" alt="<?= esc_attr($card_image['alt']) ?>">
+                                                </picture>
+                                                <div class="card__text">
+                                                    <div class="card__text-title">
+                                                        <?= esc_html(get_field('scientist_name')); ?>
+                                                    </div>
+                                                    <div class="card__text-description">
+                                                        <?= get_field('scientist_description') ?>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="card__text-description">
-                                                Doctor of Medical Sciences Gastroenterologist Geriatrics Gerontology Ozone Therapy Member of the International Red Cross
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/Vasilii-Khammad.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Vasilii Khammad
-                                            </div>
-                                            <div class="card__text-description">
-                                                Doctorate in Neuro-Oncology
-                                                General Medicine (GM)
-                                                Residency in Medical Oncology
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/Kalinchenko-Svetlana.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Svetlana Kalinchenko
-                                            </div>
-                                            <div class="card__text-description">
-                                                Doctor of Medical Sciences
-                                                Urologist Endocrinologist Andrologist
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/MAJIDOVA-Yokutkhon.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Yokutkhon Majidova
-                                            </div>
-                                            <div class="card__text-description">
-                                                Professor Doctor of Medical Sciences President of the Association of Neurologists Child Neurology and Medical Genetics
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/Katya-Khammad.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Katya Khammad
-                                            </div>
-                                            <div class="card__text-description">
-                                                Doctor of Medical Sciences Gastroenterologist Geriatrics Gerontology Ozone Therapy Member of the International Red Cross
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/Vasilii-Khammad.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Vasilii Khammad
-                                            </div>
-                                            <div class="card__text-description">
-                                                Doctorate in Neuro-Oncology
-                                                General Medicine (GM)
-                                                Residency in Medical Oncology
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/Kalinchenko-Svetlana.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Svetlana Kalinchenko
-                                            </div>
-                                            <div class="card__text-description">
-                                                Doctor of Medical Sciences
-                                                Urologist Endocrinologist Andrologist
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide card">
-                                        <picture>
-                                            <img src="<?= get_template_directory_uri(); ?>/assets/images/scientists/MAJIDOVA-Yokutkhon.jpeg" alt="">
-                                        </picture>
-                                        <div class="card__text">
-                                            <div class="card__text-title">
-                                                Yokutkhon Majidova
-                                            </div>
-                                            <div class="card__text-description">
-                                                Professor Doctor of Medical Sciences President of the Association of Neurologists Child Neurology and Medical Genetics
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <?php endwhile;
+
+                                        wp_reset_postdata();
+                                    endif;
+                                    ?>
                                 </div>
                                 <div class="slider__control mob-hidden">
                                     <div class="slider__btn slider__btn--prev">

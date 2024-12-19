@@ -3,7 +3,7 @@
         <div class="slider slider--partners" data-slider="partners" data-slides="6">
             <div class="slider__header">
                 <h2 class="title">
-                    Partners
+                    <?= get_static_content('partners') ?>
                 </h2>
             </div>
             <div class="swiper">

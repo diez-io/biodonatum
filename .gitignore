@@ -140,7 +140,12 @@ wp-content/index.php
 wp-content/languages/
 
 # Исключаем все плагины
-wp-content/plugins/
+!/wp-content/plugins/
+wp-content/plugins/*
+!wp-content/plugins/custom-admin-filter/
+!wp-content/plugins/language-detector/
+!wp-content/plugins/custom-admin-filter/**
+!wp-content/plugins/language-detector/**
 
 # Исключаем временные и кэшированные файлы
 wp-content/cache/

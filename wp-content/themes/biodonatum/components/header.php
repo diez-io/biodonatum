@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $_SESSION['lang'] ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,7 @@
 </head>
 
 <body>
-    <aside class="pre-header">ÉCONOMISEZ 10 % SUR VOTRE PREMIÈRE COMMANDE. Entrez le code HALLO10 à la caisse pour
-        10 % de
-        réduction sur votre première commande.</aside>
+    <aside class="pre-header"><?= get_static_content('top_line') ?></aside>
     <header class="header">
         <div class="container">
             <div class="header__wrapper">
@@ -24,13 +22,13 @@
                 </div>
                 <div class="header__block">
                     <nav class="nav mob-hidden">
-                        <a href="#" class="nav__link">Home</a>
-                        <a href="#" class="nav__link">About</a>
-                        <a href="#" class="nav__link">Science</a>
-                        <a href="#" class="nav__link">Scientists</a>
-                        <a href="#" class="nav__link">Shop</a>
-                        <a href="#" class="nav__link">FAQ</a>
-                        <a href="#" class="nav__link">Contacts</a>
+                        <a href="#" class="nav__link"><?= get_static_content('home') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('about') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('science') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('scientists') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('shop') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('faq') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('contacts') ?></a>
                     </nav>
                 </div>
                 <div class="header__block header__block--no-gap">
@@ -59,13 +57,16 @@
                     <div class="header__personal">
                         <div class="header__language">
                             <div class="header__element">
-                                <span>EN</span>
+                                <span><?= $_SESSION['lang'] ?></span>
                             </div>
                             <div class="menu">
-                                <a href="#" class="menu__item">English</a>
-                                <a href="#" class="menu__item">French</a>
-                                <a href="#" class="menu__item">Russian</a>
-                                <a href="#" class="menu__item">German</a>
+                                <? global $supported_languages; ?>
+                                <? foreach ($supported_languages as $key => $name) : ?>
+                                    <form method="POST" action="">
+                                        <input type="hidden" name="lang" value="<?= $key ?>">
+                                        <button type="submit" class="menu__item"><?= $name ?></button>
+                                    </form>
+                                <? endforeach; ?>
                             </div>
                         </div>
                         <div class="header__user">
@@ -93,37 +94,37 @@
             <ul class="mobile-menu__list">
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        Home
+                        <?= get_static_content('home') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        About
+                        <?= get_static_content('about') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        Science
+                        <?= get_static_content('science') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        Scientists
+                        <?= get_static_content('scientists') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        Shop
+                        <?= get_static_content('shop') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        FAQ
+                        <?= get_static_content('faq') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        Contacts
+                        <?= get_static_content('contacts') ?>
                     </a>
                 </li>
             </ul>

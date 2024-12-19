@@ -2,11 +2,11 @@
     <div class="container">
         <div class="reviews">
             <div class="head">
-                <h2 class="title">Reviews</h2>
+                <h2 class="title"><?= get_static_content('reviews') ?></h2>
             </div>
             <div class="reviews__filter">
                 <div class="reviews__filter__something">
-                    253 Reviews
+                    253 <?= get_static_content('reviews') ?>
                     <svg>
                         <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
                     </svg>
@@ -19,12 +19,12 @@
                     </div>
                     <div class="island reviews__filter__popup-body popup-body">
                         <div class="reviews__filter__title">
-                            Sort by:
+                            <?= get_static_content('sort_by') ?>:
                         </div>
-                        <div class="reviews__filter__item">Featured</div>
-                        <div class="reviews__filter__item">Newest</div>
-                        <div class="reviews__filter__item">Highest Ratings</div>
-                        <div class="reviews__filter__item">Lowest Ratings</div>
+                        <div class="reviews__filter__item"><?= get_static_content('sort_by_featured') ?></div>
+                        <div class="reviews__filter__item"><?= get_static_content('sort_by_newest') ?></div>
+                        <div class="reviews__filter__item"><?= get_static_content('sort_by_highest_ratings') ?></div>
+                        <div class="reviews__filter__item"><?= get_static_content('sort_by_lowest_ratings') ?></div>
                     </div>
                 </div>
             </div>
@@ -499,7 +499,7 @@
                 </div>
             </div>
             <div class="button load-more-btn">
-                LOAD MORE
+                <?= get_static_content('load_more') ?>
             </div>
         </div>
     </div>
