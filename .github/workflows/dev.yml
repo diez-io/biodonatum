@@ -1,0 +1,65 @@
+# Переменные с git:
+# secrets.SSH_SECRET_KEY
+# github.repository
+# secrets.USER
+# secrets.IP
+# secrets.PATH
+
+name: dev_workflow  # Название workflow для автоматического запуска при push в ветку dev
+
+on:
+  push:
+    branches:
+      - dev  # Триггер запускается при push в ветку dev
+
+jobs:
+  First-code-execution:
+    runs-on: ubuntu-latest  # Действия выполняются на последней версии Ubuntu
+
+    steps:
+      # Шаг 1. Клонирует репозиторий, включая указанную ветку dev
+      - name: git clone my branch main
+        uses: actions/checkout@v3  # Подключает репозиторий и настраивает рабочую директорию
+
+      # Шаг 2. Включает строгий режим bash для остановки на ошибках и использовании необъявленных переменных
+      - name: Setup key
+        run: set -eu  # -e останавливает скрипт при ошибке любой команды; -u — при попытке использования необъявленной переменной
+
+      # Шаг 3. Создает директорию .ssh в домашнем каталоге для хранения SSH-ключей
+      - name: create directory
+        run: mkdir -p "$HOME/.ssh"  # Создает директорию $HOME/.ssh для сохранения SSH-ключа
+
+      # Шаг 4. Извлекает закрытый SSH-ключ из секретов GitHub и записывает его в файл key
+      - name: catch key into runner
+        run: |
+          touch "$HOME/.ssh/${{ github.event.repository.name }}_key"  # Создает файл ключа, если он не существует
+          echo "${{ secrets.SSH_SECRET_KEY }}" > "$HOME/.ssh/${{ github.event.repository.name }}_key"  # Сохраняет секретный ключ в файл
+
+      # Шаг 5. Устанавливает права доступа 600 для SSH-ключа, чтобы его мог читать только владелец
+      - name: set access right
+        run: chmod 600 "$HOME/.ssh/${{ github.event.repository.name }}_key"  # Защищает ключ, ограничив доступ только для владельца
+
+      # Шаг 6. Проверяет существование пользователя
+      - name: Check user existence
+        run: |
+          if ! ssh -i "$HOME/.ssh/${{ github.event.repository.name }}_key" -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "id -u ${{ secrets.USER }}"; then
+            echo "User not found: ${{ secrets.USER }}"
+            exit 1
+          fi
+
+      # Шаг 7. Проверяет существование директории
+      - name: Check directory existence
+        run: |
+          if ! ssh -i "$HOME/.ssh/${{ github.event.repository.name }}_key" -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "[ -d '${{ secrets.PATH }}' ]"; then
+            echo "Directory not found: ${{ secrets.PATH }}"
+            exit 1
+          fi
+      # Шаг 8. Сбрасывает все изменения локального репозитория
+      - name: Reset changes
+        run: ssh -i "$HOME/.ssh/${{ github.event.repository.name }}_key" -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "cd ${{ secrets.PATH }} && git reset --hard"
+
+      # Шаг 9. Подключается к удаленному серверу по SSH и выполняет команду git pull в нужной директории
+      - name: deploy on dev
+        run: ssh -i "$HOME/.ssh/${{ github.event.repository.name }}_key" -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "cd ${{ secrets.PATH }} && git pull origin dev"
+        # Использует SSH-ключ для доступа к серверу, отключая проверку ключа хоста
+        # Переходит в директорию на сервере и выполняет git pull для обновления main-ветки
