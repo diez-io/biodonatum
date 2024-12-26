@@ -212,6 +212,9 @@
                 display: none !important;
             }
 
+            .checkbox {
+                border-radius: 50%;
+            }
             .checkbox::before {
                 content: '';
                 position: absolute;
@@ -222,7 +225,7 @@
                 background-color: transparent;
                 transform: translate(-50%, -50%) scale(0);
                 border: 2px solid #007bff;
-                border-radius: 2px;
+                border-radius: 50%;
                 transition: all 0.2s ease;
             }
 
