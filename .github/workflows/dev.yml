@@ -17,10 +17,6 @@ jobs:
     runs-on: ubuntu-latest  # Действия выполняются на последней версии Ubuntu
 
     steps:
-      # Шаг 1. Клонирует репозиторий, включая указанную ветку dev
-      - name: git clone my branch main
-        uses: actions/checkout@v3  # Подключает репозиторий и настраивает рабочую директорию
-
       # Шаг 2. Включает строгий режим bash для остановки на ошибках и использовании необъявленных переменных
       - name: Setup key
         run: set -eu  # -e останавливает скрипт при ошибке любой команды; -u — при попытке использования необъявленной переменной
@@ -54,12 +50,12 @@ jobs:
             echo "Directory not found: ${{ secrets.PATH }}"
             exit 1
           fi
-      # Шаг 8. Сбрасывает все изменения локального репозитория
-      - name: Reset changes
-        run: ssh -i "$HOME/.ssh/${{ github.event.repository.name }}_key" -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "cd ${{ secrets.PATH }} && git reset --hard"
 
       # Шаг 9. Подключается к удаленному серверу по SSH и выполняет команду git pull в нужной директории
       - name: deploy on dev
-        run: ssh -i "$HOME/.ssh/${{ github.event.repository.name }}_key" -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "cd ${{ secrets.PATH }} && git pull origin dev"
-        # Использует SSH-ключ для доступа к серверу, отключая проверку ключа хоста
-        # Переходит в директорию на сервере и выполняет git pull для обновления main-ветки
+        run: |
+          ssh -i "$HOME/.ssh/${{ github.event.repository.name }}_key" -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} << 'EOF'
+            cd ${{ secrets.PATH }}
+            git fetch origin dev  # Получаем обновления с удаленного репозитория
+            git reset --hard origin/dev  # Применяем изменения из удаленной ветки
+          EOF
