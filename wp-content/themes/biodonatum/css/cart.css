@@ -184,3 +184,15 @@
     padding: 3px;
     cursor: pointer;
 }
+
+.containers_line {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: 2fr 1fr;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 28px;
+    overflow: hidden;
+    align-items: stretch;
+}
