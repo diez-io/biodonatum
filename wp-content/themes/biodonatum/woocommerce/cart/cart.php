@@ -192,7 +192,11 @@ defined( 'ABSPATH' ) || exit; ?>
                                 <input class="input" placeholder="E-mail" type="email" name="email">  
                             </label>
                             <div class="line">
-                                <label><input class="checkbox" type="checkbox" name="send">Получать рассылку</label>
+                                <label>
+                                    <input class="checkbox" type="checkbox" name="send">
+                                    <div class="checkbox"></div>
+                                    Получать рассылку
+                                </label>
                             </div>
                             <label class="line">
                                 <input class="input" placeholder="E-mail" type="email" name="email">  
