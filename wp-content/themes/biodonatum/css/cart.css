@@ -195,4 +195,8 @@
     gap: 28px;
     overflow: hidden;
     align-items: stretch;
+
+    .line {
+        grid-column: 1 / 3;
+    }
 }
