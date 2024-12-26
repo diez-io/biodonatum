@@ -214,6 +214,7 @@
 
             .checkbox {
                 border-radius: 50%;
+                position: relative;
             }
             .checkbox::before {
                 content: '';
