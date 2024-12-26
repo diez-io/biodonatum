@@ -177,8 +177,16 @@ defined( 'ABSPATH' ) || exit; ?>
                         <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
                         <form action="/" method="post" class="wpcf7-form">
                             <div class="line">
-                                <label><input class="checkbox" type="radio" name="sex" value="m">муж</label>
-                                <label><input class="checkbox" type="radio" name="sex" value="w">жен</label>
+                                <label>
+                                    <input type="radio" name="sex" value="m" checked>
+                                    <div class="checkbox"></div>
+                                    муж
+                                </label>
+                                <label>
+                                    <input type="radio" name="sex" value="w">
+                                    <div class="checkbox"></div>
+                                    жен
+                                </label>
                             </div>
                             <label class="line">
                                 <input class="input" placeholder="E-mail" type="email" name="email">  
