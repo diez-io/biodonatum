@@ -199,7 +199,13 @@
     .line {
         grid-column: 1 / 3;
     }
-    .line:has(:or([type="checkbox"], [type="radio"])) {
+    .line:has([type="checkbox"], [type="radio"]) {
         display: flex;
+    }
+
+    label:has([type="checkbox"], [type="radio"]) {
+        display: flex;
+        gap: 15px;
+        align-items: center;
     }
 }
