@@ -193,7 +193,7 @@ defined( 'ABSPATH' ) || exit; ?>
                             </label>
                             <div class="line">
                                 <label>
-                                    <input class="checkbox" type="checkbox" name="send">
+                                    <input type="checkbox" name="send">
                                     <div class="checkbox"></div>
                                     Получать рассылку
                                 </label>
