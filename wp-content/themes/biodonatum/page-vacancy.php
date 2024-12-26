@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Vacancy Page */
 ?>
-<? get_template_part('components/header'); ?>
+<? get_header(); ?>
 
         <main class="main">
             <section class="section pt-50">
@@ -230,4 +230,4 @@
             <? get_template_part('components/feedback'); ?>
         </main>
 
-<? get_template_part('components/footer'); ?>
+<? get_footer(); ?>

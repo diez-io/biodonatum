@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Reviews Page */
 ?>
-<? get_template_part('components/header'); ?>
+<? get_header(); ?>
 
         <div class="main">
             <section class="section pt-50">
@@ -17,4 +17,4 @@
             <? get_template_part('components/feedback'); ?>
         </div>
 
-<? get_template_part('components/footer'); ?>
+<? get_footer(); ?>

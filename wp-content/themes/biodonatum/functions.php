@@ -1,4 +1,13 @@
 <?php
+
+if (file_exists(get_template_directory() . '/inc/woocommerce/cart.php')) {
+    require_once get_template_directory() . '/inc/woocommerce/cart.php';
+}
+
+if (file_exists(get_template_directory() . '/inc/woocommerce/registration.php')) {
+    require_once get_template_directory() . '/inc/woocommerce/registration.php';
+}
+
 function google_fonts() {?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8,6 +17,7 @@ function google_fonts() {?>
 function theme_enqueue_assets() {
     // Enqueue CSS
     wp_enqueue_style('my-theme-style', get_template_directory_uri() . '/css/main.css');
+    wp_enqueue_style('my-theme-header', get_template_directory_uri() . '/css/header.css');
 
     // Enqueue JS
     wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/bundle.js', array(), null, true); // true loads it in the footer
@@ -159,3 +169,5 @@ function get_cf7_form_by_title($title) {
 
     return ''; // Return empty string if no form found
 }
+
+add_filter('woocommerce_enqueue_styles', '__return_empty_array');

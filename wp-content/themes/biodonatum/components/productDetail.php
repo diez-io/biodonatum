@@ -1,34 +1,49 @@
 <section class="section">
     <div class="container">
         <?
-        $product_id = 210;
         $post_type = 'advanced_product';
         $post_type_prefix = $post_type . '_';
+        $advanced_product_id = null;
+        $isDetailedProductPage = !isset($args['woo_id']);
 
-        $args = [
-            'post_type'  => $post_type,
-            'meta_query' => [
-                [
-                    'key'     => $post_type_prefix . 'woo_id',
-                    'value'   => $product_id,
-                    'compare' => '='
+        if (!$isDetailedProductPage) {
+            $product_id = $args['woo_id'];
+            error_log('productDetail is on main page, woo_id = ' . $product_id);
+
+            $queryArgs = [
+                'post_type'  => $post_type,
+                'meta_query' => [
+                    [
+                        'key'     => $post_type_prefix . 'woo_id',
+                        'value'   => $product_id,
+                        'compare' => '='
+                    ],
                 ],
-            ],
-            'tax_query' => [
-                [
-                    'taxonomy' => 'taxonomy_language',
-                    'field'    => 'slug',
-                    'terms'    => $_SESSION['lang'],
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'taxonomy_language',
+                        'field'    => 'slug',
+                        'terms'    => $_SESSION['lang'],
+                    ],
                 ],
-            ],
-        ];
+            ];
 
-        $query = new WP_Query($args);
+            $query = new WP_Query($queryArgs);
 
-        if ($query->have_posts()) {
-            $advanced_product_id = $query->posts[0]->ID;
-            $woo_product = wc_get_product($product_id);?>
+            if ($query->have_posts()) {
+                $advanced_product_id = $query->posts[0]->ID;
+                $woo_product = wc_get_product($product_id);
+            }
+        }
+        else {
+            $advanced_product_id = get_the_ID();
+            $product_id = get_field($post_type_prefix . 'woo_id');
+            $woo_product = wc_get_product($product_id);
 
+            error_log('productDetail is on detailed page, woo_id = ' . $product_id);
+        }
+
+        if ($advanced_product_id) : ?>
             <div class="product-detail">
                 <div class="product-detail__left">
                     <div class="slider" data-slider="detail">
@@ -146,8 +161,18 @@
                             <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
                         </article>
                         <div class="buttons">
-                            <button class="button" type="submit">Buy 1 pack</button>
-                            <button class="button button--green">Buy a subscription</button>
+                            <? if ($isDetailedProductPage) : ?>
+                                <div class="quantity_panel">
+                                    <div class="quantity_panel--minus">-</div>
+                                    <input type="text" value="1">
+                                    <div class="quantity_panel--plus">+</div>
+                                </div>
+                                <button class="button add-to-cart-button" type="submit" data-product-id="<?= $product_id ?>">Add to cart</button>
+                                <button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>">Buy a subscription</button>
+                            <? else : ?>
+                                <button class="button" type="submit" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'">Buy 1 pack</button>
+                                <button class="button button--green" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'">Buy a subscription</button>
+                            <? endif; ?>
                         </div>
                     </div>
                 </div>
@@ -178,8 +203,6 @@
                     </div>
                 </div>
             </div>
-        <?
-        }
-        ?>
+        <? endif; ?>
     </div>
 </section>

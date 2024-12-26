@@ -1,7 +1,7 @@
 <?php
 /* Template Name: About Page */
 ?>
-<? get_template_part('components/header'); ?>
+<? get_header(); ?>
 
 <main class="main">
     <? get_template_part('components/mainHero'); ?>
@@ -172,4 +172,4 @@
 
 </main>
 
-<? get_template_part('components/footer'); ?>
+<? get_footer(); ?>

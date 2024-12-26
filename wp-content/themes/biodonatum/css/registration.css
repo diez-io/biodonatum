@@ -1,0 +1,123 @@
+body {
+    position: relative;
+}
+
+.header {
+    z-index: 100;
+}
+
+.modal-background {
+    background-color: rgba(0, 0, 0, 0.313);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+
+.registration {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+}
+
+.registration__title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 39.01px;
+    margin-bottom: 30px;
+}
+
+.registration__new-user {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    margin-bottom: 50px;
+}
+
+.registration__new-user__create {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    color: #27AAE2;
+    cursor: pointer;
+}
+
+.registration__input {
+    margin-bottom: 20px;
+}
+
+.registration__input input {
+    line-height: 38px;
+}
+
+.registration__input--lable {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    margin-bottom: 10px;
+}
+
+.registration__btns {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.registration__btns button {
+    flex: 4;
+}
+
+.registration__btns--forgot {
+    color: #27AAE2;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    cursor: pointer;
+    flex: 3;
+    text-align: center;
+}
+
+.registration [data-agree-custom] {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.registration svg {
+    width: 1em;
+    height: 1em;
+}
+
+.registration [data-agree-custom] > div {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.registration [data-agree-custom] > div span {
+    color: #27AAE2;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.lost-password {
+    position: relative;
+    border-radius: 20px;
+    margin: 25px 30px;
+    padding: 10px 0;
+    background-color: #ffffff;
+}
+
+.lost-password__container {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 550px);
+    min-height: fit-content;
+    justify-content: center;
+}

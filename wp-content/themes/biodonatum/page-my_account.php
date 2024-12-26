@@ -1,4 +1,4 @@
-<?php /* Template Name: CustomShop */ ?>
+<?php /* Template Name: My Account Page */ ?>
 
 <?php get_header(); ?>
 

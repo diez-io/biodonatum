@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <div class="modal-background" style="display:none;"></div>
     <aside class="pre-header"><?= get_static_content('top_line') ?></aside>
     <header class="header">
         <div class="container">
@@ -69,20 +70,24 @@
                                 <? endforeach; ?>
                             </div>
                         </div>
-                        <div class="header__user">
+                        <div data-url="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" <?= is_user_logged_in() ? 'logged-in' : '' ?> class="header__user">
                             <div class="header__element">
                                 <svg class="icon">
                                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-person"></use>
                                 </svg>
                             </div>
                         </div>
-                        <div class="header__cart">
+                        <a href="<?= esc_url(wc_get_cart_url()); ?>" class="header__cart">
                             <div class="header__element">
                                 <svg class="icon">
                                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-cart"></use>
                                 </svg>
                             </div>
-                        </div>
+                            <? $cart_count = get_cart_count(); ?>
+                            <div class="cart_count" <?= $cart_count ? '' : 'style="display:none;"' ?>>
+                                <?= $cart_count ?>
+                            </div>
+                        </a>
                     </div>
                     <div class="burger" data-burger>
                         <div class="burger__item"></div>
@@ -159,4 +164,5 @@
         <!--            Личный кабинет-->
         <!--        </button>-->
         </div>
+        <? get_template_part('components/login'); ?>
     </header>

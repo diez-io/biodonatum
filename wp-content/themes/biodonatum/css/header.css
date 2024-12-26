@@ -1,0 +1,16 @@
+.header__cart {
+    position: relative;
+}
+
+.header__cart .cart_count {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 8px;
+    background-color: #FF543E;
+    border-radius: 2px;
+    line-height: 8px;
+    padding: 3px;
+    color: #fff;
+    font-weight: 600;
+}

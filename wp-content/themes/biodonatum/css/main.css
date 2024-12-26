@@ -12348,36 +12348,6 @@ meter {
   }
 }
 
-.cart table img {
-  width: 60px;
-}
-.cart table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1em 0;
-  font-size: 1rem;
-  text-align: left;
-}
-.cart table thead {
-  color: #ACACAC;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 28px;
-}
-.cart table thead th {
-  border-bottom: 1px solid #F1F1F1;
-  padding: 8px;
-}
-.cart table th {
-  font-weight: bold;
-}
-.cart table td div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 20px;
-}
-
 .blog {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -190,7 +190,7 @@ function add_hreflang_tags() {
 
     global $supported_languages;
 
-    if (is_singular('blog')) {
+    if (is_singular(['blog', 'advanced_product'])) {
         $current_post_id = get_the_ID();
 
         foreach ($supported_languages as $lang_slug => $lang_name) {
@@ -312,7 +312,12 @@ function get_translated_post($post_id, $lang) {
     }
 
     // Construct the dynamic field name
-    $translation_group_field = "{$post_type}_translate_group";
+    if ($post_type === 'advanced_product') {
+        $translation_group_field = $post_type . '_woo_id';
+    }
+    else {
+        $translation_group_field = "{$post_type}_translate_group";
+    }
 
     // Retrieve the translation group field value for the current post
     $translation_group = get_field($translation_group_field, $post_id);

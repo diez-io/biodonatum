@@ -1,4 +1,4 @@
-<? get_template_part('components/header'); ?>
+<? get_header(); ?>
 
         <main class="main">
             <section class="section pt-50">
@@ -36,4 +36,4 @@
 
         </main>
 
-<? get_template_part('components/footer'); ?>
+<? get_footer(); ?>
