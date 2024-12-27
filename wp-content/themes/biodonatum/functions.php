@@ -32,7 +32,7 @@ function theme_enqueue_assets() {
         ],
     ]);
     wp_enqueue_script('st_select', get_template_directory_uri() . '/js/st_select.min.js', array(), null, false); // st_select lib
-    wp_enqueue_script('st_select', get_template_directory_uri() . '/js/st_mask.min.js', array(), null, false); // st_mask lib
+    wp_enqueue_script('st_mask', get_template_directory_uri() . '/js/st_mask.min.js', array(), null, false); // st_mask lib
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
