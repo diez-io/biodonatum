@@ -12887,12 +12887,12 @@ body {
   display: none;
 }
 
-.wpcf7 form {
+.feedback .wpcf7 form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
-.wpcf7-form-control-wrap:nth-of-type(3) {
+.feedback .wpcf7-form-control-wrap:nth-of-type(3) {
   grid-column: 1/3;
 }
 .wpcf7-submit {
@@ -12933,11 +12933,13 @@ body {
 	border-radius: 100%;
 	padding: 0;
 	margin: 0 auto;
-	position: relative;
   animation-name: spin;
 	animation-duration: 1000ms;
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
+}
+
+.feedback .wpcf7-spinner {
   grid-column: 1/3;
 }
 
@@ -12982,8 +12984,11 @@ form.submitting .wpcf7-spinner {
 	}
 }
 .wpcf7-response-output {
-  grid-column: 1/3;
   font-size: 14px;
   line-height: 14px;
   font-weight: 400;
+}
+
+.feedback .wpcf7-response-output {
+  grid-column: 1/3;
 }
