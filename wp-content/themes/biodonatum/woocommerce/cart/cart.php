@@ -230,25 +230,48 @@ defined( 'ABSPATH' ) || exit; ?>
                         </form>
                     </div>
                 </div>
-                <div class="feedback__form">
-                    <h3 class="feedback__title">Write to us</h3>
-                    <div class="wpcf7 js" id="wpcf7-f148-o1" lang="en-US" dir="ltr" data-wpcf7-id="148">
-                        <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
-                        <form action="/cart/#wpcf7-f148-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
-                        <div style="display: none;">
-                        <input type="hidden" name="_wpcf7" value="148">
-                        <input type="hidden" name="_wpcf7_version" value="6.0.1">
-                        <input type="hidden" name="_wpcf7_locale" value="en_US">
-                        <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f148-o1">
-                        <input type="hidden" name="_wpcf7_container_post" value="0">
-                        <input type="hidden" name="_wpcf7_posted_data_hash" value="">
-                        </div>
-                        <span class="wpcf7-form-control-wrap" data-name="text-969"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input" autocomplete="name" aria-required="true" aria-invalid="false" placeholder="Имя*" value="" type="text" name="text-969"></span>
-                        <span class="wpcf7-form-control-wrap" data-name="email-288"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email input" autocomplete="email" aria-required="true" aria-invalid="false" placeholder="E-mail*" value="" type="email" name="email-288"></span>
-                        <span class="wpcf7-form-control-wrap" data-name="textarea-230"><textarea cols="40" rows="10" maxlength="2000" class="wpcf7-form-control wpcf7-textarea input input--area" aria-invalid="false" placeholder="Ваше сообщение" name="textarea-230"></textarea></span>
-                        <input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="отправить"><span class="wpcf7-spinner"></span>
-                        <div class="wpcf7-response-output" aria-hidden="true"></div>
+                <div class="cart__promocode-and-total">
+                    <div class="cart__promocode island">
+                        <div class="cart__promocode--title">Details</div>
+                        <form>
+                            <input class="input" type="text" name="coupon_code" placeholder="Promocode">
+                            <button class="button button--wide" type="submit">apply promocode</button>
                         </form>
+                        <div class="cart__promocode--title">Order Notes (optional)</div>
+                        <textarea class="input input--area" type="textarea" placeholder="Your message here"></textarea>
+                    </div>
+                    <div class="cart__total island">
+                        <div class="cart__total__grid">
+                            <div class="cart__total--title">Subtotal</div>
+                            <div class="cart__total--subtotal"><?= WC()->cart->get_cart_subtotal() ?></div>
+                            <div class="cart__total--title">Shipping</div>
+                            <div class="cart__total--shipping">Shipping options will be updated upon ordering.</div>
+                            <?
+                                $appliedCoupons = WC()->cart->get_applied_coupons();
+                                $show = !empty($appliedCoupons) ? '' : 'style="display:none;"';
+                                $discountTotal = WC()->cart->get_cart_discount_total();
+                            ?>
+                            <div class="cart__total--title" <?= $show ?>>Applied coupons</div>
+                            <div class="cart__total--coupons" <?= $show ?>>
+                                <? foreach ($appliedCoupons as $coupon) : ?>
+                                    <div class="cart__total--coupon">
+                                        <div class="cart__total--coupon-name">
+                                            <?= $coupon ?>
+                                        </div>
+                                        <div class="cart__total--coupon-del">
+                                            <svg>
+                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-x"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                <? endforeach; ?>
+                            </div>
+                            <div class="cart__total--title" <?= $show ?>>Discount</div>
+                            <div class="cart__total--discount" <?= $show ?>><?= wc_price(-$discountTotal) ?></div>
+                            <div class="cart__total--title">Total</div>
+                            <div class="cart__total--total"><?= WC()->cart->get_cart_total() ?></div>
+                        </div>
+                        <button class="button button--wide">validate the order</button>
                     </div>
                 </div>
             </div>
