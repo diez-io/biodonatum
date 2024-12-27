@@ -231,15 +231,6 @@ defined( 'ABSPATH' ) || exit; ?>
                     </div>
                 </div>
                 <div class="cart__promocode-and-total">
-                    <div class="cart__promocode island">
-                        <div class="cart__promocode--title">Details</div>
-                        <form>
-                            <input class="input" type="text" name="coupon_code" placeholder="Promocode">
-                            <button class="button button--wide" type="submit">apply promocode</button>
-                        </form>
-                        <div class="cart__promocode--title">Order Notes (optional)</div>
-                        <textarea class="input input--area" type="textarea" placeholder="Your message here"></textarea>
-                    </div>
                     <div class="cart__total island">
                         <div class="cart__total__grid">
                             <div class="cart__total--title">Subtotal</div>
