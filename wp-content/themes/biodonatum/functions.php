@@ -21,7 +21,7 @@ function theme_enqueue_assets() {
 
     // Enqueue JS
     wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/bundle.js', array(), null, true); // true loads it in the footer
-    wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/st_select.min.js', array(), null, false); // st_select lib 
+    wp_enqueue_script('st_select', get_template_directory_uri() . '/js/st_select.min.js', array(), null, false); // st_select lib 
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
