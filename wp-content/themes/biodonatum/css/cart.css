@@ -210,8 +210,9 @@
             padding: 28px 20px;
         }
     }
-    .title {
-        
+    .separator {
+        border-bottom: 1px solid #F1F1F1;
+        margin: 20px 0px; 
     }
     .right_block_container {
         display: flex;
