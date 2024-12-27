@@ -242,12 +242,13 @@
 
 [type="select_container"]:has(select.input) {
     width: 100%;
-    background-color: white;
-    transition: 2s;
-    border: 1px solid rgb(39, 170, 226);
-    border-radius: 10px;
-
+    
     [type="options_container"] {
+        background-color: white;
+        transition: 2s;
+        border: 1px solid rgb(39, 170, 226);
+        border-radius: 10px;
+
         option.input {
             font-size: 16px;
             margin: 10px 0px 10px 0px;
