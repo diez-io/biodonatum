@@ -239,3 +239,12 @@
 
     }
 }
+
+[type="select_container"]:has(select.input) {
+    width: 100%;
+    [type="options_container"] {
+        option {
+            font-size: 16px;
+        }
+    }
+}

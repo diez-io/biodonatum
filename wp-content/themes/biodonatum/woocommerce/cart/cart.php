@@ -200,9 +200,9 @@ defined( 'ABSPATH' ) || exit; ?>
                             </div>
                             <label class="line">
                                 <select class="st_select input" name="country" >
-                                    <option value="fr">France</option>
-                                    <option value="ru">Russian</option>
-                                    <option value="cn">China</option>
+                                    <option class="input" value="fr">France</option>
+                                    <option class="input" value="ru">Russian</option>
+                                    <option class="input" value="cn">China</option>
                                 </select>
                             </label>
                             <label>
