@@ -199,28 +199,32 @@ defined( 'ABSPATH' ) || exit; ?>
                                 </label>
                             </div>
                             <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">  
+                                <select class="st_select input" name="country" >
+                                    <option value="fr">France</option>
+                                    <option value="ru">Russian</option>
+                                    <option value="cn">China</option>
+                                </select> 
                             </label>
                             <label>
-                                <input class="input" placeholder="Имя*" type="text" name="name">
+                                <input class="input" placeholder="Имя" type="text" name="name">
                             </label>
                             <label>
-                                <input class="input" placeholder="Фамилия*" type="text" name="surname">
+                                <input class="input" placeholder="Фамилия" type="text" name="surname">
                             </label>
                             <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">  
+                                <input class="input" placeholder="Адрес улица" type="text" name="optional">  
                             </label>
                             <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">  
+                                <input class="input" placeholder="Апартаменты, люкс-студия и т.д. (по желанию)" type="text" name="unit">  
                             </label>
                             <label>
-                                <input class="input" placeholder="Имя*" type="text" name="name">
+                                <input class="input" placeholder="Город" type="text" name="city">
                             </label>
                             <label>
-                                <input class="input" placeholder="Фамилия*" type="text" name="surname">
+                                <input class="input" placeholder="Почтовый индекс" type="text" name="postal_code">
                             </label>
                             <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">  
+                                <input class="input" placeholder="Телефон" type="phone" name="phone">  
                             </label>
                             <input class="wpcf7-submit" type="submit" value="отправить">
                         </form>
