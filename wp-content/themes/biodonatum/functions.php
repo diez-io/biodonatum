@@ -21,7 +21,7 @@ function theme_enqueue_assets() {
 
     // Enqueue JS
     wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/bundle.js', array(), null, true); // true loads it in the footer
-    wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/st_select.min.js', array(), null, true); // st_select lib 
+    wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/st_select.min.js', array(), null, false); // st_select lib 
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
@@ -172,3 +172,6 @@ function get_cf7_form_by_title($title) {
 }
 
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
+add_action('wp_footer', function() {
+    echo '<script>new st_select();</script>';
+});
