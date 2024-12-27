@@ -243,11 +243,6 @@
 [type="select_container"]:has(select.input) {
     width: 100%;
     [type="options_container"] {
-        background-color: white;
-        border: 3px solid rgb(249, 249, 249);
-        border-radius: 10%;
-        padding: 10px;
-
         option {
             font-size: 16px;
         }
