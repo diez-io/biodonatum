@@ -170,68 +170,70 @@ defined( 'ABSPATH' ) || exit; ?>
 
     <section class="section pt-80 ptm-60 pb-80 pbm-60">
         <div class="container">
-            <div class="containers_line">
-                <div class="feedback__form">
+            <form action="/" method="POST" class="containers_line">
+                <div class="island">
                     <div class="cart__promocode--title">Contact:</div>
-                    <div class="wpcf7 js" id="wpcf7-f148-o1" lang="en-US" dir="ltr" data-wpcf7-id="148">
-                        <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
-                        <form action="/" method="post" class="wpcf7-form">
-                            <div class="line">
-                                <label>
-                                    <input type="radio" name="sex" value="m" checked>
-                                    <div class="checkbox"></div>
-                                    муж
-                                </label>
-                                <label>
-                                    <input type="radio" name="sex" value="w">
-                                    <div class="checkbox"></div>
-                                    жен
-                                </label>
-                            </div>
-                            <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">
-                            </label>
-                            <div class="line">
-                                <label>
-                                    <input type="checkbox" name="send">
-                                    <div class="checkbox"></div>
-                                    Получать рассылку
-                                </label>
-                            </div>
-                            <label class="line">
-                                <select class="st_select input" name="country" >
-                                    <option class="input" value="fr">France</option>
-                                    <option class="input" value="ru">Russian</option>
-                                    <option class="input" value="cn">China</option>
-                                </select>
+                    <div class="wpcf7_form">
+                        <div class="line mb20">
+                            <label>
+                                <input type="radio" name="sex" value="m" checked>
+                                <div class="checkbox"></div>
+                                муж
                             </label>
                             <label>
-                                <input class="input" placeholder="Имя" type="text" name="name">
+                                <input type="radio" name="sex" value="w">
+                                <div class="checkbox"></div>
+                                жен
                             </label>
+                        </div>
+                        <label class="line">
+                            <input class="input" placeholder="E-mail" type="email" name="email">
+                        </label>
+                        <div class="line mb20">
                             <label>
-                                <input class="input" placeholder="Фамилия" type="text" name="surname">
+                                <input type="checkbox" name="send">
+                                <div class="svg_container">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="20" height="20" rx="5" fill="#27AAE2"/>
+                                        <path d="M13.8574 7.82946L13.1525 7.13953C13.0574 7.04651 12.9386 7 12.804 7C12.6693 7 12.5505 7.04651 12.4554 7.13953L9.06535 10.4574L7.55248 8.96899C7.45743 8.87597 7.33861 8.82946 7.20396 8.82946C7.06931 8.82946 6.9505 8.87597 6.85545 8.96899L6.1505 9.65891C6.04752 9.75194 6 9.86822 6 10C6 10.1318 6.04752 10.2481 6.14257 10.3411L8.01188 12.1705L8.71683 12.8605C8.81188 12.9535 8.93069 13 9.06535 13C9.2 13 9.31881 12.9535 9.41386 12.8605L10.1188 12.1705L13.8574 8.51163C13.9525 8.4186 14 8.30233 14 8.17054C14 8.03876 13.9525 7.92248 13.8574 7.82946Z" fill="white"/>
+                                    </svg>
+                                </div>
+                                Получать рассылку
                             </label>
-                            <label class="line">
-                                <input class="input" placeholder="Адрес улица" type="text" name="optional">
-                            </label>
-                            <label class="line">
-                                <input class="input" placeholder="Апартаменты, люкс-студия и т.д. (по желанию)" type="text" name="unit">
-                            </label>
-                            <label>
-                                <input class="input" placeholder="Город" type="text" name="city">
-                            </label>
-                            <label>
-                                <input class="input" placeholder="Почтовый индекс" type="text" name="postal_code">
-                            </label>
-                            <label class="line">
-                                <input class="input" placeholder="Телефон" type="phone" name="phone">
-                            </label>
-                            <input class="wpcf7-submit" type="submit" value="отправить">
-                        </form>
+                        </div>
+                        <label class="line">
+                            <select class="st_select input" name="country" >
+                                <option class="input" value="fr">France</option>
+                                <option class="input" value="ru">Russian</option>
+                                <option class="input" value="cn">China</option>
+                            </select>
+                        </label>
+                        <label>
+                            <input class="input" placeholder="Имя" type="text" name="name">
+                        </label>
+                        <label>
+                            <input class="input" placeholder="Фамилия" type="text" name="surname">
+                        </label>
+                        <label class="line">
+                            <input class="input" placeholder="Адрес улица" type="text" name="optional">
+                        </label>
+                        <label class="line">
+                            <input class="input" placeholder="Апартаменты, люкс-студия и т.д. (по желанию)" type="text" name="unit">
+                        </label>
+                        <label>
+                            <input class="input" placeholder="Город" type="text" name="city">
+                        </label>
+                        <label>
+                            <input class="input" placeholder="Почтовый индекс" type="text" name="postal_code">
+                        </label>
+                        <label class="line">
+                            <input class="input" placeholder="Телефон" type="phone" name="phone">
+                        </label>
                     </div>
                 </div>
-                <div class="cart__promocode-and-total">
+                <div class="right_block_container">
                     <div class="cart__total island">
+                        <h3 class="feedback__title">Your order</h3>
                         <div class="cart__total__grid">
                             <div class="cart__total--title">Subtotal</div>
                             <div class="cart__total--subtotal"><?= WC()->cart->get_cart_subtotal() ?></div>
@@ -262,93 +264,26 @@ defined( 'ABSPATH' ) || exit; ?>
                             <div class="cart__total--title">Total</div>
                             <div class="cart__total--total"><?= WC()->cart->get_cart_total() ?></div>
                         </div>
-                        <button class="button button--wide">validate the order</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section pt-80 ptm-60 pb-80 pbm-60">
-        <div class="container">
-            <div class="containers_line">
-                <div class="feedback__form">
-                    <h3 class="feedback__title">Write to us</h3>
-                    <div class="wpcf7 js" id="wpcf7-f148-o1" lang="en-US" dir="ltr" data-wpcf7-id="148">
-                        <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
-                        <form action="/" method="post" class="wpcf7-form">
-                            <div class="line">
-                                <label>
-                                    <input type="radio" name="sex" value="m" checked>
-                                    <div class="checkbox"></div>
-                                    муж
-                                </label>
-                                <label>
-                                    <input type="radio" name="sex" value="w">
-                                    <div class="checkbox"></div>
-                                    жен
-                                </label>
-                            </div>
-                            <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">
+                    <div class="island_wrapper">
+                        <div class="line">
+                            <label class="island">
+                                <input type="radio" name="payment_method">
+                                <div class="checkbox"></div>
+                                Платёжка 1
                             </label>
-                            <div class="line">
-                                <label>
-                                    <input type="checkbox" name="send">
-                                    <div class="checkbox"></div>
-                                    Получать рассылку
-                                </label>
-                            </div>
-                            <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">
-                            </label>
-                            <label>
-                                <input class="input" placeholder="Имя*" type="text" name="name">
-                            </label>
-                            <label>
-                                <input class="input" placeholder="Фамилия*" type="text" name="surname">
-                            </label>
-                            <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">
-                            </label>
-                            <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">
-                            </label>
-                            <label>
-                                <input class="input" placeholder="Имя*" type="text" name="name">
-                            </label>
-                            <label>
-                                <input class="input" placeholder="Фамилия*" type="text" name="surname">
-                            </label>
-                            <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">
-                            </label>
-                            <input class="wpcf7-submit" type="submit" value="отправить">
-                        </form>
-                    </div>
-                </div>
-                <div class="feedback__form">
-                    <h3 class="feedback__title">Write to us</h3>
-                    <div class="wpcf7 js" id="wpcf7-f148-o1" lang="en-US" dir="ltr" data-wpcf7-id="148">
-                        <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
-                        <form action="/cart/#wpcf7-f148-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
-                        <div style="display: none;">
-                        <input type="hidden" name="_wpcf7" value="148">
-                        <input type="hidden" name="_wpcf7_version" value="6.0.1">
-                        <input type="hidden" name="_wpcf7_locale" value="en_US">
-                        <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f148-o1">
-                        <input type="hidden" name="_wpcf7_container_post" value="0">
-                        <input type="hidden" name="_wpcf7_posted_data_hash" value="">
                         </div>
-                        <span class="wpcf7-form-control-wrap" data-name="text-969"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input" autocomplete="name" aria-required="true" aria-invalid="false" placeholder="Имя*" value="" type="text" name="text-969"></span>
-                        <span class="wpcf7-form-control-wrap" data-name="email-288"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email input" autocomplete="email" aria-required="true" aria-invalid="false" placeholder="E-mail*" value="" type="email" name="email-288"></span>
-                        <span class="wpcf7-form-control-wrap" data-name="textarea-230"><textarea cols="40" rows="10" maxlength="2000" class="wpcf7-form-control wpcf7-textarea input input--area" aria-invalid="false" placeholder="Ваше сообщение" name="textarea-230"></textarea></span>
-                        <input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="отправить"><span class="wpcf7-spinner"></span>
-                        <div class="wpcf7-response-output" aria-hidden="true"></div>
-                        </form>
+                        <div class="line">
+                            <label class="island">
+                                <input type="radio" name="payment_method">
+                                <div class="checkbox"></div>
+                                Платёжка 2
+                            </label>
+                        </div>
                     </div>
+                    <button class="button button--wide">order</button>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
