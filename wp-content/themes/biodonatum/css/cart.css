@@ -184,3 +184,58 @@
     padding: 3px;
     cursor: pointer;
 }
+
+.containers_line {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: 2fr 1fr;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 28px;
+    overflow: hidden;
+    align-items: stretch;
+
+    .line {
+        grid-column: 1 / 3;
+    }
+    .line:has([type="checkbox"], [type="radio"]) {
+        display: flex;
+        gap: 40px;
+
+        label {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 16px;
+            line-height: 0px;
+            margin-bottom: 20px;
+
+            input {
+                display: none !important;
+            }
+
+            .checkbox {
+                border-radius: 50%;
+                position: relative;
+            }
+            .checkbox::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 12px;
+                height: 12px;
+                background-color: #007EC1;
+                transform: translate(-50%, -50%) scale(0);
+                border-radius: 50%;
+                transition: all 0.2s ease;
+            }
+
+            input:checked + .checkbox::before {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+    }
+}

@@ -31,6 +31,7 @@ function theme_enqueue_assets() {
             'fill_out_this_field' => get_static_content('please_fill_out_this_field'),
         ],
     ]);
+    wp_enqueue_script('st_select', get_template_directory_uri() . '/js/st_select.min.js', array(), null, false); // st_select lib
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
@@ -181,3 +182,6 @@ function get_cf7_form_by_title($title) {
 }
 
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
+add_action('wp_footer', function() {
+    echo '<script>new st_select();</script>';
+});
