@@ -32,7 +32,7 @@ function theme_enqueue_assets() {
         ],
     ]);
     wp_enqueue_script('st_select', get_template_directory_uri() . '/js/st_select.min.js', array(), null, false); // st_select lib
-    wp_enqueue_script('st_mask', get_template_directory_uri() . '/js/st_mask.min.js', array(), null, false); // st_mask lib
+    //wp_enqueue_script('st_mask', get_template_directory_uri() . '/js/st_mask.min.js', array(), null, false); // st_mask lib
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
@@ -184,7 +184,7 @@ function get_cf7_form_by_title($title) {
 
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 add_action('wp_footer', function() {
-    echo `
+    ?>
     <script>
         new st_select();
         new st_mask({ //Маска для телефона
@@ -196,5 +196,5 @@ add_action('wp_footer', function() {
             not_full: function (input) {input.setAttrubute('in_valid')}
         });
     </script>
-    `;
+    <?
 });
