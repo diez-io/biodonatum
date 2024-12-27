@@ -234,6 +234,7 @@ defined( 'ABSPATH' ) || exit; ?>
                 <div class="right_block_container">
                     <div class="cart__total island">
                         <h3 class="feedback__title">Your order</h3>
+                        <div class="separator"></div>
                         <div class="cart__total__grid">
                             <div class="cart__total--title">Subtotal</div>
                             <div class="cart__total--subtotal"><?= WC()->cart->get_cart_subtotal() ?></div>
