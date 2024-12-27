@@ -172,7 +172,7 @@ defined( 'ABSPATH' ) || exit; ?>
         <div class="container">
             <div class="containers_line">
                 <div class="feedback__form">
-                    <h3 class="feedback__title">Write to us</h3>
+                    <div class="cart__promocode--title">Contact:</div>
                     <div class="wpcf7 js" id="wpcf7-f148-o1" lang="en-US" dir="ltr" data-wpcf7-id="148">
                         <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
                         <form action="/" method="post" class="wpcf7-form">
