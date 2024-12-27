@@ -195,14 +195,6 @@ add_action('wp_footer', function() {
             full: function (input) {input.removeAttribute('invalid')},
             not_full: function (input) {input.setAttribute('invalid')}
         });
-        new st_mask({ //Маска для телефона
-            selector: 'input[type=email]',
-            mask: "+7 ({\\d}{\\d}{\\d}) {\\d}{\\d}{\\d} - {\\d}{\\d} - {\\d}{\\d}",
-            placeholder: true,
-            filler: '_',
-            full: function (input) {input.removeAttribute('invalid')},
-            not_full: function (input) {input.setAttribute('invalid')}
-        });
     </script>
     <?
 });
