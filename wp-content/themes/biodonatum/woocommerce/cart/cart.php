@@ -189,7 +189,7 @@ defined( 'ABSPATH' ) || exit; ?>
                                 </label>
                             </div>
                             <label class="line">
-                                <input class="input" placeholder="E-mail" type="email" name="email">  
+                                <input class="input" placeholder="E-mail" type="email" name="email">
                             </label>
                             <div class="line">
                                 <label>
@@ -203,7 +203,7 @@ defined( 'ABSPATH' ) || exit; ?>
                                     <option class="input" value="fr">France</option>
                                     <option class="input" value="ru">Russian</option>
                                     <option class="input" value="cn">China</option>
-                                </select> 
+                                </select>
                             </label>
                             <label>
                                 <input class="input" placeholder="Имя" type="text" name="name">
@@ -212,10 +212,10 @@ defined( 'ABSPATH' ) || exit; ?>
                                 <input class="input" placeholder="Фамилия" type="text" name="surname">
                             </label>
                             <label class="line">
-                                <input class="input" placeholder="Адрес улица" type="text" name="optional">  
+                                <input class="input" placeholder="Адрес улица" type="text" name="optional">
                             </label>
                             <label class="line">
-                                <input class="input" placeholder="Апартаменты, люкс-студия и т.д. (по желанию)" type="text" name="unit">  
+                                <input class="input" placeholder="Апартаменты, люкс-студия и т.д. (по желанию)" type="text" name="unit">
                             </label>
                             <label>
                                 <input class="input" placeholder="Город" type="text" name="city">
@@ -224,7 +224,90 @@ defined( 'ABSPATH' ) || exit; ?>
                                 <input class="input" placeholder="Почтовый индекс" type="text" name="postal_code">
                             </label>
                             <label class="line">
-                                <input class="input" placeholder="Телефон" type="phone" name="phone">  
+                                <input class="input" placeholder="Телефон" type="phone" name="phone">
+                            </label>
+                            <input class="wpcf7-submit" type="submit" value="отправить">
+                        </form>
+                    </div>
+                </div>
+                <div class="feedback__form">
+                    <h3 class="feedback__title">Write to us</h3>
+                    <div class="wpcf7 js" id="wpcf7-f148-o1" lang="en-US" dir="ltr" data-wpcf7-id="148">
+                        <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+                        <form action="/cart/#wpcf7-f148-o1" method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
+                        <div style="display: none;">
+                        <input type="hidden" name="_wpcf7" value="148">
+                        <input type="hidden" name="_wpcf7_version" value="6.0.1">
+                        <input type="hidden" name="_wpcf7_locale" value="en_US">
+                        <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f148-o1">
+                        <input type="hidden" name="_wpcf7_container_post" value="0">
+                        <input type="hidden" name="_wpcf7_posted_data_hash" value="">
+                        </div>
+                        <span class="wpcf7-form-control-wrap" data-name="text-969"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input" autocomplete="name" aria-required="true" aria-invalid="false" placeholder="Имя*" value="" type="text" name="text-969"></span>
+                        <span class="wpcf7-form-control-wrap" data-name="email-288"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email input" autocomplete="email" aria-required="true" aria-invalid="false" placeholder="E-mail*" value="" type="email" name="email-288"></span>
+                        <span class="wpcf7-form-control-wrap" data-name="textarea-230"><textarea cols="40" rows="10" maxlength="2000" class="wpcf7-form-control wpcf7-textarea input input--area" aria-invalid="false" placeholder="Ваше сообщение" name="textarea-230"></textarea></span>
+                        <input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="отправить"><span class="wpcf7-spinner"></span>
+                        <div class="wpcf7-response-output" aria-hidden="true"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pt-80 ptm-60 pb-80 pbm-60">
+        <div class="container">
+            <div class="containers_line">
+                <div class="feedback__form">
+                    <h3 class="feedback__title">Write to us</h3>
+                    <div class="wpcf7 js" id="wpcf7-f148-o1" lang="en-US" dir="ltr" data-wpcf7-id="148">
+                        <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+                        <form action="/" method="post" class="wpcf7-form">
+                            <div class="line">
+                                <label>
+                                    <input type="radio" name="sex" value="m" checked>
+                                    <div class="checkbox"></div>
+                                    муж
+                                </label>
+                                <label>
+                                    <input type="radio" name="sex" value="w">
+                                    <div class="checkbox"></div>
+                                    жен
+                                </label>
+                            </div>
+                            <label class="line">
+                                <input class="input" placeholder="E-mail" type="email" name="email">
+                            </label>
+                            <div class="line">
+                                <label>
+                                    <input type="checkbox" name="send">
+                                    <div class="checkbox"></div>
+                                    Получать рассылку
+                                </label>
+                            </div>
+                            <label class="line">
+                                <input class="input" placeholder="E-mail" type="email" name="email">
+                            </label>
+                            <label>
+                                <input class="input" placeholder="Имя*" type="text" name="name">
+                            </label>
+                            <label>
+                                <input class="input" placeholder="Фамилия*" type="text" name="surname">
+                            </label>
+                            <label class="line">
+                                <input class="input" placeholder="E-mail" type="email" name="email">
+                            </label>
+                            <label class="line">
+                                <input class="input" placeholder="E-mail" type="email" name="email">
+                            </label>
+                            <label>
+                                <input class="input" placeholder="Имя*" type="text" name="name">
+                            </label>
+                            <label>
+                                <input class="input" placeholder="Фамилия*" type="text" name="surname">
+                            </label>
+                            <label class="line">
+                                <input class="input" placeholder="E-mail" type="email" name="email">
                             </label>
                             <input class="wpcf7-submit" type="submit" value="отправить">
                         </form>

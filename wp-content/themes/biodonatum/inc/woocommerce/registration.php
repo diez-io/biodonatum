@@ -59,12 +59,12 @@ function handle_custom_registration() {
             // Create an array to hold error messages
             $validation_error  = new WP_Error();
             $validation_error  = apply_filters( 'woocommerce_process_registration_errors', $validation_error, $username, $password, $email );
-            $validation_errors = $validation_error->get_error_messages();
+            $validation_errors = $validation_error->get_error_codes();
 
             if ( $validation_errors ) {
                 // Collect validation errors
-                foreach ( $validation_errors as $message ) {
-                    $response['errors'][] = $message;
+                foreach ( $validation_errors as $code ) {
+                    $response['errors'][$code] = 'Validation failed';
                 }
                 throw new Exception('Validation failed');
             }
@@ -98,10 +98,92 @@ function handle_custom_registration() {
         }
     } else {
         // Invalid request or nonce error
-        $response['errors'][] = 'Invalid request or nonce.';
+        $response['message'] = 'Invalid request or nonce.';
     }
 
     // Return strict JSON response with consistent structure
     wp_send_json( $response );
 }
 add_action('wp_ajax_nopriv_custom_register', 'handle_custom_registration');
+
+function handle_custom_login() {
+    error_log('handle_custom_login');
+    static $valid_nonce = null;
+    $errors = [];
+
+    if ( null === $valid_nonce ) {
+        // Retrieve and verify nonce.
+        $nonce_value = wc_get_var( $_REQUEST['woocommerce-login-nonce'], wc_get_var( $_REQUEST['_wpnonce'], '' ) );
+        $valid_nonce = wp_verify_nonce( $nonce_value, 'woocommerce-login' );
+    }
+
+    // Check if login details are set and nonce is valid.
+    if ( isset( $_POST['username'], $_POST['password'] ) && $valid_nonce ) {
+
+        try {
+            $creds = array(
+                'user_login'    => trim( wp_unslash( $_POST['username'] ) ), // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                'user_password' => $_POST['password'], // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+                'remember'      => isset( $_POST['rememberme'] ), // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            );
+
+            $validation_error = new WP_Error();
+            $validation_error = apply_filters( 'woocommerce_process_login_errors', $validation_error, $creds['user_login'], $creds['user_password'] );
+
+            if ( $validation_error->get_error_code() ) {
+                foreach ($validation_error->get_error_codes() as $errorCode) {
+                    $errors[$errorCode] = 'Invalid username.';
+                }
+
+                throw new Exception();
+            }
+
+            if ( empty( $creds['user_login'] ) ) {
+                throw new Exception( 'Username is required.');
+            }
+
+            // On multisite, ensure user exists on current site.
+            if ( is_multisite() ) {
+                $user_data = get_user_by( is_email( $creds['user_login'] ) ? 'email' : 'login', $creds['user_login'] );
+
+                if ( $user_data && ! is_user_member_of_blog( $user_data->ID, get_current_blog_id() ) ) {
+                    add_user_to_blog( get_current_blog_id(), $user_data->ID, 'customer' );
+                }
+            }
+
+            // Perform the login.
+            $user = wp_signon( apply_filters( 'woocommerce_login_credentials', $creds ), is_ssl() );
+
+            if ( is_wp_error( $user ) ) {
+                foreach ($user->get_error_codes() as $errorCode) {
+                    $errors[$errorCode] = 'Invalid username.';
+                }
+
+                throw new Exception();
+            } else {
+                // Return strict JSON success response.
+                wp_send_json( array(
+                    'success' => true,
+                    'message' => 'Login successful.',
+                    'errors'  => $errors,
+                    'redirect' => htmlspecialchars($_SERVER['_wp_http_referer']),
+                ) );
+            }
+        } catch ( Exception $e ) {
+            // Return strict JSON error response.
+            wp_send_json( array(
+                'success' => false,
+                'message' => 'Login failed.',
+                'errors'  => $errors,
+            ) );
+        }
+    }
+
+    // Return JSON error if login data is not set or nonce is invalid.
+    wp_send_json( array(
+        'success' => false,
+        'message' => 'Invalid request. Please try again.',
+        'errors'  => [],
+    ) );
+}
+add_action('wp_ajax_nopriv_custom_login', 'handle_custom_login');
