@@ -64,7 +64,7 @@ function handle_custom_registration() {
             if ( $validation_errors ) {
                 // Collect validation errors
                 foreach ( $validation_errors as $code ) {
-                    $response['errors'][$code] = 'Validation failed';
+                    $response['errors'][$code] = $validation_error->get_error_message($code);
                 }
                 throw new Exception('Validation failed');
             }
@@ -74,13 +74,21 @@ function handle_custom_registration() {
 
             if ( is_wp_error( $new_customer ) ) {
                 // Collect customer creation errors
-                $response['errors'][] = $new_customer->get_error_message();
+                foreach ( $new_customer->get_error_codes() as $code ) {
+                    $response['errors'][$code] = $new_customer->get_error_message($code);
+                }
+
                 throw new Exception('Customer creation failed');
             }
 
             // Set success message
             $response['success'] = true;
             $response['message'] = 'Your account was created successfully.';
+
+            ob_start();
+            get_template_part('components/signUpSuccess');
+            $response['successComponent'] = ob_get_clean();
+
             if ( 'yes' === get_option( 'woocommerce_registration_generate_password' ) ) {
                 $response['message'] .= ' A password has been sent to your email address.';
             } else {

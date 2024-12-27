@@ -122,17 +122,27 @@ jQuery(function ($) {
         }
 
         showResult(response) {
+            if (response.successComponent) {
+                const $successComponent = $($.parseHTML(response.successComponent));
+
+                console.log($successComponent.data('success-for'));
+            }
+
+            if (response.reactiveRedirect) {
+
+            }
+
             if (response.message) {
                 this.$responseOutput.text(response.message);
                 this.$responseOutput.show();
+            }
 
-                if (response.errors) {
-                    for (let [code, error] of Object.entries(response.errors)) {
-                        const $notValidTip = this.notValidTips.filter('.error_' + code);
-                        $notValidTip.siblings('.input').toggleClass('wpcf7-not-valid', true);
-                        $notValidTip.text(error);
-                        $notValidTip.show();
-                    }
+            if (response.errors) {
+                for (let [code, error] of Object.entries(response.errors)) {
+                    const $notValidTip = this.notValidTips.filter('.error_' + code);
+                    $notValidTip.siblings('.input').toggleClass('wpcf7-not-valid', true);
+                    $notValidTip.text(error);
+                    $notValidTip.show();
                 }
             }
         }

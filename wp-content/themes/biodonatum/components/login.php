@@ -71,8 +71,8 @@
             <input type="hidden" name="action" value="custom_register">
             <div class="registration__input">
                 <div class="registration__input--lable">Адрес электронной почты:</div>
-                <input class="input" type="text" name="email" placeholder="Введите E-mail">
-                <div class="wpcf7-not-valid-tip error_invalid_username" style="display:none;"></div>
+                <input class="input input--required" type="text" name="email" placeholder="Введите E-mail">
+                <div class="wpcf7-not-valid-tip error_registration-error-invalid-email" style="display:none;"></div>
             </div>
             <button type="submit" class="button button--wide">Зарегистрироваться</button>
             <input type="checkbox" style="display: none;"  data-agree>
