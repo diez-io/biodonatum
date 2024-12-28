@@ -5,7 +5,7 @@ jQuery(function ($) {
         }
         else {
             $('.modal-background').toggle();
-            $('.registration').toggle();
+            $('.registration:not(.lost-password)').toggle();
         }
     });
 
@@ -22,5 +22,10 @@ jQuery(function ($) {
     $('.registration__new-user__create').on('click', function() {
         $('.registration--login').hide();
         $('.registration--registration').show();
+    });
+
+    $('.registration__back').on('click', function() {
+        $(this).parent().hide();
+        $('.registration--login').show();
     });
 });

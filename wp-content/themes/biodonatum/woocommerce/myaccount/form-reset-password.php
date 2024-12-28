@@ -23,20 +23,22 @@ defined( 'ABSPATH' ) || exit;
 <div class="lost-password registration">
     <div class="lost-password__container">
         <div class="registration__title">Создание нового пароля</div>
-        <form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" class="form" data-form action="<?= esc_url(admin_url('admin-ajax.php')) ?>">
+        <form class="form custom-woocommerce-form" action="<?= esc_url(admin_url('admin-ajax.php')) ?>">
 
             <? wp_nonce_field( 'reset_password', 'woocommerce-reset-password-nonce' ); ?>
-            <input type="hidden" name="wc_reset_password" value="true" />
             <input type="hidden" name="reset_key" value="<?= esc_attr($args['key']) ?>" />
             <input type="hidden" name="reset_login" value="<?= esc_attr($args['login']) ?>" />
+            <input type="hidden" name="action" value="custom_reset_password">
 
             <div class="registration__input">
                 <div class="registration__input--lable">Новый пароль:</div>
-                <input class="input" type="password" name="password_1" placeholder="Введите пароль">
+                <input class="input input--required" type="password" name="password_1" placeholder="Введите пароль">
+                <div class="wpcf7-not-valid-tip error_incorrect_password" style="display:none;"></div>
             </div>
             <div class="registration__input">
                 <div class="registration__input--lable">Повторить пароль:</div>
-                <input class="input" type="password" name="password_2" placeholder="Введите пароль">
+                <input class="input input--required" type="password" name="password_2" placeholder="Введите пароль">
+                <div class="wpcf7-not-valid-tip error_password_mismatch" style="display:none;"></div>
             </div>
             <button type="submit" class="button button--wide">Сменить пароль</button>
             <input type="checkbox" style="display: none;"  data-agree required>
@@ -51,6 +53,8 @@ defined( 'ABSPATH' ) || exit;
                     By clicking the button you agree to the terms of the <span>Privacy Policy</span>
                 </div>
             </div>
+            <span class="wpcf7-spinner"></span>
+            <div class="wpcf7-response-output" aria-hidden="true" style="display:none;"></div>
         </form>
     </div>
 </div>

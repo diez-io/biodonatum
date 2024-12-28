@@ -124,25 +124,35 @@ jQuery(function ($) {
         showResult(response) {
             if (response.successComponent) {
                 const $successComponent = $($.parseHTML(response.successComponent));
+                const successFor = '.' + $successComponent.data('success-for');
 
-                console.log($successComponent.data('success-for'));
+                console.log('response.successComponent');
+
+                if (this.$form.parent().is('.registration--registration, .lost-password__container')) {
+                    console.log('attr logged-id');
+                    $('.header__user').attr('logged-in', '');
+                }
+
+                $(successFor).replaceWith($successComponent);
+
+                $successComponent.find('.registration__back').on('click', function() {
+                    $(this).parent().hide();
+                    $('.registration--login').show();
+                });
             }
+            else {
+                if (response.message) {
+                    this.$responseOutput.text(response.message);
+                    this.$responseOutput.show();
+                }
 
-            if (response.reactiveRedirect) {
-
-            }
-
-            if (response.message) {
-                this.$responseOutput.text(response.message);
-                this.$responseOutput.show();
-            }
-
-            if (response.errors) {
-                for (let [code, error] of Object.entries(response.errors)) {
-                    const $notValidTip = this.notValidTips.filter('.error_' + code);
-                    $notValidTip.siblings('.input').toggleClass('wpcf7-not-valid', true);
-                    $notValidTip.text(error);
-                    $notValidTip.show();
+                if (response.errors) {
+                    for (let [code, error] of Object.entries(response.errors)) {
+                        const $notValidTip = this.notValidTips.filter('.error_' + code);
+                        $notValidTip.siblings('.input').toggleClass('wpcf7-not-valid', true);
+                        $notValidTip.text(error);
+                        $notValidTip.show();
+                    }
                 }
             }
         }
