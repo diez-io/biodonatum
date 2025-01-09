@@ -9,7 +9,7 @@ function get_cart_count() {
 }
 
 function enqueue_cart_count_script() {
-    if (is_cart() || is_singular('advanced_product')) {
+    if (is_cart() || is_checkout() || is_singular('advanced_product')) {
         wp_enqueue_style('cart-style', get_template_directory_uri() . '/css/cart.css');
 
         wp_enqueue_script(

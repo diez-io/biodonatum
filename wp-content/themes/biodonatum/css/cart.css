@@ -191,16 +191,6 @@
     width: 100%;
 }
 .containers_line {
-    display: grid;
-    grid-auto-flow: dense;
-    grid-template-columns: 2fr 1fr;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    gap: 28px;
-    overflow: hidden;
-    align-items: stretch;
-
     .wpcf7_form {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -212,7 +202,7 @@
     }
     .separator {
         border-bottom: 1px solid #F1F1F1;
-        margin: 20px 0px; 
+        margin: 20px 0px;
     }
     .right_block_container {
         display: flex;
@@ -297,7 +287,7 @@
 
 [type="select_container"]:has(select.input) {
     width: 100%;
-    
+
     [type="options_container"] {
         background-color: #fff;
         transition: 2s;
