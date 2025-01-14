@@ -152,3 +152,51 @@ form[name="checkout"] {
 #wc-woocommerce_payments-new-payment-method {
     all: revert;
 }
+
+.checkout .woocommerce-order {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.checkout .woocommerce-order h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 33.6px;
+    border-bottom: 1px solid #F1F1F1;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+.checkout .woocommerce-order table {
+    width: 100%;
+}
+
+.checkout .woocommerce-thankyou-order-received {
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 65px;
+    margin-bottom: 30px;
+    grid-column: 1/3;
+}
+
+.checkout .woocommerce-order-overview__order.order {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 44.8px;
+    border-bottom: 1px solid #F1F1F1;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+.checkout .woocommerce-order-overview__order.order strong {
+    color: #27AAE2;
+}
+
+.woocommerce-order-overview.woocommerce-thankyou-order-details.order_details {
+    margin-bottom: 50px;
+}
+
+.woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
+    margin-top: 50px;
+}

@@ -18,6 +18,7 @@ function theme_enqueue_assets() {
     // Enqueue CSS
     wp_enqueue_style('my-theme-style', get_template_directory_uri() . '/css/main.css');
     wp_enqueue_style('my-theme-header', get_template_directory_uri() . '/css/header.css');
+    wp_enqueue_style('my-theme-account', get_template_directory_uri() . '/css/account.css');
 
     // Enqueue JS
     wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/bundle.js', array(), null, true); // true loads it in the footer
@@ -31,6 +32,10 @@ function theme_enqueue_assets() {
             'fill_out_this_field' => get_static_content('please_fill_out_this_field'),
         ],
     ]);
+
+    if (is_account_page()) {
+        wp_enqueue_script( 'wc-add-payment-method' );
+    }
 
     if (is_checkout()) {
         wp_enqueue_style('checkout-style', get_template_directory_uri() . '/css/checkout.css');
@@ -204,3 +209,48 @@ add_action('wp_footer', function() {
     </script>
     <?
 });
+
+add_action('woocommerce_save_account_details', 'custom_redirect_after_account_save', 20);
+
+function custom_redirect_after_account_save() {
+    // Check if there are no error notices.
+    if (wc_notice_count('error') === 0) {
+        // Add a success notice.
+        wc_add_notice(__('Account details changed successfully.', 'woocommerce'));
+
+        // Redirect to the My Account page instead of the edit-account endpoint.
+        wp_safe_redirect(get_permalink( get_option('woocommerce_myaccount_page_id')));
+        exit;
+    }
+}
+
+//add_filter('woocommerce_available_payment_gateways', 'force_add_payment_method_gateways');
+
+// function force_add_payment_method_gateways($available_gateways) {
+//     if (is_account_page() && !is_wc_endpoint_url('payment-methods')) {
+//         // Get all gateways supporting 'add_payment_method' or 'tokenization'
+//         foreach (WC()->payment_gateways->payment_gateways() as $gateway_id => $gateway) {
+//             if ($gateway->supports('add_payment_method') || $gateway->supports('tokenization')) {
+//                 $available_gateways[$gateway_id] = $gateway;
+//             }
+//         }
+//     }
+
+//     return $available_gateways;
+// }
+
+add_filter('woocommerce_available_payment_gateways', 'custom_available_payment_gateways');
+
+function custom_available_payment_gateways($gateways) {
+    if (is_account_page() && !is_wc_endpoint_url('payment-methods') && !is_wc_endpoint_url('add-payment-method')) {
+        foreach ($gateways as $gateway_id => $gateway) {
+            if (!$gateway->supports('add_payment_method') && !$gateway->supports('tokenization')) {
+                unset($gateways[$gateway_id]);
+            }
+
+            $gateway->tokenization_script();
+        }
+    }
+
+    return $gateways;
+}

@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_address();
 ?>
-<section class="woocommerce-customer-details">
+<section class="island woocommerce-customer-details">
 
 	<?php if ( $show_shipping ) : ?>
 
@@ -86,3 +86,12 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 	<?php do_action( 'woocommerce_order_details_after_customer_details', $order ); ?>
 
 </section>
+
+<? if (is_account_page()) : ?>
+			</div>
+		</div>
+	</section>
+
+    <? get_template_part('components/feedback'); ?>
+</main>
+<? endif; ?>

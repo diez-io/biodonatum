@@ -211,5 +211,15 @@ jQuery(function ($) {
         console.log('each custom-woocommerce-form');
         new Form($(this));
     });
-});
 
+    $('.account__add-btn').on('click', function() {
+        $(this).hide();
+        $(this).siblings('#add_payment_method').show();
+    });
+
+    $('.account__edit-address-btn').on('click', function() {
+        $(this).hide();
+        $(this).siblings('address').hide();
+        $(this).siblings('.account__edit-address').css('position', 'static');
+    });
+});

@@ -21,7 +21,17 @@ defined( 'ABSPATH' ) || exit;
 
 $notes = $order->get_customer_order_notes();
 ?>
-<p>
+<main class="main">
+    <section class="section pt-50">
+        <div class="container">
+            <div class="breadcrumbs mb-40">
+                <a href="<?= home_url() ?>" class="breadcrumbs__link">to index</a>
+                <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="breadcrumbs__link">Personal account</a>
+                <span class="breadcrumbs__link">Order</span>
+            </div>
+			<div class="island checkout__order-review">
+
+<p class="account__order-title">
 <?php
 printf(
 	/* translators: 1: order number 2: order date 3: order status */

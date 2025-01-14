@@ -1,0 +1,249 @@
+.account__edit {
+    display: flex;
+    gap: 30px;
+}
+
+.account__edit > * {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.account__edit__col1 {
+    flex: 1;
+}
+
+.account__edit__col2 {
+    flex: 2;
+}
+
+.account__logout {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    color: #27AAE2;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.account h3 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 39.01px;
+    margin-bottom: 20px;
+}
+
+.account .woocommerce-form-row,
+.account .form-row {
+    margin: 15px 0;
+}
+
+.account .woocommerce-form-row input,
+.account .form-row input {
+    line-height: 50px;
+}
+
+.account__pwd-change {
+    margin: 50px 0 20px 0;
+}
+
+.account__add-btn {
+    color: #27AAE2;
+    text-transform: lowercase;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.account #add_payment_method {
+    border: 1px solid #bbbbbb;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #ecf6ff;
+}
+
+.account .account-payment-methods-table {
+    margin: 20px 0;
+    width: 100%;
+}
+
+.account .account-payment-methods-table svg {
+    width: 30px;
+    height: 30px;
+}
+
+.account .account-payment-methods-table td {
+    vertical-align: middle;
+}
+
+.account__cell-wrap {
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+.account td:first-child .account__cell-wrap {
+    border-radius: 10px 0 0 10px;
+}
+
+.account td:last-child .account__cell-wrap {
+    border-radius: 0 10px 10px 0;
+    justify-content: flex-end;
+}
+
+.account td:last-child .account__cell-wrap a {
+    display: flex;
+}
+
+.account__make-default-btn,
+.account__default-method {
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.account__make-default-btn{
+    background-color: #27AAE2;
+    color: #fff;
+}
+
+.account__default-method {
+    border: 1px solid green;
+}
+
+.account .woocommerce-SavedPaymentMethods-saveNew {
+    display: none;
+}
+
+.account .woocommerce-Address {
+    border: 1px solid #bbbbbb;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #ededed;
+    margin: 20px 0;
+}
+
+.account__edit-address {
+    position: absolute;
+    left: 150vw;
+}
+
+.account h4 {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+
+.account__edit-address-btn {
+    background-color: #27AAE2;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.account .select2 {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #242424;
+    background-color: #f9f9f9;
+    border: 1px solid #f9f9f9;
+    border-radius: 10px;
+    -webkit-transition: 0.2s linear;
+    transition: 0.2s linear;
+    width: 100%;
+}
+
+.account .selection {
+    all: unset;
+}
+
+.account .selection * {
+    all: unset;
+}
+
+.account .select2-selection {
+    display: flex;
+}
+
+.account .select2-selection__rendered {
+    padding: 0 !important;
+}
+
+.account .select2-selection__arrow {
+    top: 20px !important;
+    right: 20px !important;
+}
+
+.account .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 50px;
+}
+
+.account .account-orders-table {
+    width: 100%;
+}
+
+.account .account-orders-table thead {
+    color: #ACACAC;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.account .account-orders-table thead th {
+    padding-bottom: 20px;
+}
+
+.account .account-orders-table tbody tr > * {
+    padding: 15px 0;
+}
+
+.account .account-orders-table tr {
+    border-bottom: 1px solid #F1F1F1;
+}
+
+.account .account-orders-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.account .account-orders-table .woocommerce-buttonview {
+    background-color: #27AAE2;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.account .woocommerce-order {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.checkout__order-review:has(.account__order-title) {
+    margin-bottom: 30px;
+}
+
+.checkout__order-review h2,
+.woocommerce-customer-details h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 33.6px;
+}
+
+.account .woocommerce-order table {
+    width: 100%;
+}
+
+.account .woocommerce-thankyou-order-received {
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 65px;
+    margin-bottom: 30px;
+    grid-column: 1/3;
+}
+
