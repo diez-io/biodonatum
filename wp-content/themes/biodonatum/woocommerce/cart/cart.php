@@ -21,22 +21,22 @@ defined( 'ABSPATH' ) || exit; ?>
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                <span class="breadcrumbs__link">Your basket</span>
+                <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                <span class="breadcrumbs__link"><?= __('Cart', 'static') ?></span>
             </div>
             <div class="cart">
                 <div class="head">
-                    <h2 class="title">Your basket</h2>
+                    <h2 class="title"><?= __('Cart', 'static') ?></h2>
                 </div>
                 <div class="island">
                     <table>
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>SubTotal</th>
-                                <th>Loyalty program</th>
+                                <th><?= __('Product', 'static') ?></th>
+                                <th><?= __('Quantity', 'static') ?></th>
+                                <th><?= __('Price', 'static') ?></th>
+                                <th><?= __('SubTotal', 'static') ?></th>
+                                <th><?= __('Loyalty program', 'static') ?></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -122,26 +122,23 @@ defined( 'ABSPATH' ) || exit; ?>
                 </div>
                 <div class="cart__promocode-and-total">
                     <div class="cart__promocode island">
-                        <div class="cart__promocode--title">Details</div>
                         <form>
-                            <input class="input" type="text" name="coupon_code" placeholder="Promocode">
-                            <button class="button button--wide" type="submit">apply promocode</button>
+                            <input class="input" type="text" name="coupon_code" placeholder="<?= __('Promocode', 'static') ?>">
+                            <button class="button button--wide" type="submit"><?= __('Apply promocode', 'static') ?></button>
                         </form>
-                        <div class="cart__promocode--title">Order Notes (optional)</div>
-                        <textarea class="input input--area" type="textarea" placeholder="Your message here"></textarea>
                     </div>
                     <div class="cart__total island">
                         <div class="cart__total__grid">
-                            <div class="cart__total--title">Subtotal</div>
+                            <div class="cart__total--title"><?= __('Subtotal', 'static') ?></div>
                             <div class="cart__total--subtotal"><?= WC()->cart->get_cart_subtotal() ?></div>
-                            <div class="cart__total--title">Shipping</div>
-                            <div class="cart__total--shipping">Shipping options will be updated upon ordering.</div>
+                            <div class="cart__total--title"><?= __('Shipping', 'static') ?></div>
+                            <div class="cart__total--shipping"><?= __('Shipping options will be updated upon ordering.', 'static') ?></div>
                             <?
                                 $appliedCoupons = WC()->cart->get_applied_coupons();
                                 $show = !empty($appliedCoupons) ? '' : 'style="display:none;"';
                                 $discountTotal = WC()->cart->get_cart_discount_total();
                             ?>
-                            <div class="cart__total--title" <?= $show ?>>Applied coupons</div>
+                            <div class="cart__total--title" <?= $show ?>><?= __('Applied coupons', 'static') ?></div>
                             <div class="cart__total--coupons" <?= $show ?>>
                                 <? foreach ($appliedCoupons as $coupon) : ?>
                                     <div class="cart__total--coupon">
@@ -156,13 +153,13 @@ defined( 'ABSPATH' ) || exit; ?>
                                     </div>
                                 <? endforeach; ?>
                             </div>
-                            <div class="cart__total--title" <?= $show ?>>Discount</div>
+                            <div class="cart__total--title" <?= $show ?>><?= __('Discount', 'static') ?></div>
                             <div class="cart__total--discount" <?= $show ?>><?= wc_price(-$discountTotal) ?></div>
-                            <div class="cart__total--title">Total</div>
+                            <div class="cart__total--title"><?= __('Total', 'static') ?></div>
                             <div class="cart__total--total"><?= WC()->cart->get_cart_total() ?></div>
                         </div>
                         <a href="<?= esc_url(wc_get_checkout_url()) ?>" class="button button--wide">
-                            validate the order
+                            <?= __('validate the order', 'static') ?>
                         </a>
                     </div>
                 </div>

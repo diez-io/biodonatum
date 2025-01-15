@@ -23,22 +23,22 @@ if ( ! defined( 'ABSPATH' ) ) {
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                <span class="breadcrumbs__link">Checkout</span>
+                <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                <span class="breadcrumbs__link"><?= __('Checkout', 'static') ?></span>
             </div>
             <div class="cart">
                 <div class="head">
-                    <h2 class="title">Checkout</h2>
+                    <h2 class="title"><?= __('Checkout', 'static') ?></h2>
                 </div>
                 <div class="island">
                     <table>
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>SubTotal</th>
-                                <th>Loyalty program</th>
+                                <th><?= __('Product', 'static') ?></th>
+                                <th><?= __('Quantity', 'static') ?></th>
+                                <th><?= __('Price', 'static') ?></th>
+                                <th><?= __('SubTotal', 'static') ?></th>
+                                <th><?= __('Loyalty program', 'static') ?></th>
                             </tr>
                         </thead>
                         <tbody>

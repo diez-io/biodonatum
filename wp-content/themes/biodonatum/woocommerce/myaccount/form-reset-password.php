@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 
 <div class="lost-password registration">
     <div class="lost-password__container">
-        <div class="registration__title">Создание нового пароля</div>
+        <div class="registration__title"><?= __('Enter a new password below.', 'static') ?></div>
         <form class="form custom-woocommerce-form" action="<?= esc_url(admin_url('admin-ajax.php')) ?>">
 
             <? wp_nonce_field( 'reset_password', 'woocommerce-reset-password-nonce' ); ?>
@@ -31,16 +31,16 @@ defined( 'ABSPATH' ) || exit;
             <input type="hidden" name="action" value="custom_reset_password">
 
             <div class="registration__input">
-                <div class="registration__input--lable">Новый пароль:</div>
-                <input class="input input--required" type="password" name="password_1" placeholder="Введите пароль">
+                <div class="registration__input--lable"><?= __('New password', 'static') ?>:</div>
+                <input class="input input--required" type="password" name="password_1">
                 <div class="wpcf7-not-valid-tip error_incorrect_password" style="display:none;"></div>
             </div>
             <div class="registration__input">
-                <div class="registration__input--lable">Повторить пароль:</div>
-                <input class="input input--required" type="password" name="password_2" placeholder="Введите пароль">
+                <div class="registration__input--lable"><?= __('Re-enter new password', 'static') ?>:</div>
+                <input class="input input--required" type="password" name="password_2">
                 <div class="wpcf7-not-valid-tip error_password_mismatch" style="display:none;"></div>
             </div>
-            <button type="submit" class="button button--wide">Сменить пароль</button>
+            <button type="submit" class="button button--wide"><?= __('Save', 'static') ?></button>
             <input type="checkbox" style="display: none;"  data-agree required>
             <div data-agree-custom class="noselect">
                 <svg>
@@ -50,7 +50,7 @@ defined( 'ABSPATH' ) || exit;
                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-checkbox-checked"></use>
                 </svg>
                 <div>
-                    By clicking the button you agree to the terms of the <span>Privacy Policy</span>
+                    <?= __('By clicking the button you agree to the terms of the <span>Privacy Policy</span>', 'static') ?>
                 </div>
             </div>
             <span class="wpcf7-spinner"></span>

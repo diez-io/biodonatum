@@ -36,12 +36,12 @@ if (!$isViewOrderPage) : ?>
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                <span class="breadcrumbs__link">Personal account</span>
+                <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                <span class="breadcrumbs__link"><?= __('Personal account', 'static') ?></span>
             </div>
             <div class="account">
                 <div class="head">
-                    <h2 class="title">Personal account</h2>
+                    <h2 class="title"><?= __('Personal account', 'static') ?></h2>
                 </div>
 				<div class="account__edit">
 					<div class="account__edit__col1">
@@ -51,24 +51,24 @@ if (!$isViewOrderPage) : ?>
 							</picture>
 						</div>
 						<div class="island">
-							<a class="account__logout" href="<?= esc_url( wc_logout_url(home_url()) ) ?>">Log out</a>
+							<a class="account__logout" href="<?= esc_url( wc_logout_url(home_url()) ) ?>"><?= __('Log out', 'static') ?></a>
 						</div>
 					</div>
 					<div class="account__edit__col2">
 						<div class="island">
-							<h3>Account details</h3>
+							<h3><?= __('Account details', 'static') ?></h3>
 							<?
 								do_action('woocommerce_account_edit-account_endpoint');
 							?>
 						</div>
 						<div class="island">
-							<h3>Payment methods</h3>
+							<h3><?= __('Payment methods', 'static') ?></h3>
 							<?
 								do_action('woocommerce_account_payment-methods_endpoint');
 							?>
 						</div>
 						<div class="island">
-							<h3>Addresses</h3>
+							<h3><?= __('Addresses', 'static') ?></h3>
 							<?
 								do_action('woocommerce_account_edit-address_endpoint');
 							?>
@@ -76,7 +76,7 @@ if (!$isViewOrderPage) : ?>
 					</div>
 				</div>
                 <div class="head">
-                    <h2 class="title">History</h2>
+                    <h2 class="title"><?= __('History', 'static') ?></h2>
                 </div>
                 <div class="island">
 					<?

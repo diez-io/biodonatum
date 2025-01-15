@@ -118,6 +118,7 @@
     display: flex;
     gap: 28px;
     margin-top: 28px;
+    align-items: flex-start;
 }
 
 .cart__promocode-and-total > * {
