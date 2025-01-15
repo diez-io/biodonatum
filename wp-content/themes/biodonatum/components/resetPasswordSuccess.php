@@ -5,7 +5,7 @@
                 <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-success"></use>
             </svg>
         </div>
-        <div class="registration__title">Пароль успешно обновлен!</div>
-        <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="button button--wide">Перейти в профиль</a>
+        <div class="registration__title"><?= __('Password has been reset successfully!', 'static') ?></div>
+        <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="button button--wide"><?= __('Go to your profile page', 'static') ?></a>
     </div>
 </div>

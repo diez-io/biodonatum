@@ -7,8 +7,8 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                        <span class="breadcrumbs__link">Reviews</span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                        <span class="breadcrumbs__link"><?= __('Reviews', 'static') ?></span>
                     </div>
                 </div>
             </section>

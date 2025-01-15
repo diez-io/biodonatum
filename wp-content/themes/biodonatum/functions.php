@@ -29,7 +29,7 @@ function theme_enqueue_assets() {
         //'ajaxUrl' => admin_url('admin-ajax.php'),
         //'nonce'   => wp_create_nonce('my_nonce'),
         'staticContent' => [
-            'fill_out_this_field' => get_static_content('please_fill_out_this_field'),
+            'fill_out_this_field' => __('Please fill out this field.', 'static'),
         ],
     ]);
 

@@ -7,15 +7,16 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                        <span class="breadcrumbs__link">Our Scientists</span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                        <span class="breadcrumbs__link"><?= __('Our Scientists', 'static') ?></span>
                     </div>
                     <div class="scientists">
                         <div class="head">
-                            <h2 class="title">Our Scientists</h2>
+                            <h2 class="title"><?= __('Our Scientists', 'static') ?></h2>
                         </div>
                         <div class="island">
-                            Our Scientific Board is represented by doctors, scientists and researchers in such fields as microbiology, immunology, genetics, metabolomics, gastroenterology, pediatrics, gynecology and cosmetology. They head clinics and laboratories, teach at world-renowned institutes and are authors of scientific journals and publications.
+                            <?= __('Our Scientific Board is represented by doctors, scientists and researchers in such fields as microbiology, immunology, genetics, metabolomics, gastroenterology, pediatrics, gynecology and cosmetology.', 'static') ?>
+                            <?= __('They head clinics and laboratories, teach at world-renowned institutes and are authors of scientific journals and publications.', 'static') ?>
                         </div>
                         <div class="slider" data-slider="scientists">
                             <div class="swiper">
@@ -72,7 +73,7 @@
                                 </div>
                                 <div class="swiper-pagination"></div>
                                 <div class="button button--wide scientists__load-more load-more-btn">
-                                    LOAD MORE
+                                    <?= __('LOAD MORE', 'static') ?>
                                 </div>
                             </div>
                         </div>

@@ -8,18 +8,18 @@
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                <span class="breadcrumbs__link">About us</span>
+                <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                <span class="breadcrumbs__link"><?= __('About us', 'static') ?></span>
             </div>
             <div class="about">
                 <div class="head">
-                    <h2 class="title">About us</h2>
+                    <h2 class="title"><?= __('About us', 'static') ?></h2>
                 </div>
                 <div class="editor">
                     <p>
-                        BIODONATUM WAS BORN BY THE BREATH OF THE UNIVERSE FOR YOUR HEALTH.
+                        <?= __('BIODONATUM WAS BORN BY THE BREATH OF THE UNIVERSE FOR YOUR HEALTH.', 'static') ?>
                         <br>
-                        Our mission is population health and active longevity for every person.
+                        <?= __('Our mission is population health and active longevity for every person.', 'static') ?>
                     </p>
                 </div>
                 <div class="about__stories">
@@ -163,8 +163,8 @@
     </section>
     <section class="section section--bg about__wide" style="background-image: url('<?= get_template_directory_uri(); ?>/assets/images/about/about-wide.png')">
         <div class="about__wide__content">
-            <div class="about__wide__content-big">2024 Biodonatum is available in the European Union</div>
-            <div class="about__wide__content-small">Lactobacillus fermentation extract is now available in the European Union.</div>
+            <div class="about__wide__content-big"><?= __('2024 Biodonatum is available in the European Union', 'static') ?></div>
+            <div class="about__wide__content-small"><?= __('Lactobacillus fermentation extract is now available in the European Union.', 'static') ?></div>
         </div>
     </section>
 

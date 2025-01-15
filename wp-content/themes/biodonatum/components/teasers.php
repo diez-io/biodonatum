@@ -6,7 +6,7 @@
                     <img src="<?= get_template_directory_uri(); ?>/assets/images/index-teaser-1.png" alt="">
                 </picture>
                 <p class="article-teaser__info">
-                    Microbiotic for health,<br> beauty and active<br> longevity
+                    <?= __('Microbiotic for health, beauty and active longevity', 'static') ?>
                 </p>
             </article>
             <article class="article-teaser">
@@ -14,7 +14,7 @@
                     <img src="<?= get_template_directory_uri(); ?>/assets/images/index-teaser-2.png" alt="">
                 </picture>
                 <p class="article-teaser__info">
-                    Natural source of<br> fermented metabolites 16<br> strains of lactobacilli
+                    <?= __('Natural source of fermented metabolites 16 strains of lactobacilli', 'static') ?>
                 </p>
             </article>
             <article class="article-teaser">
@@ -22,7 +22,7 @@
                     <img src="<?= get_template_directory_uri(); ?>/assets/images/index-teaser-3.png" alt="">
                 </picture>
                 <p class="article-teaser__info">
-                    Learn more about<br> the Universe named<br> Human
+                    <?= __('Learn more about the Universe named Human', 'static') ?>
                 </p>
             </article>
             <article class="article-teaser">
@@ -30,7 +30,7 @@
                     <img src="<?= get_template_directory_uri(); ?>/assets/images/index-teaser-4.png" alt="">
                 </picture>
                 <p class="article-teaser__info">
-                    Developed in Japan, a<br> company with a 100-<br>year history
+                    <?= __('Developed in Japan, a company with a 100-year history', 'static') ?>
                 </p>
             </article>
         </div>

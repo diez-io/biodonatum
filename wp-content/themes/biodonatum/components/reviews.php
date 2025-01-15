@@ -2,11 +2,11 @@
     <div class="container">
         <div class="reviews">
             <div class="head">
-                <h2 class="title"><?= get_static_content('reviews') ?></h2>
+                <h2 class="title"><?= __('Reviews', 'static') ?></h2>
             </div>
             <div class="reviews__filter">
                 <div class="reviews__filter__something">
-                    253 <?= get_static_content('reviews') ?>
+                    253 <?= __('Reviews', 'static') ?>
                     <svg>
                         <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
                     </svg>
@@ -19,12 +19,12 @@
                     </div>
                     <div class="island reviews__filter__popup-body popup-body">
                         <div class="reviews__filter__title">
-                            <?= get_static_content('sort_by') ?>:
+                            <?= __('Sort by', 'static') ?>:
                         </div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_featured') ?></div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_newest') ?></div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_highest_ratings') ?></div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_lowest_ratings') ?></div>
+                        <div class="reviews__filter__item"><?= __('Featured', 'static') ?></div>
+                        <div class="reviews__filter__item"><?= __('Newest', 'static') ?></div>
+                        <div class="reviews__filter__item"><?= __('Highest Rating', 'static') ?></div>
+                        <div class="reviews__filter__item"><?= __('Lowest Rating', 'static') ?></div>
                     </div>
                 </div>
             </div>
@@ -499,7 +499,7 @@
                 </div>
             </div>
             <div class="button load-more-btn">
-                <?= get_static_content('load_more') ?>
+                <?= __('Load more', 'static') ?>
             </div>
         </div>
     </div>

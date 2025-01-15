@@ -6,18 +6,18 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                        <span class="breadcrumbs__link">Contacts</span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                        <span class="breadcrumbs__link"><?= __('Contacts', 'static') ?></span>
                     </div>
                     <div class="contacts">
                         <div class="head">
-                            <h2 class="title">Contacts</h2>
+                            <h2 class="title"><?= __('Contacts', 'static') ?></h2>
                         </div>
                         <div class="contacts__cards">
                             <div class="card">
                                 <div class="card__text">
                                     <div class="card__text-title">
-                                        Head office of the company
+                                        <?= __('Head office of the company', 'static') ?>
                                     </div>
                                     <div class="card__text-description">
                                         April
@@ -49,7 +49,7 @@
                             <div class="card">
                                 <div class="card__text">
                                     <div class="card__text-title">
-                                        The MENA Countries
+                                        <?= __('The MENA Countries', 'static') ?>
                                     </div>
                                     <div class="card__text-description">
                                         BIODONATUM TRAIDING
@@ -89,7 +89,7 @@
                             <div class="card">
                                 <div class="card__text">
                                     <div class="card__text-title">
-                                        The CIS countries
+                                        <?= __('The CIS countries', 'static') ?>
                                     </div>
                                     <div class="card__text-description">
                                         April Nutrition LLC
@@ -129,7 +129,7 @@
                             <div class="card">
                                 <div class="card__text">
                                     <div class="card__text-title">
-                                        USA
+                                        <?= __('USA', 'static') ?>
                                     </div>
                                     <div class="card__text-description">
                                         APREL NUTRITION LLC
@@ -160,13 +160,15 @@
                             </div>
                         </div>
                         <div class="head">
-                            <h2 class="title">Our distributor partners</h2>
+                            <h2 class="title"><?= __('Our distributor partners', 'static') ?></h2>
                         </div>
                         <div class="contacts__cards">
                             <div class="card">
                                 <div class="card__text">
                                     <div class="card__text-title">
-                                        Belgium and Luxembourg
+                                        <?= __('Belgium', 'static') ?>
+                                        <?= __('and', 'static') ?>
+                                        <?= __('Luxembourg', 'static') ?>
                                     </div>
                                     <div class="card__text-description">
                                         Bergfin srl, Avenue Ernestine 4, 1050 Brussels, Belgium
@@ -196,7 +198,7 @@
                             <div class="card">
                                 <div class="card__text">
                                     <div class="card__text-title">
-                                        Germany
+                                        <?= __('Germany', 'static') ?>
                                     </div>
                                     <div class="card__text-description">
                                         Company Medicana GmbH
@@ -236,7 +238,7 @@
                         </div>
                         <div class="editor">
                             <p>
-                                If you would like to become our distributor partner, please write or call us at the central office and we will be happy to discuss possible options with you.
+                                <?= __('If you would like to become our distributor partner, please write or call us at the central office and we will be happy to discuss possible options with you.', 'static') ?>
                             </p>
                         </div>
                     </div>

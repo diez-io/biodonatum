@@ -10599,6 +10599,7 @@ meter {
   font-size: 20px;
   line-height: 30px;
   text-align: center;
+  width: 70%;
 }
 @media only screen and (max-width: 1199px) {
   .article-teaser__info {

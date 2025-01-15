@@ -4,12 +4,12 @@
             <div class="columns__col-12 columns__col-mob-4">
                 <div class="main-hero">
                     <h1 class="main-hero__title">
-                        <?= get_static_content('main_hero_title') ?>
+                        <?= __('ORGANIC JAPANESE MICROBIOTIC', 'static') ?>
                     </h1>
                     <p class="text">
-                        <?= get_static_content('main_hero_text') ?>
+                        <?= __('FOR HEALTH, BEAUTY AND ACTIVE LONGEVITY', 'static') ?>
                     </p>
-                    <a href="#" class="button"><?= get_static_content('buy_now') ?></a>
+                    <a href="#" class="button"><?= __('Buy now', 'static') ?></a>
                     <div class="main-hero__circle container">
                     </div>
                     <div class="main-hero__circle__content">
@@ -18,7 +18,7 @@
                                 <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-1.png" alt="">
                             </picture>
                             <p>
-                                The biotechnological production cycle is 2 years
+                                <?= __('The biotechnological production cycle is 2 years', 'static') ?>
                             </p>
                         </div>
                         <div>
@@ -26,7 +26,7 @@
                                 <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-2.png" alt="">
                             </picture>
                             <p>
-                                Gluten free
+                                <?= __('Gluten free', 'static') ?>
                             </p>
                         </div>
                         <div>
@@ -34,7 +34,7 @@
                                 <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-3.png" alt="">
                             </picture>
                             <p>
-                                Lactose free
+                                <?= __('Lactose free', 'static') ?>
                             </p>
                         </div>
                         <div>
@@ -42,7 +42,7 @@
                                 <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-4.png" alt="">
                             </picture>
                             <p>
-                                Mushrooms and yeast free
+                                <?= __('Mushrooms and yeast free', 'static') ?>
                             </p>
                         </div>
                         <div>
@@ -50,7 +50,7 @@
                                 <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-5.png" alt="">
                             </picture>
                             <p>
-                                Suitable for diabetics
+                                <?= __('Suitable for diabetics', 'static') ?>
                             </p>
                         </div>
                     </div>

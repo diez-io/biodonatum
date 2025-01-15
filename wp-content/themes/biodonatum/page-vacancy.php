@@ -7,20 +7,16 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link">to index</a>
-                        <span class="breadcrumbs__link">Vacancy</span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                        <span class="breadcrumbs__link"><?= __('Vacancy', 'static') ?></span>
                     </div>
                     <div class="vacancy">
                         <div class="head">
-                            <h2 class="title">Vacancy</h2>
+                            <h2 class="title"><?= __('Vacancy', 'static') ?></h2>
                         </div>
                         <div class="editor">
                             <p>
-                                You have the right to withdraw from this agreement without giving reasons within fourteen (14) days. The withdrawal period expires 14 days from the day on which you or a third party other than the carrier nominated by you takes physical possession of the (last) goods.
-                                <br>
-                                To exercise the right of withdrawal, you must notify us (April 843 555 392 R.C.S.53 rue Eugène Rethacker 94490 Ormesson-sur-Marne) or by email: info@biodonatum.fr of your decision to withdraw from this contract by means of a clear statement.
-                                <br>
-                                (for example, a letter sent by mail or email). You may use the standard opt-out form, but this is not required. To comply with the withdrawal period, it is sufficient that you send your message regarding the exercise of the right to withdraw funds before the expiration of the withdrawal period.
+                                <?= __('vacancy_text', 'static') ?>
                             </p>
                         </div>
                         <div class="vacancy__cards load-more-items">
@@ -46,11 +42,11 @@
                                             <svg>
                                                 <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
                                             </svg>
-                                            Experience 1-3 years
+                                            <?= __('Experience', 'static') ?> 1-3 years
                                         </div>
                                     </div>
                                     <div class="card__text-description">
-                                        <h3>Описание</h3>
+                                        <h3><?= __('Description', 'static') ?></h3>
                                         Over 46 million “genuine” product reviews by actual customers in 19 languages which we share with other E-tailers of your brand via Google Shopping Many potential domestic and international customers visit iHerb to read product reviews. Then will shop your brand through other channels Complement your current distribution channels by giving your international customers another channel to shop your brand
                                     </div>
                                 </div>
@@ -181,7 +177,7 @@
                             </div>
                         </div>
                         <div class="button load-more-btn">
-                            LOAD MORE
+                            <?= __('LOAD MORE', 'static') ?>
                         </div>
                     </div>
                 </div>
@@ -193,7 +189,7 @@
                     <div class="container">
                         <div class="island">
                             <h2 class="form__title">
-                                Join our team
+                                <?= __('Join our team', 'static') ?>
                             </h2>
                             <form action="#" class="form" data-form>
                                 <div class="form__content">

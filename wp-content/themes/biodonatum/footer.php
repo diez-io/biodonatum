@@ -8,14 +8,14 @@
             </div>
             <div class="footer__block">
                 <nav class="footer__nav">
-                    <a href="#" class="footer__link"><?= get_static_content('about') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('science') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('scientists') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('terms_of_sales') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('return_policy') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('delivery_terms') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('loyalty_program') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('privacy_policy') ?></a>
+                    <a href="#" class="footer__link"><?= __('About us', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= __('Science', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= __('Scientists', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= __('Terms of sales', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= __('Return Policy', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= __('Delivery terms', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= __('Loyalty program', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= __('Privacy Policy', 'static') ?></a>
                 </nav>
             </div>
             <div class="footer__block">
@@ -50,7 +50,7 @@
         </div>
     </div>
 </footer>
-<aside class="footer__copyright"><?= get_static_content('bottom_line') ?></aside>
+<aside class="footer__copyright"><?= __('1982 Microbiotic Biodonatum', 'static') ?></aside>
 
 <style>
     .temp {
@@ -83,12 +83,9 @@
             <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('reviews')), PHP_URL_PATH)); ?>" class="temp__link">Отзывы</a>
             <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('delivery')), PHP_URL_PATH)); ?>" class="temp__link">Доставка</a>
             <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('scientists')), PHP_URL_PATH)); ?>" class="temp__link">Ученые</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('cart')), PHP_URL_PATH)); ?>" class="temp__link"
-                style="text-decoration-line: line-through;">Оформление</a>
             <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('blog')), PHP_URL_PATH)); ?>" class="temp__link">Блог</a>
             <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('contacts')), PHP_URL_PATH)); ?>" class="temp__link">Контакты</a>
             <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('vacancy')), PHP_URL_PATH)); ?>" class="temp__link">Вакансии</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('product')), PHP_URL_PATH)); ?>" class="temp__link">Товар</a>
             <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('about')), PHP_URL_PATH)); ?>" class="temp__link">О нас</a>
         </div>
     </div>
