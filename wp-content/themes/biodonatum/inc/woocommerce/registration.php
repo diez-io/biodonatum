@@ -83,17 +83,11 @@ function handle_custom_registration() {
 
             // Set success message
             $response['success'] = true;
-            $response['message'] = 'Your account was created successfully.';
+            $response['message'] = __('Your account was created successfully.', 'static');
 
             ob_start();
             get_template_part('components/signUpSuccess', null, ['email' => $email]);
             $response['successComponent'] = ob_get_clean();
-
-            if ( 'yes' === get_option( 'woocommerce_registration_generate_password' ) ) {
-                $response['message'] .= ' A password has been sent to your email address.';
-            } else {
-                $response['message'] .= ' Your login details have been sent to your email address.';
-            }
 
             // Set customer authentication cookie
             wc_set_customer_auth_cookie( $new_customer );
@@ -101,12 +95,12 @@ function handle_custom_registration() {
         } catch ( Exception $e ) {
             // On error, return failure and include error messages
             if ( ! empty( $response['errors'] ) ) {
-                $response['message'] = 'There were errors during registration.';
+                $response['message'] = __('There were errors during registration.', 'static');
             }
         }
     } else {
         // Invalid request or nonce error
-        $response['message'] = 'Invalid request or nonce.';
+        $response['message'] = __('Invalid request or nonce.', 'static');
     }
 
     // Return strict JSON response with consistent structure
@@ -115,7 +109,6 @@ function handle_custom_registration() {
 add_action('wp_ajax_nopriv_custom_register', 'handle_custom_registration');
 
 function handle_custom_login() {
-    error_log('handle_custom_login');
     static $valid_nonce = null;
     $errors = [];
 
@@ -172,7 +165,7 @@ function handle_custom_login() {
                 // Return strict JSON success response.
                 wp_send_json( array(
                     'success' => true,
-                    'message' => 'Login successful.',
+                    'message' => __('Login successful.', 'static'),
                     'errors'  => $errors,
                     'redirect' => esc_url($_POST['_wp_http_referer']),
                 ) );
@@ -181,7 +174,7 @@ function handle_custom_login() {
             // Return strict JSON error response.
             wp_send_json( array(
                 'success' => false,
-                'message' => 'Login failed.',
+                'message' => __('Login failed.', 'static'),
                 'errors'  => $errors,
             ) );
         }
@@ -190,7 +183,7 @@ function handle_custom_login() {
     // Return JSON error if login data is not set or nonce is invalid.
     wp_send_json( array(
         'success' => false,
-        'message' => 'Invalid request. Please try again.',
+        'message' => __('Invalid request. Please try again.', 'static'),
         'errors'  => [],
     ) );
 }
@@ -221,7 +214,6 @@ function handle_custom_lost_password() {
 
         // If no user found, check if the login is email and lookup user based on email.
         if ( !$user_data && is_email( $login ) && apply_filters( 'woocommerce_get_username_from_email', true ) ) {
-            error_log('If no user found, check if the login is email and lookup user based on email.');
             $user_data = get_user_by( 'email', $login );
         }
 
@@ -245,9 +237,6 @@ function handle_custom_lost_password() {
                 $key = get_password_reset_key( $user_data );
 
                 if ( is_wp_error( $key ) ) {
-                    error_log('Get password reset key.');
-                    error_log(print_r($user_data, true));
-
                     $errors['key_generation_failed'] = $key->get_error_message();
                 } else {
                     // Send email notification.
