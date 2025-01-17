@@ -24,21 +24,21 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="container">
             <div class="breadcrumbs mb-40">
                 <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
-                <span class="breadcrumbs__link"><?= __('Checkout', 'static') ?></span>
+                <span class="breadcrumbs__link"><?= get_static_content('checkout') ?></span>
             </div>
             <div class="cart">
                 <div class="head">
-                    <h2 class="title"><?= __('Checkout', 'static') ?></h2>
+                    <h2 class="title"><?= get_static_content('checkout') ?></h2>
                 </div>
                 <div class="island">
                     <table>
                         <thead>
                             <tr>
-                                <th><?= __('Product', 'static') ?></th>
-                                <th><?= __('Quantity', 'static') ?></th>
-                                <th><?= __('Price', 'static') ?></th>
-                                <th><?= __('SubTotal', 'static') ?></th>
-                                <th><?= __('Loyalty program', 'static') ?></th>
+                                <th><?= get_static_content('product') ?></th>
+                                <th><?= get_static_content('quantity') ?></th>
+                                <th><?= get_static_content('price') ?></th>
+                                <th><?= get_static_content('subtotal') ?></th>
+                                <th><?= get_static_content('loyalty_program') ?></th>
                             </tr>
                         </thead>
                         <tbody>

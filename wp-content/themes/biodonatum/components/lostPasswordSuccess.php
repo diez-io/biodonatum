@@ -4,7 +4,7 @@
             <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-vector"></use>
         </svg>
     </div>
-    <div class="registration__title"><?= __('Success!', 'static') ?></div>
-    <div class="registration__input--lable"><?= __('Password reset link has been sent to your email address', 'static') ?></div>
+    <div class="registration__title"><?= get_static_content('success') ?></div>
+    <div class="registration__input--lable"><?= get_static_content('password_reset_link_has_been_sent') ?></div>
     <div class="registration__title"><?= $args['email'] ?></div>
 </div>

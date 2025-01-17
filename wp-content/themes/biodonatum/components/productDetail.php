@@ -82,7 +82,7 @@
                                             <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-1.png" alt="">
                                         </picture>
                                         <p>
-                                            <?= __('The biotechnological production cycle is 2 years', 'static') ?>
+                                            <?= get_static_content('teaser_1') ?>
                                         </p>
                                     </article>
                                 </div>
@@ -92,7 +92,7 @@
                                             <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-2.png" alt="">
                                         </picture>
                                         <p>
-                                            <?= __('Gluten free', 'static') ?>
+                                            <?= get_static_content('teaser_2') ?>
                                         </p>
                                     </article>
                                 </div>
@@ -102,7 +102,7 @@
                                             <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-3.png" alt="">
                                         </picture>
                                         <p>
-                                            <?= __('Lactose free', 'static') ?>
+                                            <?= get_static_content('teaser_3') ?>
                                         </p>
                                     </article>
                                 </div>
@@ -112,7 +112,7 @@
                                             <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-4.png" alt="">
                                         </picture>
                                         <p>
-                                            <?= __('Mushrooms and yeast free', 'static') ?>
+                                            <?= get_static_content('teaser_4') ?>
                                         </p>
                                     </article>
                                 </div>
@@ -122,13 +122,13 @@
                                             <img src="<?= get_template_directory_uri(); ?>/assets/images/index-slider-features-5.png" alt="">
                                         </picture>
                                         <p>
-                                            <?= __('Suitable for diabetics', 'static') ?>
+                                            <?= get_static_content('teaser_5') ?>
                                         </p>
                                     </article>
                                 </div>
                             </div>
                             <div class="teasers-pagination-wrapper">
-                                <div><?= __('Swipe left/right', 'static') ?></div>
+                                <div><?= get_static_content('swipe_left_right') ?></div>
                                 <div class="swiper-pagination desktop-hidden"></div>
                             </div>
                         </div>
@@ -164,11 +164,11 @@
                                     <input type="text" value="1">
                                     <div class="quantity_panel--plus">+</div>
                                 </div>
-                                <button class="button add-to-cart-button" type="submit" data-product-id="<?= $product_id ?>"><?= __('Add to cart', 'static') ?></button>
-                                <button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>"><?= __('Buy a subscription', 'static') ?></button>
+                                <button class="button add-to-cart-button" type="submit" data-product-id="<?= $product_id ?>"><?= get_static_content('add_to_cart') ?></button>
+                                <button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>"><?= get_static_content('buy_subscription') ?></button>
                             <? else : ?>
-                                <button class="button" type="submit" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= __('Buy 1 pack', 'static') ?></button>
-                                <button class="button button--green" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= __('Buy a subscription', 'static') ?></button>
+                                <button class="button" type="submit" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= get_static_content('buy_one_pack') ?></button>
+                                <button class="button button--green" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= get_static_content('buy_subscription') ?></button>
                             <? endif; ?>
                         </div>
                     </div>

@@ -83,7 +83,7 @@ function handle_custom_registration() {
 
             // Set success message
             $response['success'] = true;
-            $response['message'] = __('Your account was created successfully.', 'static');
+            $response['message'] = get_static_content('account_created_successfully');
 
             ob_start();
             get_template_part('components/signUpSuccess', null, ['email' => $email]);
@@ -95,12 +95,12 @@ function handle_custom_registration() {
         } catch ( Exception $e ) {
             // On error, return failure and include error messages
             if ( ! empty( $response['errors'] ) ) {
-                $response['message'] = __('There were errors during registration.', 'static');
+                $response['message'] = get_static_content('errors_duringregistration');
             }
         }
     } else {
         // Invalid request or nonce error
-        $response['message'] = __('Invalid request or nonce.', 'static');
+        $response['message'] = get_static_content('invalid_request_or_nonce');
     }
 
     // Return strict JSON response with consistent structure
@@ -165,7 +165,7 @@ function handle_custom_login() {
                 // Return strict JSON success response.
                 wp_send_json( array(
                     'success' => true,
-                    'message' => __('Login successful.', 'static'),
+                    'message' => get_static_content('login_successful'),
                     'errors'  => $errors,
                     'redirect' => esc_url($_POST['_wp_http_referer']),
                 ) );
@@ -174,7 +174,7 @@ function handle_custom_login() {
             // Return strict JSON error response.
             wp_send_json( array(
                 'success' => false,
-                'message' => __('Login failed.', 'static'),
+                'message' => get_static_content('login_failed'),
                 'errors'  => $errors,
             ) );
         }
@@ -183,7 +183,7 @@ function handle_custom_login() {
     // Return JSON error if login data is not set or nonce is invalid.
     wp_send_json( array(
         'success' => false,
-        'message' => __('Invalid request. Please try again.', 'static'),
+        'message' => get_static_content('invalid_request_try_again'),
         'errors'  => [],
     ) );
 }

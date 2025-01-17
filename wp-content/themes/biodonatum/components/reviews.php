@@ -499,7 +499,7 @@
                 </div>
             </div>
             <div class="button load-more-btn">
-                <?= __('Load more', 'static') ?>
+                <?= get_static_content('load_more') ?>
             </div>
         </div>
     </div>

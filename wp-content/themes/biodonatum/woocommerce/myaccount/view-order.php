@@ -26,8 +26,8 @@ $notes = $order->get_customer_order_notes();
         <div class="container">
             <div class="breadcrumbs mb-40">
                 <a href="<?= home_url() ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
-                <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="breadcrumbs__link"><?= __('Personal account', 'static') ?></a>
-                <span class="breadcrumbs__link"><?= __('Order', 'static') ?></span>
+                <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="breadcrumbs__link"><?= get_static_content('personal_account') ?></a>
+                <span class="breadcrumbs__link"><?= get_static_content('order') ?></span>
             </div>
 			<div class="island checkout__order-review">
 

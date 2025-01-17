@@ -51,7 +51,7 @@ function custom_ajax_update_cart_item() {
     $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 0;
 
     if (!$cart_item_key || $quantity < 0) {
-        wp_send_json_error(['error' => __('Invalid input.', 'static')]);
+        wp_send_json_error(['error' => get_static_content('invalid_input')]);
     }
 
     // Update the cart item's quantity
@@ -65,7 +65,7 @@ function custom_ajax_update_cart_item() {
     $item = isset($cart[$cart_item_key]) ? $cart[$cart_item_key] : null;
 
     if (!$item) {
-        wp_send_json_error(['error' => __('Cart item not found.', 'static')]);
+        wp_send_json_error(['error' => get_static_content('cart_item_not_found')]);
     }
 
     wp_send_json_success([
@@ -87,7 +87,7 @@ add_action('wp_ajax_nopriv_apply_custom_coupon', 'apply_custom_coupon_handler');
 function apply_custom_coupon_handler() {
     // Check if WooCommerce is active
     if (!class_exists('WC_Cart')) {
-        wp_send_json_error(['message' => __('WooCommerce not loaded', 'static')]);
+        wp_send_json_error(['message' => get_static_content('woocommerce_not_loaded')]);
         return;
     }
 
@@ -96,7 +96,7 @@ function apply_custom_coupon_handler() {
 
     // Validate the coupon code
     if (empty($coupon_code)) {
-        wp_send_json_error(['message' => __('Coupon code is required', 'static')]);
+        wp_send_json_error(['message' => get_static_content('coupon_code_is_required')]);
         return;
     }
 
@@ -105,7 +105,7 @@ function apply_custom_coupon_handler() {
 
     // Check if the coupon was successfully applied
     if (!$result) {
-        wp_send_json_error(['message' => __('Invalid or expired coupon', 'static')]);
+        wp_send_json_error(['message' => get_static_content('invalid_coupon')]);
         return;
     }
 
@@ -134,7 +134,7 @@ function apply_custom_coupon_handler() {
 function remove_custom_coupon_handler() {
     // Check if WooCommerce is active
     if (!class_exists('WC_Cart')) {
-        wp_send_json_error(['message' => __('WooCommerce not loaded', 'static')]);
+        wp_send_json_error(['message' => get_static_content('woocommerce_not_loaded')]);
         return;
     }
 
@@ -143,7 +143,7 @@ function remove_custom_coupon_handler() {
 
     // Validate the coupon code
     if (empty($coupon_code)) {
-        wp_send_json_error(['message' => __('Coupon code is required', 'static')]);
+        wp_send_json_error(['message' => get_static_content('coupon_code_is_required')]);
         return;
     }
 
@@ -152,7 +152,7 @@ function remove_custom_coupon_handler() {
 
     // Check if the coupon was successfully removed
     if (!$result) {
-        wp_send_json_error(['message' => __('Failed to remove coupon', 'static')]);
+        wp_send_json_error(['message' => get_static_content('failed_to_remove_coupon')]);
         return;
     }
 
