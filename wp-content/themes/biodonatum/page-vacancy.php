@@ -7,16 +7,16 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
-                        <span class="breadcrumbs__link"><?= __('Vacancy', 'static') ?></span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                        <span class="breadcrumbs__link"><?= get_static_content('vacancy') ?></span>
                     </div>
                     <div class="vacancy">
                         <div class="head">
-                            <h2 class="title"><?= __('Vacancy', 'static') ?></h2>
+                            <h2 class="title"><?= get_static_content('vacancy') ?></h2>
                         </div>
                         <div class="editor">
                             <p>
-                                <?= __('vacancy_text', 'static') ?>
+                                <?= get_static_content('vacancy_text') ?>
                             </p>
                         </div>
                         <div class="vacancy__cards load-more-items">
@@ -42,11 +42,11 @@
                                             <svg>
                                                 <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
                                             </svg>
-                                            <?= __('Experience', 'static') ?> 1-3 years
+                                            <?= get_static_content('experience') ?> 1-3 years
                                         </div>
                                     </div>
                                     <div class="card__text-description">
-                                        <h3><?= __('Description', 'static') ?></h3>
+                                        <h3><?= get_static_content('description') ?></h3>
                                         Over 46 million “genuine” product reviews by actual customers in 19 languages which we share with other E-tailers of your brand via Google Shopping Many potential domestic and international customers visit iHerb to read product reviews. Then will shop your brand through other channels Complement your current distribution channels by giving your international customers another channel to shop your brand
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
                             </div>
                         </div>
                         <div class="button load-more-btn">
-                            <?= __('LOAD MORE', 'static') ?>
+                            <?= get_static_content('load_more') ?>
                         </div>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
                     <div class="container">
                         <div class="island">
                             <h2 class="form__title">
-                                <?= __('Join our team', 'static') ?>
+                                <?= get_static_content('join_our_team') ?>
                             </h2>
                             <form action="#" class="form" data-form>
                                 <div class="form__content">

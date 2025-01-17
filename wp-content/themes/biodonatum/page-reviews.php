@@ -7,8 +7,8 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
-                        <span class="breadcrumbs__link"><?= __('Reviews', 'static') ?></span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                        <span class="breadcrumbs__link"><?= get_static_content('reviews') ?></span>
                     </div>
                 </div>
             </section>

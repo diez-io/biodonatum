@@ -6,12 +6,12 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
-                        <span class="breadcrumbs__link"><?= __('Contacts', 'static') ?></span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                        <span class="breadcrumbs__link"><?= get_static_content('contacts') ?></span>
                     </div>
                     <div class="contacts">
                         <div class="head">
-                            <h2 class="title"><?= __('Contacts', 'static') ?></h2>
+                            <h2 class="title"><?= get_static_content('contacts') ?></h2>
                         </div>
                         <div class="contacts__cards">
                             <div class="card">
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         <div class="head">
-                            <h2 class="title"><?= __('Our distributor partners', 'static') ?></h2>
+                            <h2 class="title"><?= get_static_content('our_distributor_partners') ?></h2>
                         </div>
                         <div class="contacts__cards">
                             <div class="card">
@@ -238,7 +238,7 @@
                         </div>
                         <div class="editor">
                             <p>
-                                <?= __('If you would like to become our distributor partner, please write or call us at the central office and we will be happy to discuss possible options with you.', 'static') ?>
+                                <?= get_static_content('contacts_text_1') ?>
                             </p>
                         </div>
                     </div>

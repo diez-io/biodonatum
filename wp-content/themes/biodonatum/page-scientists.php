@@ -7,16 +7,16 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
-                        <span class="breadcrumbs__link"><?= __('Our Scientists', 'static') ?></span>
+                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                        <span class="breadcrumbs__link"><?= get_static_content('scientists') ?></span>
                     </div>
                     <div class="scientists">
                         <div class="head">
-                            <h2 class="title"><?= __('Our Scientists', 'static') ?></h2>
+                            <h2 class="title"><?= get_static_content('scientists_title') ?></h2>
                         </div>
                         <div class="island">
-                            <?= __('Our Scientific Board is represented by doctors, scientists and researchers in such fields as microbiology, immunology, genetics, metabolomics, gastroenterology, pediatrics, gynecology and cosmetology.', 'static') ?>
-                            <?= __('They head clinics and laboratories, teach at world-renowned institutes and are authors of scientific journals and publications.', 'static') ?>
+                            <?= get_static_content('scientists_text_1') ?>
+                            <?= get_static_content('scientists_text_2') ?>
                         </div>
                         <div class="slider" data-slider="scientists">
                             <div class="swiper">
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="swiper-pagination"></div>
                                 <div class="button button--wide scientists__load-more load-more-btn">
-                                    <?= __('LOAD MORE', 'static') ?>
+                                    <?= get_static_content('load_more') ?>
                                 </div>
                             </div>
                         </div>

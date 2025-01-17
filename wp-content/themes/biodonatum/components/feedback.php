@@ -5,7 +5,7 @@
                 <div class="feedback__header">
                     <img class="feedback__logo" src="<?= get_template_directory_uri(); ?>/assets/images/feedback-logo.png" alt="">
                     <div class="feedback__titles">
-                        <h2 class="feedback__title"><?= __('Contacts', 'static') ?></h2>
+                        <h2 class="feedback__title"><?= get_static_content('contacts') ?></h2>
                         <h3 class="feedback__title">Distributor in Uzbekistan</h3>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="feedback__form">
-                <h3 class="feedback__title"><?= __('Write to us', 'static') ?></h3>
+                <h3 class="feedback__title"><?= get_static_content('write_to_us') ?></h3>
                 <?= get_cf7_form_by_title('message') ?>
             </div>
         </div>

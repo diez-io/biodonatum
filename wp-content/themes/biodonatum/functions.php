@@ -29,7 +29,7 @@ function theme_enqueue_assets() {
         //'ajaxUrl' => admin_url('admin-ajax.php'),
         //'nonce'   => wp_create_nonce('my_nonce'),
         'staticContent' => [
-            'fill_out_this_field' => __('Please fill out this field.', 'static'),
+            'fill_out_this_field' => get_static_content('please_fill_out_this_field'),
         ],
     ]);
 
@@ -89,8 +89,8 @@ function handle_language_switch() {
 
 add_action('template_redirect', 'handle_language_switch');
 
-function get_static_content($text) {
-    $transient_key = "static_content_{$text}_{$_SESSION['lang']}";
+function get_static_content($slug) {
+    $transient_key = "static_content_{$slug}_{$_SESSION['lang']}";
 
     // Check if the content is cached
     $cached_content = get_transient($transient_key);
@@ -115,7 +115,7 @@ function get_static_content($text) {
 
     if ($query->have_posts()) {
         $post_id = $query->posts[0]->ID; // Get the ID of the first matching post
-        $content = get_field("static_{$text}", $post_id); // Fetch the ACF field
+        $content = get_field("static_{$slug}", $post_id); // Fetch the ACF field
         wp_reset_postdata();
 
         set_transient($transient_key, $content, HOUR_IN_SECONDS);

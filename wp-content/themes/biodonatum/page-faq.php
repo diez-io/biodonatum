@@ -7,17 +7,17 @@
                 <section class="section pt-50">
                     <div class="container">
                         <div class="breadcrumbs mb-40">
-                            <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
-                            <span class="breadcrumbs__link"><?= __('FAQ', 'static') ?></span>
+                            <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                            <span class="breadcrumbs__link"><?= get_static_content('faq') ?></span>
                         </div>
                         <div class="head">
-                            <h2 class="title"><?= __('FAQ', 'static') ?></h2>
+                            <h2 class="title"><?= get_static_content('faq') ?></h2>
                         </div>
                         <div class="faq" data-dropdown="">
                             <div class="faq__item" data-dropdown-trigger="">
                                 <div class="faq__header">
                                     <h3 class="faq__title title title--extra-small">
-                                        <?= __('What is Biodonatum?', 'static') ?>
+                                        <?= get_static_content('what_is_biodonatum') ?>
                                     </h3>
                                     <svg class="faq__icon">
                                         <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
@@ -25,14 +25,14 @@
                                 </div>
                                 <div class="faq__content">
                                     <p class="text text--middle text--dark">
-                                        <?= __('Biodonatum is a health supplement or product (additional details could be provided about its specific nature).', 'static') ?>
+                                        <?= get_static_content('what_is_biodonatum_text') ?>
                                     </p>
                                 </div>
                             </div>
                             <div class="faq__item" data-dropdown-trigger="">
                                 <div class="faq__header">
                                     <h3 class="faq__title title title--extra-small">
-                                        <?= __('How to buy?', 'static') ?>
+                                        <?= get_static_content('how_to_buy') ?>
                                     </h3>
                                     <svg class="faq__icon">
                                         <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
@@ -40,14 +40,14 @@
                                 </div>
                                 <div class="faq__content">
                                     <p class="text text--middle text--dark">
-                                        <?= __('Biodonatum is a health supplement or product (additional details could be provided about its specific nature).', 'static') ?>
+                                        <?= get_static_content('how_to_buy_text') ?>
                                     </p>
                                 </div>
                             </div>
                             <div class="faq__item" data-dropdown-trigger="">
                                 <div class="faq__header">
                                     <h3 class="faq__title title title--extra-small">
-                                        <?= __('Where to buy?', 'static') ?>
+                                        <?= get_static_content('where_to_buy') ?>
                                     </h3>
                                     <svg class="faq__icon">
                                         <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
@@ -55,22 +55,7 @@
                                 </div>
                                 <div class="faq__content">
                                     <p class="text text--middle text--dark">
-                                        <?= __('Biodonatum is a health supplement or product (additional details could be provided about its specific nature).', 'static') ?>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="faq__item" data-dropdown-trigger="">
-                                <div class="faq__header">
-                                    <h3 class="faq__title title title--extra-small">
-                                        <?= __('What is Biodonatum?', 'static') ?>
-                                    </h3>
-                                    <svg class="faq__icon">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
-                                    </svg>
-                                </div>
-                                <div class="faq__content">
-                                    <p class="text text--middle text--dark">
-                                        <?= __('Biodonatum is a health supplement or product (additional details could be provided about its specific nature).', 'static') ?>
+                                        <?= get_static_content('where_to_buy_text') ?>
                                     </p>
                                 </div>
                             </div>

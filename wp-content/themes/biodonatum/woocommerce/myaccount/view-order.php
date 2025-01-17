@@ -25,7 +25,7 @@ $notes = $order->get_customer_order_notes();
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url() ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
+                <a href="<?= home_url() ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
                 <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="breadcrumbs__link"><?= __('Personal account', 'static') ?></a>
                 <span class="breadcrumbs__link"><?= __('Order', 'static') ?></span>
             </div>

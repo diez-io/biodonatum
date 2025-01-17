@@ -7,28 +7,28 @@
                 <section class="section pt-50">
                     <div class="container">
                         <div class="breadcrumbs mb-40">
-                            <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= __('Home', 'static') ?></a>
-                            <span class="breadcrumbs__link"><?= __('Delivery terms', 'static') ?></span>
+                            <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                            <span class="breadcrumbs__link"><?= get_static_content('delivery_terms') ?></span>
                         </div>
                         <div class="head">
-                            <h2 class="title"><?= __('Delivery terms', 'static') ?></h2>
+                            <h2 class="title"><?= get_static_content('delivery_terms') ?></h2>
                         </div>
                         <div class="editor">
                             <p>
-                                <?= __('All orders are dispatched the next working day and dispatched from our warehouse in France.', 'static') ?>
+                                <?= get_static_content('delivery_text_1') ?>
                             </p>
                             <p>
-                                <?= __('We typically aim to deliver your products within 5-12 business days.', 'static') ?>
-                                <?= __('This date is a guide only, but we will do our best to get it done quickly.', 'static') ?>
-                                <?= __('However, if our delivery is delayed, we will contact you as soon as possible to let you know and we will take steps to minimize the impact of the delay.', 'static') ?>
+                                <?= get_static_content('delivery_text_2') ?>
+                                <?= get_static_content('delivery_text_3') ?>
+                                <?= get_static_content('delivery_text_4') ?>
                             </p>
                             <p>
-                                <?= __('We accept returns within 14 days of purchase.', 'static') ?>
-                                <?= __('To return an item, write to us at info@biodonatum.fr - please include your order number.', 'static') ?>
-                                <?= __('Once we confirm receipt of your request, we will respond to you with a booking link.', 'static') ?>
+                                <?= get_static_content('delivery_text_5') ?>
+                                <?= get_static_content('delivery_text_6') ?>
+                                <?= get_static_content('delivery_text_7') ?>
                             </p>
                             <p>
-                                <?= __('To initiate a refund, the item must be unused in its original packaging.', 'static') ?>
+                                <?= get_static_content('delivery_text_8') ?>
                             </p>
                         </div>
                     </div>

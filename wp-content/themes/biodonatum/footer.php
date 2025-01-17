@@ -8,14 +8,14 @@
             </div>
             <div class="footer__block">
                 <nav class="footer__nav">
-                    <a href="#" class="footer__link"><?= __('About us', 'static') ?></a>
-                    <a href="#" class="footer__link"><?= __('Science', 'static') ?></a>
-                    <a href="#" class="footer__link"><?= __('Scientists', 'static') ?></a>
-                    <a href="#" class="footer__link"><?= __('Terms of sales', 'static') ?></a>
-                    <a href="#" class="footer__link"><?= __('Return Policy', 'static') ?></a>
-                    <a href="#" class="footer__link"><?= __('Delivery terms', 'static') ?></a>
-                    <a href="#" class="footer__link"><?= __('Loyalty program', 'static') ?></a>
-                    <a href="#" class="footer__link"><?= __('Privacy Policy', 'static') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('about') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('science') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('scientists') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('terms_of_sales') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('return_policy') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('delivery_terms') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('loyalty_program') ?></a>
+                    <a href="#" class="footer__link"><?= get_static_content('privacy_policy') ?></a>
                 </nav>
             </div>
             <div class="footer__block">
@@ -50,7 +50,7 @@
         </div>
     </div>
 </footer>
-<aside class="footer__copyright"><?= __('1982 Microbiotic Biodonatum', 'static') ?></aside>
+<aside class="footer__copyright"><?= get_static_content('bottom_line') ?></aside>
 
 <style>
     .temp {

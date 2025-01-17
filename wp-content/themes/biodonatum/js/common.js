@@ -208,7 +208,6 @@ jQuery(function ($) {
     }
 
     $('.custom-woocommerce-form').each(function() {
-        console.log('each custom-woocommerce-form');
         new Form($(this));
     });
 

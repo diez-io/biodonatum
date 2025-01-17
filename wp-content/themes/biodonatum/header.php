@@ -6,13 +6,13 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?= __('Biodonatum', 'static') ?></title>
+    <title><?= get_static_content('title') ?></title>
     <? wp_head(); ?>
 </head>
 
 <body>
     <div class="modal-background" style="display:none;"></div>
-    <aside class="pre-header"><?= __('top_line', 'static') ?></aside>
+    <aside class="pre-header"><?= get_static_content('top_line') ?></aside>
     <header class="header">
         <div class="container">
             <div class="header__wrapper">
@@ -23,13 +23,13 @@
                 </div>
                 <div class="header__block">
                     <nav class="nav mob-hidden">
-                        <a href="#" class="nav__link"><?= __('Home', 'static') ?></a>
-                        <a href="#" class="nav__link"><?= __('About', 'static') ?></a>
-                        <a href="#" class="nav__link"><?= __('Science', 'static') ?></a>
-                        <a href="#" class="nav__link"><?= __('Scientists', 'static') ?></a>
-                        <a href="#" class="nav__link"><?= __('Shop', 'static') ?></a>
-                        <a href="#" class="nav__link"><?= __('FAQ', 'static') ?></a>
-                        <a href="#" class="nav__link"><?= __('Contacts', 'static') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('home') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('about') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('science') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('scientists') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('shop') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('faq') ?></a>
+                        <a href="#" class="nav__link"><?= get_static_content('contacts') ?></a>
                     </nav>
                 </div>
                 <div class="header__block header__block--no-gap">
@@ -99,37 +99,37 @@
             <ul class="mobile-menu__list">
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        <?= __('Home', 'static') ?>
+                        <?= get_static_content('home') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        <?= __('About', 'static') ?>
+                        <?= get_static_content('about') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        <?= __('Science', 'static') ?>
+                        <?= get_static_content('science') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        <?= __('Scientists', 'static') ?>
+                        <?= get_static_content('scientists') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        <?= __('Shop', 'static') ?>
+                        <?= get_static_content('shop') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        <?= __('FAQ', 'static') ?>
+                        <?= get_static_content('faq') ?>
                     </a>
                 </li>
                 <li class="mobile-menu__item">
                     <a href="#" class="mobile-menu__link">
-                        <?= __('Contacts', 'static') ?>
+                        <?= get_static_content('contacts') ?>
                     </a>
                 </li>
             </ul>
