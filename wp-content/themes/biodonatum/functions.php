@@ -216,7 +216,7 @@ function custom_redirect_after_account_save() {
     // Check if there are no error notices.
     if (wc_notice_count('error') === 0) {
         // Add a success notice.
-        wc_add_notice(__('Account details changed successfully.', 'woocommerce'));
+        wc_add_notice(get_static_content('account_details_changed_successfully'));
 
         // Redirect to the My Account page instead of the edit-account endpoint.
         wp_safe_redirect(get_permalink( get_option('woocommerce_myaccount_page_id')));

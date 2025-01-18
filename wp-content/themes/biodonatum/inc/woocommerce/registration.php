@@ -197,7 +197,7 @@ function handle_custom_lost_password() {
             wp_send_json( [
                 'success' => false,
                 'errors' => [
-                    'invalid_nonce' => __( 'Nonce verification failed.', 'woocommerce' ),
+                    'invalid_nonce' => get_static_content('nonce_verification_failed'),
                 ],
             ] );
         }
@@ -206,7 +206,7 @@ function handle_custom_lost_password() {
         $login = sanitize_user( wp_unslash( $_POST['user_login'] ) ); // WPCS: input var ok, CSRF ok.
 
         if ( empty( $login ) ) {
-            $errors['empty_username'] = __( 'Enter a username or email address.', 'woocommerce' );
+            $errors['empty_username'] = get_static_content('enter_username_or_email_address');
         } else {
             // Check on username first, as customers can use emails as usernames.
             $user_data = get_user_by( 'login', $login );
@@ -218,18 +218,18 @@ function handle_custom_lost_password() {
         }
 
         if ( !$user_data ) {
-            $errors['invalid_username'] = __( 'Invalid username or email.', 'woocommerce' );
+            $errors['invalid_username'] = get_static_content('invalid_username_or_email');
         }
 
         if ( $user_data && is_multisite() && ! is_user_member_of_blog( $user_data->ID, get_current_blog_id() ) ) {
-            $errors['invalid_username'] = __( 'Invalid username or email.', 'woocommerce' );
+            $errors['invalid_username'] = get_static_content('invalid_username_or_email');
         }
 
         if ( $user_data ) {
             $allow = apply_filters( 'allow_password_reset', true, $user_data->ID );
 
             if ( ! $allow ) {
-                $errors['password_reset_not_allowed'] = __( 'Password reset is not allowed for this user.', 'woocommerce' );
+                $errors['password_reset_not_allowed'] = get_static_content('password_reset_not_allowed_for_user');
             } elseif ( is_wp_error( $allow ) ) {
                 $errors['password_reset_error'] = $allow->get_error_message();
             } else {
@@ -269,7 +269,7 @@ function handle_custom_lost_password() {
     wp_send_json( [
         'success' => false,
         'errors'  => [
-            'invalid_request' => __( 'Invalid request.', 'woocommerce' ),
+            'invalid_request' => get_static_content('invalid_request'),
         ],
     ] );
 }
@@ -288,7 +288,7 @@ function handle_custom_reset_password() {
     $nonce_value = wc_get_var($_REQUEST['woocommerce-reset-password-nonce'], wc_get_var($_REQUEST['_wpnonce'], ''));
 
     if (!wp_verify_nonce($nonce_value, 'reset_password')) {
-        $response['errors']['invalid_nonce'] = __('Invalid nonce.', 'woocommerce');
+        $response['errors']['invalid_nonce'] = get_static_content('invalid_nonce');
         wp_send_json($response);
     }
 
@@ -296,7 +296,7 @@ function handle_custom_reset_password() {
 
     foreach ($posted_fields as $field) {
         if (!isset($_POST[$field])) {
-            $response['errors']['missing_field'] = sprintf(__('The %s field is required.', 'woocommerce'), $field);
+            $response['errors']['missing_field'] = sprintf(get_static_content('s_field_is_required'), $field);
             wp_send_json($response);
         }
 
@@ -309,11 +309,11 @@ function handle_custom_reset_password() {
 
     if ($user instanceof WP_User) {
         if (empty($posted_fields['password_1'])) {
-            $response['errors']['empty_password'] = __('Please enter your password.', 'woocommerce');
+            $response['errors']['empty_password'] = get_static_content('please_enter_your_password');
         }
 
         if ($posted_fields['password_1'] !== $posted_fields['password_2']) {
-            $response['errors']['password_mismatch'] = __('Passwords do not match.', 'woocommerce');
+            $response['errors']['password_mismatch'] = get_static_content('passwords_do_not_match');
         }
 
         $errors = new WP_Error();
@@ -330,7 +330,7 @@ function handle_custom_reset_password() {
             do_action('woocommerce_customer_reset_password', $user);
 
             $response['success'] = true;
-            $response['message'] = __('Password reset successfully.', 'woocommerce');
+            $response['message'] = get_static_content('password_reset_successfully');
 
             ob_start();
             get_template_part('components/resetPasswordSuccess');
@@ -339,10 +339,10 @@ function handle_custom_reset_password() {
             wp_send_json($response);
         }
     } else {
-        $response['errors']['invalid_user'] = __('Invalid reset key or login.', 'woocommerce');
+        $response['errors']['invalid_user'] = get_static_content('invalid_reset_key_or_login');
     }
 
-    $response['message'] = __('Password reset failed.', 'woocommerce');
+    $response['message'] = get_static_content('password_reset_failed');
     wp_send_json($response);
 }
 

@@ -11,10 +11,10 @@ defined( 'ABSPATH' ) || exit;
 $my_orders_columns = apply_filters(
 	'woocommerce_my_account_my_orders_columns',
 	array(
-		'order-number'  => esc_html__( 'Order', 'woocommerce' ),
-		'order-date'    => esc_html__( 'Date', 'woocommerce' ),
-		'order-status'  => esc_html__( 'Status', 'woocommerce' ),
-		'order-total'   => esc_html__( 'Total', 'woocommerce' ),
+		'order-number'  => get_static_content('order'),
+		'order-date'    => get_static_content('date'),
+		'order-status'  => get_static_content('status'),
+		'order-total'   => get_static_content('total'),
 		'order-actions' => '&nbsp;',
 	)
 );

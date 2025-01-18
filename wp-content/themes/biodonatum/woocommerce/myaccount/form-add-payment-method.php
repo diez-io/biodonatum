@@ -57,5 +57,5 @@ if ( $available_gateways ) : ?>
 		</div>
 	</form>
 <?php else : ?>
-	<?php wc_print_notice( esc_html__( 'New payment methods can only be added during checkout. Please contact us if you require assistance.', 'woocommerce' ), 'notice' ); ?>
+	<?php wc_print_notice( get_static_content('new_payment_methods_can_only_be_added_during_checkout'), 'notice' ); ?>
 <?php endif; ?>

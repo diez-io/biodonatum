@@ -23,8 +23,8 @@ if ( ! wc_ship_to_billing_address_only() && wc_shipping_enabled() ) {
 	$get_addresses = apply_filters(
 		'woocommerce_my_account_get_addresses',
 		array(
-			'billing'  => __( 'Billing address', 'woocommerce' ),
-			'shipping' => __( 'Shipping address', 'woocommerce' ),
+			'billing'  => get_static_content('billing_address'),
+			'shipping' => get_static_content('shipping_address'),
 		),
 		$customer_id
 	);
@@ -32,7 +32,7 @@ if ( ! wc_ship_to_billing_address_only() && wc_shipping_enabled() ) {
 	$get_addresses = apply_filters(
 		'woocommerce_my_account_get_addresses',
 		array(
-			'billing' => __( 'Billing address', 'woocommerce' ),
+			'billing' => get_static_content('billing_address'),
 		),
 		$customer_id
 	);
@@ -43,7 +43,7 @@ $col    = 1;
 ?>
 
 <p>
-	<?php echo apply_filters( 'woocommerce_my_account_my_address_description', esc_html__( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php echo apply_filters( 'woocommerce_my_account_my_address_description', get_static_content('the_following_addresses_will_be_used') ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 </p>
 
 <?php if ( ! wc_ship_to_billing_address_only() && wc_shipping_enabled() ) : ?>
@@ -78,7 +78,7 @@ $col    = 1;
 			<?php
 				printf(
 					/* translators: %s: Address title */
-					$address ? esc_html__( 'Edit %s', 'woocommerce' ) : esc_html__( '+ add %s', 'woocommerce' ),
+					$address ? get_static_content('edit_s') : '+ ' . get_static_content('add_s'),
 					esc_html( $address_title )
 				);
 			?>

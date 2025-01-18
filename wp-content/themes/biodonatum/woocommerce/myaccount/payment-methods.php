@@ -70,7 +70,7 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 							} elseif ( 'method' === $column_id ) {
 								if ( ! empty( $method['method']['last4'] ) ) {
 									/* translators: 1: credit card type 2: last 4 digits */
-									echo sprintf( esc_html__( '%1$s ending in %2$s', 'woocommerce' ), esc_html( wc_get_credit_card_type_label( $method['method']['brand'] ) ), esc_html( $method['method']['last4'] ) );
+									echo sprintf( get_static_content('1s_ending_in_2s'), esc_html( wc_get_credit_card_type_label( $method['method']['brand'] ) ), esc_html( $method['method']['last4'] ) );
 								} else {
 									echo esc_html( wc_get_credit_card_type_label( $method['method']['brand'] ) );
 								}
@@ -89,7 +89,7 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 
 <?php else : ?>
 
-	<?php wc_print_notice( esc_html__( 'No saved methods found.', 'woocommerce' ), 'notice' ); ?>
+	<?php wc_print_notice( get_static_content('no_saved_methods_found'), 'notice' ); ?>
 
 <?php endif; ?>
 
