@@ -2,36 +2,75 @@
     <div class="container">
         <div class="feedback">
             <div class="feedback__contacts">
-                <div class="feedback__header">
-                    <img class="feedback__logo" src="<?= get_template_directory_uri(); ?>/assets/images/feedback-logo.png" alt="">
-                    <div class="feedback__titles">
-                        <h2 class="feedback__title"><?= get_static_content('contacts') ?></h2>
-                        <h3 class="feedback__title">Distributor in Uzbekistan</h3>
+                <?
+                $args = array(
+                    'post_type' => 'contact',
+                    'meta_query' => [
+                        [
+                            'key'     => 'contact_address_type',
+                            'value'   => 'main',
+                            'compare' => '='
+                        ],
+                    ],
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'taxonomy_language',
+                            'field'    => 'slug',
+                            'terms'    => $_SESSION['lang'],
+                        ],
+                    ],
+                    //'posts_per_page' => 10,
+                );
+
+                $loop = new WP_Query($args);
+
+                if ($loop->have_posts()):
+                    $loop->the_post(); ?>
+
+                    <div class="feedback__header">
+                        <img class="feedback__logo" src="<?= get_template_directory_uri(); ?>/assets/images/feedback-logo.png" alt="">
+                        <div class="feedback__titles">
+                            <h2 class="feedback__title"><?= get_static_content('contacts') ?></h2>
+                            <h3 class="feedback__title"><?= esc_html(get_field('contact_name')) ?></h3>
+                        </div>
                     </div>
-                </div>
-                <div class="feedback__info">
-                    <p class="feedback__text text">
-                        Company LLC “Aprel Nutrition”<br>
-                        Republic of Uzbekistan, Tashkent, Mirzo-Ulugbek<br> District, Temur Malik Street, Building 3a
-                    </p>
-                    <div class="feedback__phones">
-                        <div class="feedback__phones--icon">
+                    <div class="feedback__info">
+                        <p class="feedback__text text">
+                            <?= esc_html(get_field('contact_company')) ?>
+                            <br>
+                            <?= esc_html(get_field('contact_address')) ?>
+                        </p>
+                        <div class="feedback__phones">
+                            <div class="feedback__phones--icon">
+                                <svg>
+                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-phone"></use>
+                                </svg>
+                            </div>
+                            <div class="feedback__links">
+                                <? $phoneNumbers = get_field('contact_phone_numbers');
+
+                                foreach ($phoneNumbers as $phoneNumbers_row) :
+                                    $phone = $phoneNumbers_row['contact_phone_numbers_item']; ?>
+
+                                    <a class="feedback__link" href="tel:<?= esc_attr($phone) ?>">
+                                        <?= esc_html($phone) ?>
+                                    </a>
+                                <? endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="feedback__email">
                             <svg>
-                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-phone"></use>
+                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-email"></use>
                             </svg>
-                        </div>
-                        <div class="feedback__links">
-                            <a class="feedback__link" href="tel:+998 99-971-09-90">+998 99-971-09-90</a>
-                            <a class="feedback__link" href="tel:+998 99-972-09-90">+998 99-972-09-90</a>
+                            <? $email = get_field('contact_email'); ?>
+                            <a class="feedback__link" href="mailto:<?= esc_attr($email) ?>">
+                                <?= esc_html($email) ?>
+                            </a>
                         </div>
                     </div>
-                    <div class="feedback__email">
-                        <svg>
-                            <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-email"></use>
-                        </svg>
-                        <a class="feedback__link" href="mailto:info@biodonatum.com">info@biodonatum.com</a>
-                    </div>
-                </div>
+
+                    <? wp_reset_postdata();
+                endif; ?>
             </div>
             <div class="feedback__form">
                 <h3 class="feedback__title"><?= get_static_content('write_to_us') ?></h3>
