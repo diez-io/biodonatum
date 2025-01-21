@@ -63,7 +63,7 @@ $col    = 1;
 		</header>
 		<address>
 			<?php
-				echo $address ? wp_kses_post( $address ) : esc_html_e( 'You have not set up this type of address yet.', 'woocommerce' );
+				echo $address ? wp_kses_post( $address ) : get_static_content('you_have_not_set_up_this_type_of_address_yet');
 
 				/**
 				 * Used to output content after core address fields.

@@ -22,14 +22,14 @@ defined( 'ABSPATH' ) || exit;
 	<thead>
 		<tr>
 			<td colspan="2">
-				<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
+				<h3 id="order_review_heading"><?= get_static_content('your_order') ?></h3>
 			</td>
 		</tr>
 	</thead>
 	<tfoot>
 
 		<tr class="cart-subtotal">
-			<th><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
+			<th><?= get_static_content('subtotal') ?></th>
 			<td><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
 
@@ -76,7 +76,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 		<tr class="order-total">
-			<th><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+			<th><?= get_static_content('total') ?></th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 

@@ -27,7 +27,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 		<thead>
 			<tr>
 				<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
-					<th scope="col" class="woocommerce-orders-table__header woocommerce-orders-table__header-<?php echo esc_attr( $column_id ); ?>"><span class="nobr"><?php echo esc_html( $column_name ); ?></span></th>
+					<th scope="col" class="woocommerce-orders-table__header woocommerce-orders-table__header-<?php echo esc_attr( $column_id ); ?>"><span class="nobr"><?= get_static_content(str_replace('-', '_', $column_id)) ?></span></th>
 				<?php endforeach; ?>
 			</tr>
 		</thead>
@@ -74,6 +74,8 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 								$actions = wc_get_account_orders_actions( $order );
 
 								if ( ! empty( $actions ) ) {
+									echo '<div class="history__actions-wrapper">';
+
 									foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 										if ( empty( $action['aria-label'] ) ) {
 											// Generate the aria-label based on the action name.
@@ -82,9 +84,11 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 										} else {
 											$action_aria_label = $action['aria-label'];
 										}
-										echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . sanitize_html_class( $key ) . '" aria-label="' . esc_attr( $action_aria_label ) . '">' . esc_html( $action['name'] ) . '</a>';
+										echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . sanitize_html_class( $key ) . '" aria-label="' . esc_attr( $action_aria_label ) . '">' . get_static_content($key) . '</a>';
 										unset( $action_aria_label );
 									}
+
+									echo '</div>';
 								}
 								?>
 							<?php endif; ?>
@@ -107,11 +111,11 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 	<?php if ( 1 < $customer_orders->max_num_pages ) : ?>
 		<div class="woocommerce-pagination woocommerce-pagination--without-numbers woocommerce-Pagination">
 			<?php if ( 1 !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page - 1 ) ); ?>"><?php esc_html_e( 'Previous', 'woocommerce' ); ?></a>
+				<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page - 1 ) ); ?>"><?= get_static_content('previous') ?></a>
 			<?php endif; ?>
 
 			<?php if ( intval( $customer_orders->max_num_pages ) !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page + 1 ) ); ?>"><?php esc_html_e( 'Next', 'woocommerce' ); ?></a>
+				<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page + 1 ) ); ?>"><?= get_static_content('next') ?></a>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>

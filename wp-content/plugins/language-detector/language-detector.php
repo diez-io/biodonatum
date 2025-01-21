@@ -8,6 +8,10 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
+if (!session_id()) {
+    session_start();
+}
+
 function fetchSupportedLanguages() {
     global $supported_languages;
 
@@ -129,7 +133,7 @@ function rewrite_rule_for_lang_slugs() {
     //flush_rewrite_rules(false); // Only flush once when testing or during plugin activation
 }
 
-add_action('init', function () {
+function initSessionLang() {
     fetchSupportedLanguages();
     check_lang_version();
     rewrite_rule_for_lang_slugs();
@@ -141,7 +145,9 @@ add_action('init', function () {
     if (!isset($_SESSION['lang']) && $acceptLang = parseAcceptLanguage()) {
         $_SESSION['lang'] = $acceptLang;
     }
-});
+}
+
+add_action('init', 'initSessionLang');
 
 // Update language version on save
 function update_lang_version($term_id, $tt_id, $taxonomy) {
@@ -352,3 +358,253 @@ function get_translated_post($post_id, $lang) {
 
     return null; // No translation found
 }
+
+
+
+
+
+
+define('LOST_TRANSLATIONS_FILE', __DIR__ . '/lost_translations.php');
+define('DEFAULT_TRANSLATIONS_FILE', __DIR__ . '/default_translations.php');
+
+// Initialize or load the translation array.
+if (file_exists(LOST_TRANSLATIONS_FILE)) {
+    $translation_array = include LOST_TRANSLATIONS_FILE;
+} else {
+    $translation_array = [];
+}
+
+if (file_exists(DEFAULT_TRANSLATIONS_FILE)) {
+    $default_translations = include DEFAULT_TRANSLATIONS_FILE;
+} else {
+    $default_translations = [];
+}
+
+// Function to save the translation array to a file.
+function save_translation_array() {
+    global $translation_array;
+
+    // Generate PHP code to store the array.
+    $exported_array = var_export($translation_array, true);
+    $php_code = "<?php\n\nreturn " . $exported_array . ";\n";
+
+    // Save to the file.
+    file_put_contents(LOST_TRANSLATIONS_FILE, $php_code);
+}
+
+// Register a shutdown function to save the array at the end of the request.
+register_shutdown_function('save_translation_array');
+
+// function get_static_content($slug) {
+//     if (!session_id()) {
+//         initSessionLang();
+//     }
+
+//     if (class_exists('ACF')) {
+//         error_log('class_exists(ACF)');
+//         // Force ACF initialization
+//         do_action('acf/init');
+//     }
+
+//     error_log('get_object_taxonomies: ' . print_r(get_object_taxonomies('static_content', 'names'), true));
+//     error_log('get_terms' . print_r(get_terms('taxonomy_language'), true));
+
+
+//     $transient_key = "static_content_{$slug}_{$_SESSION['lang']}";
+
+//     // Check if the content is cached
+//     $cached_content = get_transient($transient_key);
+
+//     if ($cached_content !== false) {
+//         //return $cached_content; // Return cached content
+//     }
+
+//     error_log('$_SESSION[lang] = ' . $_SESSION['lang'] . '; slug = ' . $slug);
+//     error_log('session id = ' . session_id());
+
+//     // Query for static content matching the slug and language
+//     $args = [
+//         'post_type'  => 'static_content',
+//         'tax_query'  => [
+//             [
+//                 'taxonomy' => 'taxonomy_language',
+//                 'field'    => 'slug',
+//                 'terms'    => $_SESSION['lang'],
+//             ],
+//         ],
+//     ];
+
+//     $query = new WP_Query($args);
+
+//     error_log(print_r($query, true));
+
+//     if ($query->have_posts()) {
+//         error_log('have_posts: ' . $slug);
+
+//         $post_id = $query->posts[0]->ID; // Get the ID of the first matching post
+//         $content = get_field("static_{$slug}", $post_id); // Fetch the ACF field
+//         wp_reset_postdata();
+
+//         error_log('content = ' . $content);
+
+//         if ($content) {
+//             set_transient($transient_key, $content, HOUR_IN_SECONDS);
+//         }
+//         else {
+//             global $translation_array;
+//             $translation_array[$slug] = null;
+//             $content = $slug;
+//         }
+
+//         return $content;
+//     }
+
+//     error_log('does not have posts: ' . $slug . ' request url: ' . $_SERVER['REQUEST_URI'] . ' query: ' . $_SERVER['QUERY_STRING']);
+
+//     wp_reset_postdata();
+
+//     return '';
+// }
+
+
+function get_static_content($slug) {
+    error_log('get_static_content: ' . $slug);
+
+    global $wpdb;
+    $transient_key = "static_content_{$slug}_{$_SESSION['lang']}";
+
+    // Check if the content is cached
+    $cached_content = get_transient($transient_key);
+    if ($cached_content !== false) {
+        //return $cached_content; // Return cached content
+    }
+
+    // Define the taxonomy and meta keys
+    $taxonomy = 'taxonomy_language';
+    $meta_key = "static_{$slug}";
+    $language = sanitize_text_field($_SESSION['lang']); // Sanitize the language
+
+    // SQL query to get the post ID that matches the slug and language
+    $query = $wpdb->prepare("
+        SELECT p.ID
+        FROM {$wpdb->posts} AS p
+        INNER JOIN {$wpdb->term_relationships} AS tr ON p.ID = tr.object_id
+        INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+        INNER JOIN {$wpdb->terms} AS t ON tt.term_id = t.term_id
+        WHERE p.post_type = 'static_content'
+          AND p.post_status = 'publish'
+          AND tt.taxonomy = %s
+          AND t.slug = %s
+        LIMIT 1
+    ", $taxonomy, $language);
+
+    $post_id = $wpdb->get_var($query); // Get the first matching post ID
+
+    if ($post_id) {
+        // Retrieve the ACF field value
+        //$content = get_field($meta_key, $post_id); // ACF function to get the field
+        $content = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key = %s",
+                $post_id,
+                $meta_key
+            )
+        );
+
+        if ($content) {
+            error_log('content: ' . $content);
+
+            set_transient($transient_key, $content, HOUR_IN_SECONDS); // Cache the content
+            return $content;
+        } else {
+            error_log('Handle missing content: ' . $slug);
+            global $translation_array;
+            $translation_array[$slug] = null;
+            return $slug;
+        }
+    }
+
+    return ''; // Return empty if no matching post is found
+}
+
+
+
+
+
+function custom_translation_handler( $translated, $original, $domain ) {
+    global $default_translations;
+
+    if (array_key_exists($original, $default_translations)) {
+        error_log('custom_translation_handler: ' . $original);
+
+        $translated = get_static_content($default_translations[$original]);
+    }
+
+    return $translated;
+}
+
+add_filter('gettext', 'custom_translation_handler', 20, 3);
+
+add_filter('gettext_with_context', 'custom_translation_handler_with_context', 10, 4);
+
+function custom_translation_handler_with_context($translated, $original, $context, $domain) {
+    global $default_translations;
+
+    if (array_key_exists($original, $default_translations)) {
+        error_log('custom_translation_handler_with_context: ' . $original);
+
+        $translated = get_static_content($default_translations[$original]);
+    }
+
+    return $translated;
+}
+
+
+//remove_filter('gettext', 'custom_translation_handler');
+
+// if (!function_exists('__')) {
+//     function __($text, $domain = 'default') {
+//         error_log('__("' . $text . '"');
+
+//         return apply_filters('gettext', $text, $text, $domain);
+//     }
+// }
+
+function clear_static_content_cache_for_language($language_slug) {
+    global $wpdb;
+
+    // Prefix for transients
+    $prefix = '_transient_static_content_';
+
+    $sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE '" . $wpdb->esc_like($prefix) . '%' . $wpdb->esc_like('_') . $language_slug . "'";
+
+    // Delete transients matching the specific language
+    $wpdb->query($sql);
+
+    // Delete timeout entries for the transients
+    $timeout_prefix = '_transient_timeout_static_content_';
+
+    $sql = "DELETE FROM {$wpdb->options} WHERE option_name LIKE '" . $wpdb->esc_like($timeout_prefix) . '%' . $wpdb->esc_like('_') . $language_slug . "'";
+
+    $wpdb->query($sql);
+}
+
+function on_static_content_change($post_id) {
+    if (wp_is_post_revision($post_id)) return;
+
+    // Check post type
+    $post_type = get_post_type($post_id);
+
+    if ($post_type !== 'static_content') return;
+
+    // Get the taxonomy_language term assigned to the post
+    $terms = wp_get_post_terms($post_id, 'taxonomy_language', ['fields' => 'slugs']);
+
+    if (!is_wp_error($terms) && !empty($terms)) {
+        $language_slug = $terms[0]; // Assuming a single language term per post
+        clear_static_content_cache_for_language($language_slug);
+    }
+}
+
+add_action('save_post_static_content', 'on_static_content_change');
+add_action('delete_post', 'on_static_content_change');

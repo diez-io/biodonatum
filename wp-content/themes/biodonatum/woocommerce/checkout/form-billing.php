@@ -21,11 +21,11 @@ defined( 'ABSPATH' ) || exit;
 <div class="woocommerce-billing-fields">
 	<?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
-		<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
+		<h3><?= get_static_content('billing_amp_shipping') ?></h3>
 
 	<?php else : ?>
 
-		<h3><?php esc_html_e( 'Billing details', 'woocommerce' ); ?></h3>
+		<h3><?= get_static_content('billing_details') ?></h3>
 
 	<?php endif; ?>
 
@@ -36,7 +36,8 @@ defined( 'ABSPATH' ) || exit;
 		$fields = $checkout->get_checkout_fields( 'billing' );
 
 		foreach ( $fields as $key => $field ) {
-			$field['placeholder'] = $field['label'];
+			$placeholder = substr($key, strpos($key, '_') + 1);
+			$field['placeholder'] = get_static_content($placeholder);
 			$field['label'] = '';
 			woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
 		}
@@ -59,7 +60,7 @@ defined( 'ABSPATH' ) || exit;
 							<path d="M13.8574 7.82946L13.1525 7.13953C13.0574 7.04651 12.9386 7 12.804 7C12.6693 7 12.5505 7.04651 12.4554 7.13953L9.06535 10.4574L7.55248 8.96899C7.45743 8.87597 7.33861 8.82946 7.20396 8.82946C7.06931 8.82946 6.9505 8.87597 6.85545 8.96899L6.1505 9.65891C6.04752 9.75194 6 9.86822 6 10C6 10.1318 6.04752 10.2481 6.14257 10.3411L8.01188 12.1705L8.71683 12.8605C8.81188 12.9535 8.93069 13 9.06535 13C9.2 13 9.31881 12.9535 9.41386 12.8605L10.1188 12.1705L13.8574 8.51163C13.9525 8.4186 14 8.30233 14 8.17054C14 8.03876 13.9525 7.92248 13.8574 7.82946Z" fill="white"/>
 						</svg>
 					</div>
-					<span><?php esc_html_e( 'Create an account?', 'woocommerce' ); ?></span>
+					<span><?= get_static_content('create_an_account') ?></span>
 				</label>
 			</h3>
 

@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'House number and street name' => 'address_1',
+    'Apartment, suite, unit, etc. (optional)' => 'address_2',
+    'Postcode / ZIP' => 'postcode',
+    'Town / City' => 'city',
+    'State / County' => 'state',
+    'Order notes' => 'order_notes',
+    'Credit card / debit card' => 'credit_debit_card',
+    'Shipping' => 'shipping',
+    'Pay with Monetico Paiement' => 'pay_with_monetico_paiement',
+    'Direct bank transfer' => 'direct_bank_transfer',
+    'Our bank details' => 'our_bank_details',
+    'Place order' => 'place_order',
+    'OR' => 'or',
+    'Bank' => 'bank',
+    'Account number' => 'account_number',
+    'Sort code' => 'sort_code',
+    'Pending payment' => 'pending_payment',
+    'Processing' => 'processing',
+    'On hold' => 'on_hold',
+    'Completed' => 'completed',
+    'Cancelled' => 'cancelled',
+    'Refunded' => 'refunded',
+    'Failed' => 'failed',
+    'Free shipping' => 'free_shipping',
+];

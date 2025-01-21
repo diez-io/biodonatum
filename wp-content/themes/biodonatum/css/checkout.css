@@ -168,6 +168,12 @@ form[name="checkout"] {
     margin-bottom: 15px;
 }
 
+.checkout .woocommerce-order h3 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 27.6px;
+}
+
 .checkout .woocommerce-order table {
     width: 100%;
 }

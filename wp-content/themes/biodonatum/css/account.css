@@ -211,11 +211,29 @@
     background-color: #f0f0f0;
 }
 
-.account .account-orders-table .woocommerce-buttonview {
+.history__actions-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 7px;
+}
+
+.woocommerce-orders-table__cell-order-actions a {
     background-color: #27AAE2;
     color: #fff;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+}
+
+.woocommerce-pagination--without-numbers {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.woocommerce-pagination--without-numbers a {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .account .woocommerce-order {

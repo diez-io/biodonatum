@@ -80,7 +80,14 @@ if (!$isViewOrderPage) : ?>
                 </div>
                 <div class="island">
 					<?
-						do_action('woocommerce_account_orders_endpoint');
+						$urlSlugs = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+						$current_page = 1;
+
+						if (count($urlSlugs) === 5 && $urlSlugs[2] === 'orders' && is_numeric($urlSlugs[3])) {
+							$current_page = intval($urlSlugs[3]);
+						}
+
+						do_action('woocommerce_account_orders_endpoint', $current_page);
 					?>
 				</div>
             </div>

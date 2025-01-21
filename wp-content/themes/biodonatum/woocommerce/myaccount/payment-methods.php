@@ -38,10 +38,10 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 								<? if (array_key_exists('default', $method['actions'])) {
 									$key = 'default';
 									$action = $method['actions'][$key];
-									echo '<a href="' . esc_url( $action['url'] ) . '" class="account__make-default-btn ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
+									echo '<a href="' . esc_url( $action['url'] ) . '" class="account__make-default-btn ' . sanitize_html_class( $key ) . '">' . get_static_content('make_default') . '</a>';
 								}
 								else {
-									echo '<div class="account__default-method">default</div>';
+									echo '<div class="account__default-method">' . get_static_content('default') . '</div>';
 								} ?>
 								</div>
 							</td>
@@ -97,7 +97,7 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 
 <?php if ( WC()->payment_gateways->get_available_payment_gateways() ) : ?>
 	<button class="input account__add-btn">
-		+ <?php esc_html_e( 'Add payment method', 'woocommerce' ); ?>
+		+ <?= get_static_content('add_payment_method') ?>
 	</button>
 
 	<?

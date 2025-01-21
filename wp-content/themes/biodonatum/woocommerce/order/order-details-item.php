@@ -30,7 +30,37 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 		$is_visible        = $product && $product->is_visible();
 		$product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
 
-		echo wp_kses_post( apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item->get_name() ) : $item->get_name(), $item, $is_visible ) );
+		$post_type = 'advanced_product';
+		$post_type_prefix = $post_type . '_';
+		$advanced_product_id = null;
+
+		$queryArgs = [
+			'post_type'  => $post_type,
+			'meta_query' => [
+				[
+					'key'     => $post_type_prefix . 'woo_id',
+					'value'   => $product->get_id(),
+					'compare' => '='
+				],
+			],
+			'tax_query' => [
+				[
+					'taxonomy' => 'taxonomy_language',
+					'field'    => 'slug',
+					'terms'    => $_SESSION['lang'],
+				],
+			],
+		];
+
+		$query = new WP_Query($queryArgs);
+
+		if ($query->have_posts()) {
+			$advanced_product_id = $query->posts[0]->ID;
+			$advanced_product_name = get_field($post_type_prefix . 'name', $advanced_product_id);
+			$product_permalink = get_permalink($advanced_product_id);
+		}
+
+		echo wp_kses_post( apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $advanced_product_id ? $advanced_product_name : $item->get_name() ) : $item->get_name(), $item, $is_visible ) );
 
 		$qty          = $item->get_quantity();
 		$refunded_qty = $order->get_qty_refunded_for_item( $item_id );

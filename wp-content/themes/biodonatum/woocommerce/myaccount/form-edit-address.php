@@ -33,8 +33,11 @@ do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 
 			<div class="woocommerce-address-fields__field-wrapper">
 				<?php
+
 				foreach ( $address as $key => $field ) {
-					$field['placeholder'] = $field['label'];
+					$placeholder = substr($key, strpos($key, '_') + 1);
+
+					$field['placeholder'] = get_static_content($placeholder);
 					$field['label'] = '';
 					$field['input_class'][] = 'input';
 
@@ -46,7 +49,7 @@ do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 			<?php do_action( "woocommerce_after_edit_address_form_{$load_address}" ); ?>
 
 			<p>
-				<button type="submit" class="button--wide button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="save_address" value="<?php esc_attr_e( 'Save address', 'woocommerce' ); ?>"><?php esc_html_e( 'Save address', 'woocommerce' ); ?></button>
+				<button type="submit" class="button--wide button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="save_address" value="<?php esc_attr_e( 'Save address', 'woocommerce' ); ?>"><?= get_static_content('save_address') ?></button>
 				<?php wp_nonce_field( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce' ); ?>
 				<input type="hidden" name="action" value="edit_address" />
 			</p>
