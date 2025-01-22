@@ -364,15 +364,15 @@ function get_translated_post($post_id, $lang) {
 
 
 
-define('LOST_TRANSLATIONS_FILE', __DIR__ . '/lost_translations.php');
+//define('LOST_TRANSLATIONS_FILE', __DIR__ . '/lost_translations.php');
 define('DEFAULT_TRANSLATIONS_FILE', __DIR__ . '/default_translations.php');
 
 // Initialize or load the translation array.
-if (file_exists(LOST_TRANSLATIONS_FILE)) {
-    $translation_array = include LOST_TRANSLATIONS_FILE;
-} else {
-    $translation_array = [];
-}
+// if (file_exists(LOST_TRANSLATIONS_FILE)) {
+//     $translation_array = include LOST_TRANSLATIONS_FILE;
+// } else {
+//     $translation_array = [];
+// }
 
 if (file_exists(DEFAULT_TRANSLATIONS_FILE)) {
     $default_translations = include DEFAULT_TRANSLATIONS_FILE;
@@ -381,19 +381,19 @@ if (file_exists(DEFAULT_TRANSLATIONS_FILE)) {
 }
 
 // Function to save the translation array to a file.
-function save_translation_array() {
-    global $translation_array;
+// function save_translation_array() {
+//     global $translation_array;
 
-    // Generate PHP code to store the array.
-    $exported_array = var_export($translation_array, true);
-    $php_code = "<?php\n\nreturn " . $exported_array . ";\n";
+//     // Generate PHP code to store the array.
+//     $exported_array = var_export($translation_array, true);
+//     $php_code = "<?php\n\nreturn " . $exported_array . ";\n";
 
-    // Save to the file.
-    file_put_contents(LOST_TRANSLATIONS_FILE, $php_code);
-}
+//     // Save to the file.
+//     file_put_contents(LOST_TRANSLATIONS_FILE, $php_code);
+// }
 
-// Register a shutdown function to save the array at the end of the request.
-register_shutdown_function('save_translation_array');
+// // Register a shutdown function to save the array at the end of the request.
+// register_shutdown_function('save_translation_array');
 
 // function get_static_content($slug) {
 //     if (!session_id()) {
@@ -468,15 +468,13 @@ register_shutdown_function('save_translation_array');
 
 
 function get_static_content($slug) {
-    error_log('get_static_content: ' . $slug);
-
     global $wpdb;
     $transient_key = "static_content_{$slug}_{$_SESSION['lang']}";
 
     // Check if the content is cached
     $cached_content = get_transient($transient_key);
     if ($cached_content !== false) {
-        //return $cached_content; // Return cached content
+        return $cached_content; // Return cached content
     }
 
     // Define the taxonomy and meta keys
@@ -512,16 +510,14 @@ function get_static_content($slug) {
         );
 
         if ($content) {
-            error_log('content: ' . $content);
-
             set_transient($transient_key, $content, HOUR_IN_SECONDS); // Cache the content
             return $content;
-        } else {
-            error_log('Handle missing content: ' . $slug);
-            global $translation_array;
-            $translation_array[$slug] = null;
-            return $slug;
         }
+        // else {
+        //     global $translation_array;
+        //     $translation_array[$slug] = null;
+        //     return $slug;
+        // }
     }
 
     return ''; // Return empty if no matching post is found

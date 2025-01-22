@@ -20,165 +20,68 @@
                             </p>
                         </div>
                         <div class="vacancy__cards load-more-items">
-                            <div class="card">
-                                <div class="card__text">
-                                    <div class="card__text-title">
-                                        Pharmacist
-                                    </div>
-                                    <div class="vacancy__links">
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-coins"></use>
-                                            </svg>
-                                            at $10 000
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-location"></use>
-                                            </svg>
-                                            Paris
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
-                                            </svg>
-                                            <?= get_static_content('experience') ?> 1-3 years
-                                        </div>
-                                    </div>
-                                    <div class="card__text-description">
-                                        <h3><?= get_static_content('description') ?></h3>
-                                        Over 46 million “genuine” product reviews by actual customers in 19 languages which we share with other E-tailers of your brand via Google Shopping Many potential domestic and international customers visit iHerb to read product reviews. Then will shop your brand through other channels Complement your current distribution channels by giving your international customers another channel to shop your brand
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__text">
-                                    <div class="card__text-title">
-                                        Pharmacist
-                                    </div>
-                                    <div class="vacancy__links">
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-coins"></use>
-                                            </svg>
-                                            at $10 000
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-location"></use>
-                                            </svg>
-                                            Paris
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
-                                            </svg>
-                                            Experience 1-3 years
+                            <?
+                            $args = array(
+                                'post_type' => 'vacancy',
+                                'tax_query' => [
+                                    [
+                                        'taxonomy' => 'taxonomy_language',
+                                        'field'    => 'slug',
+                                        'terms'    => $_SESSION['lang'],
+                                    ],
+                                ],
+                                //'posts_per_page' => 10,
+                            );
+
+                            $loop = new WP_Query($args);
+                            $numberOfVacancies = $loop->found_posts;
+
+                            if ($loop->have_posts()):
+                                while ($loop->have_posts()):
+                                    $loop->the_post(); ?>
+
+                                    <div class="card">
+                                        <div class="card__text">
+                                            <div class="card__text-title">
+                                                <?= esc_html(get_field('vacancy_name')) ?>
+                                            </div>
+                                            <div class="vacancy__links">
+                                                <div class="card__text-link">
+                                                    <svg>
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-coins"></use>
+                                                    </svg>
+                                                    <?= esc_html(get_field('vacancy_salary')) ?>
+                                                </div>
+                                                <div class="card__text-link">
+                                                    <svg>
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-location"></use>
+                                                    </svg>
+                                                    <?= esc_html(get_field('vacancy_city')) ?>
+                                                </div>
+                                                <div class="card__text-link">
+                                                    <svg>
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
+                                                    </svg>
+                                                    <?= get_static_content('experience') ?>
+                                                    <?= esc_html(get_field('vacancy_experience')) ?>
+                                                </div>
+                                            </div>
+                                            <div class="card__text-description">
+                                                <h3><?= get_static_content('description') ?></h3>
+                                                <?= esc_html(get_field('vacancy_description')) ?>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card__text-description">
-                                        <h3>Описание</h3>
-                                        Over 46 million “genuine” product reviews by actual customers in 19 languages which we share with other E-tailers of your brand via Google Shopping Many potential domestic and international customers visit iHerb to read product reviews. Then will shop your brand through other channels Complement your current distribution channels by giving your international customers another channel to shop your brand
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__text">
-                                    <div class="card__text-title">
-                                        Pharmacist
-                                    </div>
-                                    <div class="vacancy__links">
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-coins"></use>
-                                            </svg>
-                                            at $10 000
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-location"></use>
-                                            </svg>
-                                            Paris
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
-                                            </svg>
-                                            Experience 1-3 years
-                                        </div>
-                                    </div>
-                                    <div class="card__text-description">
-                                        <h3>Описание</h3>
-                                        Over 46 million “genuine” product reviews by actual customers in 19 languages which we share with other E-tailers of your brand via Google Shopping Many potential domestic and international customers visit iHerb to read product reviews. Then will shop your brand through other channels Complement your current distribution channels by giving your international customers another channel to shop your brand
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__text">
-                                    <div class="card__text-title">
-                                        Pharmacist
-                                    </div>
-                                    <div class="vacancy__links">
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-coins"></use>
-                                            </svg>
-                                            at $10 000
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-location"></use>
-                                            </svg>
-                                            Paris
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
-                                            </svg>
-                                            Experience 1-3 years
-                                        </div>
-                                    </div>
-                                    <div class="card__text-description">
-                                        <h3>Описание</h3>
-                                        Over 46 million “genuine” product reviews by actual customers in 19 languages which we share with other E-tailers of your brand via Google Shopping Many potential domestic and international customers visit iHerb to read product reviews. Then will shop your brand through other channels Complement your current distribution channels by giving your international customers another channel to shop your brand
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card__text">
-                                    <div class="card__text-title">
-                                        Pharmacist
-                                    </div>
-                                    <div class="vacancy__links">
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-coins"></use>
-                                            </svg>
-                                            at $10 000
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-location"></use>
-                                            </svg>
-                                            Paris
-                                        </div>
-                                        <div class="card__text-link">
-                                            <svg>
-                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-document"></use>
-                                            </svg>
-                                            Experience 1-3 years
-                                        </div>
-                                    </div>
-                                    <div class="card__text-description">
-                                        <h3>Описание</h3>
-                                        Over 46 million “genuine” product reviews by actual customers in 19 languages which we share with other E-tailers of your brand via Google Shopping Many potential domestic and international customers visit iHerb to read product reviews. Then will shop your brand through other channels Complement your current distribution channels by giving your international customers another channel to shop your brand
-                                    </div>
-                                </div>
-                            </div>
+                                <?php endwhile;
+
+                                wp_reset_postdata();
+                            endif; ?>
                         </div>
-                        <div class="button load-more-btn">
-                            <?= get_static_content('load_more') ?>
-                        </div>
+                        <? if ($numberOfVacancies > 4) : ?>
+                            <div class="button load-more-btn">
+                                <?= get_static_content('load_more') ?>
+                            </div>
+                        <? endif; ?>
                     </div>
                 </div>
             </section>
