@@ -23,13 +23,16 @@
                 </div>
                 <div class="header__block">
                     <nav class="nav mob-hidden">
-                        <a href="#" class="nav__link"><?= get_static_content('home') ?></a>
-                        <a href="#" class="nav__link"><?= get_static_content('about') ?></a>
-                        <a href="#" class="nav__link"><?= get_static_content('science') ?></a>
-                        <a href="#" class="nav__link"><?= get_static_content('scientists') ?></a>
-                        <a href="#" class="nav__link"><?= get_static_content('shop') ?></a>
-                        <a href="#" class="nav__link"><?= get_static_content('faq') ?></a>
-                        <a href="#" class="nav__link"><?= get_static_content('contacts') ?></a>
+                        <? $language_slug = defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : ''; ?>
+
+                        <a href="<?= home_url("/$language_slug"); ?>" class="nav__link"><?= get_static_content('home') ?></a>
+                        <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('about')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('about') ?></a>
+                        <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('blog')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('blog') ?></a>
+                        <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('scientists')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('scientists') ?></a>
+                        <a href="<?= esc_url(wc_get_page_permalink( 'shop' )) ?>" class="nav__link"><?= get_static_content('shop') ?></a>
+                        <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('reviews')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('reviews') ?></a>
+                        <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('faq')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('faq') ?></a>
+                        <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('contacts')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('contacts') ?></a>
                     </nav>
                 </div>
                 <div class="header__block header__block--no-gap">

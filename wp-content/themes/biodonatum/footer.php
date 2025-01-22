@@ -8,14 +8,16 @@
             </div>
             <div class="footer__block">
                 <nav class="footer__nav">
-                    <a href="#" class="footer__link"><?= get_static_content('about') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('science') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('scientists') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('terms_of_sales') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('return_policy') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('delivery_terms') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('loyalty_program') ?></a>
-                    <a href="#" class="footer__link"><?= get_static_content('privacy_policy') ?></a>
+                    <? $language_slug = defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : ''; ?>
+
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('about')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('about') ?></a>
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('scientists')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('scientists') ?></a>
+                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('terms_of_sales') ?></a>
+                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('return_policy') ?></a>
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('delivery')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('delivery_terms') ?></a>
+                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('loyalty_program') ?></a>
+                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('privacy_policy') ?></a>
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('vacancy')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('vacancy') ?></a>
                 </nav>
             </div>
             <div class="footer__block">
@@ -73,23 +75,6 @@
         opacity: .7;
     }
 </style>
-<div class="temp">
-    <div class="container">
-        <div class="temp__wrapper">
-            <? $language_slug = defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : ''; ?>
-
-            <a href="<?= home_url("/$language_slug"); ?>" class="temp__link">Главная</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('faq')), PHP_URL_PATH)); ?>" class="temp__link">FAQ</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('reviews')), PHP_URL_PATH)); ?>" class="temp__link">Отзывы</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('delivery')), PHP_URL_PATH)); ?>" class="temp__link">Доставка</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('scientists')), PHP_URL_PATH)); ?>" class="temp__link">Ученые</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('blog')), PHP_URL_PATH)); ?>" class="temp__link">Блог</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('contacts')), PHP_URL_PATH)); ?>" class="temp__link">Контакты</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('vacancy')), PHP_URL_PATH)); ?>" class="temp__link">Вакансии</a>
-            <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('about')), PHP_URL_PATH)); ?>" class="temp__link">О нас</a>
-        </div>
-    </div>
-</div>
 <? wp_footer(); ?>
 </body>
 
