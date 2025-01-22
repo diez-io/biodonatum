@@ -11387,6 +11387,7 @@ meter {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 30px;
+  flex: 1;
 }
 .product-detail__left {
   display: -webkit-box;
@@ -11397,8 +11398,17 @@ meter {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 25px;
-  max-width: 750px;
+  /*max-width: 750px;*/
+  flex: 1;
+  overflow: hidden;
 }
+
+@media only screen and (max-width: 1199px) {
+  .product-detail__left {
+    width: 100%;
+  }
+}
+
 .product-detail__left .swiper-pagination {
   position: absolute;
   bottom: 36px;
@@ -12990,6 +13000,11 @@ form.submitting .wpcf7-spinner {
   aspect-ratio: 75/66;
   object-fit: cover;
   border-radius: 30px;
+}
+@media only screen and (max-width: 1199px) {
+  .product-swiper-img {
+    width: 100%;
+  }
 }
 @media only screen and (min-width: 1199px) {
   .product-detail__left .teasers-pagination-wrapper {
