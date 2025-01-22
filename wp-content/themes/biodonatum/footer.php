@@ -22,31 +22,31 @@
             </div>
             <div class="footer__block">
                 <div class="socials">
-                    <a class="socials__link" href="#">
+                    <a class="socials__link" href="https://www.instagram.com/biodonatum/" target="_blank">
                         <svg class="socials__icon">
                             <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-ig"></use>
                         </svg>
                     </a>
-                    <a class="socials__link socials__link--fb" href="#">
+                    <a class="socials__link" href="https://www.facebook.com/profile.php?id=61556171075786" target="_blank">
                         <svg class="socials__icon socials__icon--fb">
                             <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-fb"></use>
                         </svg>
                     </a>
-                    <a class="socials__link" href="#">
+                    <a class="socials__link" href="https://www.youtube.com/channel/UCZXE6CdK9G1eWEG6TTGXWcQ" target="_blank">
                         <svg class="socials__icon">
                             <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-yt"></use>
                         </svg>
                     </a>
-                    <a class="socials__link" href="#">
+                    <a class="socials__link" href="https://api.whatsapp.com/send/?phone=33667007969&text=Hey%2C+%2ABiodonatum%2A%21+I+need+info+about+Biodonatum+https%3A%2F%2Fbiodonatum.com&type=phone_number&app_absent=0" target="_blank">
                         <svg class="socials__icon socials__icon--wa">
                             <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-wa"></use>
                         </svg>
                     </a>
-                    <a class="socials__link" href="#">
+                    <!--a class="socials__link" href="#">
                         <svg class="socials__icon">
                             <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-tt"></use>
                         </svg>
-                    </a>
+                    </a-->
                 </div>
             </div>
         </div>

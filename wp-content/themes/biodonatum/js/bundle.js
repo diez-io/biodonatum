@@ -4253,6 +4253,7 @@ var App = /** @class */ (function () {
             _this.createMobileMenu();
             _this.createLoadMore();
             _this.createPopup();
+            _this.createDropdown();
         };
         this.createPopup = function () {
             var popups = document.querySelectorAll('.popup');
@@ -4348,19 +4349,14 @@ __webpack_require__.r(__webpack_exports__);
 var Dropdown = /** @class */ (function () {
     function Dropdown(el) {
         this.el = el;
-        this.triggerElement = this.el.querySelector('[data-dropdown-trigger]');
+        this.triggerElements = this.el.querySelectorAll('[data-dropdown-trigger]');
         this.init();
     }
     Dropdown.prototype.init = function () {
-        this.triggerElement.addEventListener('click', this.toggle.bind(this));
+        this.triggerElements.forEach(element => element.addEventListener('click', this.toggle));
     };
-    Dropdown.prototype.toggle = function () {
-        if (this.el.classList.contains('active')) {
-            this.el.classList.remove('active');
-        }
-        else {
-            this.el.classList.add('active');
-        }
+    Dropdown.prototype.toggle = function (e) {
+        e.currentTarget.classList.toggle('active');
     };
     return Dropdown;
 }());
