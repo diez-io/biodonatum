@@ -132,7 +132,7 @@ jQuery(function ($) {
             data: {
                 action: 'woocommerce_add_to_cart',
                 product_id: productId,
-                quantity: currentQuantity,
+                quantity: currentQuantity.get(0),
             },
             success: function (response) {
                 if (response.error) {

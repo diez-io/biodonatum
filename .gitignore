@@ -50,6 +50,8 @@ ehthumbs.db
 *.log
 *.css.map
 
+!/robots.txt
+
 # архивы, включая многотомные
 *.zip
 *.zip*
