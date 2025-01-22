@@ -53,7 +53,7 @@
                                     <div class="swiper-slide">
                                         <picture>
                                             <? $image = $image_row[$post_type_prefix . 'images_item']; ?>
-                                            <img src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>">
+                                            <img class="product-swiper-img" src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>">
                                         </picture>
                                     </div>
                                 <? endforeach; ?>
