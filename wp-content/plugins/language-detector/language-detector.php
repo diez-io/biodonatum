@@ -531,6 +531,8 @@ function custom_translation_handler( $translated, $original, $domain ) {
     global $default_translations;
 
     if (array_key_exists($original, $default_translations)) {
+        error_log('custom_translation_handler: ' . $original);
+
         $translated = get_static_content($default_translations[$original]);
     }
 
@@ -545,6 +547,8 @@ function custom_translation_handler_with_context($translated, $original, $contex
     global $default_translations;
 
     if (array_key_exists($original, $default_translations)) {
+        error_log('custom_translation_handler_with_context: ' . $original);
+
         $translated = get_static_content($default_translations[$original]);
     }
 
