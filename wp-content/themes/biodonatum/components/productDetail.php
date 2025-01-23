@@ -33,39 +33,11 @@
                 $advanced_product_id = $query->posts[0]->ID;
                 $woo_product = wc_get_product($product_id);
             }
-
-
-
-            $queryArgs = [
-                'post_type'  => $post_type,
-                'meta_query' => [
-                    [
-                        'key'     => $post_type_prefix . 'woo_id',
-                        'value'   => $args['subscription_woo_id'],
-                        'compare' => '='
-                    ],
-                ],
-                'tax_query' => [
-                    [
-                        'taxonomy' => 'taxonomy_language',
-                        'field'    => 'slug',
-                        'terms'    => $_SESSION['lang'],
-                    ],
-                ],
-            ];
-
-            $query = new WP_Query($queryArgs);
-
-            if ($query->have_posts()) {
-                $subscription_product_id = $query->posts[0]->ID;
-            }
         }
         else {
             $advanced_product_id = get_the_ID();
             $product_id = get_field($post_type_prefix . 'woo_id');
             $woo_product = wc_get_product($product_id);
-
-            $isVariable = $woo_product->get_type() === 'variable';
         }
 
         if ($advanced_product_id) : ?>
@@ -218,19 +190,21 @@
                                 <!--button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>"><?= get_static_content('buy_subscription') ?></button-->
                             <? else : ?>
                                 <button class="button" type="submit" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= get_static_content('buy_one_pack') ?></button>
-                                <button class="button button--green" onclick="location.href='<?= the_permalink($subscription_product_id) ?>'"><?= get_static_content('buy_subscription') ?></button>
+                                <button class="button button--green" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= get_static_content('buy_subscription') ?></button>
                             <? endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tabs" data-tabs="">
-                <div class="tabs__header">
-                    <button class="tabs__head active" data-tabs-head="1"><?= get_field($post_type_prefix . 'detailed_description_name', $advanced_product_id) ?></button>
-                    <button class="tabs__head" data-tabs-head="2"><?= get_field($post_type_prefix . 'detailed_functions_name', $advanced_product_id) ?></button>
-                    <button class="tabs__head" data-tabs-head="3"><?= get_field($post_type_prefix . 'detailed_instructions_name', $advanced_product_id) ?></button>
-                    <button class="tabs__head" data-tabs-head="4"><?= get_field($post_type_prefix . 'detailed_composition_name', $advanced_product_id) ?></button>
-                    <button class="tabs__head" data-tabs-head="5"><?= get_field($post_type_prefix . 'detailed_calorie_name', $advanced_product_id) ?></button>
+            <div class="tabs" data-tabs="" data-slider="tabs">
+                <div class="swiper tabs__header">
+                    <div class="swiper-wrapper">
+                        <button class="tabs__head active" data-tabs-head="1"><?= get_field($post_type_prefix . 'detailed_description_name', $advanced_product_id) ?></button>
+                        <button class="tabs__head" data-tabs-head="2"><?= get_field($post_type_prefix . 'detailed_functions_name', $advanced_product_id) ?></button>
+                        <button class="tabs__head" data-tabs-head="3"><?= get_field($post_type_prefix . 'detailed_instructions_name', $advanced_product_id) ?></button>
+                        <button class="tabs__head" data-tabs-head="4"><?= get_field($post_type_prefix . 'detailed_composition_name', $advanced_product_id) ?></button>
+                        <button class="tabs__head" data-tabs-head="5"><?= get_field($post_type_prefix . 'detailed_calorie_name', $advanced_product_id) ?></button>
+                    </div>
                 </div>
                 <div class="tabs__body">
                     <div class="tabs__item active" data-tabs-content="1">
