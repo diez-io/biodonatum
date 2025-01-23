@@ -33,11 +33,39 @@
                 $advanced_product_id = $query->posts[0]->ID;
                 $woo_product = wc_get_product($product_id);
             }
+
+
+
+            $queryArgs = [
+                'post_type'  => $post_type,
+                'meta_query' => [
+                    [
+                        'key'     => $post_type_prefix . 'woo_id',
+                        'value'   => $args['subscription_woo_id'],
+                        'compare' => '='
+                    ],
+                ],
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'taxonomy_language',
+                        'field'    => 'slug',
+                        'terms'    => $_SESSION['lang'],
+                    ],
+                ],
+            ];
+
+            $query = new WP_Query($queryArgs);
+
+            if ($query->have_posts()) {
+                $subscription_product_id = $query->posts[0]->ID;
+            }
         }
         else {
             $advanced_product_id = get_the_ID();
             $product_id = get_field($post_type_prefix . 'woo_id');
             $woo_product = wc_get_product($product_id);
+
+            $isVariable = $woo_product->get_type() === 'variable';
         }
 
         if ($advanced_product_id) : ?>
@@ -156,6 +184,19 @@
                             <p class="text--semi-bold"><?= get_field($post_type_prefix . 'donation', $advanced_product_id) ?></p>
                             <!--p class="title--extra-small">Buy <span class="text--blue">1 pack now</span></p-->
                             <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
+                            <?
+                                if ($isVariable) {
+                                    $variations = $woo_product->get_available_variations();
+
+                                    foreach ($variations as $variation) {
+                                        error_log('<div>next variation: ' . '</div><br><br>');
+                                        error_log(print_r($variation, true));
+
+                                        echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
+                                        echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
+                                    }
+                                }
+                            ?>
                         </article>
                         <div class="buttons">
                             <? if ($isDetailedProductPage) : ?>
@@ -165,10 +206,10 @@
                                     <div class="quantity_panel--plus">+</div>
                                 </div>
                                 <button class="button add-to-cart-button" type="submit" data-product-id="<?= $product_id ?>"><?= get_static_content('add_to_cart') ?></button>
-                                <button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>"><?= get_static_content('buy_subscription') ?></button>
+                                <!--button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>"><?= get_static_content('buy_subscription') ?></button-->
                             <? else : ?>
                                 <button class="button" type="submit" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= get_static_content('buy_one_pack') ?></button>
-                                <button class="button button--green" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= get_static_content('buy_subscription') ?></button>
+                                <button class="button button--green" onclick="location.href='<?= the_permalink($subscription_product_id) ?>'"><?= get_static_content('buy_subscription') ?></button>
                             <? endif; ?>
                         </div>
                     </div>
