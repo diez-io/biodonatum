@@ -185,18 +185,27 @@
                             <!--p class="title--extra-small">Buy <span class="text--blue">1 pack now</span></p-->
                             <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
                             <?
-                                if ($isVariable) {
-                                    $variations = $woo_product->get_available_variations();
+                                if ($isVariable) :
+                                    $variations = $woo_product->get_available_variations(); ?>
 
-                                    foreach ($variations as $variation) {
-                                        error_log('<div>next variation: ' . '</div><br><br>');
-                                        error_log(print_r($variation, true));
+                                    <div class="select-subscription-duration">
+                                        <div class="select-subscription-duration__selected input"><?= $variations[0]['attributes']['attribute_duration'] . ' months' ?></div>
+                                        <div class="select-subscription-duration__list">
+                                        <? foreach ($variations as $variation) : ?>
+                                                <?
+                                                // error_log('<div>next variation: ' . '</div><br><br>');
+                                                // error_log(print_r($variation, true));
 
-                                        echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
-                                        echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
-                                    }
-                                }
-                            ?>
+                                                // echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
+                                                // echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
+                                                ?>
+                                            <div class="select-subscription-duration__option">
+                                                <?= $variation['attributes']['attribute_duration'] . ' months' ?>
+                                            </div>
+                                        <? endforeach; ?>
+                                        </div>
+                                    </div>
+                                <? endif; ?>
                         </article>
                         <div class="buttons">
                             <? if ($isDetailedProductPage) : ?>
@@ -205,7 +214,7 @@
                                     <input type="text" value="1">
                                     <div class="quantity_panel--plus">+</div>
                                 </div>
-                                <button class="button add-to-cart-button" type="submit" data-product-id="<?= $product_id ?>"><?= get_static_content('add_to_cart') ?></button>
+                                <button class="button add-to-cart-button<?= $isVariable ? ' subscription-add-to-cart-button' : '' ?>" type="submit" data-product-id="<?= $product_id ?>"><?= get_static_content('add_to_cart') ?></button>
                                 <!--button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>"><?= get_static_content('buy_subscription') ?></button-->
                             <? else : ?>
                                 <button class="button" type="submit" onclick="location.href='<?= the_permalink($advanced_product_id) ?>'"><?= get_static_content('buy_one_pack') ?></button>
