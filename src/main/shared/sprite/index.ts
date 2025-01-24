@@ -22,3 +22,4 @@ import './icon-filter.svg';
 import './icon-trash-can.svg';
 import './icon-x.svg';
 import './icon-success.svg';
+import './icon-angle-rounded.svg';
