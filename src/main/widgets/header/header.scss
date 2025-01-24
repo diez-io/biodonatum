@@ -82,6 +82,10 @@
 	&__language {
 		position: relative;
 
+		span {
+			text-transform: uppercase;
+		}
+
 		&:hover .menu {
 			opacity: 1;
 			visibility: visible;

@@ -4,13 +4,14 @@ import { SlidesPerViewType } from "../helpers/types";
 
 class Slider {
     el;
-    sliderType:string;
-    slidesCount:SlidesPerViewType;
-    buttonPrev:HTMLElement;
-    buttonNext:HTMLElement;
-    pagination:HTMLElement;
+    sliderType: string;
+    slidesCount: SlidesPerViewType;
+    buttonPrev: HTMLElement;
+    buttonNext: HTMLElement;
+    pagination: HTMLElement;
     desktopOnly;
     media;
+    sliderInitialized: boolean;
 
     constructor(el: Element) {
         this.el = el;
@@ -47,10 +48,53 @@ class Slider {
             case 'scientists':
                 this.initScientistsSlider();
                 break;
+            case 'tabs':
+                this.initTabsSliderConditionally();
+                break;
         }
     }
+
+    initTabsSliderConditionally() {
+        if (window.innerWidth < 1199) {
+            this.initTabsSlider();
+        }
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 1199 && !this.sliderInitialized) {
+                this.initTabsSlider();
+                this.sliderInitialized = true;
+            } else if (window.innerWidth >= 1199 && this.sliderInitialized) {
+                this.destroyTabsSlider();
+                this.sliderInitialized = false;
+            }
+        });
+    }
+
+    initTabsSlider() {
+        const slider: HTMLElement = this.el.querySelector('.swiper');
+        new Swiper(slider, {
+            modules: [Navigation, Pagination],
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+            breakpoints: {
+                1199: {
+                    slidesPerView: 2,
+                }
+            }
+        });
+        this.sliderInitialized = true;
+    }
+
+    destroyTabsSlider() {
+        const sliderElement = this.el.querySelector('.swiper') as HTMLElement & { swiper?: Swiper };
+        if (sliderElement?.swiper) {
+            sliderElement.swiper.destroy(true, true);
+        }
+    }
+
+
+
     initScientistsSlider() {
-        const slider:HTMLElement = this.el.querySelector('.swiper');
+        const slider: HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
             modules: [Navigation, Pagination],
             slidesPerView: 1,
@@ -83,7 +127,7 @@ class Slider {
         })
     }
     initProductDetailSlider() {
-        const slider:HTMLElement = this.el.querySelector('.swiper');
+        const slider: HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
             modules: [Navigation, Pagination],
             slidesPerView: 'auto',
@@ -104,7 +148,7 @@ class Slider {
         })
     }
     initDetailTeasersSlider() {
-        const slider:HTMLElement = this.el.querySelector('.swiper');
+        const slider: HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
             modules: [Pagination],
             slidesPerView: 2.5,
@@ -121,7 +165,7 @@ class Slider {
     }
 
     initPartnersSlider() {
-        const slider:HTMLElement = this.el.querySelector('.swiper');
+        const slider: HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
             modules: [Navigation, Pagination],
             slidesPerView: 2.5,
@@ -144,7 +188,7 @@ class Slider {
     }
 
     initDefaultSlider() {
-        const slider:HTMLElement = this.el.querySelector('.swiper');
+        const slider: HTMLElement = this.el.querySelector('.swiper');
         const swiperOptions = {
             modules: [Navigation],
             slidesPerView: 'auto' as SlidesPerViewType,
@@ -176,10 +220,10 @@ class Slider {
     }
 
     initThumbsSlider() {
-        const slider:HTMLElement = this.el.querySelector('.swiper');
+        const slider: HTMLElement = this.el.querySelector('.swiper');
         const thumb = document.querySelector('[data-slider="thumb"]');
         const thumbMobile = document.querySelector('[data-slider-mob]');
-        const thumbSwiper:HTMLElement = thumb.querySelector('.swiper');
+        const thumbSwiper: HTMLElement = thumb.querySelector('.swiper');
 
         let thumbSlider = null
 

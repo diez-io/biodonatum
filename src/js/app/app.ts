@@ -20,6 +20,7 @@ class App {
         this.createMobileMenu()
         this.createLoadMore();
         this.createPopup();
+        this.createDropdown();
     }
 
     createPopup = () => {
@@ -31,7 +32,7 @@ class App {
     }
 
     createLoadMore = () => {
-        const loadMoreBtns:NodeListOf<HTMLElement> = document.querySelectorAll('.load-more-btn');
+        const loadMoreBtns: NodeListOf<HTMLElement> = document.querySelectorAll('.load-more-btn');
 
         loadMoreBtns && loadMoreBtns.forEach(element => {
             new LoadMore(element);

@@ -4,12 +4,10 @@
 	gap: 40px;
 
 	&__header {
-		display: flex;
-		align-items: center;
-		gap: 17.5px;
-		@include r($mobile) {
-			overflow-x: auto;
-			overflow-y: hidden;
+		.swiper-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 17.5px;
 		}
 	}
 
@@ -22,14 +20,25 @@
 		padding: 28px 0;
 		border-radius: 100px;
 		min-width: 300px;
+		max-width: 300px;
 		font-size: 22px;
 		font-weight: $semi-bold;
+		text-align: center;
+		color: #0174a5;
 
 		transition: 0.2s linear;
 		cursor: pointer;
 
 		@include r($mobile) {
 			flex-shrink: 0;
+		}
+
+		@include r($ultramobile) {
+			padding: 20.5px 0;
+			min-width: 220px;
+			max-width: 220px;
+			font-size: 16px;
+			line-height: 19.2px;
 		}
 
 		&.active {

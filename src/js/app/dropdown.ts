@@ -1,25 +1,27 @@
 class Dropdown {
-    el;
-    triggerElement;
+    triggers: Element[];
 
-    constructor(el: Element) {
-        this.el = el;
-        this.triggerElement = this.el.querySelector('[data-dropdown-trigger]');
-
-        this.init()
+    constructor(rootElement: Element) {
+        // Находим все триггеры внутри переданного элемента
+        this.triggers = Array.from(rootElement.querySelectorAll('[data-dropdown-trigger]'));
+        this.init();
     }
 
     init() {
-        this.triggerElement.addEventListener('click', this.toggle.bind(this))
+        // Для каждого триггера добавляем обработчик событий
+        this.triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => this.toggle(trigger));
+        });
     }
 
-    toggle() {
-        if (this.el.classList.contains('active')) {
-            this.el.classList.remove('active')
+    toggle(trigger: Element) {
+        // Переключаем состояние конкретного триггера
+        if (trigger.classList.contains('active')) {
+            trigger.classList.remove('active');
         } else {
-            this.el.classList.add('active')
+            trigger.classList.add('active');
         }
     }
 }
 
-export default Dropdown
+export default Dropdown;
