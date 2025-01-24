@@ -16,297 +16,318 @@
     padding: 15px;
     align-self: center;
     cursor: pointer;
-
     background-color: #EDF9FF;
     border-radius: 10px;
     width: 75px;
     text-align: center;
     font-size: 60px;
     font-weight: 300;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .product .quantity_panel--minus {
-    padding: 10px 15px 20px 15px;
+	padding: 10px 15px 20px 15px;
 }
 
 .cart table img {
-  width: 60px;
+	width: 60px;
 }
 .cart table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1em 0;
-  font-size: 1rem;
-  text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+	margin: 1em 0;
+	font-size: 1rem;
+	text-align: left;
 }
 .cart table thead {
-  color: #ACACAC;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 28px;
+	color: #acacac;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 28px;
 }
 .cart table thead th {
-  border-bottom: 1px solid #F1F1F1;
-  padding: 8px 8px 8px 0;
-  font-weight: bold;
+	border-bottom: 1px solid #f1f1f1;
+	padding: 8px 8px 8px 0;
+	font-weight: bold;
 }
 
-.cart table td  {
-  padding: 13px 8px 13px 0;
-  vertical-align: middle;
+.cart table td {
+	padding: 13px 8px 13px 0;
+	vertical-align: middle;
 }
 
 .cart__table--product {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 20px;
-  align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	gap: 20px;
+	align-items: center;
 }
 
 .cart picture {
-    line-height: 0;
+	line-height: 0;
 }
 
 .cart .quantity_panel {
-    display: flex;
-    gap: 2px;
-    color: #27AAE2;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 10.26px;
+	display: flex;
+	gap: 2px;
+	color: #27aae2;
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 10.26px;
 }
 
 .cart .quantity_panel--minus,
 .cart .quantity_panel--plus {
-    padding: 15px;
-    align-self: center;
-    cursor: pointer;
+	padding: 15px;
+	align-self: center;
+	cursor: pointer;
 
-    background-color: #EDF9FF;
-    border-radius: 8px;
+	background-color: #edf9ff;
+	border-radius: 8px;
 
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .cart .quantity_panel input {
-    width: 50px;
-    text-align: center;
+	width: 50px;
+	text-align: center;
 }
 
 .cart__table--del svg {
-    width: 1.5em;
-    height: 1.5em;
+	width: 1.5em;
+	height: 1.5em;
 }
 
 .cart__table--del {
-    padding: 10px;
-    background-color: #EDF9FF;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
+	padding: 10px;
+	background-color: #edf9ff;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
 }
 
 .cart__promocode-and-total {
-    display: flex;
-    gap: 28px;
-    margin-top: 28px;
-    align-items: flex-start;
+	display: flex;
+	gap: 28px;
+	margin-top: 28px;
+	align-items: flex-start;
 }
 
 .cart__promocode-and-total > * {
-    flex: 1;
+	flex: 1;
 }
 
 .cart__promocode form {
-    display: flex;
-    gap: 20px;
+	display: flex;
+	gap: 20px;
 }
 
 .cart__promocode form > * {
-    flex: 1;
+	flex: 1;
 }
 
 .cart__total {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .cart__total__grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 20px;
 }
 
 .cart__total--title {
-    color: #ACACAC;
+	color: #acacac;
 }
 
 .cart__total--coupons {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: flex-start;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .cart__total--coupon {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 5px;
-    line-height: 1em;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 5px;
+	line-height: 1em;
 }
 
 .cart__total--coupon svg {
-    width: 1em;
-    height: 1em;
+	width: 1em;
+	height: 1em;
 }
 
 .cart__total--coupon-name {
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .cart__total--coupon-del {
-    display: flex;
-    align-items: center;
-    background-color: gray;
-    border-radius: 100%;
-    padding: 3px;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	background-color: gray;
+	border-radius: 100%;
+	padding: 3px;
+	cursor: pointer;
 }
 .mb20 {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 .island {
-    width: 100%;
+	width: 100%;
 }
 .containers_line {
-    .wpcf7_form {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+	.wpcf7_form {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
 
-        .input {
-            padding: 28px 20px;
-        }
-    }
-    .separator {
-        border-bottom: 1px solid #F1F1F1;
-        margin: 20px 0px;
-    }
-    .right_block_container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-    .line {
-        grid-column: 1 / 3;
-    }
-    .line:has([type="checkbox"], [type="radio"]) {
-        display: flex;
-        gap: 40px;
+		.input {
+			padding: 28px 20px;
+		}
+	}
+	.separator {
+		border-bottom: 1px solid #f1f1f1;
+		margin: 20px 0px;
+	}
+	.right_block_container {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	.line {
+		grid-column: 1 / 3;
+	}
+	.line:has([type='checkbox'], [type='radio']) {
+		display: flex;
+		gap: 40px;
 
-        label {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            font-size: 16px;
-            line-height: 0px;
+		label {
+			display: flex;
+			gap: 15px;
+			align-items: center;
+			font-size: 16px;
+			line-height: 0px;
 
-            input {
-                display: none !important;
-            }
+			input {
+				display: none !important;
+			}
 
-            .checkbox {
-                border-radius: 50%;
-                position: relative;
-            }
-            .svg_container {
-                cursor: pointer;
-                border: 1px solid #27AAE2;
-                border-radius: 25%;
-                width: max-content;
-                height: max-content;
+			.checkbox {
+				border-radius: 50%;
+				position: relative;
+			}
+			.svg_container {
+				cursor: pointer;
+				border: 1px solid #27aae2;
+				border-radius: 25%;
+				width: max-content;
+				height: max-content;
 
-                transition: all 0.2s ease;
-            }
-            svg {
-                transform: scale(0);
-                transition: all 0.2s ease;
-            }
-            .checkbox::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 12px;
-                height: 12px;
-                background-color: #27AAE2;
-                transform: translate(-50%, -50%) scale(0);
-                border-radius: 50%;
-                transition: all 0.2s ease;
-            }
+				transition: all 0.2s ease;
+			}
+			svg {
+				transform: scale(0);
+				transition: all 0.2s ease;
+			}
+			.checkbox::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 12px;
+				height: 12px;
+				background-color: #27aae2;
+				transform: translate(-50%, -50%) scale(0);
+				border-radius: 50%;
+				transition: all 0.2s ease;
+			}
 
-            input:checked + .checkbox::before {
-                transform: translate(-50%, -50%) scale(1);
-            }
+			input:checked + .checkbox::before {
+				transform: translate(-50%, -50%) scale(1);
+			}
 
-            input:checked +.svg_container {
-                border: 1px solid transparent;
-                svg {
-                    transform: scale(1);
-                }
-            }
-        }
-    }
+			input:checked + .svg_container {
+				border: 1px solid transparent;
+				svg {
+					transform: scale(1);
+				}
+			}
+		}
+	}
 
-    .island_wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+	.island_wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 
-        .island {
-            box-sizing: border-box;
-            background: #FFFFFF;
-            border: 1px solid #F5F5F5;
-            border-radius: 20px;
-            padding: 30px;
-        }
-    }
+		.island {
+			box-sizing: border-box;
+			background: #ffffff;
+			border: 1px solid #f5f5f5;
+			border-radius: 20px;
+			padding: 30px;
+		}
+	}
 }
 
-[type="select_container"]:has(select.input) {
-    width: 100%;
+[type='select_container']:has(select.input) {
+	width: 100%;
 
-    [type="options_container"] {
-        background-color: #fff;
-        transition: 2s;
-        border: 1px solid #27AAE2;
-        border-radius: 10px;
+	[type='options_container'] {
+		background-color: #fff;
+		transition: 2s;
+		border: 1px solid #27aae2;
+		border-radius: 10px;
 
-        option.input {
-            font-size: 16px;
-            margin: 10px 0px 10px 0px;
-        }
-    }
+		option.input {
+			font-size: 16px;
+			margin: 10px 0px 10px 0px;
+		}
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.cart__promocode-and-total {
+		flex-direction: column;
+	}
+}
+@media screen and (max-width: 768px) {
+	.cart table thead {
+		display: none;
+	}
+
+	.cart table tbody tr {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.cart table tbody tr td:nth-child(1),
+	.cart table tbody tr td:nth-child(2) {
+		flex-basis: 100%;
+	}
+	.cart__promocode form {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.cart__total .island {
+		gap: 30px;
+	}
 }
