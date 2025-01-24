@@ -97,17 +97,30 @@ defined( 'ABSPATH' ) || exit; ?>
                                                 <div class="quantity_panel--plus">+</div>
                                             </div>
                                         </td>
-                                        <td><?= WC()->cart->get_product_price( $_product ) ?></td>
-                                        <td class="card-item__subtotal"><?= WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ) ?></td>
-                                        <td class="card-item__discount">
-                                            <?
-                                                $line_subtotal = $cart_item['line_subtotal'];
-                                                $line_total = $cart_item['line_total'];
-                                                $discount = $line_total - $line_subtotal;
-                                            ?>
-                                            <?= wc_price($discount) ?>
+                                        <td class="cart__table__cell__not-del">
+                                            <div class="cart__table__header--mob"><?= get_static_content('price') ?></div>
+                                            <div class="cart__table__cell--mob">
+                                                <?= WC()->cart->get_product_price( $_product ) ?>
+                                            </div>
                                         </td>
-                                        <td>
+                                        <td class="cart__table__cell__not-del">
+                                            <div class="cart__table__header--mob"><?= get_static_content('subtotal') ?></div>
+                                            <div class="cart__table__cell--mob card-item__subtotal">
+                                                <?= WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ) ?>
+                                            </div>
+                                        </td>
+                                        <td class="cart__table__cell__not-del">
+                                            <div class="cart__table__header--mob"><?= get_static_content('loyalty_program') ?></div>
+                                            <div class="cart__table__cell--mob card-item__discount">
+                                                <?
+                                                    $line_subtotal = $cart_item['line_subtotal'];
+                                                    $line_total = $cart_item['line_total'];
+                                                    $discount = $line_total - $line_subtotal;
+                                                ?>
+                                                <?= wc_price($discount) ?>
+                                            </div>
+                                        </td>
+                                        <td class="cart__table__cell__del">
                                             <div class="cart__table--del">
                                                 <svg>
                                                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-trash-can"></use>

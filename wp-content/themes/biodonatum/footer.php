@@ -12,11 +12,11 @@
 
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('about')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('about') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('scientists')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('scientists') ?></a>
-                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('terms_of_sales') ?></a>
-                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('return_policy') ?></a>
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('terms-of-sales')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('terms_of_sales') ?></a>
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('refund_returns')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('return_policy') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('delivery')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('delivery_terms') ?></a>
-                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('loyalty_program') ?></a>
-                    <a style="text-decoration: line-through red;" href="#" class="footer__link"><?= get_static_content('privacy_policy') ?></a>
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('loyalty-program')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('loyalty_program') ?></a>
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('privacy-policy')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('privacy_policy') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('vacancy')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('vacancy') ?></a>
                 </nav>
             </div>
