@@ -189,24 +189,47 @@
                                     $variations = $woo_product->get_available_variations(); ?>
 
                                     <div class="select-subscription-duration">
-                                        <div class="select-subscription-duration__selected input"><?= $variations[0]['attributes']['attribute_duration'] . ' months' ?></div>
-                                        <div class="select-subscription-duration__list">
-                                        <? foreach ($variations as $variation) : ?>
-                                                <?
-                                                // error_log('<div>next variation: ' . '</div><br><br>');
-                                                // error_log(print_r($variation, true));
-
-                                                // echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
-                                                // echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
-                                                ?>
-                                            <div class="select-subscription-duration__option">
-                                                <?= $variation['attributes']['attribute_duration'] . ' months' ?>
+                                        <div class="select-subscription-duration__selected">
+                                            <div class="select-subscription-duration__selected__title">
+                                                - Select duration -
                                             </div>
-                                        <? endforeach; ?>
+                                            <div class="select-subscription-duration__selected__icon">
+                                                <svg>
+                                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-angle-rounded"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="select-subscription-duration__list" style="display:none;">
+                                            <? foreach ($variations as $variation) : ?>
+                                                    <?
+                                                    error_log('<div>next variation: ' . '</div><br><br>');
+                                                    error_log(print_r($variation, true));
+
+                                                    // echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
+                                                    // echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
+                                                    ?>
+                                                <div
+                                                    class="select-subscription-duration__option"
+                                                    data-variation-id="<?= $variation['variation_id'] ?>"
+                                                    data-regular-price="<?= $variation['display_regular_price'] ?>"
+                                                    data-price="<?= $variation['display_price'] ?>"
+                                                >
+                                                    <?= $variation['attributes']['attribute_duration'] . ' months' ?>
+                                                </div>
+                                            <? endforeach; ?>
                                         </div>
                                     </div>
                                 <? endif; ?>
                         </article>
+                        <? if ($isDetailedProductPage) : ?>
+                            <? if ($isVariable) : ?>
+                                <div class="product-detail__product-price">
+                                    <span class="product-detail__product-price__regular">1234</span>
+                                    <span class="product-detail__product-price__discount">2345</span>
+                                </div>
+                            <? endif; ?>
+                            <?= $variations[0]['price_html'] ?>
+                        <? endif; ?>
                         <div class="buttons">
                             <? if ($isDetailedProductPage) : ?>
                                 <div class="quantity_panel">

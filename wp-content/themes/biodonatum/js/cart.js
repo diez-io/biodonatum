@@ -145,6 +145,19 @@ jQuery(function ($) {
         });
     });
 
+    $('.select-subscription-duration__selected').on('click', function(e) {
+        e.stopPropagation();
+        $(this).siblings('.select-subscription-duration__list').toggle();
+    });
+
+    $('body').on('click', function(e) {
+        //e.stopPropagation();
+
+        if (!$(e.target).hasClass('select-subscription-duration') && $(e.target).parents('.select-subscription-duration').length === 0) {
+            $('.select-subscription-duration__list').hide();
+        }
+    });
+
     // remove item from cart
     $('.cart__table--del').on('click', function (e) {
         const $button = $(this);

@@ -1,0 +1,59 @@
+.select-subscription-duration {
+    position: relative;
+}
+
+.select-subscription-duration__selected {
+    display: flex;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+    color: #242424;
+    background-color: #f9f9f9;
+    border: 1px solid #F1F1F1;
+    border-radius: 10px;
+    -webkit-transition: 0.2s linear;
+    transition: 0.2s linear;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.select-subscription-duration__list {
+    position: absolute;
+
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #242424;
+    background-color: #f9f9f9;
+    border: 1px solid #F1F1F1;
+    border-radius: 10px;
+    -webkit-transition: 0.2s linear;
+    transition: 0.2s linear;
+    width: 100%;
+    z-index: 3;
+    margin-top: 10px;
+}
+
+.select-subscription-duration__option {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.select-subscription-duration__option:not(.select-subscription-duration__option__active) {
+    cursor: pointer;
+}
+
+.select-subscription-duration__option:hover {
+    background-color: #eeeeee;
+}
+
+.select-subscription-duration__option__active {
+    background-color: #dedede;
+}
+
+.select-subscription-duration__selected__icon svg {
+    width: 1em;
+    height: 1em;
+}
