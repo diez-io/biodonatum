@@ -4,9 +4,9 @@
 	gap: 30px;
 
 	&__link {
-		@include text-big($c-text);
 		transition: 0.2s linear;
-
+		font-size: 16px;
+		line-height: 19.5px;
 		&:hover {
 			color: $azure;
 		}

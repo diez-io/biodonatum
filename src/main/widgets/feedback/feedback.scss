@@ -143,6 +143,7 @@
 		padding: 40px;
 		background-color: $white;
 		border-radius: 20px;
+		height: 100%;
 		@include r($mobile) {
 			width: 100%;
 			padding: 20px;

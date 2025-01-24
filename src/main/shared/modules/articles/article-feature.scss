@@ -11,4 +11,17 @@
 		line-height: 120%;
 		font-weight: $semi-bold;
 	}
+
+	picture {
+		@include r($ultramobile) {
+			width: 60px;
+			height: 60px;
+		}
+	}
+	p {
+		@include r($ultramobile) {
+			font-size: 12px;
+			line-height: 16.8px;
+		}
+	}
 }

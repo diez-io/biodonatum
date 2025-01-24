@@ -1,4 +1,5 @@
 class Dropdown {
+
     el;
     triggerElements;
 
@@ -17,7 +18,8 @@ class Dropdown {
 
     toggle(e:Event) {
         (e.currentTarget as HTMLElement).classList.toggle('active');
+
     }
 }
 
-export default Dropdown
+export default Dropdown;

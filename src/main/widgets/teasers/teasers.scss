@@ -8,3 +8,8 @@
 		gap: 16px;
 	}
 }
+.section--teasers {
+	@include r($ultramobile) {
+		padding: 40px 0;
+	}
+}

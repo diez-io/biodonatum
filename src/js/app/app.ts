@@ -32,7 +32,7 @@ class App {
     }
 
     createLoadMore = () => {
-        const loadMoreBtns:NodeListOf<HTMLElement> = document.querySelectorAll('.load-more-btn');
+        const loadMoreBtns: NodeListOf<HTMLElement> = document.querySelectorAll('.load-more-btn');
 
         loadMoreBtns && loadMoreBtns.forEach(element => {
             new LoadMore(element);
