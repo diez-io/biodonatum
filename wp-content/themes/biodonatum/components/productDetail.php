@@ -183,10 +183,16 @@
                             <p class="text--semi-bold"><?= get_field($post_type_prefix . 'weight', $advanced_product_id) ?></p>
                             <p class="text--semi-bold"><?= get_field($post_type_prefix . 'donation', $advanced_product_id) ?></p>
                             <!--p class="title--extra-small">Buy <span class="text--blue">1 pack now</span></p-->
-                            <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
+                            <? if(!$isDetailedProductPage) : ?>
+                                <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
+                            <? endif; ?>
                             <?
                                 if ($isVariable) :
                                     $variations = $woo_product->get_available_variations(); ?>
+
+                                    <div class="select-subscription-duration__label">
+                                        На какой срок нужна подписка?
+                                    </div>
 
                                     <div class="select-subscription-duration">
                                         <div class="select-subscription-duration__selected">
@@ -202,8 +208,8 @@
                                         <div class="select-subscription-duration__list" style="display:none;">
                                             <? foreach ($variations as $variation) : ?>
                                                     <?
-                                                    error_log('<div>next variation: ' . '</div><br><br>');
-                                                    error_log(print_r($variation, true));
+                                                    // error_log('<div>next variation: ' . '</div><br><br>');
+                                                    // error_log(print_r($variation, true));
 
                                                     // echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
                                                     // echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
@@ -211,8 +217,7 @@
                                                 <div
                                                     class="select-subscription-duration__option"
                                                     data-variation-id="<?= $variation['variation_id'] ?>"
-                                                    data-regular-price="<?= $variation['display_regular_price'] ?>"
-                                                    data-price="<?= $variation['display_price'] ?>"
+                                                    data-price="<?= htmlspecialchars($variation['price_html'], ENT_QUOTES, 'UTF-8') ?>"
                                                 >
                                                     <?= $variation['attributes']['attribute_duration'] . ' months' ?>
                                                 </div>
@@ -223,12 +228,10 @@
                         </article>
                         <? if ($isDetailedProductPage) : ?>
                             <? if ($isVariable) : ?>
-                                <div class="product-detail__product-price">
-                                    <span class="product-detail__product-price__regular">1234</span>
-                                    <span class="product-detail__product-price__discount">2345</span>
+                                <div class="product-detail__product-price" style="display:none;">
+                                    <?= $variations[0]['price_html'] ?>
                                 </div>
                             <? endif; ?>
-                            <?= $variations[0]['price_html'] ?>
                         <? endif; ?>
                         <div class="buttons">
                             <? if ($isDetailedProductPage) : ?>

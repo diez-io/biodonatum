@@ -124,7 +124,13 @@ jQuery(function ($) {
     // add to cart
     $('.add-to-cart-button').on('click', function (e) {
         e.preventDefault();
-        const productId = jQuery(this).data('product-id');
+
+        if ($(this).hasClass('subscription-add-to-cart-button')) {
+            var productId = $('.select-subscription-duration__option__active').data('variationId');
+        }
+        else {
+            var productId = jQuery(this).data('product-id');
+        }
 
         $.ajax({
             url: wc_add_to_cart_params.ajax_url,
@@ -156,6 +162,17 @@ jQuery(function ($) {
         if (!$(e.target).hasClass('select-subscription-duration') && $(e.target).parents('.select-subscription-duration').length === 0) {
             $('.select-subscription-duration__list').hide();
         }
+    });
+
+    $('.select-subscription-duration__option').on('click', function(e) {
+        $('.select-subscription-duration__list').hide();
+        $('.select-subscription-duration__option__active').removeClass('select-subscription-duration__option__active');
+        $(this).addClass('select-subscription-duration__option__active');
+        $('.select-subscription-duration__selected__title').text($(this).text());
+
+        const $price = $('.product-detail__product-price');
+        $price.show();
+        $price.html($(this).data('price'));
     });
 
     // remove item from cart

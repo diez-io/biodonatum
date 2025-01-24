@@ -57,3 +57,29 @@
     width: 1em;
     height: 1em;
 }
+
+.product-detail__product-price .price {
+    flex-direction: row;
+}
+
+.product-detail__product-price .price del span {
+    color: #E5E5E5;
+}
+
+.product-detail__product-price .price ins span {
+    text-decoration: none;
+    color: #27AAE2;
+}
+
+.product-detail__product-price .price span {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+}
+
+.select-subscription-duration__label {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 38px;
+    margin: 30px 0 10px 0;
+}
