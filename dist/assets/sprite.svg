@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>
     .sprite-symbol-usage {display: none;}
     .sprite-symbol-usage:target {display: inline;}
-  </style><symbol viewBox="0 0 13 8" id="icon-angle-rounded">
-<path fill="currentColor" d="M12 1.5L6.5 6.5L1 1.5" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </style><symbol viewBox="0 0 448 512" id="icon-angle-rounded">
+<path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
 </symbol><symbol viewBox="0 0 24 22" fill="none" id="icon-cart">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0167503 0.686743C0.109257 0.224209 0.559206 -0.0757564 1.02174 0.0167503L2.21672 0.255746C3.56644 0.525691 4.58167 1.64532 4.71863 3.01494L4.81572 3.98585H20.275C22.5346 3.98585 24.1926 6.10936 23.6446 8.30148L22.366 13.4157C21.8765 15.3737 20.2331 16.8006 18.2705 17.0446C18.2539 17.0435 18.2372 17.043 18.2203 17.043H12.5265C12.4431 17.043 12.3629 17.0566 12.288 17.0817H7.42989C5.84466 17.0817 4.50945 15.8971 4.32058 14.3232L3.19379 4.93331L3.01895 3.18491C2.9567 2.56235 2.49523 2.05343 1.88172 1.93073L0.686743 1.69173C0.224209 1.59923 -0.0757564 1.14928 0.0167503 0.686743Z" fill="#27AAE2" />
 <circle cx="8.256" cy="20.213" r="1.70815" fill="#27AAE2" />
