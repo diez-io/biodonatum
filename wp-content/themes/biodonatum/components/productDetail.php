@@ -191,13 +191,13 @@
                                     $variations = $woo_product->get_available_variations(); ?>
 
                                     <div class="select-subscription-duration__label">
-                                        На какой срок нужна подписка?
+                                        <?= get_static_content('how_long_subscription') ?>
                                     </div>
 
                                     <div class="select-subscription-duration">
                                         <div class="select-subscription-duration__selected">
                                             <div class="select-subscription-duration__selected__title">
-                                                - Select duration -
+                                                - <?= get_static_content('select_duration') ?> -
                                             </div>
                                             <div class="select-subscription-duration__selected__icon">
                                                 <svg>
@@ -212,7 +212,7 @@
                                                     data-variation-id="<?= $variation['variation_id'] ?>"
                                                     data-price="<?= htmlspecialchars($variation['price_html'], ENT_QUOTES, 'UTF-8') ?>"
                                                 >
-                                                    <?= $variation['attributes']['attribute_duration'] . ' months' ?>
+                                                    <?= get_static_content('months_' . $variation['attributes']['attribute_duration']) ?>
                                                 </div>
                                             <? endforeach; ?>
                                         </div>
