@@ -1,24 +1,22 @@
 class Dropdown {
     el;
-    triggerElement;
+    triggerElements;
 
     constructor(el: Element) {
+        console.log('dropdown constructor');
+
         this.el = el;
-        this.triggerElement = this.el.querySelector('[data-dropdown-trigger]');
+        this.triggerElements = this.el.querySelectorAll('[data-dropdown-trigger]');
 
         this.init()
     }
 
     init() {
-        this.triggerElement.addEventListener('click', this.toggle.bind(this))
+        this.triggerElements.forEach(element => element.addEventListener('click', this.toggle));
     }
 
-    toggle() {
-        if (this.el.classList.contains('active')) {
-            this.el.classList.remove('active')
-        } else {
-            this.el.classList.add('active')
-        }
+    toggle(e:Event) {
+        (e.currentTarget as HTMLElement).classList.toggle('active');
     }
 }
 

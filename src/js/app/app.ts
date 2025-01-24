@@ -20,6 +20,7 @@ class App {
         this.createMobileMenu()
         this.createLoadMore();
         this.createPopup();
+        this.createDropdown();
     }
 
     createPopup = () => {
@@ -90,6 +91,8 @@ class App {
 
 
     createDropdown = () => {
+        console.log('create dropdown');
+
         const dropdown = document.querySelectorAll('[data-dropdown]')
         if (!dropdown) return
         dropdown.forEach(el => {

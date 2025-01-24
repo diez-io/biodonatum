@@ -19,3 +19,6 @@ import './icon-checkbox-checked.svg';
 import './icon-checkbox.svg';
 import './icon-upload.svg';
 import './icon-filter.svg';
+import './icon-trash-can.svg';
+import './icon-x.svg';
+import './icon-success.svg';
