@@ -207,13 +207,6 @@
                                         </div>
                                         <div class="select-subscription-duration__list" style="display:none;">
                                             <? foreach ($variations as $variation) : ?>
-                                                    <?
-                                                    // error_log('<div>next variation: ' . '</div><br><br>');
-                                                    // error_log(print_r($variation, true));
-
-                                                    // echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
-                                                    // echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
-                                                    ?>
                                                 <div
                                                     class="select-subscription-duration__option"
                                                     data-variation-id="<?= $variation['variation_id'] ?>"
