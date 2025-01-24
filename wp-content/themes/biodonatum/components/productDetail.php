@@ -183,30 +183,49 @@
                             <p class="text--semi-bold"><?= get_field($post_type_prefix . 'weight', $advanced_product_id) ?></p>
                             <p class="text--semi-bold"><?= get_field($post_type_prefix . 'donation', $advanced_product_id) ?></p>
                             <!--p class="title--extra-small">Buy <span class="text--blue">1 pack now</span></p-->
-                            <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
+                            <? if(!$isDetailedProductPage) : ?>
+                                <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
+                            <? endif; ?>
                             <?
                                 if ($isVariable) :
                                     $variations = $woo_product->get_available_variations(); ?>
 
-                                    <div class="select-subscription-duration">
-                                        <div class="select-subscription-duration__selected input"><?= $variations[0]['attributes']['attribute_duration'] . ' months' ?></div>
-                                        <div class="select-subscription-duration__list">
-                                        <? foreach ($variations as $variation) : ?>
-                                                <?
-                                                // error_log('<div>next variation: ' . '</div><br><br>');
-                                                // error_log(print_r($variation, true));
+                                    <div class="select-subscription-duration__label">
+                                        <?= get_static_content('how_long_subscription') ?>
+                                    </div>
 
-                                                // echo '<div>next variation: ' . $variation['attributes']['attribute_duration'] . '</div>';
-                                                // echo $variation['display_regular_price'] . ' ' . $variation['display_price'];
-                                                ?>
-                                            <div class="select-subscription-duration__option">
-                                                <?= $variation['attributes']['attribute_duration'] . ' months' ?>
+                                    <div class="select-subscription-duration">
+                                        <div class="select-subscription-duration__selected">
+                                            <div class="select-subscription-duration__selected__title">
+                                                - <?= get_static_content('select_duration') ?> -
                                             </div>
-                                        <? endforeach; ?>
+                                            <div class="select-subscription-duration__selected__icon">
+                                                <svg>
+                                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-angle-rounded"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="select-subscription-duration__list" style="display:none;">
+                                            <? foreach ($variations as $variation) : ?>
+                                                <div
+                                                    class="select-subscription-duration__option"
+                                                    data-variation-id="<?= $variation['variation_id'] ?>"
+                                                    data-price="<?= htmlspecialchars($variation['price_html'], ENT_QUOTES, 'UTF-8') ?>"
+                                                >
+                                                    <?= get_static_content('months_' . $variation['attributes']['attribute_duration']) ?>
+                                                </div>
+                                            <? endforeach; ?>
                                         </div>
                                     </div>
                                 <? endif; ?>
                         </article>
+                        <? if ($isDetailedProductPage) : ?>
+                            <? if ($isVariable) : ?>
+                                <div class="product-detail__product-price" style="display:none;">
+                                    <?= $variations[0]['price_html'] ?>
+                                </div>
+                            <? endif; ?>
+                        <? endif; ?>
                         <div class="buttons">
                             <? if ($isDetailedProductPage) : ?>
                                 <div class="quantity_panel">
