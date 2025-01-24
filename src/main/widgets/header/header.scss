@@ -82,8 +82,22 @@
 	&__language {
 		position: relative;
 
+
 		span {
 			text-transform: uppercase;
+		}
+
+
+		.header__element {
+			text-transform: uppercase;
+		}
+
+		.menu {
+			z-index: 1;
+
+			button {
+				cursor: pointer;
+			}
 		}
 
 		&:hover .menu {

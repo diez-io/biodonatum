@@ -91,6 +91,8 @@ class App {
 
 
     createDropdown = () => {
+        console.log('create dropdown');
+
         const dropdown = document.querySelectorAll('[data-dropdown]')
         if (!dropdown) return
         dropdown.forEach(el => {
