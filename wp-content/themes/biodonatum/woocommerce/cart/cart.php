@@ -79,7 +79,7 @@ defined( 'ABSPATH' ) || exit; ?>
                                     $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
                                     ?>
                                     <tr data-cart_item_key="<?= $cart_item_key ?>">
-                                        <td>
+                                        <td class="cart__table__cell__product">
                                             <div class="cart__table--product">
                                                 <? $image = get_field($post_type_prefix . 'images', $advanced_product_id)[0][$post_type_prefix . 'images_item']; ?>
                                                 <picture>
@@ -97,7 +97,7 @@ defined( 'ABSPATH' ) || exit; ?>
                                                 <div class="quantity_panel--plus">+</div>
                                             </div>
                                         </td>
-                                        <td class="cart__table__cell__not-del">
+                                        <td class="cart__table__cell__not-del cart__table__cell__not-del__top-border">
                                             <div class="cart__table__header--mob"><?= get_static_content('price') ?></div>
                                             <div class="cart__table__cell--mob">
                                                 <?= WC()->cart->get_product_price( $_product ) ?>
@@ -109,7 +109,7 @@ defined( 'ABSPATH' ) || exit; ?>
                                                 <?= WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ) ?>
                                             </div>
                                         </td>
-                                        <td class="cart__table__cell__not-del">
+                                        <td class="cart__table__cell__not-del cart__table__cell__not-del__bottom-margin">
                                             <div class="cart__table__header--mob"><?= get_static_content('loyalty_program') ?></div>
                                             <div class="cart__table__cell--mob card-item__discount">
                                                 <?
