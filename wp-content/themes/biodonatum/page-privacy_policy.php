@@ -15,22 +15,27 @@
                         </div>
                         <div class="editor">
                             <p>
-                                <?= get_static_content('delivery_text_1') ?>
+                                <?= get_static_content('privacy_policy_text_1') ?>
                             </p>
+                            <h3 class="privacy_policy_subtitle">
+                                <?= get_static_content('personal_information') ?>
+                            </h3>
                             <p>
-                                <?= get_static_content('delivery_text_2') ?>
-                                <?= get_static_content('delivery_text_3') ?>
-                                <?= get_static_content('delivery_text_4') ?>
-                            </p>
-                            <p>
-                                <?= get_static_content('delivery_text_5') ?>
-                                <?= get_static_content('delivery_text_6') ?>
-                                <?= get_static_content('delivery_text_7') ?>
-                            </p>
-                            <p>
-                                <?= get_static_content('delivery_text_8') ?>
+                                <?= get_static_content('privacy_policy_text_2') ?>
                             </p>
                         </div>
+                        <? if (get_static_content('privacy_policy_file')) : ?>
+                            <a target="_blank" class="download-terms-link" href="<?= wp_get_attachment_url(get_static_content('privacy_policy_file')) ?>">
+                                <div class="download-terms-link__icon">
+                                    <svg>
+                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-pdf"></use>
+                                    </svg>
+                                </div>
+                                <div class="download-terms-link__text">
+                                    <?= get_static_content('download') . ' ' . get_static_content('privacy_policy') ?>
+                                </div>
+                            </a>
+                        <? endif; ?>
                     </div>
                 </section>
 

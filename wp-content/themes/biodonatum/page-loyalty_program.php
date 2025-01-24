@@ -15,20 +15,7 @@
                         </div>
                         <div class="editor">
                             <p>
-                                <?= get_static_content('delivery_text_1') ?>
-                            </p>
-                            <p>
-                                <?= get_static_content('delivery_text_2') ?>
-                                <?= get_static_content('delivery_text_3') ?>
-                                <?= get_static_content('delivery_text_4') ?>
-                            </p>
-                            <p>
-                                <?= get_static_content('delivery_text_5') ?>
-                                <?= get_static_content('delivery_text_6') ?>
-                                <?= get_static_content('delivery_text_7') ?>
-                            </p>
-                            <p>
-                                <?= get_static_content('delivery_text_8') ?>
+                                <?= get_static_content('loyalty_program_text') ?>
                             </p>
                         </div>
                     </div>

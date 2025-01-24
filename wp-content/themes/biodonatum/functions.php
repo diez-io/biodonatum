@@ -19,6 +19,7 @@ function theme_enqueue_assets() {
     wp_enqueue_style('my-theme-style', get_template_directory_uri() . '/css/main.css');
     wp_enqueue_style('my-theme-header', get_template_directory_uri() . '/css/header.css');
     wp_enqueue_style('my-theme-account', get_template_directory_uri() . '/css/account.css');
+    wp_enqueue_style('my-theme-common-styles', get_template_directory_uri() . '/css/common.css');
 
     // Enqueue JS
     wp_enqueue_script('my-theme-script', get_template_directory_uri() . '/js/bundle.js', array(), null, true); // true loads it in the footer

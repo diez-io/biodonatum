@@ -1,0 +1,32 @@
+.download-terms-link {
+	display: flex;
+	gap: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 28px;
+	align-items: center;
+	margin-top: 30px;
+	width: fit-content;
+}
+
+.download-terms-link svg {
+	width: 1.4em;
+	height: 1.4em;
+}
+
+.download-terms-link__icon {
+	display: flex;
+	align-items: center;
+}
+
+.download-terms-link__text {
+	color: #27AAE2;
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+
+.privacy_policy_subtitle {
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 30px;
+}
