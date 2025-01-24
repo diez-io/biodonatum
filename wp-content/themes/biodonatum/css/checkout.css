@@ -223,6 +223,7 @@ textarea::placeholder {
 	}
 	.checkout tfoot td {
 		padding-right: 20px;
+		text-align: right;
 	}
 
 	.checkout tfoot tr:last-child th,
