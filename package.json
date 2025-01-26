@@ -67,6 +67,7 @@
     "axios": "^1.7.7",
     "inputmask": "^5.0.9",
     "swiper": "^11.1.15",
-    "the-new-css-reset": "^1.11.2"
+    "the-new-css-reset": "^1.11.2",
+    "typed.js": "^2.1.0"
   }
 }

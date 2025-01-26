@@ -6,6 +6,7 @@ import Dropdown from "./dropdown";
 import MobileMenu from "./mobileMenu";
 import LoadMore from "./loadMore";
 import Popup from "./popup";
+import TypeAnimation from "./typeAnimation";
 
 
 class App {
@@ -21,6 +22,15 @@ class App {
         this.createLoadMore();
         this.createPopup();
         this.createDropdown();
+        this.createTypeAnimation();
+    }
+
+    createTypeAnimation = () => {
+        const elements = document.querySelectorAll('.type-animation');
+
+        elements && elements.forEach(element => {
+            new TypeAnimation(element);
+        });
     }
 
     createPopup = () => {

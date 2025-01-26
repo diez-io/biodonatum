@@ -195,16 +195,6 @@ form.submitting .wpcf7-spinner {
 	grid-column: 1/3;
 }
 
-.product-swiper-img {
-	aspect-ratio: 75/66;
-	object-fit: cover;
-	border-radius: 30px;
-}
-@media only screen and (max-width: 1199px) {
-	.product-swiper-img {
-		width: 100%;
-	}
-}
 @media only screen and (min-width: 1199px) {
 	.teasers-pagination-wrapper {
 		display: none;

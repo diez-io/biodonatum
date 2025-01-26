@@ -4,8 +4,6 @@ class Dropdown {
     triggerElements;
 
     constructor(el: Element) {
-        console.log('dropdown constructor');
-
         this.el = el;
         this.triggerElements = this.el.querySelectorAll('[data-dropdown-trigger]');
 
