@@ -186,8 +186,19 @@
 
 	.slider {
 		&__control {
-			width: calc(100% - 20px);
+			width: calc(100% - 30px);
 			z-index: 1;
+
+			@include rmin($mobile) {
+				width: calc(100% + 150px);
+				transition: width 0.5s cubic-bezier(0.39, 0.58, 0.57, 1);
+			}
+		}
+
+		&:hover .slider__control {
+			@include rmin($mobile) {
+				width: calc(100% - 30px);
+			}
 		}
 
 		&__btn {

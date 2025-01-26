@@ -73,7 +73,7 @@
 		}
 
 		&--disabled {
-			pointer-events: none;
+			visibility: hidden;
 		}
 
 		&--blue {
