@@ -193,6 +193,7 @@ class Slider {
             slidesPerView: 2.5,
             spaceBetween: 20,
             freeMode: true,
+            loop: true,
             pagination: {
                 el: this.pagination,
                 clickable: true,
