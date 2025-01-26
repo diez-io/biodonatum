@@ -1,3 +1,10 @@
-.slider--partners__wrapper {
-    position: relative;
+.slider--partners {
+    &__wrapper {
+        position: relative;
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+    }
 }
