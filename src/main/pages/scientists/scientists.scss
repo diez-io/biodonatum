@@ -1,55 +1,62 @@
 .scientists {
-    .head {
-        @include r($mobile) {
-            display: none;
-        }
-    }
+	.head {
+		@include r($mobile) {
+			display: none;
+		}
+	}
 
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
 
-    .swiper-pagination {
-        margin-top: 30px;
-        width: 100%;
-        justify-content: center;
+	.swiper-pagination {
+		margin-top: 30px;
+		width: 100%;
+		justify-content: center;
 
-        .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-        }
-    }
+		.swiper-pagination-bullet {
+			width: 12px;
+			height: 12px;
+		}
+	}
 
-    .slider {
-        position: relative;
+	.slider {
+		position: relative;
 
-        .swiper {
-            position: static;
+		.swiper {
+			position: static;
 
-            &-wrapper {
-                @include r($mobile) {
-                    flex-direction: column;
-                    gap: 30px;
-                }
+			&-wrapper {
+				@include r($mobile) {
+					flex-direction: column;
+					gap: 30px;
+				}
 
-                & > *:not(:nth-child(-n+4)) {
-                    @include r($mobile) {
-                        display: none;
-                    }
-                }
-            }
-        }
+				& > *:not(:nth-child(-n + 4)) {
+					@include r($mobile) {
+						display: none;
+					}
+				}
+			}
+		}
 
-        &__btn {
-            background-color: #27AAE2;
-        }
-    }
+		&__btn {
+			background-color: #27aae2;
+		}
+	}
 
-    &__load-more {
-        display: none;
+	&__load-more {
+		display: none;
 
-        @include r($mobile) {
-            display: flex;
-        }
-    }
+		@include r($mobile) {
+			display: flex;
+		}
+	}
+
+	.island {
+		@include r($ultramobile) {
+			font-size: 18px;
+			line-height: 34.2px;
+		}
+	}
 }

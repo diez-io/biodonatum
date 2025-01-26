@@ -6,7 +6,7 @@
 	height: auto;
 	overflow: hidden;
 
-	picture img{
+	picture img {
 		width: 100%;
 	}
 
@@ -20,11 +20,19 @@
 		@include r($mobile) {
 			padding: 20px;
 		}
+		@include r($ultramobile) {
+			gap: 10px;
+			padding: 20px 20px 30px 20px;
+		}
 
 		&-title {
 			font-size: 24px;
 			font-weight: 600;
 			line-height: 29.26px;
+			@include r($ultramobile) {
+				font-size: 20px;
+				line-height: 24.38px;
+			}
 		}
 
 		&-description {
@@ -33,10 +41,14 @@
 			line-height: 34px;
 			text-align: left;
 			color: #838383;
+			@include r($ultramobile) {
+				font-size: 16px;
+				line-height: 27.2px;
+			}
 		}
 
 		&-link {
-			color: #27AAE2;
+			color: #27aae2;
 			text-transform: uppercase;
 			display: flex;
 			gap: 20px;
@@ -56,7 +68,7 @@
 		}
 
 		&-timestamp {
-			color: #D3D3D3;
+			color: #d3d3d3;
 			font-size: 16px;
 			font-weight: 500;
 			line-height: 19.5px;

@@ -1,205 +1,209 @@
 .vacancy {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
 
-    @include r($mobile) {
-        gap: 30px;
-    }
+	@include r($mobile) {
+		gap: 30px;
+	}
 
-    &__cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
+	&__cards {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 30px;
 
-        @include r($mobile) {
-            grid-template-columns: 1fr;
-        }
+		@include r($mobile) {
+			grid-template-columns: 1fr;
+		}
 
-        svg {
-            width: 1.3em;
-            height: 1.3em;
-        }
+		svg {
+			width: 1.3em;
+			height: 1.3em;
+		}
 
-        .card {
-            &__text {
-                gap: 30px;
+		.card {
+			&__text {
+				gap: 30px;
 
-                @include r($mobile) {
-                    gap: 16px;
-                }
+				@include r($mobile) {
+					gap: 16px;
+				}
 
-                &-title {
-                    color: #27AAE2;
-                    font-size: 24px;
-                    font-weight: 600;
-                }
+				&-title {
+					color: #27aae2;
+					font-size: 24px;
+					font-weight: 600;
 
-                &-description {
-                    font-size: 14px;
-                    line-height: 22.4px;
+					@include r($ultramobile) {
+						gap: 16px;
+					}
+				}
 
-                    @include r($mobile) {
-                        font-size: 16px;
-                        line-height: 27.2px;
-                    }
+				&-description {
+					font-size: 14px;
+					line-height: 22.4px;
 
-                    h3 {
-                        color: #242424;
-                        margin-bottom: 15px;
-                        font-size: 18px;
+					@include r($mobile) {
+						font-size: 16px;
+						line-height: 27.2px;
+					}
 
-                        @include r($mobile) {
-                            font-size: 20px;
-                            margin-bottom: 10px;
-                        }
-                    }
-                }
+					h3 {
+						color: #242424;
+						margin-bottom: 15px;
+						font-size: 18px;
 
-                &-link {
-                    text-transform: none;
-                    color: inherit;
-                    font-size: 18px;
+						@include r($mobile) {
+							font-size: 20px;
+							margin-bottom: 10px;
+						}
+					}
+				}
 
-                    @include r($mobile) {
-                        font-size: 14px;
-                    }
-                }
-            }
-        }
+				&-link {
+					text-transform: none;
+					color: inherit;
+					font-size: 18px;
 
-        & > *:not(:nth-child(-n+4)) {
-            display: none;
-        }
+					@include r($mobile) {
+						font-size: 14px;
+					}
+				}
+			}
+		}
 
-        & > *:not(:nth-child(-n+2)) {
-            @include r($mobile) {
-                display: none;
-            }
-        }
-    }
+		& > *:not(:nth-child(-n + 4)) {
+			display: none;
+		}
 
-    &__links {
-        display: flex;
-        gap: 10px;
-        justify-content: space-between;
+		& > *:not(:nth-child(-n + 2)) {
+			@include r($mobile) {
+				display: none;
+			}
+		}
+	}
 
-        @include r($mobile) {
-            flex-direction: column;
-        }
-    }
+	&__links {
+		display: flex;
+		gap: 10px;
+		justify-content: space-between;
 
-    .load-more-btn {
-        align-self: center;
-        padding: 25px 30px;
+		@include r($mobile) {
+			flex-direction: column;
+		}
+	}
 
-        @include r($mobile) {
-            width: 100%;
-        }
-    }
+	.load-more-btn {
+		align-self: center;
+		padding: 25px 30px;
 
-    .editor p {
-        font-size: 20px;
-        line-height: 30px;
+		@include r($mobile) {
+			width: 100%;
+		}
+	}
 
-        @include r($mobile) {
-            font-size: 16px;
-            line-height: 24px;
-        }
-    }
+	.editor p {
+		font-size: 20px;
+		line-height: 30px;
 
-    &__section-wrapper {
-        position: relative;
+		@include r($mobile) {
+			font-size: 16px;
+			line-height: 24px;
+		}
+	}
 
-        .section--hero {
-            aspect-ratio: 186/70;
-            margin-top: 60px;
-            margin-bottom: 100px;
+	&__section-wrapper {
+		position: relative;
 
-            @include r($mobile) {
-                aspect-ratio: 327/217;
-                margin: 40px 20px -20px 20px;
-            }
-        }
+		.section--hero {
+			aspect-ratio: 186/70;
+			margin-top: 60px;
+			margin-bottom: 100px;
 
-        &__form {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -100px;
+			@include r($mobile) {
+				aspect-ratio: 327/217;
+				margin: 40px 20px -20px 20px;
+			}
+		}
 
-            @include r($mobile) {
-                position: static;
-            }
+		&__form {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: -100px;
 
-            svg {
-                width: 1.3em;
-                height: 1.3em;
-            }
+			@include r($mobile) {
+				position: static;
+			}
 
-            .form__content {
-                grid-template-columns: repeat(4, 1fr);
+			svg {
+				width: 1.3em;
+				height: 1.3em;
+			}
 
-                input {
-                    padding: 20px 20px;
-                }
+			.form__content {
+				grid-template-columns: repeat(4, 1fr);
 
-                button {
-                    width: 100%;
-                    grid-column: 4/5;
-                    grid-row: 1/2;
-                }
+				input {
+					padding: 20px 20px;
+				}
 
-                [data-agree-custom] {
-                    display: flex;
-                    gap: 20px;
-                    align-items: center;
-                    grid-column: 4/5;
-                    grid-row: 2/3;
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 20px;
+				button {
+					width: 100%;
+					grid-column: 4/5;
+					grid-row: 1/2;
+				}
 
-                    @include r($mobile) {
-                        gap: 15px;
-                        padding-top: 15px;
-                        padding-bottom: 15px;
-                    }
+				[data-agree-custom] {
+					display: flex;
+					gap: 20px;
+					align-items: center;
+					grid-column: 4/5;
+					grid-row: 2/3;
+					font-size: 14px;
+					font-weight: 500;
+					line-height: 20px;
 
-                    svg {
-                        flex-shrink: 0;
-                    }
+					@include r($mobile) {
+						gap: 15px;
+						padding-top: 15px;
+						padding-bottom: 15px;
+					}
 
-                    span {
-                        color: #27AAE2;
-                        text-decoration: underline;
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
-    }
+					svg {
+						flex-shrink: 0;
+					}
 
-    &__upload {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        grid-column: 1/4;
+					span {
+						color: #27aae2;
+						text-decoration: underline;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
 
-        @include r($mobile) {
-            gap: 15px;
-            padding-top: 15px;
-            padding-bottom: 15px;
-        }
+	&__upload {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		grid-column: 1/4;
 
-        &-text {
-            color: #27AAE2;
-            text-transform: uppercase;
-            flex-shrink: 0;
-        }
+		@include r($mobile) {
+			gap: 15px;
+			padding-top: 15px;
+			padding-bottom: 15px;
+		}
 
-        &-format {
-            color: #C0C0C0;
-        }
-    }
+		&-text {
+			color: #27aae2;
+			text-transform: uppercase;
+			flex-shrink: 0;
+		}
+
+		&-format {
+			color: #c0c0c0;
+		}
+	}
 }
