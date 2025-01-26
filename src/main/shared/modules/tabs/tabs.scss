@@ -25,19 +25,15 @@
 		font-size: 22px;
 		font-weight: $semi-bold;
 		color: #0174a5;
+		width: auto;
+		height: auto;
 
 		@include rmin($mobile) {
 			flex: 1;
-			width: auto;
-			height: auto;
 		}
 
 		transition: 0.2s linear;
 		cursor: pointer;
-
-		@include r($mobile) {
-			//flex-shrink: 0;
-		}
 
 		@include r($ultramobile) {
 			padding: 20.5px 10;
