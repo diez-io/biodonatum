@@ -9,7 +9,7 @@
 	@include r($mobile) {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: stretch;
 		gap: 20px;
 	}
 

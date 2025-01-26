@@ -4,10 +4,12 @@
 	gap: 40px;
 
 	&__header {
-		.swiper-wrapper {
-			display: flex;
-			align-items: center;
-			gap: 17.5px;
+		width: 100%;
+
+		@include rmin($mobile) {
+			.swiper-wrapper {
+				gap: 17.5px;
+			}
 		}
 	}
 
@@ -16,27 +18,29 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		text-align: center;
 		background-color: $white;
-		padding: 28px 0;
+		padding: 28px 15px;
 		border-radius: 100px;
-		min-width: 300px;
-		max-width: 300px;
 		font-size: 22px;
 		font-weight: $semi-bold;
-		text-align: center;
 		color: #0174a5;
+
+		@include rmin($mobile) {
+			flex: 1;
+			width: auto;
+			height: auto;
+		}
 
 		transition: 0.2s linear;
 		cursor: pointer;
 
 		@include r($mobile) {
-			flex-shrink: 0;
+			//flex-shrink: 0;
 		}
 
 		@include r($ultramobile) {
-			padding: 20.5px 0;
-			min-width: 220px;
-			max-width: 220px;
+			padding: 20.5px 10;
 			font-size: 16px;
 			line-height: 19.2px;
 		}

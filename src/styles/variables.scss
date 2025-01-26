@@ -34,6 +34,8 @@ $mobile: 1199;
 
 $ultramobile: 568;
 
+$max-container: 1610;
+
 // Миксины
 @mixin h1($color) {
 	font-size: 50px;

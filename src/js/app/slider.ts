@@ -1,9 +1,9 @@
 import Swiper from "swiper";
-import { Navigation, Pagination, Thumbs } from "swiper/modules";
+import { Navigation, Pagination, Thumbs, FreeMode } from "swiper/modules";
 import { SlidesPerViewType } from "../helpers/types";
 
 class Slider {
-    el;
+    el: HTMLElement;
     sliderType: string;
     slidesCount: SlidesPerViewType;
     buttonPrev: HTMLElement;
@@ -13,7 +13,7 @@ class Slider {
     media;
     sliderInitialized: boolean;
 
-    constructor(el: Element) {
+    constructor(el: HTMLElement) {
         this.el = el;
         this.sliderType = this.el.getAttribute('data-slider');
         this.slidesCount = parseInt(this.el.getAttribute('data-slides'));
@@ -70,15 +70,27 @@ class Slider {
     }
 
     initTabsSlider() {
-        const slider: HTMLElement = this.el.querySelector('.swiper');
-        new Swiper(slider, {
-            modules: [Navigation, Pagination],
+        //const slider: HTMLElement = this.el.querySelector('.swiper');
+
+        new Swiper(this.el, {
+            modules: [Navigation, Pagination, FreeMode],
             slidesPerView: 1.5,
-            spaceBetween: 20,
+            spaceBetween: 17.5,
+            freeMode: true,
+            pagination: {
+                el: this.pagination,
+                clickable: true,
+            },
             breakpoints: {
-                1199: {
+                700: {
                     slidesPerView: 2,
-                }
+                },
+                800: {
+                    slidesPerView: 2.5,
+                },
+                900: {
+                    slidesPerView: 3,
+                },
             }
         });
         this.sliderInitialized = true;
@@ -150,16 +162,26 @@ class Slider {
     initDetailTeasersSlider() {
         const slider: HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
-            modules: [Pagination],
+            modules: [Pagination, FreeMode],
             slidesPerView: 2.5,
+            freeMode: true,
             pagination: {
                 el: this.pagination,
                 clickable: true,
             },
             breakpoints: {
+                400: {
+                    slidesPerView: 3,
+                },
+                700: {
+                    slidesPerView: 3.5,
+                },
+                800: {
+                    slidesPerView: 4,
+                },
                 1199: {
-                    slidesPerView: this.slidesCount ? this.slidesCount : 1,
-                }
+                    slidesPerView: this.slidesCount ?? 1,
+                },
             }
         })
     }
@@ -167,8 +189,10 @@ class Slider {
     initPartnersSlider() {
         const slider: HTMLElement = this.el.querySelector('.swiper');
         new Swiper(slider, {
-            modules: [Navigation, Pagination],
+            modules: [Navigation, Pagination, FreeMode],
             slidesPerView: 2.5,
+            spaceBetween: 20,
+            freeMode: true,
             pagination: {
                 el: this.pagination,
                 clickable: true,
@@ -179,9 +203,18 @@ class Slider {
                 disabledClass: 'slider__btn--disabled'
             },
             breakpoints: {
+                700: {
+                    slidesPerView: 3,
+                },
+                800: {
+                    slidesPerView: 3.5,
+                },
+                900: {
+                    slidesPerView: 4,
+                },
                 1199: {
-                    slidesPerView: this.slidesCount ? this.slidesCount : 1,
-                }
+                    slidesPerView: 6,
+                },
             }
         }
         )

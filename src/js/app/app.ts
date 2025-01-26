@@ -43,7 +43,7 @@ class App {
         const sliders = document.querySelectorAll('[data-slider]')
         if (!sliders) return
         sliders.forEach(slider => {
-            new Slider(slider)
+            new Slider(slider as HTMLElement)
         })
     }
 
