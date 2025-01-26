@@ -498,26 +498,83 @@ function get_static_content($slug) {
 
     $post_id = $wpdb->get_var($query); // Get the first matching post ID
 
+    // if ($post_id) {
+    //     // Retrieve the ACF field value
+    //     //$content = get_field($meta_key, $post_id); // ACF function to get the field
+    //     $content = $wpdb->get_var(
+    //         $wpdb->prepare(
+    //             "SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key = %s",
+    //             $post_id,
+    //             $meta_key
+    //         )
+    //     );
+
+    //     if ($content) {
+    //         set_transient($transient_key, $content, HOUR_IN_SECONDS); // Cache the content
+    //         return $content;
+    //     }
+    //     // else {
+    //     //     global $translation_array;
+    //     //     $translation_array[$slug] = null;
+    //     //     return $slug;
+    //     // }
+    // }
+
     if ($post_id) {
-        // Retrieve the ACF field value
-        //$content = get_field($meta_key, $post_id); // ACF function to get the field
-        $content = $wpdb->get_var(
+        // Fetch both the raw field value and the field key in one query
+        $results = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key = %s",
+                "
+                SELECT meta_key, meta_value
+                FROM {$wpdb->postmeta}
+                WHERE post_id = %d AND meta_key IN (%s, %s)
+                ",
                 $post_id,
-                $meta_key
-            )
+                $meta_key,
+                "_{$meta_key}" // Field key meta
+            ),
+            OBJECT_K
         );
 
-        if ($content) {
-            set_transient($transient_key, $content, HOUR_IN_SECONDS); // Cache the content
-            return $content;
+        if (!empty($results) && isset($results[$meta_key]) && isset($results["_{$meta_key}"])) {
+            $content = $results[$meta_key]->meta_value;
+            $field_key = $results["_{$meta_key}"]->meta_value;
+
+            // Retrieve field settings using the field key
+            $field_settings_serialized = $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT post_content FROM {$wpdb->posts} WHERE post_name = %s AND post_type = 'acf-field'",
+                    $field_key
+                )
+            );
+
+            if ($field_settings_serialized) {
+                $field_settings = maybe_unserialize($field_settings_serialized);
+
+                if ($slug === 'loyalty_program_text') {
+                    error_log(print_r($field_settings, true));
+                }
+
+                if (isset($field_settings['new_lines'])) {
+                    switch ($field_settings['new_lines']) {
+                        case 'wpautop': // Automatically add <p> tags
+                            $content = wpautop($content);
+                            break;
+                        case 'br': // Automatically add <br> tags
+                            $content = nl2br($content);
+                            break;
+                        case 'none': // No formatting
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            if ($content) {
+                set_transient($transient_key, $content, HOUR_IN_SECONDS); // Cache the content
+                return $content;
+            }
         }
-        // else {
-        //     global $translation_array;
-        //     $translation_array[$slug] = null;
-        //     return $slug;
-        // }
     }
 
     return ''; // Return empty if no matching post is found

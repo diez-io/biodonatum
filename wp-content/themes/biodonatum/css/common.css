@@ -30,3 +30,11 @@
 	font-weight: 700;
 	line-height: 30px;
 }
+
+.menu__item {
+	cursor: pointer;
+}
+
+.product-detail .buttons__add-to-cart {
+	flex-direction: row;
+}

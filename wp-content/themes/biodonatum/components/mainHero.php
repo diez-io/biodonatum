@@ -9,7 +9,7 @@
                     <p class="text">
                         <?= get_static_content('main_hero_text') ?>
                     </p>
-                    <a href="#" class="button"><?= get_static_content('buy_now') ?></a>
+                    <a href="#product-detail__header" class="button"><?= get_static_content('buy_now') ?></a>
                     <div class="main-hero__circle container">
                     </div>
                     <div class="main-hero__circle__content">

@@ -163,8 +163,13 @@
                     </div>
                 </div>
                 <div class="product-detail__right">
-                    <div class="product-detail__header">
+                    <div class="product-detail__header" id="product-detail__header">
                         <h2 class="title"><?= get_field($post_type_prefix . 'name', $advanced_product_id) ?></h2>
+                        <? if ($isDetailedProductPage) : ?>
+                            <div class="product-detail__product-amount">
+                                <?= $woo_product->get_price_html() ?>
+                            </div>
+                        <? endif; ?>
                         <p><?= get_field($post_type_prefix . 'short_description', $advanced_product_id) ?></p>
                     </div>
 
@@ -184,7 +189,14 @@
                             <p class="text--semi-bold"><?= get_field($post_type_prefix . 'donation', $advanced_product_id) ?></p>
                             <!--p class="title--extra-small">Buy <span class="text--blue">1 pack now</span></p-->
                             <? if(!$isDetailedProductPage) : ?>
-                                <p class="title--extra-small"><?= get_field($post_type_prefix . 'call_to_action', $advanced_product_id) ?></span></p>
+                                <div class="type-animation">
+                                    <div class="type-animation__strings">
+                                        <p class="title--extra-small"><?= get_static_content('call_to_action_1') ?></p>
+                                        <p class="title--extra-small"><span class="text--blue"><?= get_static_content('call_to_action_2') ?></span></p>
+                                        <p class="title--extra-small"><span class="text--red"><?= get_static_content('call_to_action_3') ?></span></p>
+                                    </div>
+                                    <p class="title--extra-small"><?= get_static_content('call_to_action') ?> <span class="type-animation__typed"></span></p>
+                                </div>
                             <? endif; ?>
                             <?
                                 if ($isVariable) :
@@ -219,19 +231,17 @@
                                     </div>
                                 <? endif; ?>
                         </article>
-                        <? if ($isDetailedProductPage) : ?>
-                            <? if ($isVariable) : ?>
-                                <div class="product-detail__product-price" style="display:none;">
-                                    <?= $variations[0]['price_html'] ?>
-                                </div>
-                            <? endif; ?>
+                        <? if ($isDetailedProductPage && $isVariable) : ?>
+                            <div class="product-detail__product-price" style="display:none;">
+                                <?= $variations[0]['price_html'] ?>
+                            </div>
                         <? endif; ?>
-                        <div class="buttons">
+                        <div class="buttons<?= $isDetailedProductPage ? ' buttons__add-to-cart' : '' ?>">
                             <? if ($isDetailedProductPage) : ?>
                                 <div class="quantity_panel">
-                                    <div class="quantity_panel--minus">-</div>
+                                    <div class="quantity_panel--minus noselect">-</div>
                                     <input type="text" value="1">
-                                    <div class="quantity_panel--plus">+</div>
+                                    <div class="quantity_panel--plus noselect">+</div>
                                 </div>
                                 <button class="button add-to-cart-button<?= $isVariable ? ' subscription-add-to-cart-button' : '' ?>" type="submit" data-product-id="<?= $product_id ?>"><?= get_static_content('add_to_cart') ?></button>
                                 <!--button class="button button--green add-to-cart-button" data-product-id="<?= $product_id ?>"><?= get_static_content('buy_subscription') ?></button-->
@@ -243,14 +253,18 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs" data-tabs="" data-slider="tabs">
-                <div class="swiper tabs__header">
+            <div class="tabs" data-tabs="">
+                <div class="swiper tabs__header" data-slider="tabs">
                     <div class="swiper-wrapper">
                         <button class="swiper-slide tabs__head active" data-tabs-head="1"><?= get_field($post_type_prefix . 'detailed_description_name', $advanced_product_id) ?></button>
                         <button class="swiper-slide tabs__head" data-tabs-head="2"><?= get_field($post_type_prefix . 'detailed_functions_name', $advanced_product_id) ?></button>
                         <button class="swiper-slide tabs__head" data-tabs-head="3"><?= get_field($post_type_prefix . 'detailed_instructions_name', $advanced_product_id) ?></button>
                         <button class="swiper-slide tabs__head" data-tabs-head="4"><?= get_field($post_type_prefix . 'detailed_composition_name', $advanced_product_id) ?></button>
                         <button class="swiper-slide tabs__head" data-tabs-head="5"><?= get_field($post_type_prefix . 'detailed_calorie_name', $advanced_product_id) ?></button>
+                    </div>
+                    <div class="teasers-pagination-wrapper">
+                        <div><?= get_static_content('swipe_left_right') ?></div>
+                        <div class="swiper-pagination desktop-hidden"></div>
                     </div>
                 </div>
                 <div class="tabs__body">

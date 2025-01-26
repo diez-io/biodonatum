@@ -66,12 +66,14 @@
     color: #E5E5E5;
 }
 
-.product-detail__product-price .price ins span {
+.product-detail__product-price .price ins span,
+.product-detail__product-amount {
     text-decoration: none;
     color: #27AAE2;
 }
 
-.product-detail__product-price .price span {
+.product-detail__product-price .price span,
+.product-detail__product-amount {
     font-size: 32px;
     font-weight: 600;
     line-height: 48px;
