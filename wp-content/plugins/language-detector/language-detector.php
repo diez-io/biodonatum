@@ -474,7 +474,7 @@ function get_static_content($slug) {
     // Check if the content is cached
     $cached_content = get_transient($transient_key);
     if ($cached_content !== false) {
-        return $cached_content; // Return cached content
+        //return $cached_content; // Return cached content
     }
 
     // Define the taxonomy and meta keys

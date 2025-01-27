@@ -53,6 +53,7 @@
 .cart table td {
 	padding: 13px 8px 13px 0;
 	vertical-align: middle;
+    line-height: 25px;
 }
 
 .cart__table--product {
@@ -229,7 +230,8 @@
 			gap: 15px;
 			align-items: center;
 			font-size: 16px;
-			line-height: 0px;
+			line-height: 19px;
+			flex-wrap: wrap;
 
 			input {
 				display: none !important;
@@ -372,4 +374,17 @@
     .cart__table__header--mob {
         display: none !important;
     }
+}
+
+.cart__table--product div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px !important;
+}
+
+.cart__table__variation {
+    padding: 5px 10px;
+    background-color: #edf9ff;
+    border-radius: 5px;
+    color: #27AAE2;
 }

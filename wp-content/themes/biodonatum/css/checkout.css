@@ -122,7 +122,7 @@ textarea::placeholder {
 	margin-top: 30px;
 }
 
-.checkout .woocommerce-checkout-payment button {
+.checkout .woocommerce-checkout-payment button[name="woocommerce_checkout_place_order"] {
 	margin-top: 30px;
 }
 

@@ -88,7 +88,9 @@ defined( 'ABSPATH' ) || exit; ?>
                                                 <div>
                                                     <?= get_field($post_type_prefix . 'name', $advanced_product_id) ?>
                                                     <? if ($_product->get_type() === 'variation') : ?>
-                                                        <?= '<br>x ' . get_static_content('months_' . $_product->get_attribute('duration')) ?>
+                                                        <div class="cart__table__variation">
+                                                            <?= get_static_content('months_' . $_product->get_attribute('duration')) ?>
+                                                        </div>
                                                     <? endif; ?>
                                                 </div>
                                             </div>
@@ -140,7 +142,7 @@ defined( 'ABSPATH' ) || exit; ?>
                     <div class="cart__promocode island">
                         <form>
                             <input class="input" type="text" name="coupon_code" placeholder="<?= get_static_content('promocode') ?>">
-                            <button class="button button--wide" type="submit"><?= get_static_content('apply_promocode') ?></button>
+                            <button class="button button--wide mtm-10" type="submit"><?= get_static_content('apply_promocode') ?></button>
                         </form>
                     </div>
                     <div class="cart__total island">
@@ -174,7 +176,7 @@ defined( 'ABSPATH' ) || exit; ?>
                             <div class="cart__total--title"><?= get_static_content('total') ?></div>
                             <div class="cart__total--total"><?= WC()->cart->get_cart_total() ?></div>
                         </div>
-                        <a href="<?= esc_url(wc_get_checkout_url()) ?>" class="button button--wide">
+                        <a href="<?= esc_url(wc_get_checkout_url()) ?>" class="button button--wide mt-20">
                             <?= get_static_content('validate_the_order') ?>
                         </a>
                     </div>
