@@ -20,7 +20,7 @@
 }
 
 .download-terms-link__text {
-	color: #27AAE2;
+	color: #27aae2;
 	text-decoration: underline;
 	text-transform: uppercase;
 }
@@ -39,6 +39,12 @@
 	flex-direction: row;
 }
 
+@media screen and (max-width: 768px) {
+	.product-detail .buttons__add-to-cart {
+		flex-direction: column;
+	}
+}
+
 .product-detail__calory-info {
 	display: flex;
 	flex-direction: column;
@@ -55,8 +61,8 @@
 
 .product-detail__calory-table th,
 .product-detail__calory-table td {
-    border: 1px solid #979797;
-    padding: 8px;
+	border: 1px solid #979797;
+	padding: 8px;
 }
 
 .product-detail__calory-table tr:nth-child(odd) {
