@@ -87,6 +87,9 @@ defined( 'ABSPATH' ) || exit; ?>
                                                 </picture>
                                                 <div>
                                                     <?= get_field($post_type_prefix . 'name', $advanced_product_id) ?>
+                                                    <? if ($_product->get_type() === 'variation') : ?>
+                                                        <?= '<br>x ' . get_static_content('months_' . $_product->get_attribute('duration')) ?>
+                                                    <? endif; ?>
                                                 </div>
                                             </div>
                                         </td>
