@@ -38,3 +38,27 @@
 .product-detail .buttons__add-to-cart {
 	flex-direction: row;
 }
+
+.product-detail__calory-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+}
+
+.product-detail__calory-table {
+	width: 100%;
+	max-width: 700px;
+	border-collapse: collapse;
+	border: 1px solid #979797;
+}
+
+.product-detail__calory-table th,
+.product-detail__calory-table td {
+    border: 1px solid #979797;
+    padding: 8px;
+}
+
+.product-detail__calory-table tr:nth-child(odd) {
+	background-color: #f2f2f2;
+}

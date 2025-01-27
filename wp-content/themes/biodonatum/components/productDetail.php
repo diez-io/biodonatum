@@ -186,7 +186,7 @@
                                 <? endforeach; ?>
                             </ul>
                             <p class="text--semi-bold"><?= get_field($post_type_prefix . 'weight', $advanced_product_id) ?></p>
-                            <p class="text--semi-bold"><?= get_field($post_type_prefix . 'donation', $advanced_product_id) ?></p>
+                            <p class="text--semi-bold"><?= get_static_content('product_donation') ?></p>
                             <!--p class="title--extra-small">Buy <span class="text--blue">1 pack now</span></p-->
                             <? if(!$isDetailedProductPage) : ?>
                                 <div class="type-animation">
@@ -256,11 +256,11 @@
             <div class="tabs" data-slider="tabs">
                 <div thumbsSlider="" class="swiper tabs__header">
                     <div class="swiper-wrapper">
-                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_description_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_functions_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_instructions_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_composition_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_calorie_name', $advanced_product_id) ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_static_content('product_detailed_description') ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_static_content('product_detailed_functions') ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_static_content('product_detailed_instructions') ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_static_content('product_detailed_composition') ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_static_content('product_detailed_calorie') ?></button>
                     </div>
                     <div class="teasers-pagination-wrapper">
                         <div><?= get_static_content('swipe_left_right') ?></div>
@@ -281,8 +281,24 @@
                         <div class="swiper-slide tabs__item">
                             <?= get_field($post_type_prefix . 'detailed_composition_content', $advanced_product_id) ?>
                         </div>
-                        <div class="swiper-slide tabs__item">
-                            <?= get_field($post_type_prefix . 'detailed_calorie_content', $advanced_product_id) ?>
+                        <div class="swiper-slide tabs__item product-detail__calory-info">
+                            <table class="product-detail__calory-table">
+                                <tbody>
+                                    <td colspan="2"><?= get_field($post_type_prefix . 'detailed_calorie_table_title', $advanced_product_id) ?></td>
+                                    <? $caloryTableRows = get_field($post_type_prefix . 'detailed_calorie_table', $advanced_product_id); ?>
+                                    <? foreach ($caloryTableRows as $row) : ?>
+                                        <tr>
+                                            <th>
+                                                <?= $row[$post_type_prefix . 'detailed_calorie_table_property'] ?>
+                                            </th>
+                                            <td>
+                                                <?= $row[$post_type_prefix . 'detailed_calorie_table_value'] ?>
+                                            </td>
+                                        </tr>
+                                    <? endforeach; ?>
+                                </tbody>
+                            </table>
+                            <p><?= get_field($post_type_prefix . 'detailed_calorie_table_under', $advanced_product_id) ?></p>
                         </div>
                     </div>
                 </div>
