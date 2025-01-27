@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
                 <span class="breadcrumbs__link"><?= get_static_content('checkout') ?></span>
             </div>
-            <div class="cart">
+            <div class="cart cart_checkout">
                 <div class="head">
                     <h2 class="title"><?= get_static_content('checkout') ?></h2>
                 </div>
@@ -80,7 +80,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
                                     ?>
                                     <tr data-cart_item_key="<?= $cart_item_key ?>">
-                                        <td>
+                                        <td class="cart__table__cell__product">
                                             <div class="cart__table--product">
                                                 <? $image = get_field($post_type_prefix . 'images', $advanced_product_id)[0][$post_type_prefix . 'images_item']; ?>
                                                 <picture>
@@ -88,6 +88,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                 </picture>
                                                 <div>
                                                     <?= get_field($post_type_prefix . 'name', $advanced_product_id) ?>
+                                                    <? if ($_product->get_type() === 'variation') : ?>
+                                                        <?= '<br>x ' . get_static_content('months_' . $_product->get_attribute('duration')) ?>
+                                                    <? endif; ?>
                                                 </div>
                                             </div>
                                         </td>
@@ -96,15 +99,28 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                 <?= $cart_item['quantity'] ?>
                                             </div>
                                         </td>
-                                        <td><?= WC()->cart->get_product_price( $_product ) ?></td>
-                                        <td class="card-item__subtotal"><?= WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ) ?></td>
-                                        <td class="card-item__discount">
-                                            <?
-                                                $line_subtotal = $cart_item['line_subtotal'];
-                                                $line_total = $cart_item['line_total'];
-                                                $discount = $line_total - $line_subtotal;
-                                            ?>
-                                            <?= wc_price($discount) ?>
+                                        <td class="cart__table__cell__not-del cart__table__cell__not-del__top-border">
+                                            <div class="cart__table__header--mob"><?= get_static_content('price') ?></div>
+                                            <div class="cart__table__cell--mob">
+                                                <?= WC()->cart->get_product_price( $_product ) ?>
+                                            </div>
+                                        </td>
+                                        <td class="cart__table__cell__not-del">
+                                            <div class="cart__table__header--mob"><?= get_static_content('subtotal') ?></div>
+                                            <div class="cart__table__cell--mob card-item__subtotal">
+                                                <?= WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ) ?>
+                                            </div>
+                                        </td>
+                                        <td class="cart__table__cell__not-del cart__table__cell__not-del__bottom-margin">
+                                            <div class="cart__table__header--mob"><?= get_static_content('loyalty_program') ?></div>
+                                            <div class="cart__table__cell--mob card-item__discount">
+                                                <?
+                                                    $line_subtotal = $cart_item['line_subtotal'];
+                                                    $line_total = $cart_item['line_total'];
+                                                    $discount = $line_total - $line_subtotal;
+                                                ?>
+                                                <?= wc_price($discount) ?>
+                                            </div>
                                         </td>
                                     </tr>
                                 <? endif; ?>

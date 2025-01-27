@@ -76,6 +76,13 @@
 	line-height: 10.26px;
 }
 
+@media screen and (max-width: 768px) {
+    .cart.cart_checkout .quantity_panel::before {
+        content: 'x';
+        margin-right: 5px;
+    }
+}
+
 .cart .quantity_panel--minus,
 .cart .quantity_panel--plus {
 	padding: 15px;
