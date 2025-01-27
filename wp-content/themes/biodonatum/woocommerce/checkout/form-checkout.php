@@ -123,40 +123,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                 ?>
 
+
+
                 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data" aria-label="<?php echo esc_attr__( 'Checkout', 'woocommerce' ); ?>">
+                    <div class="checkout__wrapper">
+                        <div class="island checkout__address">
+                            <?php if ( $checkout->get_checkout_fields() ) : ?>
 
-                    <div class="island checkout__address">
-                        <?php if ( $checkout->get_checkout_fields() ) : ?>
+                                <?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-                            <?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
+                                <div class="col2-set" id="customer_details">
+                                    <div class="col-1">
+                                        <?php do_action( 'woocommerce_checkout_billing' ); ?>
+                                    </div>
 
-                            <div class="col2-set" id="customer_details">
-                                <div class="col-1">
-                                    <?php do_action( 'woocommerce_checkout_billing' ); ?>
+                                    <div class="col-2">
+                                        <?php do_action( 'woocommerce_checkout_shipping' ); ?>
+                                    </div>
                                 </div>
 
-                                <div class="col-2">
-                                    <?php do_action( 'woocommerce_checkout_shipping' ); ?>
-                                </div>
-                            </div>
+                                <?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 
-                            <?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
-
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="checkout__order">
-                        <?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
-
-                        <?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
-
-                        <div id="order_review" class="woocommerce-checkout-review-order">
-                            <?php do_action( 'woocommerce_checkout_order_review' ); ?>
+                            <?php endif; ?>
                         </div>
 
-                        <?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
-                    </div>
+                        <div class="checkout__order">
+                            <?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
 
+                            <?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
+
+                            <div id="order_review" class="woocommerce-checkout-review-order">
+                                <?php do_action( 'woocommerce_checkout_order_review' ); ?>
+                            </div>
+
+                            <?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+                        </div>
+                    </div>
                 </form>
 
                 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
