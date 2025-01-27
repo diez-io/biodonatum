@@ -51,8 +51,9 @@
 
 	&__item {
 		padding: 40px;
-		border-radius: 18px;
+		border-radius: 20px;
 		background-color: $white;
+		font-size: 18px;
 
 		@include r($mobile) {
 			font-size: 16px;
