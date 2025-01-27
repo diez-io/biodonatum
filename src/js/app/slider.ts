@@ -49,7 +49,8 @@ class Slider {
                 this.initScientistsSlider();
                 break;
             case 'tabs':
-                this.initTabsSliderConditionally();
+                //this.initTabsSliderConditionally();
+                this.initTabsSlider();
                 break;
         }
     }
@@ -70,10 +71,11 @@ class Slider {
     }
 
     initTabsSlider() {
-        //const slider: HTMLElement = this.el.querySelector('.swiper');
+        const tabsBody: HTMLElement = this.el.querySelector('.tabs__body');
+        const tabsHeader: HTMLElement = this.el.querySelector('.tabs__header');
 
-        new Swiper(this.el, {
-            modules: [Navigation, Pagination, FreeMode],
+        const thumbsSlider = new Swiper(tabsHeader, {
+            modules: [Pagination, FreeMode],
             slidesPerView: 1.5,
             spaceBetween: 17.5,
             freeMode: true,
@@ -91,8 +93,31 @@ class Slider {
                 900: {
                     slidesPerView: 3,
                 },
+                1000: {
+                    slidesPerView: 3.5,
+                },
+                1100: {
+                    slidesPerView: 4,
+                },
+                1150: {
+                    slidesPerView: 4.5,
+                },
+                1199: {
+                    slidesPerView: 5,
+                },
             }
         });
+
+        new Swiper(tabsBody, {
+            modules: [Thumbs],
+            slidesPerView: 1,
+            autoHeight: true,
+            thumbs: {
+                slideThumbActiveClass: 'active',
+                swiper: thumbsSlider,
+            },
+        });
+
         this.sliderInitialized = true;
     }
 

@@ -5,12 +5,10 @@
 
 	&__header {
 		width: 100%;
+	}
 
-		@include rmin($mobile) {
-			.swiper-wrapper {
-				gap: 17.5px;
-			}
-		}
+	&__body {
+		width: 100%;
 	}
 
 	&__head {
@@ -22,7 +20,7 @@
 		background-color: $white;
 		padding: 28px 15px;
 		border-radius: 100px;
-		font-size: 22px;
+		font-size: 20px;
 		font-weight: $semi-bold;
 		color: #0174a5;
 		width: auto;
@@ -45,15 +43,16 @@
 			color: $blue;
 			background-color: $blue-light;
 		}
+
+		&:last-child {
+			margin-right: 0 !important;
+		}
 	}
 
 	&__item {
 		padding: 40px;
-		border-radius: 20px;
+		border-radius: 18px;
 		background-color: $white;
-		&:not(.active) {
-			display: none;
-		}
 
 		@include r($mobile) {
 			font-size: 16px;
