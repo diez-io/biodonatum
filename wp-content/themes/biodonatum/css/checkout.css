@@ -239,4 +239,14 @@ textarea::placeholder {
 	.checkout tfoot tr:last-child td {
 		padding-bottom: 30px;
 	}
+
+	.checkout .woocommerce-order {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.checkout .woocommerce-thankyou-order-received {
+		font-size: 30px;
+		line-height: 41.6px;
+	}
 }
