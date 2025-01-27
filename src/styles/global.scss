@@ -88,73 +88,91 @@ body .screen-reader-response {
 	display: none;
 }
 
-.wpcf7 .form-custom {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 10px;
-}
-.wpcf7-form-control-wrap:nth-of-type(3) {
-	grid-column: 1/3;
-}
-.wpcf7-submit {
-	padding: 28px;
-	width: 100%;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 17px;
-	color: #ffffff;
-	border-radius: 10px;
-	background-color: #27aae2;
-	-webkit-transition: 0.2s linear;
-	transition: 0.2s linear;
-	cursor: pointer;
-	text-transform: uppercase;
-	text-align: center;
-	grid-column: 1/3;
-}
-.wpcf7-submit:active {
-	background-color: #44aeec;
-}
-.wpcf7-not-valid {
-	border-color: rgb(221, 8, 8);
-}
-.wpcf7-not-valid-tip {
-	font-size: 14px;
-	line-height: 14px;
-	font-weight: 400;
-	color: rgb(221, 8, 8);
-}
-.wpcf7-spinner {
-	display: none;
-	width: 24px;
-	height: 24px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: rgb(93, 93, 93) rgba(0, 0, 0, 0.274) rgba(0, 0, 0, 0.274)
-		rgba(0, 0, 0, 0.274);
-	border-radius: 100%;
-	padding: 0;
-	margin: 0 auto;
-	animation-name: spin;
-	animation-duration: 1000ms;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-}
+.wpcf7 {
+	.form-custom {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
+	}
 
-.feedback .wpcf7-spinner {
-	grid-column: 1/3;
-}
+	&-form-control-wrap {
+		&:nth-of-type(3) {
+			grid-column: 1/3;
+		}
 
-form.submitting .wpcf7-spinner {
-	display: inline-block;
-}
+		@include r($mobile) {
+			grid-column: 1/3;
+		}
+	}
 
-@media (prefers-reduced-motion: reduce) {
-	.wpcf7-spinner::before {
-		animation-name: blink;
-		animation-duration: 2000ms;
+	&-submit {
+		padding: 28px;
+		width: 100%;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 17px;
+		color: #ffffff;
+		border-radius: 10px;
+		background-color: #27aae2;
+		-webkit-transition: 0.2s linear;
+		transition: 0.2s linear;
+		cursor: pointer;
+		text-transform: uppercase;
+		text-align: center;
+		grid-column: 1/3;
+	}
+
+	&-submit:active {
+		background-color: #44aeec;
+	}
+
+	&-not-valid {
+		border-color: rgb(221, 8, 8);
+	}
+
+	&-not-valid-tip {
+		font-size: 14px;
+		line-height: 14px;
+		font-weight: 400;
+		color: rgb(221, 8, 8);
+	}
+
+	&-spinner {
+		display: none;
+		width: 24px;
+		height: 24px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: rgb(93, 93, 93) rgba(0, 0, 0, 0.274) rgba(0, 0, 0, 0.274)
+			rgba(0, 0, 0, 0.274);
+		border-radius: 100%;
+		padding: 0;
+		margin: 0 auto;
+		animation-name: spin;
+		animation-duration: 1000ms;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+
+	.feedback &-spinner {
+		grid-column: 1/3;
+	}
+
+	form.submitting &-spinner {
+		display: inline-block;
+	}
+
+	&-response-output {
+		font-size: 14px;
+		line-height: 14px;
+		font-weight: 400;
+	}
+
+	.feedback &-response-output {
+		grid-column: 1/3;
 	}
 }
+
 @media (prefers-reduced-motion: reduce) {
 	.wpcf7-spinner::before {
 		animation-name: blink;
@@ -184,15 +202,6 @@ form.submitting .wpcf7-spinner {
 	to {
 		opacity: 0;
 	}
-}
-.wpcf7-response-output {
-	font-size: 14px;
-	line-height: 14px;
-	font-weight: 400;
-}
-
-.feedback .wpcf7-response-output {
-	grid-column: 1/3;
 }
 
 @media only screen and (min-width: 1199px) {
