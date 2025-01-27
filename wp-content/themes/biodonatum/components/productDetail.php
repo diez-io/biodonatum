@@ -253,35 +253,37 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs" data-tabs="">
-                <div class="swiper tabs__header" data-slider="tabs">
+            <div class="tabs" data-slider="tabs">
+                <div thumbsSlider="" class="swiper tabs__header">
                     <div class="swiper-wrapper">
-                        <button class="swiper-slide tabs__head active" data-tabs-head="1"><?= get_field($post_type_prefix . 'detailed_description_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head" data-tabs-head="2"><?= get_field($post_type_prefix . 'detailed_functions_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head" data-tabs-head="3"><?= get_field($post_type_prefix . 'detailed_instructions_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head" data-tabs-head="4"><?= get_field($post_type_prefix . 'detailed_composition_name', $advanced_product_id) ?></button>
-                        <button class="swiper-slide tabs__head" data-tabs-head="5"><?= get_field($post_type_prefix . 'detailed_calorie_name', $advanced_product_id) ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_description_name', $advanced_product_id) ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_functions_name', $advanced_product_id) ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_instructions_name', $advanced_product_id) ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_composition_name', $advanced_product_id) ?></button>
+                        <button class="swiper-slide tabs__head"><?= get_field($post_type_prefix . 'detailed_calorie_name', $advanced_product_id) ?></button>
                     </div>
                     <div class="teasers-pagination-wrapper">
                         <div><?= get_static_content('swipe_left_right') ?></div>
                         <div class="swiper-pagination desktop-hidden"></div>
                     </div>
                 </div>
-                <div class="tabs__body">
-                    <div class="tabs__item active" data-tabs-content="1">
-                        <?= get_field($post_type_prefix . 'detailed_description_content', $advanced_product_id) ?>
-                    </div>
-                    <div class="tabs__item" data-tabs-content="2">
-                        <?= get_field($post_type_prefix . 'detailed_functions_content', $advanced_product_id) ?>
-                    </div>
-                    <div class="tabs__item" data-tabs-content="3">
-                        <?= get_field($post_type_prefix . 'detailed_instructions_content', $advanced_product_id) ?>
-                    </div>
-                    <div class="tabs__item" data-tabs-content="4">
-                        <?= get_field($post_type_prefix . 'detailed_composition_content', $advanced_product_id) ?>
-                    </div>
-                    <div class="tabs__item" data-tabs-content="5">
-                        <?= get_field($post_type_prefix . 'detailed_calorie_content', $advanced_product_id) ?>
+                <div class="tabs__body swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide tabs__item">
+                            <?= get_field($post_type_prefix . 'detailed_description_content', $advanced_product_id) ?>
+                        </div>
+                        <div class="swiper-slide tabs__item">
+                            <?= get_field($post_type_prefix . 'detailed_functions_content', $advanced_product_id) ?>
+                        </div>
+                        <div class="swiper-slide tabs__item">
+                            <?= get_field($post_type_prefix . 'detailed_instructions_content', $advanced_product_id) ?>
+                        </div>
+                        <div class="swiper-slide tabs__item">
+                            <?= get_field($post_type_prefix . 'detailed_composition_content', $advanced_product_id) ?>
+                        </div>
+                        <div class="swiper-slide tabs__item">
+                            <?= get_field($post_type_prefix . 'detailed_calorie_content', $advanced_product_id) ?>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -2,14 +2,13 @@
     <div class="container">
         <div class="footer__wrapper">
             <div class="footer__block">
-                <a href="#" class="footer__logo">
+                <? $language_slug = defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : ''; ?>
+                <a href="<?= home_url("/$language_slug"); ?>" class="footer__logo">
                     <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.png" alt="">
                 </a>
             </div>
             <div class="footer__block">
                 <nav class="footer__nav">
-                    <? $language_slug = defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : ''; ?>
-
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('about')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('about') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('scientists')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('scientists') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('terms-of-sales')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('terms_of_sales') ?></a>

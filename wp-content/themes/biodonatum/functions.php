@@ -109,7 +109,7 @@ function get_cf7_form_by_title($title) {
         if (!empty($forms) && is_array($forms)) {
             $form = reset($forms); // Get the first matching form
 
-            return do_shortcode('[contact-form-7 id="' . $form->id() . '" title="' . $form->title() . '" html_class="form"]');
+            return do_shortcode('[contact-form-7 id="' . $form->id() . '" title="' . $form->title() . '" html_class="form-custom"]');
         }
     }
 
