@@ -220,6 +220,10 @@ textarea::placeholder {
 		flex-direction: column;
 	}
 
+	.checkout__wrapper {
+		flex-direction: column;
+	}
+
 	.checkout thead td {
 		padding: 30px 20px 0px 20px;
 	}
