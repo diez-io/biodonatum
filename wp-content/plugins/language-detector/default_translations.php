@@ -36,4 +36,5 @@ return [
     'There are no shipping options available. Please ensure that your address has been entered correctly, or contact us if you need any help.' => 'no_shipping_options',
     'No shipping method has been selected. Please double check your address, or contact us if you need any help.' => 'no_shipping_method_selected',
     '%s is a required field.' => 'is_required_field',
+    'Your cart is currently empty.' => 'cart_empty',
 ];
