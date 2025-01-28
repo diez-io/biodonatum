@@ -30,6 +30,7 @@
 
                         foreach ($products as $product_id) {
                             $product = wc_get_product($product_id);
+                            $isVariable = $product->get_type() === 'variable';
                             $post_type = 'advanced_product';
                             $post_type_prefix = $post_type . '_';
 
@@ -98,7 +99,9 @@
                                         </div>
                                         <div class="card__price">
                                             <div class="card__price__title"><?= get_static_content('price') ?>:</div>
-                                            <div class="card__price__price"><?= $product->get_price_html() ?></div>
+                                            <div class="card__price__price">
+                                                <?= $isVariable ? sprintf(get_static_content('from_s'), wc_price($product->get_price())) : wc_price($product->get_price()) ?>
+                                            </div>
                                         </div>
                                         <a href="<?= the_permalink($advanced_product_id) ?>" class="card__buy-btn">
                                             <?= get_static_content('buy') ?>
