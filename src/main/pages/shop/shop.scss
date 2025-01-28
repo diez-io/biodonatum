@@ -18,20 +18,27 @@
         }
 
         .card {
-            &__text-title {
-                font-size: 22px;
-                font-weight: 600;
-                line-height: 26.82px;
+            &__text {
+                &-title {
+                    font-size: 22px;
+                    font-weight: 600;
+                    line-height: 26.82px;
 
-                @include r($mobile) {
-                    font-size: 20px;
-                    line-height: 24.38px;
+                    @include r($mobile) {
+                        font-size: 20px;
+                        line-height: 24.38px;
+                    }
+                }
+
+                &-description {
+                    margin-bottom: auto;
                 }
             }
 
             &__price {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 margin: 15px 0;
 
                 &__title {
