@@ -54,6 +54,7 @@ defined( 'ABSPATH' ) || exit;
 					<?php endif; ?>
 				</div>
 			</div>
+			<? get_template_part('components/feedback'); ?>
 		</div>
 	</section>
 </main>
