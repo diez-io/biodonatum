@@ -94,33 +94,7 @@
                             <h2 class="form__title">
                                 <?= get_static_content('join_our_team') ?>
                             </h2>
-                            <form action="#" class="form" data-form>
-                                <div class="form__content">
-                                    <input type="text" class="input" placeholder="Name*" required>
-                                    <input type="text" class="input" placeholder="E-mail*" required>
-                                    <input type="text" class="input" placeholder="Phone*" required>
-                                    <div class="vacancy__upload noselect">
-                                        <svg>
-                                            <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-upload"></use>
-                                        </svg>
-                                        <div class="vacancy__upload-text">ATTACH RESUME</div>
-                                        <div class="vacancy__upload-format">Word or PDF up to 20 MB</div>
-                                    </div>
-                                    <input type="checkbox" style="display: none;"  data-agree required>
-                                    <button type="submit" class="button">SEND</button>
-                                    <div data-agree-custom class="noselect">
-                                        <svg>
-                                            <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-checkbox"></use>
-                                        </svg>
-                                        <svg style="display: none;">
-                                            <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-checkbox-checked"></use>
-                                        </svg>
-                                        <div>
-                                            By clicking the button you agree to the terms of the <span>Privacy Policy</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                            <?= get_cf7_form_by_title('join_team', 'join-out-team-form') ?>
                         </div>
                     </div>
                 </section>

@@ -145,3 +145,99 @@
 	border-top: 1px solid #F1F1F1;
 	padding-top: 15px;
 }
+
+.join-out-team-form {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px 30px;
+}
+
+.join-out-team-form > .wpcf7-form-control-wrap {
+	grid-column: unset;
+	grid-row: unset;
+}
+
+.join-out-team-form .wpcf7-submit {
+	grid-column: 4/5;
+	grid-row: 1/2;
+	max-height: 60px;
+	padding: 0;
+}
+
+.join-out-team-form .wpcf7-submit[disabled] {
+    pointer-events: none;
+    background-color: #bbbbbb;
+}
+
+.join-out-team-form .vacancy__upload {
+	grid-row: 3/4;
+	cursor: pointer;
+	width: fit-content;
+}
+
+.join-out-team-form [data-agree-custom] {
+	grid-row: 3/4;
+
+
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 20px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.join-out-team-form [data-agree-custom] svg {
+	width: 1.3em;
+	height: 1.3em;
+	flex-shrink: 0;
+}
+
+.join-out-team-form [data-agree-custom] a {
+    color: #27aae2;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.join-out-team-form .wpcf7-response-output {
+	grid-row: 4/5;
+	grid-column: 1/5;
+	font-size: 23px;
+	line-height: 27px;
+	font-weight: 500;
+	text-align: center;
+}
+
+.join-out-team-form .wpcf7-spinner {
+	grid-column: 4/5;
+}
+
+.join-out-team-form span:has([type="file"]) {
+	display: none;
+}
+
+.join-out-team-form .vacancy__upload-file-name {
+	color: #5a5a5a;
+}
+
+@media only screen and (max-width: 1199px) {
+	.join-out-team-form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.join-out-team-form .wpcf7-submit {
+		padding: 28px;
+		margin-bottom: 10px;
+		max-height: unset;
+	}
+
+	.join-out-team-form .wpcf7-response-output {
+		font-size: 18px;
+		line-height: 25px;
+	}
+}

@@ -223,4 +223,28 @@ jQuery(function ($) {
     });
 
     $('.checkout__pay #order_review').before($('.woocommerce:has(.checkout__pay) > .woocommerce-error')[0]);
+
+    (() => {
+        const $fileInput = $('.join-out-team-form [type="file"]');
+        const $fileFormat = $('.join-out-team-form .vacancy__upload-format');
+        const $fileNameDisplay = $('.join-out-team-form .vacancy__upload-file-name');
+
+        $('.join-out-team-form .vacancy__upload').on('click', () => $fileInput.trigger('click'));
+
+        $fileInput.on('change', function () {
+            if ($fileInput[0].files[0]) {
+                $fileNameDisplay.text($fileInput[0].files[0].name);
+                $fileFormat.hide();
+            }
+            else {
+                $fileNameDisplay.text('');
+                $fileFormat.show();
+            }
+        });
+
+        $('.join-out-team-form [data-agree-custom]').on('click', function(e) {
+            $(this).find('svg').toggle();
+            $('.join-out-team-form [type="checkbox"]').trigger('click');
+        });
+    })();
 });
