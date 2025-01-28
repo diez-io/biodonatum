@@ -34,6 +34,7 @@
                                     );
 
                                     $loop = new WP_Query($args);
+                                    $numberOfScientists = $loog->found_posts;
 
                                     if ($loop->have_posts()):
                                         while ($loop->have_posts()):
@@ -72,9 +73,11 @@
                                     </div>
                                 </div>
                                 <div class="swiper-pagination"></div>
-                                <div class="button button--wide scientists__load-more load-more-btn">
-                                    <?= get_static_content('load_more') ?>
-                                </div>
+                                <? if ($numberOfScientists > 4) : ?>
+                                    <div class="button button--wide scientists__load-more load-more-btn">
+                                        <?= get_static_content('load_more') ?>
+                                    </div>
+                                <? endif; ?>
                             </div>
                         </div>
                     </div>

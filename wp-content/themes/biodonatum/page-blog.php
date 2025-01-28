@@ -34,6 +34,8 @@
                             );
 
                             $loop = new WP_Query($args);
+                            $numberOfBlogs = $loop->found_posts;
+
                             if ($loop->have_posts()):
                                 while ($loop->have_posts()):
                                     $loop->the_post(); ?>
@@ -62,9 +64,11 @@
                             endif;
                             ?>
                         </div>
-                        <div class="button blog__load-more load-more-btn">
-                            <?= get_static_content('load_more') ?>
-                        </div>
+                        <? if ($numberOfBlogs > 9) : ?>
+                            <div class="button blog__load-more load-more-btn">
+                                <?= get_static_content('load_more') ?>
+                            </div>
+                        <? endif; ?>
                     </div>
                 </div>
             </section>

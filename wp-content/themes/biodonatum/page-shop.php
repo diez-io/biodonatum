@@ -78,12 +78,12 @@
                                             <div class="slider__control">
                                                 <div class="slider__btn slider__btn--prev">
                                                     <svg class="slider__icon">
-                                                        <use xlink:href="./assets/sprite.svg#icon-chevrone"></use>
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
                                                     </svg>
                                                 </div>
                                                 <div class="slider__btn slider__btn--next">
                                                     <svg class="slider__icon">
-                                                        <use xlink:href="./assets/sprite.svg#icon-chevrone"></use>
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
                                                     </svg>
                                                 </div>
                                             </div>
