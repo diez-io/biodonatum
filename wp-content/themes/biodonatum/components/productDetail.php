@@ -199,7 +199,7 @@
                                 </div>
                             <? endif; ?>
                             <?
-                                if ($isVariable) :
+                                if ($isDetailedProductPage && $isVariable) :
                                     $variations = $woo_product->get_available_variations(); ?>
 
                                     <div class="select-subscription-duration__label">

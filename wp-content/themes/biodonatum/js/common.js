@@ -221,4 +221,6 @@ jQuery(function ($) {
         $(this).siblings('address').hide();
         $(this).siblings('.account__edit-address').css('position', 'static');
     });
+
+    $('.checkout__pay #order_review').before($('.woocommerce:has(.checkout__pay) > .woocommerce-error')[0]);
 });

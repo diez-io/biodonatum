@@ -178,8 +178,12 @@ function custom_available_payment_gateways($gateways) {
     return $gateways;
 }
 
-add_filter('wc_stripe_params', 'set_stripe_locale');
-function set_stripe_locale($params) {
-    $params['locale'] = $_SESSION['lang'];
-    return $params;
-}
+function wc_update_locale_in_stripe_element_options( $options ) {
+    return array_merge(
+        $options,
+        array(
+            'locale' => $_SESSION['lang'] ?? 'en',
+        )
+    );
+};
+add_filter( 'wcpay_payment_fields_js_config', 'wc_update_locale_in_stripe_element_options' );
