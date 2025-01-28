@@ -1,0 +1,140 @@
+.shop {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    &__cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+
+        & > *:not(:nth-child(-n+4)) {
+            display: none;
+        }
+
+        picture img {
+            aspect-ratio: 37/30;
+            object-fit: cover;
+        }
+
+        .card {
+            &__text-title {
+                font-size: 22px;
+                font-weight: 600;
+                line-height: 26.82px;
+
+                @include r($mobile) {
+                    font-size: 20px;
+                    line-height: 24.38px;
+                }
+            }
+
+            &__price {
+                display: flex;
+                justify-content: space-between;
+                margin: 15px 0;
+
+                &__title {
+                    font-size: 24px;
+                    font-weight: 600;
+                    line-height: 29.26px;
+                    color: #838383;
+                }
+
+                &__price {
+                    font-size: 30px;
+                    font-weight: 600;
+                    line-height: 36.57px;
+                }
+            }
+
+            &__buy-btn {
+                border: 2px solid $azure;
+                border-radius: 10px;
+                padding: 25px 30px;
+                color: $azure;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 24px;
+                text-align: center;
+
+                &:hover {
+                    background-color: $azure;
+                    color: $white;
+                }
+            }
+        }
+
+        & > *:not(:nth-child(-n+9)) {
+            display: none;
+        }
+
+        & > *:not(:nth-child(-n+3)) {
+            @include r($mobile) {
+                display: none;
+            }
+        }
+
+        @include r($mobile) {
+            grid-template-columns: 1fr;
+        }
+
+        .swiper-pagination {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            justify-content: center;
+            z-index: 1;
+
+            .swiper-pagination-bullet {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        .slider {
+            &__control {
+                width: calc(100% - 30px);
+                z-index: 1;
+
+                @include rmin($mobile) {
+                    width: calc(100% + 150px);
+                    transition: width 0.5s cubic-bezier(0.39, 0.58, 0.57, 1);
+                }
+            }
+
+            &:hover .slider__control {
+                @include rmin($mobile) {
+                    width: calc(100% - 30px);
+                }
+            }
+
+            &__btn {
+                background-color: #ffffff3d;
+                color: $azure;
+
+                @include r($ultramobile) {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                .slider__icon {
+                    @include r($ultramobile) {
+                        width: 6px;
+                        height: 10px;
+                    }
+                }
+            }
+        }
+        }
+
+    &__load-more {
+        padding-left: 30px;
+        padding-right: 30px;
+        align-self: center;
+
+        @include r($mobile) {
+            width: 100%;
+        }
+    }
+}
