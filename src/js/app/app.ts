@@ -14,11 +14,11 @@ class App {
         this.init();
     }
     init = () => {
-        this.createSlider()
-        this.createRequest()
-        this.createMask()
-        this.createTabs()
-        this.createMobileMenu()
+        this.createSlider();
+        this.createRequest();
+        this.createMask();
+        this.createTabs();
+        this.createMobileMenu();
         this.createLoadMore();
         this.createPopup();
         this.createDropdown();
@@ -71,7 +71,7 @@ class App {
 
         inputs.forEach(input => {
             if (input.type === 'tel') {
-                inputmask({ "mask": "+7 (999) 999-99-99" }).mask(input);
+                inputmask({ "mask": "+9{1,3} (999) 999-99-99" }).mask(input);
             } else if (input.hasAttribute('data-email')) {
                 inputmask({
                     mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
