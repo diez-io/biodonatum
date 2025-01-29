@@ -44,7 +44,6 @@ function theme_enqueue_assets() {
 
 
     wp_enqueue_script('st_select', get_template_directory_uri() . '/js/st_select.min.js', array(), null, false); // st_select lib
-    wp_enqueue_script('st_mask', get_template_directory_uri() . '/js/st_mask.min.js', array(), null, false); // st_mask lib
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
@@ -121,14 +120,6 @@ add_action('wp_footer', function() {
     ?>
     <script>
         new st_select('.st_select');
-        new st_mask({ //Маска для телефона
-            selector: 'input[type=phone]',
-            mask: "+7 ({\\d}{\\d}{\\d}) {\\d}{\\d}{\\d} - {\\d}{\\d} - {\\d}{\\d}",
-            placeholder: true,
-            filler: '_',
-            full: function (input) {input.removeAttribute('invalid')},
-            not_full: function (input) {input.setAttribute('invalid')}
-        });
     </script>
     <?
 });
