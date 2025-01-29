@@ -10,7 +10,10 @@ form[name='checkout'] {
 .checkout__wrapper {
 	display: flex;
 	gap: 30px;
-	align-items: flex-start;
+}
+
+.checkout__wrapper > * {
+	height: fit-content;
 }
 
 .checkout__address {

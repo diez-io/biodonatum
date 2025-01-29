@@ -142,7 +142,7 @@ defined( 'ABSPATH' ) || exit; ?>
                     <div class="cart__promocode island">
                         <form>
                             <input class="input" type="text" name="coupon_code" placeholder="<?= get_static_content('promocode') ?>">
-                            <button class="button button--wide mtm-10" type="submit"><?= get_static_content('apply_promocode') ?></button>
+                            <button class="button button--wide" type="submit"><?= get_static_content('apply_promocode') ?></button>
                         </form>
                     </div>
                     <div class="cart__total island">
