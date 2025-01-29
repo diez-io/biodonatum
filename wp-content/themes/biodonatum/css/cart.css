@@ -245,8 +245,8 @@
 				cursor: pointer;
 				border: 1px solid #27aae2;
 				border-radius: 25%;
-				width: max-content;
-				height: max-content;
+				width: 20px;
+				height: 20px;
 
 				transition: all 0.2s ease;
 			}
