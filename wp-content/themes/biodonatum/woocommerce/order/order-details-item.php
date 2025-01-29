@@ -34,12 +34,21 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 		$post_type_prefix = $post_type . '_';
 		$advanced_product_id = null;
 
+		$isVariable = $product->get_type() === 'variation';
+
+		if ($isVariable) {
+			$product_id = $product->get_parent_id();
+		}
+		else {
+			$product_id = $product->get_id();
+		}
+
 		$queryArgs = [
 			'post_type'  => $post_type,
 			'meta_query' => [
 				[
 					'key'     => $post_type_prefix . 'woo_id',
-					'value'   => $product->get_id(),
+					'value'   => $product_id,
 					'compare' => '='
 				],
 			],
@@ -71,13 +80,14 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 			$qty_display = esc_html( $qty );
 		}
 
+
+		if ($isVariable) : ?>
+			<div class="cart__table__variation">
+				<?= get_static_content('months_' . $product->get_attribute('duration')) ?>
+			</div>
+		<? endif;
+
 		echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>', $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
-
-		wc_display_item_meta( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-		do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
 		?>
 	</td>
 

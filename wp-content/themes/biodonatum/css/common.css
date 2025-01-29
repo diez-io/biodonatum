@@ -146,6 +146,11 @@
 	padding-top: 15px;
 }
 
+.checkout__pay tbody tr:last-child td,
+.checkout__pay tbody tr:last-child th {
+	padding-bottom: 15px;
+}
+
 .join-out-team-form {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -240,4 +245,61 @@
 		font-size: 18px;
 		line-height: 25px;
 	}
+}
+
+.woocommerce-order-details .woocommerce-table--order-details{
+	width: 100%;
+	max-width: 700px;
+}
+
+.woocommerce-order-details .woocommerce-table--order-details .cart__table__variation {
+    padding: 5px 10px;
+    background-color: #edf9ff;
+    border-radius: 10px;
+    color: #27AAE2;
+	display: inline-block;
+}
+
+.woocommerce-order-details .woocommerce-table--order-details .product-quantity {
+	margin-left: 5px;
+    font-size: 20px;
+    color: #27aae2;
+}
+
+.woocommerce-order-details .woocommerce-table--order-details tfoot th {
+    padding-left: 40px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #acacac;
+}
+
+.woocommerce-order-details .woocommerce-table--order-details tfoot tr:first-child td,
+.woocommerce-order-details .woocommerce-table--order-details tfoot tr:first-child th {
+    border-top: 1px solid #F1F1F1;
+    padding-top: 15px;
+}
+
+.woocommerce-order-details .woocommerce-table--order-details tbody tr:last-child td,
+.woocommerce-order-details .woocommerce-table--order-details tbody tr:last-child th {
+    padding-bottom: 15px;
+}
+
+.account__order-title {
+	font-size: 22px;
+	margin-bottom: 40px;
+}
+
+.account__order-title mark {
+	font-weight: 600;
+}
+
+.account__order-title mark.order-number {
+	color: #27AAE2;
+}
+
+.order-again a {
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-top: 30px;
 }

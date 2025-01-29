@@ -52,13 +52,6 @@ if ( $show_downloads ) {
 
 	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
 
-		<thead>
-			<tr>
-				<th class="woocommerce-table__product-name product-name"><?= get_static_content('product') ?></th>
-				<th class="woocommerce-table__product-table product-total"><?= get_static_content('total'); ?></th>
-			</tr>
-		</thead>
-
 		<tbody>
 			<?php
 			do_action( 'woocommerce_order_details_before_order_table_items', $order );
