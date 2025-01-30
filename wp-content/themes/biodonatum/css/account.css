@@ -127,8 +127,9 @@
 }
 
 .account__edit-address {
-	position: absolute;
-	left: 150vw;
+	width: 0;
+	height: 0;
+	overflow: hidden;
 }
 
 .account h4 {
@@ -460,5 +461,19 @@ body:has(.remove-profile-img-modal.active) {
 
 	.edit-profile-picture {
 		display: flex;
+	}
+}
+
+.history__browse-products-btn {
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-top: 30px;
+}
+
+@media screen and (max-width: 767px) {
+	.history__browse-products-btn {
+		padding-left: unset;
+		padding-right: unset;
+		width: 100%;
 	}
 }

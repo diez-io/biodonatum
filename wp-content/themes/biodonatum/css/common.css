@@ -180,6 +180,10 @@
 	width: fit-content;
 }
 
+.join-our-team-form .vacancy__upload svg {
+	color: #27AAE2;
+}
+
 .join-our-team-form [data-agree-custom] {
 	grid-row: 3/4;
 

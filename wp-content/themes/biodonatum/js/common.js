@@ -219,7 +219,11 @@ jQuery(function ($) {
     $('.account__edit-address-btn').on('click', function() {
         $(this).hide();
         $(this).siblings('address').hide();
-        $(this).siblings('.account__edit-address').css('position', 'static');
+        $(this).siblings('.account__edit-address').css({
+            'width': 'unset',
+            'height': 'unset',
+            'overflow': 'unset',
+        });
     });
 
     $('.checkout__pay #order_review').before($('.woocommerce:has(.checkout__pay) > .woocommerce-error')[0]);
