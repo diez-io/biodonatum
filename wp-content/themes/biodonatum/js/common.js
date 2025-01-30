@@ -300,4 +300,8 @@ jQuery(function ($) {
             $removeProfilePictureModal.toggleClass('active');
         });
     })();
+
+    $('.product-added-to-cart-popup__close-icon').on('click', function(e) {
+        $('.product-added-to-cart-popup').toggleClass('active');
+    });
 });

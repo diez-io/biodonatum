@@ -306,3 +306,8 @@
         <? endif; ?>
     </div>
 </section>
+
+<?
+    if ($isDetailedProductPage) {
+        get_template_part('components/addedToCartPopup');
+    }

@@ -19,6 +19,10 @@ jQuery(function ($) {
 
         if (isNaN) {
             $.get(wc_cart.ajax_url + '?action=get_cart_count', function (response) {
+                if (response.cart_count === 0) {
+                    location.reload();
+                }
+
                 $cartCount.toggle(response.cart_count > 0);
                 $cartCount.text(response.cart_count);
             });
@@ -144,6 +148,25 @@ jQuery(function ($) {
                 if (response.error) {
                     jQuery('#cart-response').html('Error: ' + response.message);
                 } else {
+                    const $addedToCartPopup = $('.product-added-to-cart-popup');
+                    let addedToCartPopupTimeout;
+
+                    function togglePopup(active = true) {
+                      $addedToCartPopup.toggleClass('active', active);
+                    }
+
+                    togglePopup(true);
+                    addedToCartPopupTimeout = setTimeout(() => togglePopup(false), 3000);
+
+                    $addedToCartPopup.on('mouseenter', () => {
+                      clearTimeout(addedToCartPopupTimeout);
+                    });
+
+                    $addedToCartPopup.on('mouseleave', () => {
+                      if (!$addedToCartPopup.hasClass('active')) return;
+                      addedToCartPopupTimeout = setTimeout(() => togglePopup(false), 3000);
+                    });
+
                     updateCartCount();
                     jQuery('#cart-response').html('Product added to cart!');
                 }
