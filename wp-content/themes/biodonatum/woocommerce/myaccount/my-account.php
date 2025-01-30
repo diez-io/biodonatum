@@ -57,7 +57,9 @@ if (!$isViewOrderPage) : ?>
 								</picture>
 								<? if ($profile_image_url) : ?>
 									<div class="remove-profile-picture noselect">
-										x
+										<svg>
+											<use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-x"></use>
+										</svg>
 									</div>
 								<? endif; ?>
 								<div class="edit-profile-picture noselect">
