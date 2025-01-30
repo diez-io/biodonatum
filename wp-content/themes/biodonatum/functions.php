@@ -178,3 +178,49 @@ function wc_update_locale_in_stripe_element_options( $options ) {
     );
 };
 add_filter( 'wcpay_payment_fields_js_config', 'wc_update_locale_in_stripe_element_options' );
+
+add_action('init', 'handle_profile_image_upload');
+function handle_profile_image_upload() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['upload_profile_picture']) && !empty($_FILES['image']['name'])) {
+            if (!isset($_POST['profile_picture_upload_nonce']) || !check_admin_referer('profile_picture_upload_action', 'profile_picture_upload_nonce')) {
+                wp_die('Security check failed.');
+            }
+
+            $user_id = get_current_user_id();
+
+            if (!$user_id) {
+                return;
+            }
+
+            require_once(ABSPATH . 'wp-admin/includes/file.php');
+            require_once(ABSPATH . 'wp-admin/includes/media.php');
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+            // Handle the upload
+            $uploaded_image = media_handle_upload('image', 0);
+
+            if (is_wp_error($uploaded_image)) {
+                echo "Error uploading image.";
+            }
+            else {
+                // Get the image URL and save it as user meta
+                $image_url = wp_get_attachment_url($uploaded_image);
+                update_user_meta($user_id, 'profile_image_url', $image_url);
+            }
+        }
+
+        if (isset($_POST['remove_profile_picture'])) {
+            if (!isset($_POST['profile_picture_remove_nonce']) || !check_admin_referer('profile_picture_remove_action', 'profile_picture_remove_nonce')) {
+                wp_die('Security check failed.');
+            }
+
+            $user_id = get_current_user_id();
+
+            // Remove the profile picture (delete user meta)
+            if (!delete_user_meta($user_id, 'profile_image_url')) {
+                wp_die('Failed to remove profile picture.');
+            }
+        }
+    }
+}

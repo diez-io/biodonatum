@@ -46,9 +46,37 @@ if (!$isViewOrderPage) : ?>
 				<div class="account__edit">
 					<div class="account__edit__col1">
 						<div class="island">
-							<picture class="">
-								<img src="<?= get_template_directory_uri(); ?>/assets/images/person.jpg" alt="">
-							</picture>
+							<div class="account__profile-picture">
+								<picture>
+									<?
+										$user_id = get_current_user_id();
+										$profile_image_url = get_user_meta($user_id, 'profile_image_url', true);
+									?>
+									<img class="account__profile-picture__img" src="<?= $profile_image_url ?: get_template_directory_uri() . '/assets/images/person.jpg' ?>" alt="">
+									<img class="account__profile-picture__preview" style="display:none;" src="">
+								</picture>
+								<? if ($profile_image_url) : ?>
+									<div class="remove-profile-picture noselect">
+										x
+									</div>
+								<? endif; ?>
+								<div class="edit-profile-picture noselect">
+									<svg>
+										<use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-upload"></use>
+									</svg>
+									<?= get_static_content('change_photo') ?>
+								</div>
+							</div>
+							<form class="account__profile-picture-edit-form" action="" method="post" enctype="multipart/form-data">
+								<? wp_nonce_field('profile_picture_upload_action', 'profile_picture_upload_nonce'); ?>
+								<input type="file" name="image" accept="image/*" style="display:none" required>
+								<button style="display:none" class="button button--wide mt-20" type="submit" name="upload_profile_picture">
+									<?= get_static_content('save') ?>
+								</button>
+							</form>
+							<button style="display:none" class="account__profile-picture__cancel button button--wide mt-20">
+								<?= get_static_content('cancel') ?>
+							</button>
 						</div>
 						<div class="island">
 							<a class="account__logout" href="<?= esc_url( wc_logout_url(home_url()) ) ?>"><?= get_static_content('log_out') ?></a>
@@ -97,4 +125,6 @@ if (!$isViewOrderPage) : ?>
     <? get_template_part('components/feedback'); ?>
 
 </main>
+<? get_template_part('components/removeProfileImageForm'); ?>
+
 <? endif; ?>

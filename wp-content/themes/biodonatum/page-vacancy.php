@@ -94,7 +94,7 @@
                             <h2 class="form__title">
                                 <?= get_static_content('join_our_team') ?>
                             </h2>
-                            <?= get_cf7_form_by_title('join_team', 'join-out-team-form') ?>
+                            <?= get_cf7_form_by_title('join_team', 'join-our-team-form') ?>
                         </div>
                     </div>
                 </section>

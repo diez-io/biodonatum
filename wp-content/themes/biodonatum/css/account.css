@@ -280,11 +280,6 @@
 	.account__edit__col2 .island {
 		flex-direction: column;
 	}
-
-	.account__edit .account__edit__col1 .island {
-		display: flex;
-		justify-content: center;
-	}
 }
 
 @media screen and (max-width: 767px) {
@@ -326,4 +321,144 @@
 .woocommerce-input-wrapper .input {
 	background: #fff;
 	border: 1px solid #dbdbdb;
+}
+
+.remove-profile-picture,
+.edit-profile-picture {
+	position: absolute;
+}
+
+.account__profile-picture {
+	position: relative;
+	color: #acacac;
+}
+
+.account__profile-picture img {
+	aspect-ratio: 1/1;
+	object-fit: cover;
+	width: 100%;
+	border-radius: 20px;
+}
+
+.account__profile-picture svg {
+	width: 1.3em;
+	height: 1.3em;
+}
+
+.remove-profile-picture {
+	top: 20px;
+	right: 20px;
+	border: 1px solid #acacac;
+	padding: 10px;
+	border-radius: 10px;
+	line-height: 18px;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.edit-profile-picture {
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 10px;
+
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 45.6px;
+	text-wrap: nowrap;
+
+	/* text-shadow: 0px 0px 7px black; */
+
+	gap: 20px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.remove-profile-picture:hover {
+	border-color: #000;
+	color: #000;
+}
+
+.edit-profile-picture:hover {
+	color: #000;
+}
+
+.remove-profile-img-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #00000099;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.remove-profile-img-modal .island {
+	width: 100%;
+	max-width: 900px;
+	margin: 20px;
+}
+
+.remove-profile-img-modal.active {
+	display: flex;
+}
+
+body:has(.remove-profile-img-modal.active) {
+	overflow: hidden;
+}
+
+.remove-profile-img-modal__btns {
+	display: flex;
+	gap: 20px;
+}
+
+.remove-profile-img-modal__btns > * {
+	flex: 1;
+}
+
+.remove-profile-img-modal form button {
+	background-color: red;
+}
+
+.remove-profile-img-modal h2 {
+	text-align: center;
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 27px;
+	margin-bottom: 50px;
+}
+
+@media screen and (max-width: 767px) {
+	.remove-profile-img-modal__btns {
+		flex-direction: column;
+	}
+}
+
+@media (pointer: fine) {
+	/* Styles for touch devices */
+
+	.remove-profile-picture, .edit-profile-picture {
+		display: none;
+	}
+
+	.island:has(.account__profile-picture):hover .remove-profile-picture {
+		display: block;
+	}
+
+	.island:has(.account__profile-picture):hover .edit-profile-picture {
+		display: flex;
+	}
+
+}
+
+@media (pointer: coarse) {
+	.remove-profile-picture {
+		display: block;
+	}
+
+	.edit-profile-picture {
+		display: flex;
+	}
 }

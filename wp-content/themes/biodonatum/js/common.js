@@ -225,11 +225,11 @@ jQuery(function ($) {
     $('.checkout__pay #order_review').before($('.woocommerce:has(.checkout__pay) > .woocommerce-error')[0]);
 
     (() => {
-        const $fileInput = $('.join-out-team-form [type="file"]');
-        const $fileFormat = $('.join-out-team-form .vacancy__upload-format');
-        const $fileNameDisplay = $('.join-out-team-form .vacancy__upload-file-name');
+        const $fileInput = $('.join-our-team-form [type="file"]');
+        const $fileFormat = $('.join-our-team-form .vacancy__upload-format');
+        const $fileNameDisplay = $('.join-our-team-form .vacancy__upload-file-name');
 
-        $('.join-out-team-form .vacancy__upload').on('click', () => $fileInput.trigger('click'));
+        $('.join-our-team-form .vacancy__upload').on('click', () => $fileInput.trigger('click'));
 
         $fileInput.on('change', function () {
             if ($fileInput[0].files[0]) {
@@ -242,9 +242,58 @@ jQuery(function ($) {
             }
         });
 
-        $('.join-out-team-form [data-agree-custom]').on('click', function(e) {
+        $('.join-our-team-form [data-agree-custom]').on('click', function(e) {
             $(this).find('svg').toggle();
-            $('.join-out-team-form [type="checkbox"]').trigger('click');
+            $('.join-our-team-form [type="checkbox"]').trigger('click');
+        });
+    })();
+
+    (() => {
+        $inputFile = $('.account__profile-picture-edit-form [name="image"]');
+        const $profilePicture = $('.account__profile-picture__img');
+        const preview = $('.account__profile-picture__preview')[0];
+        const $removeProfilePictureBtn = $('.remove-profile-picture');
+
+        $inputFile.on('change', function(event) {
+            const file = event.target.files[0];
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+
+                $profilePicture.hide();
+                $(preview).show();
+                $('.account__profile-picture-edit-form button, .account__profile-picture__cancel').show();
+
+                $removeProfilePictureBtn.css('visibility', 'hidden');
+            }
+        });
+
+        $('.edit-profile-picture').on('click', function(e) {
+            $inputFile.trigger('click');
+        });
+
+        $('.account__profile-picture__cancel').on('click', function(e) {
+            $profilePicture.show();
+            $(preview).hide();
+            $('.account__profile-picture-edit-form button, .account__profile-picture__cancel').hide();
+
+            $removeProfilePictureBtn.css('visibility', '');
+        });
+
+        const $removeProfilePictureModal = $('.remove-profile-img-modal');
+
+        $removeProfilePictureBtn.on('click', function(e) {
+            $removeProfilePictureModal.toggleClass('active');
+        });
+
+        $('.remove-profile-img-modal__btns > button').on('click', function(e) {
+            $removeProfilePictureModal.toggleClass('active');
         });
     })();
 });
