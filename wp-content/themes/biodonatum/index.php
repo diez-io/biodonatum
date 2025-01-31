@@ -10,6 +10,7 @@
             'subscription_woo_id' => 622,
         ]);
 
+        get_template_part('components/videoAnimation');
         get_template_part('components/partners');
         get_template_part('components/feedback');
     ?>
