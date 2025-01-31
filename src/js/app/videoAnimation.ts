@@ -124,7 +124,6 @@ class VideoAnimation {
     }
 
     transformContainer = (delta: number) => {
-        console.log(delta);
         const width = this.maxWidth + ((this.startDelta - (delta)) / this.startDelta) * (window.innerWidth - this.maxWidth);
         const height = 40 + ((this.startDelta - delta) / this.startDelta) * 60;
         const padding = 20 - ((this.startDelta - delta) / this.startDelta) * 20;
