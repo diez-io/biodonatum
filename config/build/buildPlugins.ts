@@ -11,7 +11,7 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
         isDev,
         paths
     } = options
-    
+
     return [
         new MiniCssExtractPlugin({
             filename: isDev ? 'css/[name].[contenthash:4].css' : 'css/[name].css',
@@ -27,6 +27,11 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
                 {
                     from: "src/main/shared/images",
                     to: "./assets/images/",
+                    noErrorOnMissing: true,
+                },
+                {
+                    from: "src/main/shared/videos",
+                    to: "./assets/videos/",
                     noErrorOnMissing: true,
                 },
                 {

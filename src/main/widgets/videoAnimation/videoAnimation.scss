@@ -1,0 +1,25 @@
+body {
+	// height: 200vh;
+	/* Just for demo purposes to enable scrolling */
+}
+
+.video-container {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	margin-top: 60px;
+
+	max-width: #{$max-container}px;
+	padding: 0 20px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 40vh;
+}
+
+#scroll-video {
+	border-radius: 20px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

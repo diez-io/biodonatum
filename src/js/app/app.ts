@@ -7,6 +7,7 @@ import MobileMenu from "./mobileMenu";
 import LoadMore from "./loadMore";
 import Popup from "./popup";
 import TypeAnimation from "./typeAnimation";
+import VideoAnimation from "./videoAnimation";
 
 
 class App {
@@ -23,6 +24,15 @@ class App {
         this.createPopup();
         this.createDropdown();
         this.createTypeAnimation();
+        this.createVideoAnimation();
+    }
+
+    createVideoAnimation = () => {
+        const elements = document.querySelectorAll('.video-animation');
+
+        elements && elements.forEach(element => {
+            new VideoAnimation(element);
+        });
     }
 
     createTypeAnimation = () => {
@@ -101,8 +111,6 @@ class App {
 
 
     createDropdown = () => {
-        console.log('create dropdown');
-
         const dropdown = document.querySelectorAll('[data-dropdown]')
         if (!dropdown) return
         dropdown.forEach(el => {
