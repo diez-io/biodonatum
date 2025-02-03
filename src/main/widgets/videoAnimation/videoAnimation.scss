@@ -1,6 +1,7 @@
 body {
 	// height: 200vh;
 	/* Just for demo purposes to enable scrolling */
+
 }
 
 .video-container {
@@ -14,7 +15,12 @@ body {
 	padding: 0 20px;
 	margin-left: auto;
 	margin-right: auto;
-	height: 40vh;
+}
+
+.video-container--fixed {
+	position: fixed;
+	inset: 0;
+	z-index: 9;
 }
 
 #scroll-video {
