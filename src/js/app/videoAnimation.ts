@@ -109,8 +109,6 @@ class VideoAnimation {
 
             //}
 
-            console.log(this.videoDuration, this.video.currentTime);
-
             if (this.video.currentTime === 0) {
                 this.position = 'down'
                 unlockScroll();
@@ -122,7 +120,6 @@ class VideoAnimation {
         };
 
         const lockScroll = () => {
-            console.log('lockScroll');
             isScrollLocked = true;
             this.el.scrollIntoView(true);
             document.body.style.overflow = 'hidden';
@@ -130,7 +127,6 @@ class VideoAnimation {
         };
 
         const unlockScroll = () => {
-            console.log('unlockScroll');
             this.el.scrollIntoView(true);
             isScrollLocked = false;
             document.body.style.overflow = '';
@@ -139,7 +135,6 @@ class VideoAnimation {
 
         window.addEventListener("scroll", (e) => {
             const rect = this.el.getBoundingClientRect();
-            console.log('scroll', rect.top);
 
             if (!isScrollLocked) {
                 if (this.position === 'down' && rect.top <= this.startDelta && rect.top > 0) {
