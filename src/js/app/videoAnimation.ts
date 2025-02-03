@@ -18,7 +18,7 @@ class VideoAnimation {
         this.video = el.querySelector('#scroll-video');
 
         this.tuneForwardSpeed = 3.5;
-        this.tuneDownwardSpeed = 1500;
+        this.tuneDownwardSpeed = 3000;
 
         this.maxWidth = 1610;
         this.supportedPlaybackRange = [0, 0];
