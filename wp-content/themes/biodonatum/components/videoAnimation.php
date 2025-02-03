@@ -1,7 +1,6 @@
 <section class="section">
     <div class="video-container video-animation">
-        <video id="scroll-video" playsinline muted preload="auto">
-            <source src="<?= get_template_directory_uri(); ?>/assets/videos/biodonatum-en.mp4" type="video/mp4">
+        <video id="scroll-video" playsinline muted data-video-src="<?= wp_get_attachment_url(get_static_content('video_animation')) ?>" data-video-src-mob="<?= wp_get_attachment_url(get_static_content('video_animation_mob')) ?>">
         </video>
     </div>
 </section>
