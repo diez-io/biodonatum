@@ -50,7 +50,24 @@ class VideoAnimation {
         this.inertiaTimeoutId = null;
         this.tuneInertia = 0.1;
 
-        setTimeout(() => this.init(), 2000);
+        const waitForMetadata = (video: HTMLVideoElement): Promise<void> => {
+            return new Promise((resolve) => {
+                if (video.readyState >= 1) {
+                    resolve();
+                }
+                else {
+                    video.addEventListener('loadedmetadata', () => resolve(), { once: true });
+                }
+            });
+        };
+
+        const initializeAfterMetadata = async (video1: HTMLVideoElement, video2: HTMLVideoElement) => {
+            await Promise.all([waitForMetadata(video1), waitForMetadata(video2)]);
+
+            this.init();
+        };
+
+        initializeAfterMetadata(this.videoForward, this.videoBackward);
     }
 
     init() {
@@ -210,7 +227,7 @@ class VideoAnimation {
         const rect = this.el.getBoundingClientRect();
 
         if (this.position === 'down') {
-            window.scrollBy(0, rect.top - 1);
+            window.scrollBy(0, rect.top - 2);
         }
         else {
             window.scrollBy(0, rect.top + 2);
@@ -223,7 +240,7 @@ class VideoAnimation {
     };
 
     playVideo = async (deltaY: number) => {
-        if (deltaY < 0 && this.videoBackward.currentTime !== this.videoDuration) {
+        if (deltaY < 0 && this.videoDuration - this.videoBackward.currentTime > 0.1) {
             // this.video.pause();
             // //const scrollDelta = Math.sign(deltaY) * 0.001;
             // const scrollDelta = deltaY / this.tuneDownwardSpeed;
@@ -267,7 +284,7 @@ class VideoAnimation {
             //this.videoBackward.pause();
             // this.videoForward.currentTime = this.videoDuration - this.videoBackward.currentTime;
         }
-        else if (this.videoForward.currentTime !== this.videoDuration) {
+        else if (deltaY > 0 && this.videoDuration - this.videoForward.currentTime > 0.1) {
             this.currentDirection = 'forward';
 
             this.videoBackward.pause();
@@ -375,12 +392,23 @@ class VideoAnimation {
     calibrateWheelDelta = () => {
         let countEvents = 0;
 
+        function calculate(x: number) {
+            if (x <= 3) return 186;
+            if (x >= 16) return 80;
+
+            if (x <= 10) {
+                return 186 + (292 - 186) * ((x - 3) / (10 - 3));
+            } else {
+                return 292 + (80 - 292) * ((x - 10) / (16 - 10));
+            }
+        }
+
         const handleWheelCalibration = (event: WheelEvent) => {
             const deltaY = Math.abs(event.deltaY);
 
             if (deltaY < this.smallestDelta) {
                 this.smallestDelta = deltaY;
-                this.tuneForwardSpeed = this.smallestDelta * 30;
+                this.tuneForwardSpeed = calculate(deltaY);
             }
 
             if (deltaY > this.biggestDelta) {
@@ -396,39 +424,40 @@ class VideoAnimation {
     };
 
     calibrateTouchDelta = () => {
-        let countEvents = 0;
-        let previousTouch = 0;
-        let smallestDelta = 1000;
+        // let countEvents = 0;
+        // let previousTouch = 0;
+        // let smallestDelta = 1000;
 
         const setInitialTouch = (e: TouchEvent) => {
-            if (e.touches.length === 1) {
-                previousTouch = e.touches[0].clientY;
-            }
+            //if (e.touches.length === 1) {
+                //previousTouch = e.touches[0].clientY;
+            //}
+            this.tuneForwardSpeed = 15;
         };
 
-        const handleTouchCalibration = (e: TouchEvent) => {
-            if (e.touches.length === 1) {
-                const clientY = e.touches[0].clientY;
-                const deltaTouch = Math.abs(previousTouch - clientY);
+        // const handleTouchCalibration = (e: TouchEvent) => {
+        //     if (e.touches.length === 1) {
+        //         const clientY = e.touches[0].clientY;
+        //         const deltaTouch = Math.abs(previousTouch - clientY);
 
-                if (deltaTouch === 0) return;
+        //         if (deltaTouch === 0) return;
 
-                if (deltaTouch < smallestDelta) {
-                    smallestDelta = deltaTouch;
-                    this.tuneForwardSpeed = smallestDelta * 24;
-                }
+        //         if (deltaTouch < smallestDelta) {
+        //             smallestDelta = deltaTouch;
+        //             this.tuneForwardSpeed = 1;
+        //         }
 
-                previousTouch = clientY;
+        //         previousTouch = clientY;
 
-                if (++countEvents > 150) {
-                    window.removeEventListener("touchstart", setInitialTouch);
-                    window.removeEventListener("touchmove", handleTouchCalibration);
-                }
-            }
-        }
+        //         if (++countEvents > 150) {
+        //             window.removeEventListener("touchstart", setInitialTouch);
+        //             window.removeEventListener("touchmove", handleTouchCalibration);
+        //         }
+        //     }
+        // }
 
-        window.addEventListener("touchstart", setInitialTouch, { passive: false });
-        window.addEventListener("touchmove", handleTouchCalibration, { passive: false });
+        window.addEventListener("touchstart", setInitialTouch, { once: true });
+        //window.addEventListener("touchmove", handleTouchCalibration, { passive: false });
     };
 }
 
