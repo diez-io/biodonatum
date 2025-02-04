@@ -393,18 +393,25 @@ class VideoAnimation {
         let countEvents = 0;
 
         function calculate(x: number) {
-            if (x <= 3) return 186;
-            if (x >= 16) return 80;
+            if (x <= 3) return 50;
+            if (x >= 15) return 50;
+
+            const min = 80;
+            const middle = 186;
+            const max = 300;
 
             if (x <= 10) {
-                return 186 + (292 - 186) * ((x - 3) / (10 - 3));
-            } else {
-                return 292 + (80 - 292) * ((x - 10) / (16 - 10));
+                return middle + (max - middle) * ((x - 3) / (10 - 3));
+            }
+            else {
+                return max + (min - max) * ((x - 10) / (15 - 10));
             }
         }
 
         const handleWheelCalibration = (event: WheelEvent) => {
             const deltaY = Math.abs(event.deltaY);
+
+            console.log('deltaY', deltaY);
 
             if (deltaY < this.smallestDelta) {
                 this.smallestDelta = deltaY;
