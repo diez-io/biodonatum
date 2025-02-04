@@ -5,7 +5,7 @@ body {
 }
 
 .video-container {
-	position: relative;
+	// position: relative;
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;
@@ -17,15 +17,28 @@ body {
 	margin-right: auto;
 }
 
+.scroll-video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	inset: 0;
+}
+
 .video-container--fixed {
 	position: fixed;
 	inset: 0;
 	z-index: 9;
 }
 
-#scroll-video {
+.scroll-video-wrapper {
 	border-radius: 20px;
+	overflow: hidden;
+	position: relative;
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+}
+
+.scroll-video__forward {
+	z-index: 99;
 }
