@@ -107,7 +107,7 @@ class VideoAnimation {
                 }
 
                 if (
-                    (this.position === 'up' && window.innerHeight - rect.bottom <= 0) ||
+                    (this.position === 'up' && rect.top > 0) ||
                     (this.position === 'down' && rect.top <= 0)
                 ) {
                     this.lockScroll();
@@ -188,7 +188,6 @@ class VideoAnimation {
             return Math.max(minInertia, (range / maxRange) * maxInertia);
         };
 
-
         if (this.currentDirection === 'forward') {
             if (this.videoForward.playbackRate > this.supportedPlaybackRange[0]) {
                 let playbackRate = this.videoForward.playbackRate - computeInertia(this.videoForward.playbackRate);
@@ -224,6 +223,9 @@ class VideoAnimation {
     };
 
     unlockScroll = () => {
+        document.body.style.overflow = '';
+        this.videoForward.classList.remove('video-container--fixed');
+        this.videoBackward.classList.remove('video-container--fixed');
         const rect = this.el.getBoundingClientRect();
 
         if (this.position === 'down') {
@@ -234,9 +236,6 @@ class VideoAnimation {
         }
 
         this.isScrollLocked = false;
-        document.body.style.overflow = '';
-        this.videoForward.classList.remove('video-container--fixed');
-        this.videoBackward.classList.remove('video-container--fixed');
     };
 
     playVideo = async (deltaY: number) => {
@@ -393,7 +392,8 @@ class VideoAnimation {
         let countEvents = 0;
 
         function calculate(x: number) {
-            if (x <= 3) return 50;
+            if (x <= 2) return 10;
+            if (x <= 3) return 30;
             if (x >= 15) return 50;
 
             const min = 80;
@@ -410,8 +410,6 @@ class VideoAnimation {
 
         const handleWheelCalibration = (event: WheelEvent) => {
             const deltaY = Math.abs(event.deltaY);
-
-            console.log('deltaY', deltaY);
 
             if (deltaY < this.smallestDelta) {
                 this.smallestDelta = deltaY;
