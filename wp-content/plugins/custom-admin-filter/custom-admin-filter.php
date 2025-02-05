@@ -6,6 +6,7 @@ Version: 1.0
 Author: Your Name
 */
 
+
 function your_plugin_enqueue_admin_styles() {
     // Only enqueue on admin pages where posts are displayed
     if (is_admin()) {

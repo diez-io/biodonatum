@@ -145,6 +145,7 @@ wp-content/languages/
 !/wp-content/plugins/
 wp-content/plugins/*
 !wp-content/plugins/custom-admin-filter/
+!wp-content/plugins/import-export-translations/
 !wp-content/plugins/language-detector/
 !wp-content/plugins/custom-admin-filter/**
 !wp-content/plugins/language-detector/**
