@@ -224,3 +224,48 @@ function handle_profile_image_upload() {
         }
     }
 }
+
+
+
+add_action('admin_menu', 'create_custom_content_menu');
+add_action('init', 'move_dynamic_acf_post_types_under_menu', 20);
+
+function create_custom_content_menu() {
+    // Create a parent menu for grouping custom post types
+    add_menu_page(
+        'Content',
+        'Content',
+        'manage_options',
+        'custom-content-menu',
+        '',
+        'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjNzVGQjRDIj48cGF0aCBkPSJtNDc2LTgwIDE4Mi00ODBoODRMOTI0LTgwaC04NGwtNDMtMTIySDYwM0w1NjAtODBoLTg0Wk0xNjAtMjAwbC01Ni01NiAyMDItMjAycS0zNS0zNS02My41LTgwVDE5MC02NDBoODRxMjAgMzkgNDAgNjh0NDggNThxMzMtMzMgNjguNS05Mi41VDQ4NC03MjBINDB2LTgwaDI4MHYtODBoODB2ODBoMjgwdjgwSDU2NHEtMjEgNzItNjMgMTQ4dC04MyAxMTZsOTYgOTgtMzAgODItMTIyLTEyNS0yMDIgMjAxWm00NjgtNzJoMTQ0bC03Mi0yMDQtNzIgMjA0WiIvPjwvc3ZnPg==',
+        25
+    );
+}
+
+function move_dynamic_acf_post_types_under_menu() {
+    $parent_menu_slug = 'custom-content-menu';
+
+    $post_types = [];
+
+    // Retrieve all registered post types
+    $all_post_types = get_post_types([], 'objects');
+
+    foreach ($all_post_types as $post_type) {
+        $taxonomies = get_object_taxonomies($post_type->name);
+
+        if (in_array('taxonomy_language', $taxonomies)) {
+            $post_types[] = $post_type->name;
+        }
+    }
+
+    foreach ($post_types as $post_type) {
+        add_submenu_page(
+            $parent_menu_slug,
+            get_post_type_object($post_type)->labels->name,
+            get_post_type_object($post_type)->labels->menu_name,
+            'manage_options',
+            "edit.php?post_type=$post_type"
+        );
+    }
+}
