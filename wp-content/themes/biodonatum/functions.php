@@ -231,7 +231,18 @@ add_action('admin_menu', 'create_custom_content_menu');
 add_action('init', 'move_dynamic_acf_post_types_under_menu', 20);
 
 function create_custom_content_menu() {
-    // Create a parent menu for grouping custom post types
+    $edit_link = admin_url("edit-tags.php?taxonomy=taxonomy_language");
+
+    add_menu_page(
+        'Languages',
+        'Languages',
+        'manage_options',
+        $edit_link,
+        '',
+        'dashicons-translation',
+        25,
+    );
+
     add_menu_page(
         'Content',
         'Content',

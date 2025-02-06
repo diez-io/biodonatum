@@ -7,7 +7,7 @@ jQuery(document).ready(function ($) {
         const modal = `
         <div id="acf-import-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999;">
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px;">
-                <h2>Import ACF Data</h2>
+                <h2>Import from excel file</h2>
                 <form id="acf-import-form" enctype="multipart/form-data">
                     <input type="file" name="acf_excel_file" accept=".xlsx, .xls" required />
                     <input type="hidden" name="post_id" value="${postId}" />
