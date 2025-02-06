@@ -20,12 +20,14 @@ class VideoAnimation {
     currentDirection: 'forward' | 'backword';
     inertiaTimeoutId: NodeJS.Timeout;
     tuneInertia: number;
+    headerElement: HTMLElement;
 
     constructor(el: Element) {
         this.el = el;
         this.videoForward = el.querySelector('.scroll-video__forward');
         this.videoBackward = el.querySelector('.scroll-video__backward');
         this.scrollVideoWrapper = el.querySelector('.scroll-video-wrapper');
+        this.headerElement = document.querySelector('.header');
 
         //this.tuneForwardSpeed = 10;
         this.tuneForwardSpeed = 3;
@@ -94,31 +96,7 @@ class VideoAnimation {
             this.currentDirection = 'forward';
         }
 
-        window.addEventListener("scroll", (e) => {
-            const rect = this.el.getBoundingClientRect();
-
-            if (!this.isScrollLocked) {
-                if (this.position === 'down' && rect.top <= this.startDelta && rect.top > 0) {
-                    this.transformContainer(rect.top);
-                }
-
-                if (this.position === 'up' && (window.innerHeight - rect.bottom) <= this.startDelta && (window.innerHeight - rect.bottom) > 0) {
-                    this.transformContainer(window.innerHeight - rect.bottom);
-                }
-
-                if (
-                    (this.position === 'up' && rect.top > 0) ||
-                    (this.position === 'down' && rect.top <= 0)
-                ) {
-                    this.lockScroll();
-                }
-            }
-            else {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                e.stopPropagation();
-            }
-        });
+        window.addEventListener("scroll", this.scrollEventHandler);
 
         window.addEventListener("wheel", (e: WheelEvent) => {
             if (!this.isScrollLocked) return;
@@ -175,6 +153,32 @@ class VideoAnimation {
         // window.addEventListener("touchend", (event: TouchEvent) => {
         //     console.log('touchend');
         // });
+    }
+
+    scrollEventHandler = (e: Event) => {
+        const rect = this.el.getBoundingClientRect();
+
+        if (!this.isScrollLocked) {
+            if (this.position === 'down' && rect.top <= this.startDelta && rect.top > 0) {
+                this.transformContainer(rect.top);
+            }
+
+            if (this.position === 'up' && (window.innerHeight - rect.bottom) <= this.startDelta && (window.innerHeight - rect.bottom) > 0) {
+                this.transformContainer(window.innerHeight - rect.bottom);
+            }
+
+            if (
+                (this.position === 'up' && rect.top > 0) ||
+                (this.position === 'down' && rect.top <= 0)
+            ) {
+                this.lockScroll();
+            }
+        }
+        else {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            e.stopPropagation();
+        }
     }
 
     inertia = () => {
@@ -336,12 +340,16 @@ class VideoAnimation {
     };
 
     transformContainer = (delta: number) => {
-        const width = this.maxWidth + ((this.startDelta - (delta)) / this.startDelta) * (window.innerWidth - this.maxWidth);
-        const padding = 20 - ((this.startDelta - delta) / this.startDelta) * 20;
+        const percent = (this.startDelta - delta) / this.startDelta;
+
+        const width = this.maxWidth + percent * (window.innerWidth - this.maxWidth);
+        const padding = 20 - percent * 20;
+        const headerBackground = 100 - percent * 32;
 
         (this.el as HTMLElement).style.maxWidth = width + 'px';
         (this.el as HTMLElement).style.padding = '0 ' + padding + 'px';
         this.scrollVideoWrapper.style.borderRadius = padding + 'px';
+        this.headerElement.style.backgroundColor = 'rgb(255 255 255 / ' + headerBackground + '%)';
     };
 
     simulateWheelEvent(deltaY: number) {
@@ -464,6 +472,32 @@ class VideoAnimation {
         window.addEventListener("touchstart", setInitialTouch, { once: true });
         //window.addEventListener("touchmove", handleTouchCalibration, { passive: false });
     };
+
+    scrollToTop() {
+        window.removeEventListener("scroll", this.scrollEventHandler);
+        clearTimeout(this.inertiaTimeoutId);
+        document.body.style.overflow = '';
+        this.videoForward.classList.remove('video-container--fixed');
+        this.videoBackward.classList.remove('video-container--fixed');
+
+        this.videoBackward.pause();
+        this.videoForward.pause();
+        this.position = 'down';
+        this.currentDirection = 'forward';
+        this.videoForward.style.visibility = 'hidden';
+        this.videoBackward.style.visibility = '';
+
+        (this.el as HTMLElement).style.maxWidth = '';
+        (this.el as HTMLElement).style.padding = '';
+        this.scrollVideoWrapper.style.borderRadius = '';
+        this.headerElement.style.backgroundColor = '';
+
+        this.videoBackward.currentTime = this.videoDuration;
+        this.videoForward.currentTime = 0;
+        this.isScrollLocked = false;
+
+        setTimeout(() => window.addEventListener("scroll", this.scrollEventHandler), 1000);
+    }
 }
 
 export default VideoAnimation;

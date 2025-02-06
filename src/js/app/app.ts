@@ -11,7 +11,11 @@ import VideoAnimation from "./videoAnimation";
 
 
 class App {
+    videoAnimation: VideoAnimation;
+
     constructor() {
+        this.videoAnimation = null;
+
         this.init();
     }
     init = () => {
@@ -25,14 +29,34 @@ class App {
         this.createDropdown();
         this.createTypeAnimation();
         this.createVideoAnimation();
+        this.initScrollToTopBtn();
+    }
+
+    initScrollToTopBtn = () => {
+        const scrollToTopBtn = document.querySelector('.scroll-up-btn') as HTMLElement;
+
+        window.addEventListener('scroll', () => {
+            scrollToTopBtn.style.display = window.scrollY > 200 ? 'flex' : '';
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            if (this.videoAnimation) {
+                this.videoAnimation.scrollToTop();
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     }
 
     createVideoAnimation = () => {
-        const elements = document.querySelectorAll('.video-animation');
+        const element = document.querySelector('.video-animation');
 
-        elements && elements.forEach(element => {
-            new VideoAnimation(element);
-        });
+        if (element) {
+            this.videoAnimation = new VideoAnimation(element);
+        }
     }
 
     createTypeAnimation = () => {
