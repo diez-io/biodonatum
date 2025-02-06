@@ -1,3 +1,9 @@
+<div class="scroll-up-btn">
+    <svg class="socials__icon socials__icon--wa">
+        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-angle-rounded"></use>
+    </svg>
+</div>
+
 <footer class="footer">
     <div class="container">
         <div class="footer__wrapper">
