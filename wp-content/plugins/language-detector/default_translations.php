@@ -53,4 +53,6 @@ return [
     'Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our %s.' => 'your_personal_data_will_be_used_support_experience',
     'Pay for order' => 'pay_for_order',
     'Save payment information to my account for future purchases.' => 'save_payment_information',
+    '%1$s for %2$s item' => '1s_for_2s_item',
+    '%1$s for %2$s items' => '1s_for_2s_items',
 ];

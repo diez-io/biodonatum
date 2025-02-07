@@ -608,6 +608,22 @@ function custom_translation_handler_with_context($translated, $original, $contex
     return $translated;
 }
 
+add_filter('ngettext', 'custom_translation_handler_for_single_plural', 10, 5);
+
+function custom_translation_handler_for_single_plural($translation, $single, $plural, $number, $domain) {
+    global $default_translations;
+
+    if ($number === 1 && array_key_exists($single, $default_translations)) {
+        $translation = get_static_content($default_translations[$single]);
+    }
+    elseif (array_key_exists($plural, $default_translations)) {
+        $translation = get_static_content($default_translations[$plural]);
+    }
+
+    return $translation;
+}
+
+
 
 //remove_filter('gettext', 'custom_translation_handler');
 
