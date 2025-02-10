@@ -90,9 +90,8 @@ class VideoAnimation {
         initializeAfterMetadata();
     }
 
-    init() {
-        this.videoForward.play();
-        this.videoBackward.play();
+    async init() {
+        await Promise.all([this.videoForward.play(), this.videoBackward.play()]);
         this.videoForward.pause();
         this.videoBackward.pause();
         this.videoDuration = this.videoForward.duration;
@@ -579,6 +578,10 @@ class VideoAnimation {
         const response = await fetch(videoSrc);
         const videoBlob = await response.blob();
 
+        videoElement.src = URL.createObjectURL(videoBlob);
+        videoElement.load();
+        resolve();
+
         const dbRequest = indexedDB.open(this.dbName, 1);
 
         dbRequest.onsuccess = (event: Event) => {
@@ -587,9 +590,6 @@ class VideoAnimation {
             const store = transaction.objectStore(this.storeName);
 
             store.put(videoBlob, key);
-            videoElement.src = URL.createObjectURL(videoBlob);
-            videoElement.load();
-            resolve();
         };
 
         dbRequest.onerror = (event) => {
