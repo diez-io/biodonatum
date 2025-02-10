@@ -1,11 +1,4 @@
-body {
-	// height: 200vh;
-	/* Just for demo purposes to enable scrolling */
-
-}
-
 .video-container {
-	// position: relative;
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;
@@ -15,6 +8,54 @@ body {
 	padding: 0 20px;
 	margin-left: auto;
 	margin-right: auto;
+
+	&__loader {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		inset: 0;
+		z-index: 100;
+
+		&__desktop {
+			@include r(768) {
+				display: none;
+			}
+		}
+
+		&__mob {
+			@include rmin(768) {
+				display: none;
+			}
+		}
+
+		img {
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&__spinner {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&__element {
+				width: 30%;
+				aspect-ratio: 1/1;
+				border-width: 25px;
+				border-style: solid;
+				border-color: rgb(93, 93, 93) rgba(0, 0, 0, 0.274) rgba(0, 0, 0, 0.274)
+					rgba(0, 0, 0, 0.274);
+				border-radius: 100%;
+				animation-name: spin;
+				animation-duration: 1000ms;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+			}
+		}
+	}
 }
 
 .scroll-video {

@@ -1,6 +1,15 @@
 <section class="section">
     <div class="video-container video-animation">
         <div class="scroll-video-wrapper">
+            <div class="video-container__loader">
+                <picture>
+                    <img class="video-container__loader__desktop" src="./assets/images/first_frame_en.jpg" alt="">
+                    <img class="video-container__loader__mob" src="./assets/images/first_frame_mob.jpg" alt="">
+                </picture>
+                <div class="video-container__loader__spinner">
+                    <div class="video-container__loader__spinner__element"></div>
+                </div>
+            </div>
             <video class="scroll-video scroll-video__forward" playsinline muted data-video-src="./assets/videos/biodonatum-en.mp4" data-video-src-mob="./assets/videos/biodonatum-en-mob.mp4">
             </video>
             <video class="scroll-video scroll-video__backward" playsinline muted data-video-src="./assets/videos/biodonatum-en-reverse.mp4" data-video-src-mob="./assets/videos/biodonatum-en-mob-reverse.mp4">

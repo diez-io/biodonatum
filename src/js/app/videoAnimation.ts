@@ -1,4 +1,5 @@
 import { resolve } from "path";
+import { LoaderTargetPlugin } from "webpack";
 
 class VideoAnimation {
 
@@ -21,6 +22,9 @@ class VideoAnimation {
     inertiaTimeoutId: NodeJS.Timeout;
     tuneInertia: number;
     headerElement: HTMLElement;
+    dbName: string;
+    storeName: string;
+    isMobile: boolean;
 
     constructor(el: Element) {
         this.el = el;
@@ -28,6 +32,8 @@ class VideoAnimation {
         this.videoBackward = el.querySelector('.scroll-video__backward');
         this.scrollVideoWrapper = el.querySelector('.scroll-video-wrapper');
         this.headerElement = document.querySelector('.header');
+        this.dbName = 'VideoDB';
+        this.storeName = 'Videos';
 
         //this.tuneForwardSpeed = 10;
         this.tuneForwardSpeed = 3;
@@ -37,11 +43,11 @@ class VideoAnimation {
         this.supportedPlaybackRange = [0, 0];
         this.findSupportedPlaybackRange();
 
-        const isMobile = window.innerWidth < 768;
-        this.videoForward.src = isMobile ? this.videoForward.dataset.videoSrcMob : this.videoForward.dataset.videoSrc;
-        this.videoBackward.src = isMobile ? this.videoBackward.dataset.videoSrcMob : this.videoBackward.dataset.videoSrc;
-        this.videoForward.load();
-        this.videoBackward.load();
+        this.isMobile = window.innerWidth < 768;
+        // this.videoForward.src = this.isMobile ? this.videoForward.dataset.videoSrcMob : this.videoForward.dataset.videoSrc;
+        // this.videoBackward.src = this.isMobile ? this.videoBackward.dataset.videoSrcMob : this.videoBackward.dataset.videoSrc;
+        // this.videoForward.load();
+        // this.videoBackward.load();
 
         this.isScrollLocked = false;
 
@@ -63,13 +69,23 @@ class VideoAnimation {
             });
         };
 
-        const initializeAfterMetadata = async (video1: HTMLVideoElement, video2: HTMLVideoElement) => {
-            await Promise.all([waitForMetadata(video1), waitForMetadata(video2)]);
+        const initializeAfterMetadata = async () => {
+            await Promise.all([
+                this.loadVideoFromIndexedDB('forward', this.videoForward),
+                this.loadVideoFromIndexedDB('backward', this.videoBackward),
+            ]);
+
+            await Promise.all([
+                waitForMetadata(this.videoForward),
+                waitForMetadata(this.videoBackward),
+            ]);
+
+            (this.el.querySelector('.video-container__loader') as HTMLElement).style.display = 'none';
 
             this.init();
         };
 
-        initializeAfterMetadata(this.videoForward, this.videoBackward);
+        initializeAfterMetadata();
     }
 
     init() {
@@ -498,6 +514,82 @@ class VideoAnimation {
 
         setTimeout(() => window.addEventListener("scroll", this.scrollEventHandler), 1000);
     }
+
+    loadVideoFromIndexedDB = (key: string, videoElement: HTMLVideoElement): Promise<void> => {
+        if (this.isMobile) {
+            key += '_mob';
+        }
+
+        return new Promise((resolve, reject) => {
+            const dbRequest: IDBOpenDBRequest = indexedDB.open(this.dbName, 1);
+
+            dbRequest.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+                const db = (event.target as IDBOpenDBRequest).result;
+
+                if (!db.objectStoreNames.contains(this.storeName)) {
+                    db.createObjectStore(this.storeName);
+                }
+            };
+
+            dbRequest.onsuccess = async (event: Event) => {
+                const db = (event.target as IDBOpenDBRequest).result;
+                const transaction = db.transaction(this.storeName, "readonly");
+                const store = transaction.objectStore(this.storeName);
+
+                const videoRequest = store.get(key);
+
+                videoRequest.onsuccess = async (event: Event) => {
+                    const videoBlob = (event.target as IDBRequest<Blob | null>).result;
+
+                    if (videoBlob) {
+                        // Video already in the database
+                        const videoBlobUrl = URL.createObjectURL(videoBlob);
+                        videoElement.src = videoBlobUrl;
+                        videoElement.load();
+                        resolve();
+                    }
+                    else {
+                        // Video not found in the database, fetch and save it
+                        this.saveVideoToIndexedDB(key, videoElement, resolve, reject);
+                    }
+                };
+
+                videoRequest.onerror = () => {
+                    console.error("Failed to load video from IndexedDB.");
+                    reject(new Error("Failed to load video from IndexedDB"));
+                };
+            };
+
+            dbRequest.onerror = (event) => {
+                console.error("IndexedDB error:", (event.target as IDBOpenDBRequest).error);
+                reject(new Error("IndexedDB initialization error"));
+            };
+        });
+    };
+
+    saveVideoToIndexedDB = async (key: string, videoElement: HTMLVideoElement, resolve: any, reject: any) => {
+        const videoSrc = this.isMobile ? videoElement.dataset.videoSrcMob : videoElement.dataset.videoSrc;
+
+        const response = await fetch(videoSrc);
+        const videoBlob = await response.blob();
+
+        const dbRequest = indexedDB.open(this.dbName, 1);
+
+        dbRequest.onsuccess = (event: Event) => {
+            const db = (event.target as IDBOpenDBRequest).result;
+            const transaction = db.transaction(this.storeName, "readwrite");
+            const store = transaction.objectStore(this.storeName);
+
+            store.put(videoBlob, key);
+            videoElement.src = URL.createObjectURL(videoBlob);
+            videoElement.load();
+            resolve();
+        };
+
+        dbRequest.onerror = (event) => {
+            reject("Error saving video to IndexedDB");
+        };
+    };
 }
 
 export default VideoAnimation;
