@@ -25,6 +25,7 @@ class VideoAnimation {
     dbName: string;
     storeName: string;
     isMobile: boolean;
+    isInitialised: boolean;
 
     constructor(el: Element) {
         this.el = el;
@@ -34,6 +35,7 @@ class VideoAnimation {
         this.headerElement = document.querySelector('.header');
         this.dbName = 'VideoDB';
         this.storeName = 'Videos';
+        this.isInitialised = false;
 
         //this.tuneForwardSpeed = 10;
         this.tuneForwardSpeed = 3;
@@ -111,6 +113,8 @@ class VideoAnimation {
             this.videoBackward.style.visibility = 'hidden';
             this.currentDirection = 'forward';
         }
+
+        this.isInitialised = true;
 
         window.addEventListener("scroll", this.scrollEventHandler);
 
@@ -490,29 +494,31 @@ class VideoAnimation {
     };
 
     scrollToTop() {
-        window.removeEventListener("scroll", this.scrollEventHandler);
-        clearTimeout(this.inertiaTimeoutId);
-        document.body.style.overflow = '';
-        this.videoForward.classList.remove('video-container--fixed');
-        this.videoBackward.classList.remove('video-container--fixed');
+        if (this.isInitialised) {
+            window.removeEventListener("scroll", this.scrollEventHandler);
+            clearTimeout(this.inertiaTimeoutId);
+            document.body.style.overflow = '';
+            this.videoForward.classList.remove('video-container--fixed');
+            this.videoBackward.classList.remove('video-container--fixed');
 
-        this.videoBackward.pause();
-        this.videoForward.pause();
-        this.position = 'down';
-        this.currentDirection = 'forward';
-        this.videoForward.style.visibility = 'hidden';
-        this.videoBackward.style.visibility = '';
+            this.videoBackward.pause();
+            this.videoForward.pause();
+            this.position = 'down';
+            this.currentDirection = 'forward';
+            this.videoForward.style.visibility = 'hidden';
+            this.videoBackward.style.visibility = '';
 
-        (this.el as HTMLElement).style.maxWidth = '';
-        (this.el as HTMLElement).style.padding = '';
-        this.scrollVideoWrapper.style.borderRadius = '';
-        this.headerElement.style.backgroundColor = '';
+            (this.el as HTMLElement).style.maxWidth = '';
+            (this.el as HTMLElement).style.padding = '';
+            this.scrollVideoWrapper.style.borderRadius = '';
+            this.headerElement.style.backgroundColor = '';
 
-        this.videoBackward.currentTime = this.videoDuration;
-        this.videoForward.currentTime = 0;
-        this.isScrollLocked = false;
+            this.videoBackward.currentTime = this.videoDuration;
+            this.videoForward.currentTime = 0;
+            this.isScrollLocked = false;
 
-        setTimeout(() => window.addEventListener("scroll", this.scrollEventHandler), 1000);
+            setTimeout(() => window.addEventListener("scroll", this.scrollEventHandler), 1000);
+        }
     }
 
     loadVideoFromIndexedDB = (key: string, videoElement: HTMLVideoElement): Promise<void> => {
