@@ -280,3 +280,7 @@ function move_dynamic_acf_post_types_under_menu() {
         );
     }
 }
+
+add_filter('locale', function() {
+    return $_SESSION['lang'] ?? 'en';
+});

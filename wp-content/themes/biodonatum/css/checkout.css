@@ -154,7 +154,7 @@ textarea::placeholder {
 	cursor: pointer;
 }
 
-.checkout .payment_box fieldset {
+.checkout .payment_box fieldset:not(#wc-revolut_cc-cc-form) {
 	border: 1px solid black;
 	border-radius: 10px;
 	margin-top: 20px;
@@ -276,4 +276,13 @@ textarea::placeholder {
 	.checkout .woocommerce-shipping-fields__field-wrapper #shipping_last_name_field {
 		grid-column: 2/3;
 	}
+}
+
+.revolut-payment-method-save {
+	gap: 10px;
+	cursor: pointer;
+}
+
+.revolut-payment-method-save input {
+	all: revert;
 }

@@ -17,10 +17,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! wp_doing_ajax() ) {
-	do_action( 'woocommerce_review_order_before_payment' );
-}
-?>
+if ( ! wp_doing_ajax() ) : ?>
+	<div class="mt-30">
+		<? do_action( 'woocommerce_review_order_before_payment' ); ?>
+	</div>
+<?endif; ?>
 <div id="payment" class="woocommerce-checkout-payment">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
 		<ul class="wc_payment_methods payment_methods methods containers_line">

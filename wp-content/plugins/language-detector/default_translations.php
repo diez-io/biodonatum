@@ -55,4 +55,5 @@ return [
     'Save payment information to my account for future purchases.' => 'save_payment_information',
     '%1$s for %2$s item' => '1s_for_2s_item',
     '%1$s for %2$s items' => '1s_for_2s_items',
+    'Pay with card' => 'pay_with_card',
 ];
