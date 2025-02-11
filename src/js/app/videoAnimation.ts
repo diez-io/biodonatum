@@ -580,10 +580,13 @@ class VideoAnimation {
     };
 
     saveVideoToIndexedDB = async (key: string, videoElement: HTMLVideoElement, resolve: any, reject: any) => {
-        const videoSrc = this.isMobile ? videoElement.dataset.videoSrcMob : videoElement.dataset.videoSrc;
+        const videoSrcUrl = this.isMobile ? videoElement.dataset.videoSrcMob : videoElement.dataset.videoSrc;
+        const chunkSize = 1024 * 1024 * 2; // 2MB chunks
 
-        const response = await fetch(videoSrc);
-        const videoBlob = await response.blob();
+        // const response = await fetch(videoSrcUrl);
+        // const videoBlob = await response.blob();
+
+        const videoBlob = await this.fetchVideoInChunks(videoSrcUrl, chunkSize);
 
         videoElement.src = URL.createObjectURL(videoBlob);
         videoElement.load();
@@ -602,6 +605,43 @@ class VideoAnimation {
         dbRequest.onerror = (event) => {
             reject("Error saving video to IndexedDB");
         };
+    };
+
+    fetchVideoInChunks = async (videoUrl: string, chunkSize: number): Promise<Blob> => {
+        const response = await fetch(videoUrl, { method: 'HEAD' });
+        const contentLength = response.headers.get('Content-Length');
+
+        if (!contentLength) {
+            throw new Error('Unable to fetch content length from server');
+        }
+
+        const totalSize = parseInt(contentLength, 10);
+        let start = 0;
+        const chunks: Blob[] = [];
+
+        while (start < totalSize) {
+            const end = Math.min(start + chunkSize - 1, totalSize - 1);
+
+            const chunk = await this.fetchChunk(videoUrl, start, end);
+            chunks.push(chunk);
+
+            start += chunkSize;
+        }
+
+        return new Blob(chunks, { type: 'video/mp4' });
+    };
+
+    fetchChunk = async (url: string, start: number, end: number): Promise<Blob> => {
+        const headers = new Headers();
+        headers.append('Range', `bytes=${start}-${end}`);
+
+        const response = await fetch(url, { headers });
+
+        if (!response.ok) {
+            throw new Error(`Chunk fetch failed with status ${response.status}`);
+        }
+
+        return await response.blob();
     };
 }
 
