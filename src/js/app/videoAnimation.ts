@@ -1,6 +1,3 @@
-import { resolve } from "path";
-import { LoaderTargetPlugin } from "webpack";
-
 class VideoAnimation {
 
     el: Element;
@@ -26,6 +23,7 @@ class VideoAnimation {
     storeName: string;
     isMobile: boolean;
     isInitialised: boolean;
+    currentLang: string;
 
     constructor(el: Element) {
         this.el = el;
@@ -36,6 +34,7 @@ class VideoAnimation {
         this.dbName = 'VideoDB';
         this.storeName = 'Videos';
         this.isInitialised = false;
+        this.currentLang = document.documentElement.lang;
 
         //this.tuneForwardSpeed = 10;
         this.tuneForwardSpeed = 3;
@@ -137,12 +136,16 @@ class VideoAnimation {
         }, { passive: false });
 
         const touchmoveHandler = async (event: TouchEvent) => {
-            if (this.isScrollLocked) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-                event.stopPropagation();
-            }
-            else {
+            // if (this.isScrollLocked) {
+            //     event.preventDefault();
+            //     event.stopImmediatePropagation();
+            //     event.stopPropagation();
+            // }
+            // else {
+            //     return;
+            // }
+
+            if (!this.isScrollLocked) {
                 return;
             }
 
@@ -193,11 +196,11 @@ class VideoAnimation {
                 this.lockScroll();
             }
         }
-        else {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            e.stopPropagation();
-        }
+        // else {
+        //     e.preventDefault();
+        //     e.stopImmediatePropagation();
+        //     e.stopPropagation();
+        // }
     }
 
     inertia = () => {
@@ -391,7 +394,8 @@ class VideoAnimation {
             try {
                 this.videoForward.playbackRate = slowest;
                 slowestMax = slowest;
-            } catch (error) {
+            }
+            catch (error) {
                 slowestMin = slowest;
             }
         }
@@ -407,7 +411,8 @@ class VideoAnimation {
             try {
                 this.videoForward.playbackRate = fastest;
                 fastestMin = fastest;
-            } catch (error) {
+            }
+            catch (error) {
                 fastestMax = fastest;
             }
         }
@@ -521,6 +526,8 @@ class VideoAnimation {
     }
 
     loadVideoFromIndexedDB = (key: string, videoElement: HTMLVideoElement): Promise<void> => {
+        key += '_' + this.currentLang;
+
         if (this.isMobile) {
             key += '_mob';
         }
