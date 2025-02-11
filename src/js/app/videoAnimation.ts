@@ -581,7 +581,7 @@ class VideoAnimation {
 
     saveVideoToIndexedDB = async (key: string, videoElement: HTMLVideoElement, resolve: any, reject: any) => {
         const videoSrcUrl = this.isMobile ? videoElement.dataset.videoSrcMob : videoElement.dataset.videoSrc;
-        const chunkSize = 1024 * 1024 * 2; // 2MB chunks
+        const chunkSize = 1024 * 512; // 2MB chunks
 
         // const response = await fetch(videoSrcUrl);
         // const videoBlob = await response.blob();
