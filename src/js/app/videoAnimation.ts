@@ -90,9 +90,11 @@ class VideoAnimation {
     }
 
     async init() {
-        await Promise.all([this.videoForward.play(), this.videoBackward.play()]);
-        this.videoForward.pause();
-        this.videoBackward.pause();
+        // await Promise.all([this.videoForward.play(), this.videoBackward.play()]);
+        // this.videoForward.pause();
+        // this.videoBackward.pause();
+        this.simulateTouchEvent();
+
         this.videoDuration = this.videoForward.duration;
         this.startDelta = 2 * window.innerHeight / 3;
 
@@ -136,18 +138,18 @@ class VideoAnimation {
         }, { passive: false });
 
         const touchmoveHandler = async (event: TouchEvent) => {
-            // if (this.isScrollLocked) {
-            //     event.preventDefault();
-            //     event.stopImmediatePropagation();
-            //     event.stopPropagation();
-            // }
-            // else {
-            //     return;
-            // }
-
-            if (!this.isScrollLocked) {
+            if (this.isScrollLocked) {
+                event.preventDefault();
+                // event.stopImmediatePropagation();
+                // event.stopPropagation();
+            }
+            else {
                 return;
             }
+
+            // if (!this.isScrollLocked) {
+            //     return;
+            // }
 
             window.removeEventListener("touchmove", touchmoveHandler);
 
@@ -384,6 +386,21 @@ class VideoAnimation {
         window.dispatchEvent(simulatedEvent);
     }
 
+    simulateTouchEvent() {
+        const touchstart = new TouchEvent('touchstart', {
+            bubbles: true,
+            cancelable: true,
+        });
+
+        const touchend = new TouchEvent('touchend', {
+            bubbles: true,
+            cancelable: true,
+        });
+
+        window.dispatchEvent(touchstart);
+        window.dispatchEvent(touchend);
+    }
+
     findSupportedPlaybackRange = () => {
         let slowestMin = 0.0001;
         let slowestMax = 1.0;
@@ -581,7 +598,7 @@ class VideoAnimation {
 
     saveVideoToIndexedDB = async (key: string, videoElement: HTMLVideoElement, resolve: any, reject: any) => {
         const videoSrcUrl = this.isMobile ? videoElement.dataset.videoSrcMob : videoElement.dataset.videoSrc;
-        const chunkSize = 1024 * 512; // 2MB chunks
+        const chunkSize = 1024 * 1024 * 2; // 2MB chunks
 
         // const response = await fetch(videoSrcUrl);
         // const videoBlob = await response.blob();
