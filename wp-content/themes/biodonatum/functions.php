@@ -173,7 +173,7 @@ function wc_update_locale_in_stripe_element_options( $options ) {
     return array_merge(
         $options,
         array(
-            'locale' => $_SESSION['lang'] ?? 'en',
+            'locale' => $_SESSION['lang'] ?? 'fr',
         )
     );
 };
@@ -282,5 +282,5 @@ function move_dynamic_acf_post_types_under_menu() {
 }
 
 add_filter('locale', function() {
-    return $_SESSION['lang'] ?? 'en';
+    return $_SESSION['lang'] ?? 'fr';
 });
