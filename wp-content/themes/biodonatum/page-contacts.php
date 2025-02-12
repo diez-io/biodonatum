@@ -25,7 +25,15 @@ function printContacts($type) {
 
     $loop = new WP_Query($args);
 
-    if ($loop->have_posts()):
+    if ($loop->have_posts()): ?>
+        <? if ($type === 'partner') : ?>
+            <div class="head">
+                <h2 class="title"><?= get_static_content('our_distributor_partners') ?></h2>
+            </div>
+        <? endif; ?>
+
+        <div class="contacts__cards">
+        <?
         while ($loop->have_posts()):
             $loop->the_post(); ?>
 
@@ -43,20 +51,9 @@ function printContacts($type) {
                         <?
                         $websites = get_field('contact_websites');
 
-                        if (count($websites) === 1) :
-                            $url = esc_url($websites[0]['contact_websites_item']); ?>
-
-                            <a href="<?= $url ?>" class="card__text-link">
-                                <svg>
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-globe"></use>
-                                </svg>
-                                <?= parse_url($url, PHP_URL_HOST) ?>
-                            </a>
-                        <? else : ?>
-                            <div class="card__text-link card__text-link_multiple">
-
-                            <? foreach ($websites as $websites_row) :
-                                $url = esc_url($websites_row['contact_websites_item']); ?>
+                        if ($websites !== null && $websites !== false) :
+                            if (count($websites) === 1) :
+                                $url = esc_url($websites[0]['contact_websites_item']); ?>
 
                                 <a href="<?= $url ?>" class="card__text-link">
                                     <svg>
@@ -64,9 +61,22 @@ function printContacts($type) {
                                     </svg>
                                     <?= parse_url($url, PHP_URL_HOST) ?>
                                 </a>
-                            <? endforeach; ?>
+                            <? else : ?>
+                                <div class="card__text-link card__text-link_multiple">
 
-                            </div>
+                                <? foreach ($websites as $websites_row) :
+                                    $url = esc_url($websites_row['contact_websites_item']); ?>
+
+                                    <a href="<?= $url ?>" class="card__text-link">
+                                        <svg>
+                                            <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-globe"></use>
+                                        </svg>
+                                        <?= parse_url($url, PHP_URL_HOST) ?>
+                                    </a>
+                                <? endforeach; ?>
+
+                                </div>
+                            <? endif; ?>
                         <? endif; ?>
 
                         <?
@@ -109,9 +119,11 @@ function printContacts($type) {
                 </div>
             </div>
 
-        <?php endwhile;
+        <?php endwhile; ?>
 
-        wp_reset_postdata();
+        </div>
+
+        <? wp_reset_postdata();
     endif;
 }
 ?>
@@ -127,15 +139,9 @@ function printContacts($type) {
                 <div class="head">
                     <h2 class="title"><?= get_static_content('contacts') ?></h2>
                 </div>
-                <div class="contacts__cards">
-                    <? printContacts('regular'); ?>
-                </div>
-                <div class="head">
-                    <h2 class="title"><?= get_static_content('our_distributor_partners') ?></h2>
-                </div>
-                <div class="contacts__cards">
-                    <? printContacts('partner'); ?>
-                </div>
+                <? printContacts('main'); ?>
+                <? printContacts('regular'); ?>
+                <? printContacts('partner'); ?>
                 <div class="editor">
                     <p>
                         <?= get_static_content('contacts_text_1') ?>
