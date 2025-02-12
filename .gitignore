@@ -158,3 +158,5 @@ wp-content/uploads/wp-content/cache/
 
 .htaccess
 .well-known
+.user.ini
+php.ini
