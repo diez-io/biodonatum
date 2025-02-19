@@ -34,7 +34,7 @@
                                     );
 
                                     $loop = new WP_Query($args);
-                                    $numberOfScientists = $loog->found_posts;
+                                    $numberOfScientists = $loop->found_posts;
 
                                     if ($loop->have_posts()):
                                         while ($loop->have_posts()):
