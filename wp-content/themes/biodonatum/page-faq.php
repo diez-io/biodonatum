@@ -39,14 +39,14 @@
                                                 <h3 class="faq__title title title--extra-small">
                                                     <?= $row['static_faq_questions_question'] ?>
                                                 </h3>
-                                                <svg class="faq__icon">
-                                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
-                                                </svg>
+                                                <div class="faq__icon">
+                                                    <svg>
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-x"></use>
+                                                    </svg>
+                                                </div>
                                             </div>
                                             <div class="faq__content">
-                                                <p class="text text--middle text--dark">
-                                                    <?= $row['static_faq_questions_answer'] ?>
-                                                </p>
+                                                <?= $row['static_faq_questions_answer'] ?>
                                             </div>
                                         </div>
                                     <? endforeach; ?>
