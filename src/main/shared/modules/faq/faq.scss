@@ -15,14 +15,40 @@
 			padding: 30px 20px;
 		}
 
+		.faq__icon {
+			background-color: $blue-light;
+			color: $azure;
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 10px;
+
+			svg {
+				width: 20px;
+				height: 20px;
+				transform: rotate(45deg);
+				flex-shrink: 0;
+
+				transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+			}
+		}
+
 		&.active {
 			.faq__content {
 				height: 100%;
 				overflow: visible;
 				margin-top: 16px;
 			}
+
 			.faq__icon {
-				transform: rotate(180deg);
+				padding: 9px;
+
+				svg {
+					transform: none;
+					width: 22px;
+					height: 22px;
+				}
 			}
 		}
 	}
@@ -38,17 +64,8 @@
 		color: $blue;
 	}
 
-	&__icon {
-		display: flex;
-		flex-shrink: 0;
-		width: 18px;
-		height: 18px;
-		fill: $blue;
-	}
-
 	&__content {
 		height: 0;
 		overflow: hidden;
-		max-width: 630px;
 	}
 }

@@ -1,0 +1,37 @@
+.faq {
+    &__content {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 34.2px;
+
+        p, ol, ul {
+            margin: 20px 0;
+
+            @include r($mobile) {
+                margin: 18px 0;
+            }
+        }
+
+        ol {
+            list-style-type: decimal;
+        }
+
+        ul {
+            list-style-type: disc;
+        }
+
+        ol, ul {
+            list-style-position: inside;
+            padding-left: 20px;
+
+            @include r($mobile) {
+                padding-left: 16px;
+            }
+        }
+
+        @include r($mobile) {
+            font-size: 16px;
+            line-height: 26px;
+        }
+    }
+}
