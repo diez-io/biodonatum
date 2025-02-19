@@ -4,7 +4,6 @@
 <? get_header(); ?>
 
 <main class="main">
-    <? get_template_part('components/mainHero'); ?>
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
