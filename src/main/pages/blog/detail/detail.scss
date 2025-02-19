@@ -23,4 +23,17 @@
             font-size: 16px;
         }
     }
+
+    ol {
+        list-style-type: decimal;
+        list-style-position: inside;
+        padding-left: 20px;
+        font-size: 20px;
+
+
+        @include r($mobile) {
+            font-size: 16px;
+            padding-left: 16px;
+        }
+    }
 }
