@@ -406,8 +406,3 @@
 		flex-direction: column;
 	}
 }
-
-.faq ol {
-	list-style: decimal;
-	margin-left: 56px;
-}
