@@ -65,7 +65,7 @@ function parseAcceptLanguage() {
         }
     }
 
-    return 'fr';
+    return 'en';
 }
 
 function check_lang_version() {
@@ -284,7 +284,7 @@ add_action('template_redirect', function () {
         // If no preferred language is set, ensure the language slug is present
         if (!$language_slug) {
             // Default to English if no language slug is present
-            $default_language = 'fr'; // Adjust if needed
+            $default_language = 'en'; // Adjust if needed
             wp_safe_redirect(home_url('/' . $default_language . '/' . $requested_path));
             exit;
         }
