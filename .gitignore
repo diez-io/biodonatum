@@ -160,3 +160,5 @@ wp-content/uploads/wp-content/cache/
 .well-known
 .user.ini
 php.ini
+.ftpquota
+error_log
