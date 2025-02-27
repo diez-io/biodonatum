@@ -59,20 +59,6 @@
                         </a>
                     </div>
                     <div class="header__personal">
-                        <div class="header__language">
-                            <div class="header__element">
-                                <span><?= $_SESSION['lang'] ?></span>
-                            </div>
-                            <div class="menu">
-                                <? global $supported_languages; ?>
-                                <? foreach ($supported_languages as $key => $name) : ?>
-                                    <form method="POST" action="">
-                                        <input type="hidden" name="lang" value="<?= $key ?>">
-                                        <button type="submit" class="menu__item"><?= $name ?></button>
-                                    </form>
-                                <? endforeach; ?>
-                            </div>
-                        </div>
                         <div data-url="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" <?= is_user_logged_in() ? 'logged-in' : '' ?> class="header__user">
                             <div class="header__element">
                                 <svg class="icon">
