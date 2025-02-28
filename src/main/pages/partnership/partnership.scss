@@ -1,0 +1,61 @@
+.partnership {
+    .island {
+        margin: 40px 0;
+
+        @include r($mobile) {
+            margin: 20px 0;
+        }
+    }
+
+    h3 {
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 39.01px;
+        margin-bottom: 30px;
+
+        @include r($mobile) {
+            font-size: 22px;
+            line-height: 26.82px;
+            margin-bottom: 25px;
+        }
+    }
+
+    ul {
+        list-style-type: disc;
+        list-style-position: inside;
+
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 45.6px;
+
+        @include r($mobile) {
+            font-size: 18px;
+            line-height: 34.2px;
+        }
+    }
+
+    &__global-reach {
+        li::marker {
+            color: $azure;
+            font-size: 1.2em;
+        }
+    }
+
+    a {
+        color: $azure;
+
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 45.6px;
+
+        @include r($mobile) {
+            font-size: 18px;
+            line-height: 34.2px;
+        }
+
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+    }
+}

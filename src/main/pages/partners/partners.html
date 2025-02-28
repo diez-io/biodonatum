@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<%= htmlWebpackPlugin.options.widgets.head %>
+
+<body>
+    <%= htmlWebpackPlugin.options.widgets.header %>
+    <main class="main">
+        <section class="section pt-50">
+            <div class="container">
+                <div class="breadcrumbs mb-40">
+                    <a href="./index.html" class="breadcrumbs__link">to index</a>
+                    <span class="breadcrumbs__link">Partners</span>
+                </div>
+                <div class="partners-page">
+                    <%= htmlWebpackPlugin.options.widgets.partners %>
+
+                    <div class="island">
+                        <h3>
+                            <span class="partners-page__emogi">🚀</span> Joining forces – shaping the future!
+                        </h3>
+                        <p>
+                            Biodonatum invites international partners to collaborate in the distribution of innovative biotechnological solutions. We welcome distributors, medical institutions, and scientific organizations worldwide that are committed to advancing cutting-edge technologies in health and longevity.
+                        </p>
+                        <h3>
+                            <span class="partners-page__emogi">💡</span> Driving innovation – multiplying success!
+                        </h3>
+                        <p>
+                            By partnering with us, you gain:
+
+                            <ul>
+                                <li>Access to high-quality products and advanced developments</li>
+                                <li>Flexible partnership terms and a personalized approach</li>
+                                <li>Full support at every stage of cooperation</li>
+                            </ul>
+                        </p>
+                        <h3>
+                            <span class="partners-page__emogi">🤝</span> Together – towards new opportunities!
+                        </h3>
+                        <p>
+                            We are looking for reliable partners for long-term collaboration and are open to discussing various forms of cooperation. If you are interested in becoming our official representative in your country, get in touch with us!
+                        </p>
+                        <a href="#" class="partners-page__contact-us">
+                            <span class="partners-page__emogi">📩</span> Contact us – let's grow together!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%= htmlWebpackPlugin.options.widgets.feedback %>
+    </main>
+    <%= htmlWebpackPlugin.options.widgets.footer %>
+    <%= htmlWebpackPlugin.options.widgets.temp %>
+</body>
+
+</html>
