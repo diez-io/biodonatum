@@ -13,6 +13,19 @@
             <div class="partners-page">
                 <? get_template_part('components/partners'); ?>
 
+                <div class="partners-page__download">
+                    <a target="_blank" href="<?= wp_get_attachment_url(get_static_content('company_profile_file')) ?>">
+                        <div class="partners-page__download__icon">
+                            <svg>
+                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-pdf"></use>
+                            </svg>
+                        </div>
+                        <div class="partners-page__download__text">
+                            <?= get_static_content('download_company_profile') ?>
+                        </div>
+                    </a>
+                </div>
+
                 <div class="island">
                     <h3>
                         <span class="partners-page__emogi">🚀</span> <?= get_static_content('joining_forces_shaping_the_future') ?>
