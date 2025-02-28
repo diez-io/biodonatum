@@ -84,4 +84,44 @@
             color: $azure;
         }
     }
+
+    &__download {
+        color: $azure;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 33.1px;
+        margin: 60px 20px;
+
+        @include r($mobile) {
+            font-size: 27px;
+            line-height: 30.1px;
+            margin: 40px 10px;
+        }
+
+        &__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                width: 1.2em;
+                height: 1.2em;
+            }
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: fit-content;
+
+            @include r($mobile) {
+                gap: 10px;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }
