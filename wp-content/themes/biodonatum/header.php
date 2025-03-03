@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?= $_SESSION['lang'] ?>">
+<html lang="<?= $_SESSION['lang'] ?>"<?= $_SESSION['lang'] === 'ar' ? ' dir="rtl"' : '' ?>>
 
 <head>
     <meta charset="UTF-8">
@@ -35,7 +35,7 @@
                         <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('contacts')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('contacts') ?></a>
                     </nav>
                 </div>
-                <div class="header__block header__block--no-gap">
+                <div class="header__block header__block__socials-and-personal">
                     <div class="socials mob-hidden">
                         <a class="socials__link" href="https://www.instagram.com/biodonatum/" target="_blank">
                             <svg class="socials__icon">
@@ -58,6 +58,7 @@
                             </svg>
                         </a>
                     </div>
+                    <div class="header__block__divider mob-hidden"></div>
                     <div class="header__personal">
                         <div data-url="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" <?= is_user_logged_in() ? 'logged-in' : '' ?> class="header__user">
                             <div class="header__element">
