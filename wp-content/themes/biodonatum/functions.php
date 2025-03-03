@@ -107,8 +107,10 @@ function get_cf7_form_by_title($title, $htmlClass = 'form-custom') {
 
         if (!empty($forms) && is_array($forms)) {
             $form = reset($forms); // Get the first matching form
+            $html = do_shortcode('[contact-form-7 id="' . $form->id() . '" title="' . $form->title() . '" html_class="'. $htmlClass .'"]');
+            $html = preg_replace(['/ lang=".*?"/', '/ dir=".*?"/'], '', $html);
 
-            return do_shortcode('[contact-form-7 id="' . $form->id() . '" title="' . $form->title() . '" html_class="'. $htmlClass .'"]');
+            return $html;
         }
     }
 
