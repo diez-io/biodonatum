@@ -97,7 +97,7 @@ add_filter('wpcf7_form_elements', 'remove_cf7_br_tags');
 
 function remove_cf7_br_tags($form) {
     // Use regex to remove all <br> tags
-    $form = preg_replace(['/<br\s*\/?>/i', '/<\/?p[^>]*>/'], '', $form);
+    $form = preg_replace(['/<br\s*\/?>/i', '/<\/?p[^>]*>/', '/ lang=".*?"/', '/ dir=".*?"/'], '', $form);
     return $form;
 }
 
