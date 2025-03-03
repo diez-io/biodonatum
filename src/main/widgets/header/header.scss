@@ -44,31 +44,24 @@
 		&--no-gap {
 			gap: 0;
 		}
+
+		&__divider {
+			width: 1px;
+			background-color: #f0f0f0;
+			height: 32px;
+		}
+
+		&__socials-and-personal {
+			gap: 20px
+		}
 	}
 
 	&__personal {
 		display: flex;
 		position: relative;
 		gap: 8px;
-		padding: 0 0 0 14px;
 		@include r($mobile) {
 			padding: 0 14px 0 0;
-		}
-
-		&::before {
-			content: '';
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: 0;
-			height: calc(100% - 14px);
-			width: 1px;
-			background: #f0f0f0;
-
-			@include r($mobile) {
-				right: 0;
-				left: unset;
-			}
 		}
 	}
 
@@ -158,10 +151,6 @@
 			height: 20px;
 			fill: $white;
 		}
-	}
-
-	.socials {
-		padding-right: 14px;
 	}
 }
 

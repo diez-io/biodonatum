@@ -68,7 +68,8 @@
 			border-color: $azure;
 		}
 
-		&--next {
+		&--next:dir(ltr),
+		&--prev:dir(rtl) {
 			transform: rotate(-180deg);
 		}
 

@@ -27,23 +27,23 @@
     ol {
         list-style-type: decimal;
         list-style-position: inside;
-        padding-left: 20px;
+        padding-inline-start: 20px;
         font-size: 20px;
 
 
         @include r($mobile) {
             font-size: 16px;
-            padding-left: 16px;
+            padding-inline-start: 16px;
         }
     }
 
     blockquote {
         font-style: italic;
-        padding-left: 60px;
+        padding-inline-start: 60px;
         margin-bottom: 40px;
 
         @include r($mobile) {
-            padding-left: 40px;
+            padding-inline-start: 40px;
             margin-bottom: 30px;
         }
     }
