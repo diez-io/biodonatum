@@ -53,7 +53,9 @@
                                     $phone = $phoneNumbers_row['contact_phone_numbers_item']; ?>
 
                                     <a class="feedback__link" href="tel:<?= esc_attr($phone) ?>">
-                                        <?= esc_html($phone) ?>
+                                        <span class="phone-number">
+                                            <?= esc_html($phone) ?>
+                                        </span>
                                     </a>
                                 <? endforeach; ?>
                             </div>

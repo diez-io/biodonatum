@@ -89,7 +89,9 @@ function printContacts($type) {
                                 <svg>
                                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-phone"></use>
                                 </svg>
-                                <?= esc_html($phone) ?>
+                                <span class="phone-number">
+                                    <?= esc_html($phone) ?>
+                                </span>
                             </a>
                         <? else : ?>
                             <div class="card__text-link card__text-link_multiple">
@@ -101,7 +103,9 @@ function printContacts($type) {
                                     <svg>
                                         <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-phone"></use>
                                     </svg>
-                                    <?= esc_html($phone) ?>
+                                    <span class="phone-number">
+                                        <?= esc_html($phone) ?>
+                                    </span>
                                 </a>
                             <? endforeach; ?>
 
