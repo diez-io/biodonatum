@@ -221,3 +221,8 @@ body .screen-reader-response {
 	display: flex;
 	justify-content: center;
 }
+
+.phone-number {
+	direction: ltr;
+	unicode-bidi: plaintext;
+}
