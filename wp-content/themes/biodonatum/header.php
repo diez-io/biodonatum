@@ -18,7 +18,7 @@
             <div class="header__wrapper">
                 <div class="header__block">
                     <a href="/" class="logo">
-                        <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.png" alt="">
+                        <img src="<?= wp_get_attachment_url(get_static_content('logo')) ?>" alt="">
                     </a>
                 </div>
                 <div class="header__block">

@@ -10,7 +10,7 @@
             <div class="footer__block">
                 <? $language_slug = defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : ''; ?>
                 <a href="<?= home_url("/$language_slug"); ?>" class="footer__logo">
-                    <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.png" alt="">
+                    <img src="<?= wp_get_attachment_url(get_static_content('logo')) ?>" alt="">
                 </a>
             </div>
             <div class="footer__block">
