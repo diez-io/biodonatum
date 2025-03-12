@@ -294,6 +294,23 @@ add_action('template_redirect', function () {
     }
 });
 
+function load_homepage_for_language_slugs($query) {
+    global $supported_languages;
+
+    if (!is_admin() && $query->is_main_query()) {
+        // Extract the first path segment from the URL
+        $request_uri = trim($_SERVER['REQUEST_URI'], '/');
+
+        // If the first segment is a language slug, load the homepage
+        if (array_key_exists($request_uri, $supported_languages)) {
+            $query->set('page_id', get_option('page_on_front')); // Load homepage
+            $query->is_404 = false; // Prevent 404 errors
+            $query->is_home = true; // Treat it as homepage
+        }
+    }
+}
+add_action('pre_get_posts', 'load_homepage_for_language_slugs');
+
 add_filter('post_type_link', function ($post_link, $post) {
     if (defined('CURRENT_LANGUAGE') && CURRENT_LANGUAGE) {
         //$post_link = home_url('/' . CURRENT_LANGUAGE . '/' . $post->post_name . '/');
