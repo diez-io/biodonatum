@@ -4,6 +4,10 @@
 	border-radius: 20px;
 	background-color: $blue-black;
 
+	&__block:has(&__logo) {
+		flex-shrink: 0;
+	}
+
 	@include r($mobile) {
 		padding: 20px 0;
 
