@@ -56,6 +56,7 @@
 			font-size: 20px;
 			font-weight: 600;
 			line-height: 23px;
+			flex-wrap: wrap;
 
 			@include r($mobile) {
 				font-size: 14px;

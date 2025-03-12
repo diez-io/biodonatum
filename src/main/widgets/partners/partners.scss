@@ -1,10 +1,21 @@
-.slider--partners {
-    &__wrapper {
-        position: relative;
+.slider {
+    &--partners {
+        &__wrapper {
+            position: relative;
 
-        .swiper-slide {
-            display: flex;
-            justify-content: center;
+            .swiper-slide {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        .slider__control {
+            @include r(1760) {
+                top: unset;
+                bottom: -25px;
+                width: 100%;
+                transform: translateX(-50%);
+            }
         }
     }
 }

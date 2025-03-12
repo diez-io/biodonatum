@@ -40,6 +40,15 @@
 			}
 		}
 
+		&__control {
+			@include r(1760) {
+				top: unset;
+				bottom: -25px;
+				width: 100%;
+				transform: translateX(-50%);
+			}
+		}
+
 		&__btn {
 			background-color: #27aae2;
 		}
