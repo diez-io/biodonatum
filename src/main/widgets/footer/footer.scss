@@ -30,6 +30,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		gap: 20px;
 
 		@include r($mobile) {
 			//flex-direction: column;
@@ -54,7 +55,9 @@
 
 	&__nav {
 		display: flex;
-		gap: 30px;
+		flex-wrap: wrap;
+		gap: 20px;
+
 		@include r($mobile) {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
@@ -86,6 +89,8 @@
 	}
 
 	&__logo img {
+		height: 80px;
+
 		@include r($mobile) {
 			height: 50px;
 		}
