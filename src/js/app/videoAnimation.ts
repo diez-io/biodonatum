@@ -543,7 +543,7 @@ class VideoAnimation {
     }
 
     loadVideoFromIndexedDB = (key: string, videoElement: HTMLVideoElement): Promise<void> => {
-        key += '_' + this.currentLang;
+        key += '_v2_' + this.currentLang;
 
         if (this.isMobile) {
             key += '_mob';
