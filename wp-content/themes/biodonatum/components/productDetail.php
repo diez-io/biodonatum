@@ -253,7 +253,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs" data-slider="tabs">
+            <div class="tabs product-detail__tabs" data-slider="tabs">
                 <div thumbsSlider="" class="swiper tabs__header">
                     <div class="swiper-wrapper">
                         <button class="swiper-slide tabs__head"><?= get_static_content('product_detailed_description') ?></button>
