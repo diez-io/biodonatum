@@ -15,6 +15,7 @@
         gtag('js', new Date());
 
         gtag('config', 'G-20S32199Y4');
+        gtag('config', 'AW-16544789369');
     </script>
 
     <? wp_head(); ?>

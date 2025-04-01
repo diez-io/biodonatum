@@ -14,6 +14,13 @@ function google_fonts() {?>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
 <?}
 
+add_action('woocommerce_thankyou', 'add_conversion_tracking');
+function add_conversion_tracking($order_id) {
+    if (!$order_id) return;
+    echo "<script> gtag('event', 'conversion', {'send_to': 'AW-16544789369/zrHWCNzhnuAZEPnmldE9'}); </script>";
+}
+
+
 function theme_enqueue_assets() {
     // Enqueue CSS
     wp_enqueue_style('my-theme-style', get_template_directory_uri() . '/css/main.css');
