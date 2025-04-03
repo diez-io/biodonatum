@@ -18,7 +18,7 @@
                     $args = [
                         'limit' => -1, // -1 for all products
                         'orderby' => 'date',
-                        'order' => 'DESC',
+                        'order' => 'ASC',
                         'return' => 'ids', // Return product IDs only for better performance
                     ];
 
