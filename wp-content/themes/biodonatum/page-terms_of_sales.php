@@ -31,6 +31,18 @@
                                 </div>
                             </a>
                         <? endif; ?>
+                        <? if (get_static_content('cancellation_policy_file')) : ?>
+                            <a target="_blank" class="download-terms-link" href="<?= wp_get_attachment_url(get_static_content('cancellation_policy_file')) ?>">
+                                <div class="download-terms-link__icon">
+                                    <svg>
+                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-pdf"></use>
+                                    </svg>
+                                </div>
+                                <div class="download-terms-link__text">
+                                    <?= get_static_content('download') . ' ' . get_static_content('cancellation_policy') ?>
+                                </div>
+                            </a>
+                        <? endif; ?>
                     </div>
                 </section>
 
