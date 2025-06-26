@@ -58,6 +58,17 @@
                 </div>
             </div>
         </div>
+        <div class="pay-card-logos">
+            <svg>
+                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-visa"></use>
+            </svg>
+            <svg>
+                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-mastercard"></use>
+            </svg>
+            <svg class="amex">
+                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-amex"></use>
+            </svg>
+        </div>
     </div>
 </footer>
 <aside class="footer__copyright"><?= get_static_content('bottom_line') ?></aside>
