@@ -23,7 +23,8 @@
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('loyalty-program')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('loyalty_program') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('privacy-policy')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('privacy_policy') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('vacancy')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('vacancy') ?></a>
-                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('partners')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('partners') ?></a>
+                    <!-- <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('partners')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('partners') ?></a> -->
+                    <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('cookie-policy')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('cookie_policy') ?></a>
                     <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('partnership')), PHP_URL_PATH)); ?>" class="footer__link"><?= get_static_content('partnership') ?></a>
                 </nav>
             </div>
