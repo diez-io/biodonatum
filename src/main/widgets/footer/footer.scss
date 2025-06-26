@@ -99,6 +99,39 @@
 			height: 50px;
 		}
 	}
+
+	.pay-card-logos {
+		padding: 20px;
+		border-radius: 20px;
+		background-color: aliceblue;
+		margin: 40px 0 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+
+		@include r($mobile) {
+			gap: 8px;
+		}
+
+		svg {
+			height: 40px;
+			width: 80px;
+
+			@include r($mobile) {
+				height: 30px;
+				width: 60px;
+			}
+
+			&.amex {
+				width: 40px;
+
+				@include r($mobile) {
+					width: 30px;
+				}
+			}
+		}
+	}
 }
 
 .scroll-up-btn {

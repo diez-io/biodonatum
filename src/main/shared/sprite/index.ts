@@ -24,3 +24,6 @@ import './icon-x.svg';
 import './icon-success.svg';
 import './icon-angle-rounded.svg';
 import './icon-pdf.svg';
+import './icon-visa.svg';
+import './icon-mastercard.svg';
+import './icon-amex.svg';
