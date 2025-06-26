@@ -34,7 +34,7 @@
                     </h3>
                     <?= get_static_content('global_reach_logistics_text') ?>
                 </div>
-                <div class="island partnership__global-technology">
+                <?/*<div class="island partnership__global-technology">
                     <h3>
                         <?= get_static_content('global_technology_support') ?>
                     </h3>
@@ -45,7 +45,7 @@
                         <?= get_static_content('global_synergistic_marketing_and_logistic_support') ?>
                     </h3>
                     <?= get_static_content('global_synergistic_marketing_and_logistic_support_text') ?>
-                </div>
+                </div>*/?>
             </div>
             <div class="partners-page">
                 <div class="island">
