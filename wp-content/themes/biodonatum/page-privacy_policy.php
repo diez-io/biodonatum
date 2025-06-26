@@ -13,7 +13,7 @@
                         <div class="head">
                             <h2 class="title"><?= get_static_content('privacy_policy') ?></h2>
                         </div>
-                        <div class="editor">
+                        <?/*<div class="editor">
                             <p>
                                 <?= get_static_content('privacy_policy_text_1') ?>
                             </p>
@@ -23,7 +23,7 @@
                             <p>
                                 <?= get_static_content('privacy_policy_text_2') ?>
                             </p>
-                        </div>
+                        </div>*/?>
                         <? if (get_static_content('privacy_policy_file')) : ?>
                             <a target="_blank" class="download-terms-link" href="<?= wp_get_attachment_url(get_static_content('privacy_policy_file')) ?>">
                                 <div class="download-terms-link__icon">

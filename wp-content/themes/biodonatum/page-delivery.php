@@ -13,7 +13,7 @@
                         <div class="head">
                             <h2 class="title"><?= get_static_content('delivery_terms') ?></h2>
                         </div>
-                        <div class="editor">
+                        <?/*<div class="editor">
                             <p>
                                 <?= get_static_content('delivery_text_1') ?>
                             </p>
@@ -30,7 +30,7 @@
                             <p>
                                 <?= get_static_content('delivery_text_8') ?>
                             </p>
-                        </div>
+                        </div>*/?>
                         <? if (get_static_content('delivery_terms_file')) : ?>
                             <a target="_blank" class="download-terms-link" href="<?= wp_get_attachment_url(get_static_content('delivery_terms_file')) ?>">
                                 <div class="download-terms-link__icon">
