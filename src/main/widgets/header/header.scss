@@ -89,7 +89,7 @@
 		}
 	}
 
-	&__language {
+	&__language, &__currency {
 		position: relative;
 
 
@@ -100,6 +100,10 @@
 
 		.header__element {
 			text-transform: uppercase;
+
+			&:hover span {
+				color: #27aae2;
+			}
 		}
 
 		.menu {
@@ -114,6 +118,12 @@
 			opacity: 1;
 			visibility: visible;
 			transition-delay: 0s;
+		}
+	}
+
+	&__currency {
+		.header__element {
+			width: 65px;
 		}
 	}
 
