@@ -290,6 +290,27 @@ function move_dynamic_acf_post_types_under_menu() {
     }
 }
 
+
 add_filter('locale', function() {
     return $_SESSION['lang'] ?? 'en';
+});
+
+// Remove sanctioned countries from WooCommerce country dropdowns
+add_filter( 'woocommerce_countries_allowed_countries', function( $countries ) {
+    $blocked = [
+        'IR', // Иран
+        'CU', // Куба
+        'KP', // Северная Корея
+        'SD', // Судан
+        'SS', // Южный Судан
+        'UA', // Украина
+        'SY', // Сирия
+        'RU', // Российская Федерация
+        'MM', // Мьянма
+        'YE', // Йемен
+    ];
+    foreach ( $blocked as $code ) {
+        unset( $countries[ $code ] );
+    }
+    return $countries;
 });
