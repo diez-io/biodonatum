@@ -28,13 +28,13 @@
                         </a>
                     </div>
                 </div>
-                <div class="island partnership__global-reach">
+                <?/*<div class="island partnership__global-reach">
                     <h3>
                         <?= get_static_content('global_reach_logistics') ?>
                     </h3>
                     <?= get_static_content('global_reach_logistics_text') ?>
                 </div>
-                <?/*<div class="island partnership__global-technology">
+                <div class="island partnership__global-technology">
                     <h3>
                         <?= get_static_content('global_technology_support') ?>
                     </h3>
