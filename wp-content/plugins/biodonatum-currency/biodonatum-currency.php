@@ -50,10 +50,10 @@ add_filter('woocommerce_currency_symbol', function($currency_symbol, $currency) 
 
 // --- Biodonatum: Multiply all WooCommerce product prices by the current currency rate globally ---
 function biodonatum_get_current_rate() {
-    if (class_exists('Biodonatum_Currency_Switcher')) {
-        $plugin = new Biodonatum_Currency_Switcher();
-        $user_currency = $plugin->get_user_currency();
-        $rate = $plugin->get_rate($user_currency);
+    global $biodonatum_currency_switcher;
+    if ($biodonatum_currency_switcher instanceof Biodonatum_Currency_Switcher) {
+        $user_currency = $biodonatum_currency_switcher->get_user_currency();
+        $rate = $biodonatum_currency_switcher->get_rate($user_currency);
         if (is_array($rate) && isset($rate['rate'])) {
             return floatval($rate['rate']);
         } elseif (is_numeric($rate)) {
@@ -90,9 +90,9 @@ add_filter('woocommerce_variation_prices_sale_price', function($price, $variatio
 // Helper for theme: get current currency
 if (!function_exists('get_biodonatum_current_currency')) {
     function get_biodonatum_current_currency() {
-        if (class_exists('Biodonatum_Currency_Switcher')) {
-            $plugin = new Biodonatum_Currency_Switcher();
-            return $plugin->get_user_currency();
+        global $biodonatum_currency_switcher;
+        if ($biodonatum_currency_switcher instanceof Biodonatum_Currency_Switcher) {
+            return $biodonatum_currency_switcher->get_user_currency();
         }
         return 'EUR';
     }
@@ -101,9 +101,9 @@ if (!function_exists('get_biodonatum_current_currency')) {
 // Helper for theme: get all currencies
 if (!function_exists('get_biodonatum_currencies')) {
     function get_biodonatum_currencies($with_names = false) {
-        if (class_exists('Biodonatum_Currency_Switcher')) {
-            $plugin = new Biodonatum_Currency_Switcher();
-            $settings = $plugin->get_settings();
+        global $biodonatum_currency_switcher;
+        if ($biodonatum_currency_switcher instanceof Biodonatum_Currency_Switcher) {
+            $settings = $biodonatum_currency_switcher->get_settings();
             $currencies = $settings['currencies'] ?? ['EUR'];
             if ($with_names) {
                 // Try to get names from plugin file
@@ -478,4 +478,8 @@ class Biodonatum_Currency_Switcher {
 } // end class
 } // end if class_exists
 
-new Biodonatum_Currency_Switcher();
+// Instantiate the plugin only once and reuse the instance globally
+global $biodonatum_currency_switcher;
+if (!isset($biodonatum_currency_switcher) || !$biodonatum_currency_switcher instanceof Biodonatum_Currency_Switcher) {
+    $biodonatum_currency_switcher = new Biodonatum_Currency_Switcher();
+}
