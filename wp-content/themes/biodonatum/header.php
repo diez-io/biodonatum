@@ -74,55 +74,23 @@
                         <div class="header__language header__currency">
                             <div class="header__element">
                                 <?php
-                                if (function_exists('get_biodonatum_current_currency')) {
-                                    $current_currency = get_biodonatum_current_currency();
-                                } elseif (function_exists('Biodonatum_Currency_Switcher')) {
-                                    $current_currency = Biodonatum_Currency_Switcher::get_user_currency_static();
-                                } else {
-                                    $current_currency = 'EUR';
-                                }
+                                $current_currency = function_exists('get_biodonatum_current_currency') ? get_biodonatum_current_currency() : 'EUR';
                                 ?>
                                 <span><?= esc_html($current_currency) ?></span>
                             </div>
                             <div class="menu">
                                 <?php
                                 if (function_exists('get_biodonatum_currencies')) {
-                                    $currencies = get_biodonatum_currencies();
-                                } elseif (class_exists('Biodonatum_Currency_Switcher')) {
-                                    $currencies = Biodonatum_Currency_Switcher::get_currencies_static();
+                                    $currencies = get_biodonatum_currencies(true);
                                 } else {
-                                    $currencies = ['EUR'];
+                                    $currencies = [['code' => 'EUR', 'name' => 'Euro']];
                                 }
-
-                                // Try to get currency names from plugin file if available
-                                $currency_names = [];
-                                $currencies_file = get_template_directory() . '/../plugins/biodonatum-currency/cl-currencies-select-option.html';
-                                if (file_exists($currencies_file)) {
-                                    $html = file_get_contents($currencies_file);
-                                    if (preg_match_all("/<option value='(.*?)' title='(.*?)'>.*?<\\/option>/", $html, $matches, PREG_SET_ORDER)) {
-                                        foreach ($matches as $m) {
-                                            $currency_names[$m[1]] = $m[2];
-                                        }
-                                    }
-                                }
-
                                 foreach ($currencies as $currency) :
-                                    if ($currency === $current_currency) continue;
-                                    $label = $currency;
-                                    // Try to get currency name from WooCommerce if available
-                                    if (function_exists('get_woocommerce_currencies')) {
-                                        $wc_currencies = get_woocommerce_currencies();
-                                        if (isset($wc_currencies[$currency])) {
-                                            $label = $currency . ' - ' . $wc_currencies[$currency];
-                                        } elseif (isset($currency_names[$currency])) {
-                                            $label = $currency . ' - ' . $currency_names[$currency];
-                                        }
-                                    } elseif (isset($currency_names[$currency])) {
-                                        $label = $currency . ' - ' . $currency_names[$currency];
-                                    }
+                                    if ($currency['code'] === $current_currency) continue;
+                                    $label = $currency['code'] . ' - ' . $currency['name'];
                                 ?>
                                     <form method="POST" action="">
-                                        <input type="hidden" name="currency" value="<?= esc_attr($currency) ?>">
+                                        <input type="hidden" name="currency" value="<?= esc_attr($currency['code']) ?>">
                                         <button type="submit" class="menu__item"><?= esc_html($label) ?></button>
                                     </form>
                                 <?php endforeach; ?>

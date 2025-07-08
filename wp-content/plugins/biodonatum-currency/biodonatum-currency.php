@@ -18,11 +18,36 @@ if (!function_exists('get_biodonatum_current_currency')) {
 
 // Helper for theme: get all currencies
 if (!function_exists('get_biodonatum_currencies')) {
-    function get_biodonatum_currencies() {
+    function get_biodonatum_currencies($with_names = false) {
         if (class_exists('Biodonatum_Currency_Switcher')) {
             $plugin = new Biodonatum_Currency_Switcher();
             $settings = $plugin->get_settings();
-            return $settings['currencies'] ?? ['EUR'];
+            $currencies = $settings['currencies'] ?? ['EUR'];
+            if ($with_names) {
+                // Try to get names from plugin file
+                $currency_names = [];
+                $currencies_file = plugin_dir_path(__FILE__) . 'cl-currencies-select-option.html';
+                if (file_exists($currencies_file)) {
+                    $html = file_get_contents($currencies_file);
+                    if (preg_match_all("/<option value='(.*?)' title='(.*?)'>.*?<\\/option>/", $html, $matches, PREG_SET_ORDER)) {
+                        foreach ($matches as $m) {
+                            $currency_names[$m[1]] = $m[2];
+                        }
+                    }
+                }
+                $result = [];
+                foreach ($currencies as $code) {
+                    $result[] = [
+                        'code' => $code,
+                        'name' => $currency_names[$code] ?? $code
+                    ];
+                }
+                return $result;
+            }
+            return $currencies;
+        }
+        if ($with_names) {
+            return [['code' => 'EUR', 'name' => 'Euro']];
         }
         return ['EUR'];
     }
@@ -117,7 +142,7 @@ class Biodonatum_Currency_Switcher {
         $all_currencies = [];
         if (file_exists($currencies_file)) {
             $html = file_get_contents($currencies_file);
-            if (preg_match_all("/<option value='(.*?)' title='(.*?)'>.*?<\/option>/", $html, $matches, PREG_SET_ORDER)) {
+            if (preg_match_all("/<option value='(.*?)' title='(.*?)'>.*?<\\/option>/", $html, $matches, PREG_SET_ORDER)) {
                 foreach ($matches as $m) {
                     $all_currencies[$m[1]] = $m[2];
                 }
