@@ -125,6 +125,18 @@
 		.header__element {
 			width: 65px;
 		}
+
+		.menu {
+			min-width: unset;
+			width: unset;
+			left: 50%;
+			transform: translateX(-50%);
+			padding: 20px;
+
+			&__item {
+				text-wrap: nowrap;
+			}
+		}
 	}
 
 	&__element {
