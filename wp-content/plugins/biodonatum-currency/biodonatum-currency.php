@@ -5,6 +5,88 @@ Description: Custom WooCommerce currency switcher with exchange rates from api.e
 Version: 1.0
 Author: Your Name
 */
+
+// --- Biodonatum: Add current currency code to all WooCommerce currency symbols globally ---
+$biodonatum_currency_symbols = [
+    'AED' => 'د.إ', 'AFN' => '؋', 'ALL' => 'L', 'AMD' => '֏', 'ANG' => 'ƒ', 'AOA' => 'Kz',
+    'ARS' => '$', 'AUD' => 'A$', 'AWG' => 'ƒ', 'AZN' => '₼', 'BAM' => 'KM', 'BBD' => 'Bds$',
+    'BDT' => '৳', 'BGN' => 'лв', 'BHD' => '.د.ب', 'BIF' => 'FBu', 'BMD' => 'BD$', 'BND' => 'B$',
+    'BOB' => 'Bs.', 'BRL' => 'R$', 'BSD' => 'B$', 'BTC' => '₿', 'BTN' => 'Nu.', 'BWP' => 'P',
+    'BYN' => 'Br', 'BYR' => 'Br', 'BZD' => 'BZ$', 'CAD' => 'C$', 'CDF' => 'FC', 'CHF' => 'Fr.',
+    'CLF' => 'UF', 'CLP' => '$', 'CNY' => '¥', 'COP' => '$', 'CRC' => '₡', 'CUC' => '$',
+    'CUP' => '$', 'CVE' => '$', 'CZK' => 'Kč', 'DJF' => 'Fdj', 'DKK' => 'kr', 'DOP' => 'RD$',
+    'DZD' => 'دج', 'EEK' => 'kr', 'EGP' => '£', 'ERN' => 'Nfk', 'ETB' => 'Br', 'EUR' => '€',
+    'FJD' => 'FJ$', 'FKP' => '£', 'GBP' => '£', 'GEL' => '₾', 'GGP' => '£', 'GHS' => '₵',
+    'GIP' => '£', 'GMD' => 'D', 'GNF' => 'FG', 'GTQ' => 'Q', 'GYD' => 'G$', 'HKD' => 'HK$',
+    'HNL' => 'L', 'HRK' => 'kn', 'HTG' => 'G', 'HUF' => 'Ft', 'IDR' => 'Rp', 'ILS' => '₪',
+    'IMP' => '£', 'INR' => '₹', 'IQD' => 'ع.د', 'IRR' => '﷼', 'ISK' => 'kr', 'JEP' => '£',
+    'JMD' => 'J$', 'JOD' => 'د.ا', 'JPY' => '¥', 'KES' => 'KSh', 'KGS' => 'лв', 'KHR' => '៛',
+    'KMF' => 'CF', 'KPW' => '₩', 'KRW' => '₩', 'KWD' => 'د.ك', 'KYD' => 'CI$', 'KZT' => '₸',
+    'LAK' => '₭', 'LBP' => 'ل.ل', 'LKR' => '₨', 'LRD' => 'L$', 'LSL' => 'L', 'LTL' => 'Lt',
+    'LVL' => 'Ls', 'LYD' => 'ل.د', 'MAD' => 'د.م.', 'MDL' => 'L', 'MGA' => 'Ar', 'MKD' => 'ден',
+    'MMK' => 'K', 'MNT' => '₮', 'MOP' => 'P', 'MRO' => 'UM', 'MUR' => '₨', 'MVR' => 'Rf',
+    'MWK' => 'MK', 'MXN' => '$', 'MYR' => 'RM', 'MZN' => 'MT', 'NAD' => 'N$', 'NGN' => '₦',
+    'NIO' => 'C$', 'NOK' => 'kr', 'NPR' => '₨', 'NZD' => 'NZ$', 'OMR' => 'ر.ع.', 'PAB' => 'B/.',
+    'PEN' => 'S/', 'PGK' => 'K', 'PHP' => '₱', 'PKR' => '₨', 'PLN' => 'zł', 'PYG' => '₲',
+    'QAR' => 'ر.ق', 'RON' => 'lei', 'RSD' => 'дин.', 'RUB' => '₽', 'RWF' => 'FRw', 'SAR' => 'ر.س',
+    'SBD' => 'SI$', 'SCR' => '₨', 'SDG' => '£', 'SEK' => 'kr', 'SGD' => 'S$', 'SHP' => '£',
+    'SLL' => 'Le', 'SOS' => 'S', 'SRD' => '$', 'STD' => 'Db', 'SVC' => '$', 'SYP' => '£',
+    'SZL' => 'E', 'THB' => '฿', 'TJS' => 'ЅM', 'TMT' => 'T', 'TND' => 'د.ت', 'TOP' => 'T$',
+    'TRY' => '₺', 'TTD' => 'TT$', 'TWD' => 'NT$', 'TZS' => 'TSh', 'UAH' => '₴', 'UGX' => 'USh',
+    'USD' => '$', 'UYU' => '$U', 'UZS' => 'лв', 'VEF' => 'Bs', 'VND' => '₫', 'VUV' => 'VT',
+    'WST' => 'WS$', 'XAF' => 'FCFA', 'XAG' => 'XAG', 'XAU' => 'XAU', 'XCD' => 'EC$', 'XDR' => 'SDR',
+    'XOF' => 'CFA', 'XPF' => '₣', 'YER' => '﷼', 'ZAR' => 'R', 'ZMK' => 'ZK', 'ZMW' => 'ZK', 'ZWL' => 'Z$'
+];
+add_filter('woocommerce_currency_symbol', function($currency_symbol, $currency) use ($biodonatum_currency_symbols) {
+    // Try to get the currently chosen currency (user's selection or default)
+    if (function_exists('get_biodonatum_current_currency')) {
+        $current = get_biodonatum_current_currency();
+        $currency_symbol = isset($biodonatum_currency_symbols[$current]) ? $biodonatum_currency_symbols[$current] : $currency_symbol;
+    }
+
+    return $currency_symbol;
+}, 99, 2);
+
+
+// --- Biodonatum: Multiply all WooCommerce product prices by the current currency rate globally ---
+function biodonatum_get_current_rate() {
+    if (class_exists('Biodonatum_Currency_Switcher')) {
+        $plugin = new Biodonatum_Currency_Switcher();
+        $user_currency = $plugin->get_user_currency();
+        $rate = $plugin->get_rate($user_currency);
+        if (is_array($rate) && isset($rate['rate'])) {
+            return floatval($rate['rate']);
+        } elseif (is_numeric($rate)) {
+            return floatval($rate);
+        }
+    }
+    return 1;
+}
+add_filter('woocommerce_product_get_price', function($price, $product) {
+    $rate = biodonatum_get_current_rate();
+    return $price * $rate;
+}, 99, 2);
+add_filter('woocommerce_product_get_regular_price', function($price, $product) {
+    $rate = biodonatum_get_current_rate();
+    return $price * $rate;
+}, 99, 2);
+add_filter('woocommerce_product_get_sale_price', function($price, $product) {
+    $rate = biodonatum_get_current_rate();
+    return $price * $rate;
+}, 99, 2);
+add_filter('woocommerce_variation_prices_price', function($price, $variation, $min_or_max, $display) {
+    $rate = biodonatum_get_current_rate();
+    return $price * $rate;
+}, 99, 4);
+add_filter('woocommerce_variation_prices_regular_price', function($price, $variation, $min_or_max, $display) {
+    $rate = biodonatum_get_current_rate();
+    return $price * $rate;
+}, 99, 4);
+add_filter('woocommerce_variation_prices_sale_price', function($price, $variation, $min_or_max, $display) {
+    $rate = biodonatum_get_current_rate();
+    return $price * $rate;
+}, 99, 4);
+
 // Helper for theme: get current currency
 if (!function_exists('get_biodonatum_current_currency')) {
     function get_biodonatum_current_currency() {
