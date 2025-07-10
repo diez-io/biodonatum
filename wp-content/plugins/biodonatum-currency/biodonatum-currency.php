@@ -6,117 +6,6 @@ Version: 1.0
 Author: Your Name
 */
 
-// --- Biodonatum: Multiply all WooCommerce product prices by the current currency rate globally ---
-// function biodonatum_get_current_rate() {
-//     global $biodonatum_currency_switcher;
-//     if ($biodonatum_currency_switcher instanceof Biodonatum_Currency_Switcher) {
-//         $user_currency = $biodonatum_currency_switcher->get_user_currency();
-//         $rate = $biodonatum_currency_switcher->get_rate($user_currency);
-//         if (is_array($rate) && isset($rate['rate'])) {
-//             return floatval($rate['rate']);
-//         } elseif (is_numeric($rate)) {
-//             return floatval($rate);
-//         }
-//     }
-//     return 1;
-// }
-
-// add_filter('woocommerce_product_get_price', function($price, $product) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         return $price * $rate;
-//     }
-//     return $price;
-// }, 99, 2);
-// add_filter('woocommerce_cart_get_subtotal', function($price) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         return $price / $rate;
-//     }
-//     return $price;
-// }, 99, 1);
-// add_filter('woocommerce_cart_shipping_method_full_label', function($label, $method) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-
-//         $label     = $method->get_label();
-//         $has_cost  = 0 < $method->cost;
-//         $hide_cost = ! $has_cost && in_array( $method->get_method_id(), array( 'free_shipping', 'local_pickup' ), true );
-
-//         if ( $has_cost && ! $hide_cost ) {
-//             if ( WC()->cart->display_prices_including_tax() ) {
-//                 $label .= ': ' . wc_price( ($method->cost + $method->get_shipping_tax()) * $rate );
-//                 if ( $method->get_shipping_tax() > 0 && ! wc_prices_include_tax() ) {
-//                     $label .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
-//                 }
-//             } else {
-//                 $label .= ': ' . wc_price( $method->cost * $rate );
-//                 if ( $method->get_shipping_tax() > 0 && wc_prices_include_tax() ) {
-//                     $label .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
-//                 }
-//             }
-//         }
-//     }
-
-//     return $label;
-// }, 99, 2);
-// add_filter('woocommerce_cart_get_total', function($price) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         $price /= $rate;
-//     }
-//     return $price;
-// }, 99, 1);
-// add_filter('woocommerce_get_price_html', function($price, $product) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-
-//         if ( '' === $product->get_price() ) {
-//             $price = apply_filters( 'woocommerce_empty_price_html', '', $product );
-//         } elseif ( $product->is_on_sale() ) {
-//             $price = wc_format_sale_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) / $rate, wc_get_price_to_display( $product ) / $rate ) . $product->get_price_suffix();
-//         } else {
-//             $price = wc_price( (wc_get_price_to_display( $product ) ) / $rate) . $product->get_price_suffix();
-//         }
-//     }
-//     return $price;
-// }, 99, 2);
-// add_filter('woocommerce_product_get_regular_price', function($price, $product) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         return $price * $rate;
-//     }
-//     return $price;
-// }, 99, 2);
-// add_filter('woocommerce_product_get_sale_price', function($price, $product) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         return $price * $rate;
-//     }
-//     return $price;
-// }, 99, 2);
-// add_filter('woocommerce_variation_prices_price', function($price, $variation, $min_or_max, $display) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         return $price * $rate;
-//     }
-//     return $price;
-// }, 99, 4);
-// add_filter('woocommerce_variation_prices_regular_price', function($price, $variation, $min_or_max, $display) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         return $price * $rate;
-//     }
-//     return $price;
-// }, 99, 4);
-// add_filter('woocommerce_variation_prices_sale_price', function($price, $variation, $min_or_max, $display) {
-//     if (biodonatum_should_convert_prices()) {
-//         $rate = biodonatum_get_current_rate();
-//         return $price * $rate;
-//     }
-//     return $price;
-// }, 99, 4);
-
 // Helper for theme: get current currency
 if (!function_exists('get_biodonatum_current_currency')) {
     function get_biodonatum_current_currency() {
@@ -546,6 +435,17 @@ class Biodonatum_Currency_Switcher {
                 $default_currency = $set;
             }
         }
+        if (isset($_POST['set_api_access_key'])) {
+            $posted = $_POST[$this->option_name];
+            $key = sanitize_text_field($posted['access_key'] ?? '');
+
+            $settings = get_option($this->option_name, []);
+            $settings['access_key'] = $key;
+            $access_key = $key;
+            update_option($this->option_name, $settings);
+
+            echo '<div class="updated"><p>API Access Key updated.</p></div>';
+        }
         // If WooCommerce currency changed, check for outdated pairs
         if (isset($_POST['set_wc_currency']) && !empty($_POST['wc_currency'])) {
             $new_wc = sanitize_text_field($_POST['wc_currency']);
@@ -578,12 +478,13 @@ class Biodonatum_Currency_Switcher {
         ?>
         <div class="wrap">
             <h1>Biodonatum Currency Switcher</h1>
+            <form method="post" style="margin-bottom: 20px;">
+                <h2>API Access Key</h2>
+                <input type="text" name="<?= esc_attr($this->option_name) ?>[access_key]" value="<?= esc_attr($access_key) ?>" size="40">
+                <button name="set_api_access_key" value="1" class="button">Change</button>
+            </form>
             <form method="post">
                 <table class="form-table">
-                    <tr valign="top">
-                        <th scope="row">API Access Key</th>
-                        <td><input type="text" name="<?= $this->option_name ?>[access_key]" value="<?= $access_key ?>" size="40"></td>
-                    </tr>
                     <tr valign="top">
                         <th scope="row">WooCommerce Base Currency</th>
                         <td>
