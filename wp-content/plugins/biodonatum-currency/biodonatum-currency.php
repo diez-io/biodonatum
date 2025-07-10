@@ -6,86 +6,116 @@ Version: 1.0
 Author: Your Name
 */
 
-// --- Biodonatum: Add current currency code to all WooCommerce currency symbols globally ---
-$biodonatum_currency_symbols = [
-    'AED' => 'د.إ', 'AFN' => '؋', 'ALL' => 'L', 'AMD' => '֏', 'ANG' => 'ƒ', 'AOA' => 'Kz',
-    'ARS' => '$', 'AUD' => 'A$', 'AWG' => 'ƒ', 'AZN' => '₼', 'BAM' => 'KM', 'BBD' => 'Bds$',
-    'BDT' => '৳', 'BGN' => 'лв', 'BHD' => '.د.ب', 'BIF' => 'FBu', 'BMD' => 'BD$', 'BND' => 'B$',
-    'BOB' => 'Bs.', 'BRL' => 'R$', 'BSD' => 'B$', 'BTC' => '₿', 'BTN' => 'Nu.', 'BWP' => 'P',
-    'BYN' => 'Br', 'BYR' => 'Br', 'BZD' => 'BZ$', 'CAD' => 'C$', 'CDF' => 'FC', 'CHF' => 'Fr.',
-    'CLF' => 'UF', 'CLP' => '$', 'CNY' => '¥', 'COP' => '$', 'CRC' => '₡', 'CUC' => '$',
-    'CUP' => '$', 'CVE' => '$', 'CZK' => 'Kč', 'DJF' => 'Fdj', 'DKK' => 'kr', 'DOP' => 'RD$',
-    'DZD' => 'دج', 'EEK' => 'kr', 'EGP' => '£', 'ERN' => 'Nfk', 'ETB' => 'Br', 'EUR' => '€',
-    'FJD' => 'FJ$', 'FKP' => '£', 'GBP' => '£', 'GEL' => '₾', 'GGP' => '£', 'GHS' => '₵',
-    'GIP' => '£', 'GMD' => 'D', 'GNF' => 'FG', 'GTQ' => 'Q', 'GYD' => 'G$', 'HKD' => 'HK$',
-    'HNL' => 'L', 'HRK' => 'kn', 'HTG' => 'G', 'HUF' => 'Ft', 'IDR' => 'Rp', 'ILS' => '₪',
-    'IMP' => '£', 'INR' => '₹', 'IQD' => 'ع.د', 'IRR' => '﷼', 'ISK' => 'kr', 'JEP' => '£',
-    'JMD' => 'J$', 'JOD' => 'د.ا', 'JPY' => '¥', 'KES' => 'KSh', 'KGS' => 'лв', 'KHR' => '៛',
-    'KMF' => 'CF', 'KPW' => '₩', 'KRW' => '₩', 'KWD' => 'د.ك', 'KYD' => 'CI$', 'KZT' => '₸',
-    'LAK' => '₭', 'LBP' => 'ل.ل', 'LKR' => '₨', 'LRD' => 'L$', 'LSL' => 'L', 'LTL' => 'Lt',
-    'LVL' => 'Ls', 'LYD' => 'ل.د', 'MAD' => 'د.م.', 'MDL' => 'L', 'MGA' => 'Ar', 'MKD' => 'ден',
-    'MMK' => 'K', 'MNT' => '₮', 'MOP' => 'P', 'MRO' => 'UM', 'MUR' => '₨', 'MVR' => 'Rf',
-    'MWK' => 'MK', 'MXN' => '$', 'MYR' => 'RM', 'MZN' => 'MT', 'NAD' => 'N$', 'NGN' => '₦',
-    'NIO' => 'C$', 'NOK' => 'kr', 'NPR' => '₨', 'NZD' => 'NZ$', 'OMR' => 'ر.ع.', 'PAB' => 'B/.',
-    'PEN' => 'S/', 'PGK' => 'K', 'PHP' => '₱', 'PKR' => '₨', 'PLN' => 'zł', 'PYG' => '₲',
-    'QAR' => 'ر.ق', 'RON' => 'lei', 'RSD' => 'дин.', 'RUB' => '₽', 'RWF' => 'FRw', 'SAR' => 'ر.س',
-    'SBD' => 'SI$', 'SCR' => '₨', 'SDG' => '£', 'SEK' => 'kr', 'SGD' => 'S$', 'SHP' => '£',
-    'SLL' => 'Le', 'SOS' => 'S', 'SRD' => '$', 'STD' => 'Db', 'SVC' => '$', 'SYP' => '£',
-    'SZL' => 'E', 'THB' => '฿', 'TJS' => 'ЅM', 'TMT' => 'T', 'TND' => 'د.ت', 'TOP' => 'T$',
-    'TRY' => '₺', 'TTD' => 'TT$', 'TWD' => 'NT$', 'TZS' => 'TSh', 'UAH' => '₴', 'UGX' => 'USh',
-    'USD' => '$', 'UYU' => '$U', 'UZS' => 'лв', 'VEF' => 'Bs', 'VND' => '₫', 'VUV' => 'VT',
-    'WST' => 'WS$', 'XAF' => 'FCFA', 'XAG' => 'XAG', 'XAU' => 'XAU', 'XCD' => 'EC$', 'XDR' => 'SDR',
-    'XOF' => 'CFA', 'XPF' => '₣', 'YER' => '﷼', 'ZAR' => 'R', 'ZMK' => 'ZK', 'ZMW' => 'ZK', 'ZWL' => 'Z$'
-];
-add_filter('woocommerce_currency_symbol', function($currency_symbol, $currency) use ($biodonatum_currency_symbols) {
-    // Try to get the currently chosen currency (user's selection or default)
-    if (function_exists('get_biodonatum_current_currency')) {
-        $current = get_biodonatum_current_currency();
-        $currency_symbol = isset($biodonatum_currency_symbols[$current]) ? $biodonatum_currency_symbols[$current] : $currency_symbol;
-    }
-
-    return $currency_symbol;
-}, 99, 2);
-
-
 // --- Biodonatum: Multiply all WooCommerce product prices by the current currency rate globally ---
-function biodonatum_get_current_rate() {
-    global $biodonatum_currency_switcher;
-    if ($biodonatum_currency_switcher instanceof Biodonatum_Currency_Switcher) {
-        $user_currency = $biodonatum_currency_switcher->get_user_currency();
-        $rate = $biodonatum_currency_switcher->get_rate($user_currency);
-        if (is_array($rate) && isset($rate['rate'])) {
-            return floatval($rate['rate']);
-        } elseif (is_numeric($rate)) {
-            return floatval($rate);
-        }
-    }
-    return 1;
-}
-add_filter('woocommerce_product_get_price', function($price, $product) {
-    $rate = biodonatum_get_current_rate();
-    return $price * $rate;
-}, 99, 2);
-add_filter('woocommerce_product_get_regular_price', function($price, $product) {
-    $rate = biodonatum_get_current_rate();
-    return $price * $rate;
-}, 99, 2);
-add_filter('woocommerce_product_get_sale_price', function($price, $product) {
-    $rate = biodonatum_get_current_rate();
-    return $price * $rate;
-}, 99, 2);
-add_filter('woocommerce_variation_prices_price', function($price, $variation, $min_or_max, $display) {
-    $rate = biodonatum_get_current_rate();
-    return $price * $rate;
-}, 99, 4);
-add_filter('woocommerce_variation_prices_regular_price', function($price, $variation, $min_or_max, $display) {
-    $rate = biodonatum_get_current_rate();
-    return $price * $rate;
-}, 99, 4);
-add_filter('woocommerce_variation_prices_sale_price', function($price, $variation, $min_or_max, $display) {
-    $rate = biodonatum_get_current_rate();
-    return $price * $rate;
-}, 99, 4);
+// function biodonatum_get_current_rate() {
+//     global $biodonatum_currency_switcher;
+//     if ($biodonatum_currency_switcher instanceof Biodonatum_Currency_Switcher) {
+//         $user_currency = $biodonatum_currency_switcher->get_user_currency();
+//         $rate = $biodonatum_currency_switcher->get_rate($user_currency);
+//         if (is_array($rate) && isset($rate['rate'])) {
+//             return floatval($rate['rate']);
+//         } elseif (is_numeric($rate)) {
+//             return floatval($rate);
+//         }
+//     }
+//     return 1;
+// }
+
+// add_filter('woocommerce_product_get_price', function($price, $product) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         return $price * $rate;
+//     }
+//     return $price;
+// }, 99, 2);
+// add_filter('woocommerce_cart_get_subtotal', function($price) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         return $price / $rate;
+//     }
+//     return $price;
+// }, 99, 1);
+// add_filter('woocommerce_cart_shipping_method_full_label', function($label, $method) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+
+//         $label     = $method->get_label();
+//         $has_cost  = 0 < $method->cost;
+//         $hide_cost = ! $has_cost && in_array( $method->get_method_id(), array( 'free_shipping', 'local_pickup' ), true );
+
+//         if ( $has_cost && ! $hide_cost ) {
+//             if ( WC()->cart->display_prices_including_tax() ) {
+//                 $label .= ': ' . wc_price( ($method->cost + $method->get_shipping_tax()) * $rate );
+//                 if ( $method->get_shipping_tax() > 0 && ! wc_prices_include_tax() ) {
+//                     $label .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+//                 }
+//             } else {
+//                 $label .= ': ' . wc_price( $method->cost * $rate );
+//                 if ( $method->get_shipping_tax() > 0 && wc_prices_include_tax() ) {
+//                     $label .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+//                 }
+//             }
+//         }
+//     }
+
+//     return $label;
+// }, 99, 2);
+// add_filter('woocommerce_cart_get_total', function($price) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         $price /= $rate;
+//     }
+//     return $price;
+// }, 99, 1);
+// add_filter('woocommerce_get_price_html', function($price, $product) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+
+//         if ( '' === $product->get_price() ) {
+//             $price = apply_filters( 'woocommerce_empty_price_html', '', $product );
+//         } elseif ( $product->is_on_sale() ) {
+//             $price = wc_format_sale_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) / $rate, wc_get_price_to_display( $product ) / $rate ) . $product->get_price_suffix();
+//         } else {
+//             $price = wc_price( (wc_get_price_to_display( $product ) ) / $rate) . $product->get_price_suffix();
+//         }
+//     }
+//     return $price;
+// }, 99, 2);
+// add_filter('woocommerce_product_get_regular_price', function($price, $product) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         return $price * $rate;
+//     }
+//     return $price;
+// }, 99, 2);
+// add_filter('woocommerce_product_get_sale_price', function($price, $product) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         return $price * $rate;
+//     }
+//     return $price;
+// }, 99, 2);
+// add_filter('woocommerce_variation_prices_price', function($price, $variation, $min_or_max, $display) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         return $price * $rate;
+//     }
+//     return $price;
+// }, 99, 4);
+// add_filter('woocommerce_variation_prices_regular_price', function($price, $variation, $min_or_max, $display) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         return $price * $rate;
+//     }
+//     return $price;
+// }, 99, 4);
+// add_filter('woocommerce_variation_prices_sale_price', function($price, $variation, $min_or_max, $display) {
+//     if (biodonatum_should_convert_prices()) {
+//         $rate = biodonatum_get_current_rate();
+//         return $price * $rate;
+//     }
+//     return $price;
+// }, 99, 4);
 
 // Helper for theme: get current currency
 if (!function_exists('get_biodonatum_current_currency')) {
@@ -164,18 +194,273 @@ class Biodonatum_Currency_Switcher {
     private $option_name = 'biodonatum_currency_settings';
     private $rates_file;
 
+    // --- Biodonatum: Add current currency code to all WooCommerce currency symbols globally ---
+    private $biodonatum_currency_symbols = [
+        'AED' => 'د.إ', 'AFN' => '؋', 'ALL' => 'L', 'AMD' => '֏', 'ANG' => 'ƒ', 'AOA' => 'Kz',
+        'ARS' => '$', 'AUD' => 'A$', 'AWG' => 'ƒ', 'AZN' => '₼', 'BAM' => 'KM', 'BBD' => 'Bds$',
+        'BDT' => '৳', 'BGN' => 'лв', 'BHD' => '.د.ب', 'BIF' => 'FBu', 'BMD' => 'BD$', 'BND' => 'B$',
+        'BOB' => 'Bs.', 'BRL' => 'R$', 'BSD' => 'B$', 'BTC' => '₿', 'BTN' => 'Nu.', 'BWP' => 'P',
+        'BYN' => 'Br', 'BYR' => 'Br', 'BZD' => 'BZ$', 'CAD' => 'C$', 'CDF' => 'FC', 'CHF' => 'Fr.',
+        'CLF' => 'UF', 'CLP' => '$', 'CNY' => '¥', 'COP' => '$', 'CRC' => '₡', 'CUC' => '$',
+        'CUP' => '$', 'CVE' => '$', 'CZK' => 'Kč', 'DJF' => 'Fdj', 'DKK' => 'kr', 'DOP' => 'RD$',
+        'DZD' => 'دج', 'EEK' => 'kr', 'EGP' => '£', 'ERN' => 'Nfk', 'ETB' => 'Br', 'EUR' => '€',
+        'FJD' => 'FJ$', 'FKP' => '£', 'GBP' => '£', 'GEL' => '₾', 'GGP' => '£', 'GHS' => '₵',
+        'GIP' => '£', 'GMD' => 'D', 'GNF' => 'FG', 'GTQ' => 'Q', 'GYD' => 'G$', 'HKD' => 'HK$',
+        'HNL' => 'L', 'HRK' => 'kn', 'HTG' => 'G', 'HUF' => 'Ft', 'IDR' => 'Rp', 'ILS' => '₪',
+        'IMP' => '£', 'INR' => '₹', 'IQD' => 'ع.د', 'IRR' => '﷼', 'ISK' => 'kr', 'JEP' => '£',
+        'JMD' => 'J$', 'JOD' => 'د.ا', 'JPY' => '¥', 'KES' => 'KSh', 'KGS' => 'лв', 'KHR' => '៛',
+        'KMF' => 'CF', 'KPW' => '₩', 'KRW' => '₩', 'KWD' => 'د.ك', 'KYD' => 'CI$', 'KZT' => '₸',
+        'LAK' => '₭', 'LBP' => 'ل.ل', 'LKR' => '₨', 'LRD' => 'L$', 'LSL' => 'L', 'LTL' => 'Lt',
+        'LVL' => 'Ls', 'LYD' => 'ل.د', 'MAD' => 'د.م.', 'MDL' => 'L', 'MGA' => 'Ar', 'MKD' => 'ден',
+        'MMK' => 'K', 'MNT' => '₮', 'MOP' => 'P', 'MRO' => 'UM', 'MUR' => '₨', 'MVR' => 'Rf',
+        'MWK' => 'MK', 'MXN' => '$', 'MYR' => 'RM', 'MZN' => 'MT', 'NAD' => 'N$', 'NGN' => '₦',
+        'NIO' => 'C$', 'NOK' => 'kr', 'NPR' => '₨', 'NZD' => 'NZ$', 'OMR' => 'ر.ع.', 'PAB' => 'B/.',
+        'PEN' => 'S/', 'PGK' => 'K', 'PHP' => '₱', 'PKR' => '₨', 'PLN' => 'zł', 'PYG' => '₲',
+        'QAR' => 'ر.ق', 'RON' => 'lei', 'RSD' => 'дин.', 'RUB' => '₽', 'RWF' => 'FRw', 'SAR' => 'ر.س',
+        'SBD' => 'SI$', 'SCR' => '₨', 'SDG' => '£', 'SEK' => 'kr', 'SGD' => 'S$', 'SHP' => '£',
+        'SLL' => 'Le', 'SOS' => 'S', 'SRD' => '$', 'STD' => 'Db', 'SVC' => '$', 'SYP' => '£',
+        'SZL' => 'E', 'THB' => '฿', 'TJS' => 'ЅM', 'TMT' => 'T', 'TND' => 'د.ت', 'TOP' => 'T$',
+        'TRY' => '₺', 'TTD' => 'TT$', 'TWD' => 'NT$', 'TZS' => 'TSh', 'UAH' => '₴', 'UGX' => 'USh',
+        'USD' => '$', 'UYU' => '$U', 'UZS' => 'лв', 'VEF' => 'Bs', 'VND' => '₫', 'VUV' => 'VT',
+        'WST' => 'WS$', 'XAF' => 'FCFA', 'XAG' => 'XAG', 'XAU' => 'XAU', 'XCD' => 'EC$', 'XDR' => 'SDR',
+        'XOF' => 'CFA', 'XPF' => '₣', 'YER' => '﷼', 'ZAR' => 'R', 'ZMK' => 'ZK', 'ZMW' => 'ZK', 'ZWL' => 'Z$'
+    ];
+
     public function __construct() {
         $this->rates_file = plugin_dir_path(__FILE__) . 'exchange_rates.json';
         add_action('admin_menu', [$this, 'add_admin_menu']);
         add_action('admin_init', [$this, 'register_settings']);
         add_action('wp_ajax_biodonatum_update_rates', [$this, 'ajax_update_rates']);
         add_action('init', [$this, 'handle_currency_switch']);
+
         add_filter('woocommerce_get_price_html', [$this, 'convert_price_html'], 99, 2);
-        add_filter('woocommerce_cart_item_price', [$this, 'convert_price_html'], 99, 3);
-        add_filter('woocommerce_cart_item_subtotal', [$this, 'convert_price_html'], 99, 3);
+        add_filter('woocommerce_cart_product_price', [$this, 'get_cart_product_price'], 99, 2);
+        add_filter('woocommerce_cart_product_subtotal', [$this, 'get_product_subtotal'], 99, 4);
         add_filter('woocommerce_cart_subtotal', [$this, 'convert_cart_totals'], 99, 3);
-        add_filter('woocommerce_cart_total', [$this, 'convert_cart_totals'], 99, 1);
+        add_filter('woocommerce_cart_contents_total', [$this, 'get_cart_total'], 99, 1);
+        add_filter('woocommerce_cart_shipping_method_full_label', [$this, 'wc_cart_totals_shipping_method_label'], 99, 2);
+        add_filter('woocommerce_cart_total', [$this, 'get_order_total'], 99, 1);
+
+        add_filter('woocommerce_get_formatted_order_total', [$this, 'get_formatted_order_total'], 99, 4);
+        add_filter('woocommerce_order_formatted_line_subtotal', [$this, 'get_formatted_line_subtotal'], 99, 3);
+        add_filter('woocommerce_order_subtotal_to_display', [$this, 'get_subtotal_to_display'], 99, 3);
+        add_filter('woocommerce_order_shipping_to_display', [$this, 'get_subtotal_to_display'], 99, 3);
+
+        add_filter('woocommerce_currency_symbol', [$this, 'change_currency_symbol'], 99, 2);
         // add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+    }
+
+	public function get_subtotal_to_display( $price, $compound, $order ) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $price;
+        }
+
+        $rate = $this->get_current_rate();
+
+        if (preg_match('/[\d,.]+/', $price, $matches)) {
+            // Replace comma with dot for float conversion
+            $normalized = str_replace(',', '.', $matches[0]);
+            $price = (float) $normalized;
+            $price = wc_price($price * $rate);
+        }
+
+		return $price;
+	}
+
+	public function get_formatted_line_subtotal( $subtotal, $item, $order ) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $subtotal;
+        }
+
+        $rate = $this->get_current_rate();
+
+		$subtotal = wc_price( $order->get_line_subtotal( $item, true ) * $rate, array( 'currency' => $order->get_currency() ) );
+
+		return $subtotal;
+	}
+
+	public function get_formatted_order_total( $formatted_total, $order, $tax_display, $display_refunded ) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $formatted_total;
+        }
+
+        $rate = $this->get_current_rate();
+
+        $formatted_total = wc_price( $order->get_total() * $rate, array( 'currency' => $order->get_currency() ) );
+		$order_total     = $order->get_total() * $rate;
+		$total_refunded  = $order->get_total_refunded() * $rate;
+		$tax_string      = '';
+
+		// Tax for inclusive prices.
+		if ( wc_tax_enabled() && 'incl' === $tax_display ) {
+			$tax_string_array = array();
+			$tax_totals       = $order->get_tax_totals();
+
+			if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
+				foreach ( $tax_totals as $code => $tax ) {
+					$tax_amount         = ( $total_refunded && $display_refunded ) ? wc_price( WC_Tax::round( $tax->amount - $order->get_total_tax_refunded_by_rate_id( $tax->rate_id ) ) * $rate, array( 'currency' => $order->get_currency() ) ) : $tax->formatted_amount;
+					$tax_string_array[] = sprintf( '%s %s', $tax_amount, $tax->label );
+				}
+			} elseif ( ! empty( $tax_totals ) ) {
+				$tax_amount         = ( $total_refunded && $display_refunded ) ? $order->get_total_tax() - $order->get_total_tax_refunded() : $order->get_total_tax();
+				$tax_string_array[] = sprintf( '%s %s', wc_price( $tax_amount * $rate, array( 'currency' => $order->get_currency() ) ), WC()->countries->tax_or_vat() );
+			}
+
+			if ( ! empty( $tax_string_array ) ) {
+				/* translators: %s: taxes */
+				$tax_string = ' <small class="includes_tax">' . sprintf( __( '(includes %s)', 'woocommerce' ), implode( ', ', $tax_string_array ) ) . '</small>';
+			}
+		}
+
+		if ( $total_refunded && $display_refunded ) {
+			$formatted_total = '<del aria-hidden="true">' . wp_strip_all_tags( $formatted_total ) . '</del> <ins>' . wc_price( $order_total - $total_refunded, array( 'currency' => $order->get_currency() ) ) . $tax_string . '</ins>';
+		} else {
+			$formatted_total .= $tax_string;
+		}
+
+		return $formatted_total;
+	}
+
+	public function get_order_total( $price ) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $price;
+        }
+
+        $rate = $this->get_current_rate();
+
+        $price = (wc_prices_include_tax() ? WC()->cart->get_cart_contents_total() + WC()->cart->get_cart_contents_tax() : WC()->cart->get_cart_contents_total() );
+        $price += WC()->cart->get_shipping_total();
+
+        return wc_price($price * $rate);
+	}
+
+    public function wc_cart_totals_shipping_method_label( $label, $method ) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $label;
+        }
+
+        $rate = $this->get_current_rate();
+
+        $label     = $method->get_label();
+        $has_cost  = 0 < $method->cost;
+        $hide_cost = ! $has_cost && in_array( $method->get_method_id(), array( 'free_shipping', 'local_pickup' ), true );
+
+        if ( $has_cost && ! $hide_cost ) {
+            if ( WC()->cart->display_prices_including_tax() ) {
+                $label .= ': ' . wc_price( ($method->cost + $method->get_shipping_tax()) * $rate );
+                if ( $method->get_shipping_tax() > 0 && ! wc_prices_include_tax() ) {
+                    $label .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+                }
+            } else {
+                $label .= ': ' . wc_price( $method->cost * $rate );
+                if ( $method->get_shipping_tax() > 0 && wc_prices_include_tax() ) {
+                    $label .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+                }
+            }
+        }
+
+        return $label;
+    }
+
+	public function get_cart_total($price) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $price;
+        }
+
+		return wc_price( (wc_prices_include_tax() ? WC()->cart->get_cart_contents_total() + WC()->cart->get_cart_contents_tax() : WC()->cart->get_cart_contents_total()) * $this->get_current_rate() );
+	}
+
+	public function get_product_subtotal( $product_subtotal, $product, $quantity, $cart ) {
+		$price = $product->get_price() * $this->get_current_rate();
+
+		if ( $product->is_taxable() ) {
+
+			if ( $cart->display_prices_including_tax() ) {
+				$row_price        = wc_get_price_including_tax( $product, array( 'qty' => $quantity ) );
+				$product_subtotal = wc_price( $row_price );
+
+				if ( ! wc_prices_include_tax() && $cart->get_subtotal_tax() > 0 ) {
+					$product_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+				}
+			} else {
+				$row_price        = wc_get_price_excluding_tax( $product, array( 'qty' => $quantity ) );
+				$product_subtotal = wc_price( $row_price );
+
+				if ( wc_prices_include_tax() && $cart->get_subtotal_tax() > 0 ) {
+					$product_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+				}
+			}
+		} else {
+			$row_price        = (float) $price * (float) $quantity;
+			$product_subtotal = wc_price( $row_price );
+		}
+
+		return $product_subtotal;
+	}
+
+	public function get_cart_product_price( $price, $product ) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $price;
+        }
+
+		if ( WC()->cart->display_prices_including_tax() ) {
+			$product_price = wc_get_price_including_tax( $product );
+		} else {
+			$product_price = wc_get_price_excluding_tax( $product );
+		}
+
+		return wc_price($product_price * $this->get_current_rate());
+	}
+
+    // Only convert prices on the frontend, not in admin, REST, AJAX, or cron (so gateways get original values)
+    private function biodonatum_should_convert_prices() {
+        $result = false;
+
+        // Never convert in REST or cron
+        if (defined('DOING_CRON') && DOING_CRON) {
+            $result = false;
+        }
+        elseif (defined('REST_REQUEST') && REST_REQUEST) {
+            $result = false;
+        }
+        elseif (!is_admin()) {
+            $result = true;
+        }
+        elseif (defined('DOING_AJAX') && DOING_AJAX) {
+            // If user is not logged in or is not an admin, treat as frontend AJAX
+            if (!current_user_can('manage_options')) {
+                $result = true;
+            }
+            else {
+                // Or, check for known frontend AJAX actions
+                $frontend_ajax_actions = [
+                    'get_cart_totals', 'update_cart_item', 'apply_custom_coupon', 'remove_custom_coupon', 'get_cart_count'
+                ];
+
+                if (isset($_REQUEST['action']) && in_array($_REQUEST['action'], $frontend_ajax_actions, true)) {
+                    $result = true;
+                }
+            }
+        }
+
+        if ($result) {
+            $user_currency = $this->get_user_currency();
+            $woocommerce_currency = get_option('woocommerce_currency', 'USD');
+
+            $result = $user_currency !== $woocommerce_currency;
+        }
+
+        return $result;
+    }
+
+    public function change_currency_symbol($currency_symbol, $currency) {
+        // Try to get the currently chosen currency (user's selection or default)
+        if (function_exists('get_biodonatum_current_currency') && $this->biodonatum_should_convert_prices()) {
+            $current = $this->get_user_currency();
+            $currency_symbol = isset($this->biodonatum_currency_symbols[$current]) ? $this->biodonatum_currency_symbols[$current] : $currency_symbol;
+        }
+
+        return $currency_symbol;
     }
 
     public function add_admin_menu() {
@@ -449,31 +734,90 @@ class Biodonatum_Currency_Switcher {
         return 1;
     }
 
-    public function convert_price_html($price, $product) {
-        if (is_admin()) return $price;
+    public function get_current_rate() {
         $user_currency = $this->get_user_currency();
-        $woocommerce_currency = get_option('woocommerce_currency', 'USD');
-        if ($user_currency === $woocommerce_currency) return $price;
         $rate = $this->get_rate($user_currency);
-        $price_num = floatval(strip_tags($price));
-        if ($rate && $price_num) {
-            $converted = $price_num * $rate;
-            return wc_price($converted, ['currency' => $user_currency]);
+
+        // Defensive: if $rate is array, get numeric value
+        if (is_array($rate) && isset($rate['rate'])) {
+            $rate = floatval($rate['rate']);
+        } elseif (is_numeric($rate)) {
+            $rate = floatval($rate);
+        } else {
+            $rate = 1;
         }
+
+        return $rate;
+    }
+
+    public function convert_price_html($price, $product) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $price;
+        }
+
+        $rate = $this->get_current_rate();
+        $isVariable = $product->get_type() === 'variable';
+
+        if ($rate) {
+            if ($isVariable) {
+                $prices = $product->get_variation_prices( true );
+
+                if ( empty( $prices['price'] ) ) {
+                    $price = apply_filters( 'woocommerce_variable_empty_price_html', '', $this );
+                } else {
+                    $min_price     = current( $prices['price'] ) * $rate;
+                    $max_price     = end( $prices['price'] ) * $rate;
+                    $min_reg_price = current( $prices['regular_price'] ) * $rate;
+                    $max_reg_price = end( $prices['regular_price'] ) * $rate;
+
+                    if ( $min_price !== $max_price && !is_shop() ) {
+                        $price = wc_format_price_range( $min_price, $max_price );
+                    } elseif ( $product->is_on_sale() && $min_reg_price === $max_reg_price ) {
+                        $price = wc_format_sale_price( wc_price( $max_reg_price ), wc_price( $min_price ) );
+                    } else {
+                        $price = wc_price( $min_price );
+                    }
+                }
+            }
+            else {
+                if ( '' === $product->get_price() ) {
+                    $price = apply_filters( 'woocommerce_empty_price_html', '', $product );
+                } elseif ( $product->is_on_sale() ) {
+                    $price = wc_format_sale_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) * $rate, wc_get_price_to_display( $product ) * $rate ) . $product->get_price_suffix();
+                } else {
+                    $price = wc_price( wc_get_price_to_display( $product ) * $rate ) . $product->get_price_suffix();
+                }
+            }
+        }
+
         return $price;
     }
 
-    public function convert_cart_totals($value) {
-        $user_currency = $this->get_user_currency();
-        $woocommerce_currency = get_option('woocommerce_currency', 'USD');
-        if ($user_currency === $woocommerce_currency) return $value;
-        $rate = $this->get_rate($user_currency);
-        $value_num = floatval(strip_tags($value));
-        if ($rate && $value_num) {
-            $converted = $value_num * $rate;
-            return wc_price($converted, ['currency' => $user_currency]);
+    public function convert_cart_totals($cart_subtotal, $compound, $cart) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $cart_subtotal;
         }
-        return $value;
+
+        $rate = $this->get_current_rate();
+
+		if ( $compound ) {
+			$cart_subtotal = wc_price( ($cart->get_cart_contents_total() + $cart->get_shipping_total() + $cart->get_taxes_total( false, false )) * $rate );
+
+		} elseif ( $cart->display_prices_including_tax() ) {
+			$cart_subtotal = wc_price( ($cart->get_subtotal() + $cart->get_subtotal_tax()) * $rate );
+
+			if ( $cart->get_subtotal_tax() > 0 && ! wc_prices_include_tax() ) {
+				$cart_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+			}
+		} else {
+			$cart_subtotal = wc_price( $cart->get_subtotal() * $rate );
+
+			if ( $cart->get_subtotal_tax() > 0 && wc_prices_include_tax() ) {
+				$cart_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+			}
+		}
+
+		return $cart_subtotal;
     }
 } // end class
 } // end if class_exists

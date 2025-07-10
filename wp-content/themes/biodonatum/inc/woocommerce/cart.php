@@ -69,10 +69,12 @@ function custom_ajax_update_cart_item() {
         wp_send_json_error(['error' => get_static_content('cart_item_not_found')]);
     }
 
+    $_product = apply_filters( 'woocommerce_cart_item_product', $item['data'], $item, $cart_item_key );
+
     wp_send_json_success([
         'new_quantity' => $quantity,
         'cart_count' => WC()->cart->get_cart_contents_count(),
-        'item_subtotal' => wc_price($item['line_subtotal']),
+        'item_subtotal' => WC()->cart->get_product_subtotal( $_product, $quantity ),
         'item_discount' => wc_price($item['line_total'] - $item['line_subtotal']),
         'cart_subtotal' => WC()->cart->get_cart_subtotal(),
         'cart_total' => WC()->cart->get_cart_total(),

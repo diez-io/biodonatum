@@ -105,7 +105,7 @@ defined( 'ABSPATH' ) || exit; ?>
                                         <td class="cart__table__cell__not-del cart__table__cell__not-del__top-border">
                                             <div class="cart__table__header--mob"><?= get_static_content('price') ?></div>
                                             <div class="cart__table__cell--mob">
-                                                <?= WC()->cart->get_product_price( $_product ) ?>
+                                                <?= WC()->cart->get_product_price($_product) ?>
                                             </div>
                                         </td>
                                         <td class="cart__table__cell__not-del">
