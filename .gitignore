@@ -150,6 +150,7 @@ wp-content/plugins/*
 !wp-content/plugins/language-detector/
 !wp-content/plugins/custom-admin-filter/**
 !wp-content/plugins/language-detector/**
+!wp-content/plugins/biodonatum-currency/**
 
 # Исключаем временные и кэшированные файлы
 wp-content/cache/
