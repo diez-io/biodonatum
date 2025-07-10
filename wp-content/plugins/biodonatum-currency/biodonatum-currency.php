@@ -77,11 +77,22 @@ register_activation_hook(__FILE__, function() {
     }
     $settings['currencies'] = [$wc_currency];
     $settings['default_currency'] = $wc_currency;
+    $settings['rate_offset'] = 0;
     update_option($option_name, $settings);
+
+    if (!wp_next_scheduled('biodonatum_daily_rate_update')) {
+        wp_schedule_event(strtotime('00:00 GMT'), 'daily', 'biodonatum_daily_rate_update');
+    }
 });
+
+register_deactivation_hook(__FILE__, function() {
+    wp_clear_scheduled_hook('biodonatum_daily_rate_update');
+});
+
 class Biodonatum_Currency_Switcher {
     private $option_name = 'biodonatum_currency_settings';
     private $rates_file;
+    private $rate_offset;
 
     // --- Biodonatum: Add current currency code to all WooCommerce currency symbols globally ---
     private $biodonatum_currency_symbols = [
@@ -117,10 +128,15 @@ class Biodonatum_Currency_Switcher {
 
     public function __construct() {
         $this->rates_file = plugin_dir_path(__FILE__) . 'exchange_rates.json';
+
+        $settings = get_option($this->option_name, []);
+        $this->rate_offset = intval(isset($settings['rate_offset']) ? esc_attr($settings['rate_offset']) : 0);
+
         add_action('admin_menu', [$this, 'add_admin_menu']);
         add_action('admin_init', [$this, 'register_settings']);
         add_action('wp_ajax_biodonatum_update_rates', [$this, 'ajax_update_rates']);
         add_action('init', [$this, 'handle_currency_switch']);
+        add_action('biodonatum_daily_rate_update', [$this, 'update_rates']);
 
         add_filter('woocommerce_get_price_html', [$this, 'convert_price_html'], 99, 2);
         add_filter('woocommerce_cart_product_price', [$this, 'get_cart_product_price'], 99, 2);
@@ -446,6 +462,17 @@ class Biodonatum_Currency_Switcher {
 
             echo '<div class="updated"><p>API Access Key updated.</p></div>';
         }
+        if (isset($_POST['set_exchange_rates_offset'])) {
+            $posted = $_POST[$this->option_name];
+            $offset = intval(sanitize_text_field($posted['rate_offset'] ?? 0));
+
+            $settings = get_option($this->option_name, []);
+            $settings['rate_offset'] = $offset;
+            $this->rate_offset = $offset;
+            update_option($this->option_name, $settings);
+
+            echo '<div class="updated"><p>Exchange rates offset updated.</p></div>';
+        }
         // If WooCommerce currency changed, check for outdated pairs
         if (isset($_POST['set_wc_currency']) && !empty($_POST['wc_currency'])) {
             $new_wc = sanitize_text_field($_POST['wc_currency']);
@@ -534,6 +561,11 @@ class Biodonatum_Currency_Switcher {
                     <?php endforeach; ?>
                 </select>
                 <button name="add_currency" value="1" class="button">+</button>
+            </form>
+            <form method="post" style="margin-bottom: 20px;">
+                <h2>Exchange rates offset (%)</h2>
+                <input type="number" name="<?= esc_attr($this->option_name) ?>[rate_offset]" value="<?= esc_attr($this->rate_offset) ?>" size="40">
+                <button name="set_exchange_rates_offset" value="1" class="button">Change</button>
             </form>
             <form method="post" style="margin-top:20px;">
                 <input type="hidden" name="biodonatum_update_rates" value="1">
@@ -626,7 +658,6 @@ class Biodonatum_Currency_Switcher {
     }
 
     public function get_rate($to) {
-        $settings = $this->get_settings();
         $source = get_option('woocommerce_currency', 'USD');
         $rates = $this->get_rates();
         if (isset($rates['quotes'][ $source . $to ])) {
@@ -642,8 +673,10 @@ class Biodonatum_Currency_Switcher {
         // Defensive: if $rate is array, get numeric value
         if (is_array($rate) && isset($rate['rate'])) {
             $rate = floatval($rate['rate']);
+            $rate *= 1 + $this->rate_offset / 100;
         } elseif (is_numeric($rate)) {
             $rate = floatval($rate);
+            $rate *= 1 + $this->rate_offset / 100;
         } else {
             $rate = 1;
         }
