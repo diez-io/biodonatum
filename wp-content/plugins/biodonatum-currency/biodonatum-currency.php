@@ -156,7 +156,7 @@ class Biodonatum_Currency_Switcher {
         add_filter('woocommerce_currency', [$this, 'biodonatum_force_aed_currency_for_telr'], 99, 1);
         add_filter('woocommerce_order_get_total', [$this, 'biodonatum_convert_eur_to_aed_for_telr'], 99, 2);
 
-        // Set a session flag before Telr payment request
+        // Set the flag before Telr payment request
         add_action('woocommerce_before_checkout_process', function() {
             if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'wctelr') {
                 if (WC()->session) {
@@ -164,10 +164,15 @@ class Biodonatum_Currency_Switcher {
                 }
             }
         });
-        // Clear the flag after payment is processed
-        add_action('woocommerce_thankyou', function($order_id) {
-            if (WC()->session) {
-                WC()->session->__unset('biodonatum_telr_payment');
+        // Clear the flag before rendering order display pages
+        add_action('template_redirect', function() {
+            if (
+                (function_exists('is_wc_endpoint_url') && (is_wc_endpoint_url('order-received') || is_wc_endpoint_url('view-order')))
+                || (is_account_page() && !is_checkout())
+            ) {
+                if (WC()->session) {
+                    WC()->session->__unset('biodonatum_telr_payment');
+                }
             }
         });
     }
@@ -190,7 +195,6 @@ class Biodonatum_Currency_Switcher {
 
             return round($total * $rate, 2);
         }
-
         return $total;
     }
 
