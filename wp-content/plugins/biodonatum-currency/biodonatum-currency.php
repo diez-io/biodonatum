@@ -153,8 +153,8 @@ class Biodonatum_Currency_Switcher {
 
         add_filter('woocommerce_currency_symbol', [$this, 'change_currency_symbol'], 99, 2);
 
-        add_filter('woocommerce_order_get_currency', [$this, 'biodonatum_force_aed_currency_for_telr'], 10, 2);
-        add_filter('woocommerce_order_get_total', [$this, 'biodonatum_convert_eur_to_aed_for_telr'], 10, 2);
+        add_filter('woocommerce_order_get_currency', [$this, 'biodonatum_force_aed_currency_for_telr'], 99, 2);
+        add_filter('woocommerce_order_get_total', [$this, 'biodonatum_convert_eur_to_aed_for_telr'], 99, 2);
 
         // add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
     }
@@ -163,7 +163,7 @@ class Biodonatum_Currency_Switcher {
         if (doing_action('woocommerce_checkout_process') || is_wc_endpoint_url('order-pay')) {
             $chosen_gateway = WC()->session->get('chosen_payment_method');
 
-            if ($chosen_gateway === 'telr') {
+            if ($chosen_gateway === 'wctelr') {
                 $rate = $this->get_rate('AED');
 
                 if ($rate !== 1) {
