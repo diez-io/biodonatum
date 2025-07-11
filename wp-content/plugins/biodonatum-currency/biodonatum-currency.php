@@ -307,32 +307,21 @@ class Biodonatum_Currency_Switcher {
 		return wc_price( (wc_prices_include_tax() ? WC()->cart->get_cart_contents_total() + WC()->cart->get_cart_contents_tax() : WC()->cart->get_cart_contents_total()) * $this->get_current_rate() );
 	}
 
-	public function get_product_subtotal( $product_subtotal, $product, $quantity, $cart ) {
-		$price = $product->get_price() * $this->get_current_rate();
+	public function get_product_subtotal( $price, $product, $quantity, $cart ) {
+        if (!$this->biodonatum_should_convert_prices()) {
+            return $price;
+        }
 
-		if ( $product->is_taxable() ) {
+        $rate = $this->get_current_rate();
 
-			if ( $cart->display_prices_including_tax() ) {
-				$row_price        = wc_get_price_including_tax( $product, array( 'qty' => $quantity ) );
-				$product_subtotal = wc_price( $row_price );
+        if (preg_match('/[\d,.]+/', $price, $matches)) {
+            // Replace comma with dot for float conversion
+            $normalized = str_replace(',', '.', $matches[0]);
+            $price = (float) $normalized;
+            $price = wc_price($price * $rate);
+        }
 
-				if ( ! wc_prices_include_tax() && $cart->get_subtotal_tax() > 0 ) {
-					$product_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
-				}
-			} else {
-				$row_price        = wc_get_price_excluding_tax( $product, array( 'qty' => $quantity ) );
-				$product_subtotal = wc_price( $row_price );
-
-				if ( wc_prices_include_tax() && $cart->get_subtotal_tax() > 0 ) {
-					$product_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
-				}
-			}
-		} else {
-			$row_price        = (float) $price * (float) $quantity;
-			$product_subtotal = wc_price( $row_price );
-		}
-
-		return $product_subtotal;
+		return $price;
 	}
 
 	public function get_cart_product_price( $price, $product ) {
