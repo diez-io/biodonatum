@@ -153,33 +153,45 @@ class Biodonatum_Currency_Switcher {
 
         add_filter('woocommerce_currency_symbol', [$this, 'change_currency_symbol'], 99, 2);
 
-        add_filter('woocommerce_order_get_currency', [$this, 'biodonatum_force_aed_currency_for_telr'], 99, 2);
+        add_filter('woocommerce_currency', [$this, 'biodonatum_force_aed_currency_for_telr'], 99, 1);
         add_filter('woocommerce_order_get_total', [$this, 'biodonatum_convert_eur_to_aed_for_telr'], 99, 2);
 
         // add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
     }
 
     public function biodonatum_convert_eur_to_aed_for_telr($total, $order) {
-        $chosen_gateway = WC()->session->get('chosen_payment_method');
+        if ( WC()->session ) {
+            $chosen_gateway = WC()->session->get('chosen_payment_method');
 
-        if ($chosen_gateway === 'wctelr') {
-            $rate = $this->get_rate('AED');
+            if ($chosen_gateway === 'wctelr') {
+                $rate = $this->get_rate('AED');
 
-            if ($rate !== 1) {
-                $rate *= 1 + $this->rate_offset / 100;
+                if (is_array($rate) && isset($rate['rate'])) {
+                    $rate = floatval($rate['rate']);
+                } elseif (is_numeric($rate)) {
+                    $rate = floatval($rate);
+                } else {
+                    $rate = 1;
+                }
+
+                if ($rate !== 1) {
+                    $rate *= 1 + $this->rate_offset / 100;
+                }
+
+                return round($total * $rate, 2);
             }
-
-            return round($total * $rate, 2);
         }
 
         return $total;
     }
 
-    public function biodonatum_force_aed_currency_for_telr($currency, $order) {
-        $chosen_gateway = WC()->session->get('chosen_payment_method');
+    public function biodonatum_force_aed_currency_for_telr($currency) {
+		if ( WC()->session ) {
+            $chosen_gateway = WC()->session->get('chosen_payment_method');
 
-        if ($chosen_gateway === 'wctelr') {
-            return 'AED';
+            if ($chosen_gateway === 'wctelr') {
+                return 'AED';
+            }
         }
 
         return $currency;
