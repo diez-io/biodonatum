@@ -165,7 +165,11 @@ class Biodonatum_Currency_Switcher {
 
             if ($chosen_gateway === 'telr') {
                 $rate = $this->get_rate('AED');
-                $rate *= 1 + $this->rate_offset / 100;
+
+                if ($rate !== 1) {
+                    $rate *= 1 + $this->rate_offset / 100;
+                }
+
                 return round($total * $rate, 2);
             }
         }
@@ -701,12 +705,14 @@ class Biodonatum_Currency_Switcher {
         // Defensive: if $rate is array, get numeric value
         if (is_array($rate) && isset($rate['rate'])) {
             $rate = floatval($rate['rate']);
-            $rate *= 1 + $this->rate_offset / 100;
         } elseif (is_numeric($rate)) {
             $rate = floatval($rate);
-            $rate *= 1 + $this->rate_offset / 100;
         } else {
             $rate = 1;
+        }
+
+        if ($rate !== 1) {
+            $rate *= 1 + $this->rate_offset / 100;
         }
 
         return $rate;
