@@ -199,12 +199,8 @@ class Biodonatum_Currency_Switcher {
     }
 
     public function biodonatum_force_aed_currency_for_telr($currency) {
-		if ( WC()->session ) {
-            $chosen_gateway = WC()->session->get('chosen_payment_method');
-
-            if ($chosen_gateway === 'wctelr') {
-                return 'AED';
-            }
+        if (WC()->session && WC()->session->get('biodonatum_telr_payment')) {
+            return 'AED';
         }
 
         return $currency;
@@ -378,8 +374,7 @@ class Biodonatum_Currency_Switcher {
     }
 
     public function change_currency_symbol($currency_symbol, $currency) {
-        // Try to get the currently chosen currency (user's selection or default)
-        if (function_exists('get_biodonatum_current_currency') && $this->biodonatum_should_convert_prices()) {
+        if ($this->biodonatum_should_convert_prices()) {
             $current = $this->get_user_currency();
             $currency_symbol = isset($this->biodonatum_currency_symbols[$current]) ? $this->biodonatum_currency_symbols[$current] : $currency_symbol;
         }
