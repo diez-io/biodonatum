@@ -156,30 +156,39 @@ class Biodonatum_Currency_Switcher {
         add_filter('woocommerce_currency', [$this, 'biodonatum_force_aed_currency_for_telr'], 99, 1);
         add_filter('woocommerce_order_get_total', [$this, 'biodonatum_convert_eur_to_aed_for_telr'], 99, 2);
 
-        // add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+        // Set a session flag before Telr payment request
+        add_action('woocommerce_before_checkout_process', function() {
+            if (isset($_POST['payment_method']) && $_POST['payment_method'] === 'wctelr') {
+                if (WC()->session) {
+                    WC()->session->set('biodonatum_telr_payment', true);
+                }
+            }
+        });
+        // Clear the flag after payment is processed
+        add_action('woocommerce_thankyou', function($order_id) {
+            if (WC()->session) {
+                WC()->session->__unset('biodonatum_telr_payment');
+            }
+        });
     }
 
     public function biodonatum_convert_eur_to_aed_for_telr($total, $order) {
-        if ( WC()->session ) {
-            $chosen_gateway = WC()->session->get('chosen_payment_method');
+        if (WC()->session && WC()->session->get('biodonatum_telr_payment')) {
+            $rate = $this->get_rate('AED');
 
-            if ($chosen_gateway === 'wctelr') {
-                $rate = $this->get_rate('AED');
-
-                if (is_array($rate) && isset($rate['rate'])) {
-                    $rate = floatval($rate['rate']);
-                } elseif (is_numeric($rate)) {
-                    $rate = floatval($rate);
-                } else {
-                    $rate = 1;
-                }
-
-                if ($rate !== 1) {
-                    $rate *= 1 + $this->rate_offset / 100;
-                }
-
-                return round($total * $rate, 2);
+            if (is_array($rate) && isset($rate['rate'])) {
+                $rate = floatval($rate['rate']);
+            } elseif (is_numeric($rate)) {
+                $rate = floatval($rate);
+            } else {
+                $rate = 1;
             }
+
+            if ($rate !== 1) {
+                $rate *= 1 + $this->rate_offset / 100;
+            }
+
+            return round($total * $rate, 2);
         }
 
         return $total;
@@ -226,46 +235,21 @@ class Biodonatum_Currency_Switcher {
 		return $subtotal;
 	}
 
-	public function get_formatted_order_total( $formatted_total, $order, $tax_display, $display_refunded ) {
+	public function get_formatted_order_total( $price, $order, $tax_display, $display_refunded ) {
         if (!$this->biodonatum_should_convert_prices()) {
-            return $formatted_total;
+            return $price;
         }
 
         $rate = $this->get_current_rate();
 
-        $formatted_total = wc_price( $order->get_total() * $rate, array( 'currency' => $order->get_currency() ) );
-		$order_total     = $order->get_total() * $rate;
-		$total_refunded  = $order->get_total_refunded() * $rate;
-		$tax_string      = '';
+        if (preg_match('/[\d,.]+/', $price, $matches)) {
+            // Replace comma with dot for float conversion
+            $normalized = str_replace(',', '.', $matches[0]);
+            $price = (float) $normalized;
+            $price = wc_price($price * $rate);
+        }
 
-		// Tax for inclusive prices.
-		if ( wc_tax_enabled() && 'incl' === $tax_display ) {
-			$tax_string_array = array();
-			$tax_totals       = $order->get_tax_totals();
-
-			if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
-				foreach ( $tax_totals as $code => $tax ) {
-					$tax_amount         = ( $total_refunded && $display_refunded ) ? wc_price( WC_Tax::round( $tax->amount - $order->get_total_tax_refunded_by_rate_id( $tax->rate_id ) ) * $rate, array( 'currency' => $order->get_currency() ) ) : $tax->formatted_amount;
-					$tax_string_array[] = sprintf( '%s %s', $tax_amount, $tax->label );
-				}
-			} elseif ( ! empty( $tax_totals ) ) {
-				$tax_amount         = ( $total_refunded && $display_refunded ) ? $order->get_total_tax() - $order->get_total_tax_refunded() : $order->get_total_tax();
-				$tax_string_array[] = sprintf( '%s %s', wc_price( $tax_amount * $rate, array( 'currency' => $order->get_currency() ) ), WC()->countries->tax_or_vat() );
-			}
-
-			if ( ! empty( $tax_string_array ) ) {
-				/* translators: %s: taxes */
-				$tax_string = ' <small class="includes_tax">' . sprintf( __( '(includes %s)', 'woocommerce' ), implode( ', ', $tax_string_array ) ) . '</small>';
-			}
-		}
-
-		if ( $total_refunded && $display_refunded ) {
-			$formatted_total = '<del aria-hidden="true">' . wp_strip_all_tags( $formatted_total ) . '</del> <ins>' . wc_price( $order_total - $total_refunded, array( 'currency' => $order->get_currency() ) ) . $tax_string . '</ins>';
-		} else {
-			$formatted_total .= $tax_string;
-		}
-
-		return $formatted_total;
+		return $price;
 	}
 
 	public function get_order_total( $price ) {
