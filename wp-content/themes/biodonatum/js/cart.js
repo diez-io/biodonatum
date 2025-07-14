@@ -199,7 +199,7 @@ jQuery(function ($) {
         // Add selected to parent
         $(this).closest('.variation-type__single').addClass('variation-type__single--selected');
         // Reset the select title
-        $('.select-subscription-duration__selected__title').text('- ' + window.selectDurationText + ' -');
+        $('.select-subscription-duration__selected__title').text(window.selectDurationText);
         // Update the price display
         const $price = $('.product-detail__product-price');
         $price.show();
