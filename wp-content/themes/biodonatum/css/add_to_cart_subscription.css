@@ -106,9 +106,6 @@
     padding: 10px 0;
     border-radius: 10px;
     transition: background 0.2s, color 0.2s;
-    font-size: 16px;
-    font-weight: 500;
-    color: #242424;
     outline: none;
 }
 .variation-type__single:hover,
