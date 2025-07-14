@@ -152,6 +152,8 @@ wp-content/plugins/*
 !wp-content/plugins/language-detector/**
 !wp-content/plugins/biodonatum-currency/**
 
+wp-content/plugins/biodonatum-currency/exchange_rates.json
+
 # Исключаем временные и кэшированные файлы
 wp-content/cache/
 wp-content/backup-db/
