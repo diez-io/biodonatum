@@ -200,19 +200,22 @@
                             <? endif; ?>
                             <?
                                 if ($isDetailedProductPage && $isVariable) :
-                                    $variations = $woo_product->get_available_variations(); ?>
-
-                                    <div class="select-subscription-duration__label">
-                                        <?= get_static_content('how_long_subscription') ?>
-                                    </div>
-
-                                    <?
+                                    $variations = $woo_product->get_available_variations();
                                     $grouped_variations = [];
-                                    foreach ($variations as $variation) {
-                                        $type = $variation['attributes']['attribute_type'];
-                                        $grouped_variations[$type][] = $variation;
-                                    }
-                                    ?>
+                                    $has_types = isset($variations[0]['attributes']['attribute_type']); ?>
+
+                                    <? if (!$has_types) : ?>
+                                        <div class="select-subscription-duration__label">
+                                            <?= get_static_content('how_long_subscription') ?>
+                                        </div>
+
+                                        <? $grouped_variations['subscription'] = $variations; ?>
+                                    <? else:
+                                        foreach ($variations as $variation) {
+                                            $type = $variation['attributes']['attribute_type'];
+                                            $grouped_variations[$type][] = $variation;
+                                        }
+                                    endif;?>
 
                                     <?php
                                     // Find the first subscription variation for use in price and add-to-cart logic
@@ -225,7 +228,9 @@
                                     <? foreach ($grouped_variations as $type => $variations) : ?>
                                         <? if ($type === 'subscription') : ?>
                                             <div class="variation-type variation-type__single<?= $type === 'regular' ? ' variation-type__single--selected' : '' ?>" data-variation-type="<?= htmlspecialchars($type) ?>">
-                                                <div><?= get_static_content("type_$type") ?></div>
+                                                <? if ($has_types) : ?>
+                                                    <div><?= get_static_content("type_$type") ?></div>
+                                                <? endif; ?>
                                                 <div class="select-subscription-duration">
                                                     <div class="select-subscription-duration__selected">
                                                         <div class="select-subscription-duration__selected__title">
