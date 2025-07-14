@@ -170,7 +170,7 @@ jQuery(function ($) {
                     $price.html(price);
                 }
                 // Reset the select title for duration
-                $('.select-subscription-duration__selected__title').text('- ' + window.selectDurationText + ' -');
+                $('.select-subscription-duration__selected__title').text(window.selectDurationText);
                 window.selectedSubscriptionVariationId = null;
             }
         }
