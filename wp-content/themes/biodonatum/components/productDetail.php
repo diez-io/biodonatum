@@ -227,7 +227,7 @@
 
                                     <? foreach ($grouped_variations as $type => $variations) : ?>
                                         <? if ($type === 'subscription') : ?>
-                                            <div class="variation-type variation-type__single<?= $type === 'regular' ? ' variation-type__single--selected' : '' ?>" data-variation-type="<?= htmlspecialchars($type) ?>">
+                                            <div class="variation-type variation-type__single<?= $type === 'regular' || !$has_types ? ' variation-type__single--selected' : '' ?>" data-variation-type="<?= htmlspecialchars($type) ?>">
                                                 <? if ($has_types) : ?>
                                                     <div><?= get_static_content("type_$type") ?></div>
                                                 <? endif; ?>
