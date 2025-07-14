@@ -206,34 +206,72 @@
                                         <?= get_static_content('how_long_subscription') ?>
                                     </div>
 
-                                    <div class="select-subscription-duration">
-                                        <div class="select-subscription-duration__selected">
-                                            <div class="select-subscription-duration__selected__title">
-                                                - <?= get_static_content('select_duration') ?> -
+                                    <?
+                                    $grouped_variations = [];
+                                    foreach ($variations as $variation) {
+                                        $type = $variation['attributes']['attribute_type'];
+                                        $grouped_variations[$type][] = $variation;
+                                    }
+                                    ?>
+
+                                    <?php
+                                    // Find the first subscription variation for use in price and add-to-cart logic
+                                    $first_subscription_variation = null;
+                                    if (isset($grouped_variations['subscription']) && count($grouped_variations['subscription']) > 0) {
+                                        $first_subscription_variation = $grouped_variations['subscription'][0];
+                                    }
+                                    ?>
+
+                                    <? foreach ($grouped_variations as $type => $variations) : ?>
+                                        <? if ($type === 'subscription') : ?>
+                                            <div class="variation-type variation-type__single<?= $type === 'regular' ? ' variation-type__single--selected' : '' ?>" data-variation-type="<?= htmlspecialchars($type) ?>">
+                                                <div><?= get_static_content("type_$type") ?></div>
+                                                <div class="select-subscription-duration">
+                                                    <div class="select-subscription-duration__selected">
+                                                        <div class="select-subscription-duration__selected__title">
+                                                            - <?= get_static_content('select_duration') ?> -
+                                                        </div>
+                                                        <div class="select-subscription-duration__selected__icon">
+                                                            <svg>
+                                                                <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-angle-rounded"></use>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="select-subscription-duration__list" style="display:none;">
+                                                        <? foreach ($variations as $variation) : ?>
+                                                            <div
+                                                                class="select-subscription-duration__option"
+                                                                data-variation-id="<?= $variation['variation_id'] ?>"
+                                                                data-price="<?= htmlspecialchars($variation['price_html'], ENT_QUOTES, 'UTF-8') ?>"
+                                                            >
+                                                                <?= get_static_content('months_' . $variation['attributes']['attribute_duration']) ?>
+                                                            </div>
+                                                        <? endforeach; ?>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="select-subscription-duration__selected__icon">
-                                                <svg>
-                                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-angle-rounded"></use>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="select-subscription-duration__list" style="display:none;">
-                                            <? foreach ($variations as $variation) : ?>
-                                                <div
-                                                    class="select-subscription-duration__option"
+                                        <? else : $variation = $variations[0]; ?>
+                                            <div class="variation-type variation-type__single<?= $type === 'regular' ? ' variation-type__single--selected' : '' ?>" data-variation-type="<?= htmlspecialchars($type) ?>">
+                                                <div class="variation-type__single-option"
                                                     data-variation-id="<?= $variation['variation_id'] ?>"
                                                     data-price="<?= htmlspecialchars($variation['price_html'], ENT_QUOTES, 'UTF-8') ?>"
-                                                >
-                                                    <?= get_static_content('months_' . $variation['attributes']['attribute_duration']) ?>
+                                                    tabindex="0">
+                                                    <?= get_static_content("type_$type") ?>
                                                 </div>
-                                            <? endforeach; ?>
-                                        </div>
-                                    </div>
+                                            </div>
+                                        <? endif; ?>
+                                    <? endforeach; ?>
                                 <? endif; ?>
                         </article>
                         <? if ($isDetailedProductPage && $isVariable) : ?>
-                            <div class="product-detail__product-price" style="display:none;">
-                                <?= $variations[0]['price_html'] ?>
+                            <div class="product-detail__product-price" style="display:none;" data-subscription-from-string="<?= htmlspecialchars(sprintf(get_static_content('from_s'), $first_subscription_variation['price_html']), ENT_QUOTES, 'UTF-8') ?>">
+                                <?php if ($first_subscription_variation): ?>
+                                    <span class="product-detail__product-price-from" data-subscription-from-price="<?= htmlspecialchars($first_subscription_variation['price_html'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <?= sprintf(get_static_content('from_s'), $first_subscription_variation['price_html']) ?>
+                                    </span>
+                                <?php else: ?>
+                                    <?= $variations[0]['price_html'] ?>
+                                <?php endif; ?>
                             </div>
                         <? endif; ?>
                         <div class="buttons<?= $isDetailedProductPage ? ' buttons__add-to-cart' : '' ?>">

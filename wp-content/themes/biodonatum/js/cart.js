@@ -125,15 +125,122 @@ jQuery(function ($) {
 
     });
 
+    // Track selected group and selected subscription variation
+    window.selectedVariationType = null;
+    window.selectedSubscriptionVariationId = null;
+
+    $(function() {
+        // Set default selected group to 'regular' and show its price
+        var $defaultGroup = $('.variation-type[data-variation-type="regular"]');
+        if ($defaultGroup.length) {
+            $('.variation-type__single').removeClass('variation-type__single--selected');
+            $defaultGroup.addClass('variation-type__single--selected');
+            var $option = $defaultGroup.find('.variation-type__single-option');
+            if ($option.length) {
+                var price = $option.data('price');
+                var $price = $('.product-detail__product-price');
+                $price.show();
+                $price.html(price);
+            }
+            window.selectedVariationType = 'regular';
+            window.selectedSubscriptionVariationId = null;
+        }
+    });
+
+    $('.variation-type__single, .variation-type').on('click', function(e) {
+        // Only handle group selection if not clicking on a child option
+        if ($(e.target).closest('.select-subscription-duration__option').length === 0 && $(e.target).closest('.variation-type__single-option').length === 0) {
+            $('.variation-type__single').removeClass('variation-type__single--selected');
+            $(this).addClass('variation-type__single--selected');
+            window.selectedVariationType = $(this).data('variation-type');
+            // If subscription group, show 'from' price
+            if (window.selectedVariationType === 'subscription') {
+                const fromString = $('.product-detail__product-price').data('subscription-from-string');
+                const $price = $('.product-detail__product-price');
+                $price.show();
+                $price.html(fromString);
+                window.selectedSubscriptionVariationId = null;
+            } else {
+                // For regular, show its price
+                var $option = $(this).find('.variation-type__single-option');
+                if ($option.length) {
+                    var price = $option.data('price');
+                    var $price = $('.product-detail__product-price');
+                    $price.show();
+                    $price.html(price);
+                }
+                // Reset the select title for duration
+                $('.select-subscription-duration__selected__title').text('- ' + window.selectDurationText + ' -');
+                window.selectedSubscriptionVariationId = null;
+            }
+        }
+    });
+
+    $('.select-subscription-duration__option').on('click', function(e) {
+        $('.select-subscription-duration__list').hide();
+        $('.select-subscription-duration__option__active').removeClass('select-subscription-duration__option__active');
+        $(this).addClass('select-subscription-duration__option__active');
+        $('.select-subscription-duration__selected__title').text($(this).text());
+
+        // Visually select the subscription group and unselect others
+        $('.variation-type__single').removeClass('variation-type__single--selected');
+        $(this).closest('.variation-type').addClass('variation-type__single--selected');
+        window.selectedVariationType = 'subscription';
+        window.selectedSubscriptionVariationId = $(this).data('variation-id');
+
+        const $price = $('.product-detail__product-price');
+        $price.show();
+        $price.html($(this).data('price'));
+    });
+
+    $('.variation-type__single-option').on('click', function() {
+        // Remove selected from all
+        $('.variation-type__single').removeClass('variation-type__single--selected');
+        // Add selected to parent
+        $(this).closest('.variation-type__single').addClass('variation-type__single--selected');
+        // Reset the select title
+        $('.select-subscription-duration__selected__title').text('- ' + window.selectDurationText + ' -');
+        // Update the price display
+        const $price = $('.product-detail__product-price');
+        $price.show();
+        $price.html($(this).data('price'));
+        window.selectedVariationType = $(this).closest('.variation-type__single').data('variation-type');
+        window.selectedSubscriptionVariationId = null;
+        // Optionally, update hidden fields or data attributes for add-to-cart
+        // $('.add-to-cart-button').data('product-id', $(this).data('variation-id'));
+    });
+
+    // Store the select_duration text for reset
+    window.selectDurationText = $('.select-subscription-duration__selected__title').text().replace(/^-	*|\s*-$/g, '');
+
     // add to cart
     $('.add-to-cart-button').on('click', function (e) {
         e.preventDefault();
-
+        var productId;
         if ($(this).hasClass('subscription-add-to-cart-button')) {
-            var productId = $('.select-subscription-duration__option__active').data('variationId');
-        }
-        else {
-            var productId = jQuery(this).data('product-id');
+            // If a subscription duration is selected, use it; otherwise use the first subscription variation
+            if (window.selectedVariationType === 'subscription') {
+                if (window.selectedSubscriptionVariationId) {
+                    productId = window.selectedSubscriptionVariationId;
+                } else {
+                    // Get the first subscription variation id from the DOM
+                    var $first = $('.select-subscription-duration__option').first();
+                    productId = $first.data('variation-id');
+                }
+            } else {
+                // fallback
+                productId = $('.select-subscription-duration__option__active').data('variationId');
+            }
+        } else if (window.selectedVariationType) {
+            // For non-subscription, get the selected variation id
+            var $selected = $('.variation-type__single--selected .variation-type__single-option');
+            if ($selected.length) {
+                productId = $selected.data('variation-id');
+            } else {
+                productId = $(this).data('product-id');
+            }
+        } else {
+            productId = $(this).data('product-id');
         }
 
         $.ajax({
@@ -185,17 +292,6 @@ jQuery(function ($) {
         if (!$(e.target).hasClass('select-subscription-duration') && $(e.target).parents('.select-subscription-duration').length === 0) {
             $('.select-subscription-duration__list').hide();
         }
-    });
-
-    $('.select-subscription-duration__option').on('click', function(e) {
-        $('.select-subscription-duration__list').hide();
-        $('.select-subscription-duration__option__active').removeClass('select-subscription-duration__option__active');
-        $(this).addClass('select-subscription-duration__option__active');
-        $('.select-subscription-duration__selected__title').text($(this).text());
-
-        const $price = $('.product-detail__product-price');
-        $price.show();
-        $price.html($(this).data('price'));
     });
 
     // remove item from cart
