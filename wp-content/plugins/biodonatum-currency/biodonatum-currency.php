@@ -363,7 +363,7 @@ class Biodonatum_Currency_Switcher {
             }
         }
 
-        if ($result) {
+        if ($result && !is_shop()) {
             $user_currency = $this->get_user_currency();
             $woocommerce_currency = get_option('woocommerce_currency', 'USD');
 
