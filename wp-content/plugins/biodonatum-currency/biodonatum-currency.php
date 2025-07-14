@@ -693,7 +693,7 @@ class Biodonatum_Currency_Switcher {
             $rate = 1;
         }
 
-        if ($rate !== 1) {
+        if ($rate !== (float)1) {
             $rate *= 1 + $this->rate_offset / 100;
         }
 
