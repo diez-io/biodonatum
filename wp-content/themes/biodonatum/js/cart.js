@@ -229,7 +229,7 @@ jQuery(function ($) {
                 }
             } else {
                 // fallback
-                productId = $('.select-subscription-duration__option__active').data('variationId');
+                productId = $('.variation-type__single--selected .variation-type__single-option').data('variationId');
             }
         } else if (window.selectedVariationType) {
             // For non-subscription, get the selected variation id

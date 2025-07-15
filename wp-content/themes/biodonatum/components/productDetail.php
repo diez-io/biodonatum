@@ -229,7 +229,7 @@
                                         <? if ($type === 'subscription') : ?>
                                             <div class="variation-type variation-type__single<?= $type === 'regular' || !$has_types ? ' variation-type__single--selected' : '' ?>" data-variation-type="<?= htmlspecialchars($type) ?>">
                                                 <? if ($has_types) : ?>
-                                                    <div><?= get_static_content("type_$type") ?></div>
+                                                    <div><?= get_static_content("months_$type") ?></div>
                                                 <? endif; ?>
                                                 <div class="select-subscription-duration">
                                                     <div class="select-subscription-duration__selected">
@@ -261,7 +261,7 @@
                                                     data-variation-id="<?= $variation['variation_id'] ?>"
                                                     data-price="<?= htmlspecialchars($variation['price_html'], ENT_QUOTES, 'UTF-8') ?>"
                                                     tabindex="0">
-                                                    <?= get_static_content("type_$type") ?>
+                                                    <?= get_static_content("months_$type") ?>
                                                 </div>
                                             </div>
                                         <? endif; ?>
