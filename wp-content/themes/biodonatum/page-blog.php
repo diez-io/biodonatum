@@ -39,7 +39,7 @@
                             if ($loop->have_posts()):
                                 while ($loop->have_posts()):
                                     $loop->the_post(); ?>
-                                    <div class="card">
+                                    <a href="<?= the_permalink() ?>" class="card">
                                         <picture>
                                             <? $card_image = get_field('blog_image_preview') ?: get_field('blog_image'); ?>
                                             <img src="<?= esc_url($card_image['url']); ?>" alt="<?= esc_attr($card_image['alt']); ?>">
@@ -48,17 +48,17 @@
                                             <div class="card__text-title">
                                                 <?= esc_html(get_field('blog_title')); ?>
                                             </div>
-                                            <a href="<?= the_permalink() ?>" class="card__text-link">
+                                            <div class="card__text-link">
                                                 <?= get_static_content('look_more') ?>
                                                 <svg>
                                                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-vector"></use>
                                                 </svg>
-                                            </a>
+                                            </div>
                                             <div class="card__text-timestamp">
                                                 <?= get_the_date('d.m.Y') ?>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 <?php endwhile;
                                 wp_reset_postdata();
                             endif;
