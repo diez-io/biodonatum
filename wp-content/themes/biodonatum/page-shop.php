@@ -59,7 +59,7 @@
                                 $numberOfProducts++;
 
                                 ?>
-                                <div class="card">
+                                <a href="<?= the_permalink($advanced_product_id) ?>" class="card">
                                     <div class="slider" data-slider="detail">
                                         <div class="swiper">
                                             <div class="swiper-wrapper">
@@ -103,11 +103,11 @@
                                                 <?= $isVariable ? sprintf(get_static_content('from_s'), wc_price($product->get_price())) : wc_price($product->get_price()) ?>
                                             </div>
                                         </div>
-                                        <a href="<?= the_permalink($advanced_product_id) ?>" class="card__buy-btn">
+                                        <button class="card__buy-btn">
                                             <?= get_static_content('buy') ?>
-                                        </a>
+                                        </button>
                                     </div>
-                                </div>
+                                </a>
                                 <?
                             }
                         }
