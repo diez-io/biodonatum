@@ -18,6 +18,11 @@
         }
 
         .card {
+            &:hover .card__buy-btn {
+                background-color: $azure;
+                color: $white;
+            }
+
             &__text {
                 &-title {
                     font-size: 22px;
@@ -67,11 +72,6 @@
                 line-height: 24px;
                 text-align: center;
                 text-transform: uppercase;
-
-                &:hover {
-                    background-color: $azure;
-                    color: $white;
-                }
             }
         }
 
