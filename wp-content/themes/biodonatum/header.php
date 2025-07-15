@@ -136,6 +136,23 @@
             </div>
         </div>
         <div class="mobile-menu" data-menu>
+            <div class="header__language header__currency header__currency--mob">
+                <div class="header__element">
+                    <span><?= esc_html($current_currency) ?></span>
+                </div>
+                <div class="menu">
+                    <?php
+                    foreach ($currencies as $currency) :
+                        if ($currency['code'] === $current_currency) continue;
+                        $label = $currency['code'] . ' - ' . $currency['name'];
+                    ?>
+                        <form method="POST" action="">
+                            <input type="hidden" name="currency" value="<?= esc_attr($currency['code']) ?>">
+                            <button type="submit" class="menu__item"><?= esc_html($label) ?></button>
+                        </form>
+                    <?php endforeach; ?>
+                </div>
+            </div>
             <ul class="mobile-menu__list">
                 <li class="mobile-menu__item">
                     <a href="<?= home_url("/$language_slug"); ?>" class="mobile-menu__link">
