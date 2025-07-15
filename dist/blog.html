@@ -111,6 +111,26 @@
         </div>
     </div>
     <div class="mobile-menu" data-menu>
+        <div class="header__language header__currency header__currency--mob">
+            <div class="header__element">
+                <span>EUR</span>
+            </div>
+            <div class="menu">
+                <form method="POST" action="">
+                    <input type="hidden" name="lang" value="USD">
+                    <button type="submit" class="menu__item">AED - United Arab Emirates Dirham</button>
+                </form>
+                <form method="POST" action="">
+                    <input type="hidden" name="lang" value="CAD">
+                    <button type="submit" class="menu__item">LTL - Lithuanian Litas</button>
+                </form>
+                <form method="POST" action="">
+                    <input type="hidden" name="lang" value="PLN">
+                    <button type="submit" class="menu__item">CAD - Canadian Dollar</button>
+                </form>
+            </div>
+        </div>
+
         <ul class="mobile-menu__list">
             <li class="mobile-menu__item">
                 <a href="#" class="mobile-menu__link">
@@ -195,7 +215,7 @@
                             Microbiome science requires precision. In collaboration with scientists from all over the world, for 110 years we have been working and creating bio microbiotics for you and your health, for the benefit of future generations. We use probiotic strains with clinical data obtained in Japan.
                         </div>
                         <div class="blog__cards load-more-items">
-                            <div class="card">
+                            <a href="./detail.html" class="card">
                                 <picture>
                                     <img src="./assets/images/blog/blog.jpeg" alt="">
                                 </picture>
@@ -203,17 +223,17 @@
                                     <div class="card__text-title">
                                         Science helps people
                                     </div>
-                                    <a href="./detail.html" class="card__text-link">
+                                    <div class="card__text-link">
                                         Look More
                                         <svg>
                                             <use xlink:href="./assets/sprite.svg#icon-vector"></use>
                                         </svg>
-                                    </a>
+                                    </div>
                                     <div class="card__text-timestamp">
                                         03.09.2023
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                             <div class="card">
                                 <picture>
                                     <img src="./assets/images/blog/blog.jpeg" alt="">
