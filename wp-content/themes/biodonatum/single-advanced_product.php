@@ -4,8 +4,8 @@
             <section class="section pt-50">
                 <div class="container">
                     <div class="breadcrumbs mb-40">
-                        <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
-                        <a href="<?= get_permalink( get_option('woocommerce_shop_page_id')) ?>" class="breadcrumbs__link"><?= get_static_content('shop') ?></a>
+                        <a href="<?= esc_url(biodonatum_url_with_lang(home_url('/'))); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                        <a href="<?= esc_url(biodonatum_url_with_lang(get_permalink(get_option('woocommerce_shop_page_id')))); ?>" class="breadcrumbs__link"><?= get_static_content('shop') ?></a>
                         <span class="breadcrumbs__link"><?= get_field('advanced_product_name') ?></span>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                                     [
                                         'taxonomy' => 'taxonomy_language',
                                         'field'    => 'slug',
-                                        'terms'    => $_SESSION['lang'],
+                                        'terms'    => function_exists('get_current_language') ? get_current_language() : 'en',
                                     ],
                                 ],
                                 //'posts_per_page' => 10,

@@ -25,8 +25,8 @@ $notes = $order->get_customer_order_notes();
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url() ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
-                <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="breadcrumbs__link"><?= get_static_content('personal_account') ?></a>
+                <a href="<?= esc_url(biodonatum_url_with_lang(home_url('/'))); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                <a href="<?= esc_url(biodonatum_url_with_lang(get_permalink(get_option('woocommerce_myaccount_page_id')))); ?>" class="breadcrumbs__link"><?= get_static_content('personal_account') ?></a>
                 <span class="breadcrumbs__link"><?= get_static_content('order') ?></span>
             </div>
 			<div class="island checkout__order-review">

@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 							<p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed-actions">
 								<a href="<?php echo esc_url( $order->get_checkout_payment_url() ); ?>" class="button pay"><?= get_static_content('pay') ?></a>
 								<?php if ( is_user_logged_in() ) : ?>
-									<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="button pay"><?= get_static_content('my_account') ?></a>
+									<a href="<?php echo esc_url( biodonatum_url_with_lang( wc_get_page_permalink( 'myaccount' ) ) ); ?>" class="button pay"><?= get_static_content('my_account') ?></a>
 								<?php endif; ?>
 							</p>
 

@@ -1,5 +1,7 @@
+<? $language_slug = function_exists('get_current_language') ? get_current_language() : 'en'; ?>
+
 <!DOCTYPE html>
-<html lang="<?= $_SESSION['lang'] ?>"<?= $_SESSION['lang'] === 'ar' ? ' dir="rtl"' : '' ?>>
+<html lang="<?=$language_slug?>"<?= $language_slug === 'ar' ? ' dir="rtl"' : '' ?>>
 
 <head>
     <meta charset="UTF-8">
@@ -56,19 +58,18 @@
         <div class="container">
             <div class="header__wrapper">
                 <div class="header__block">
-                    <a href="/" class="logo">
+                    <a href="<?=home_url("/$language_slug") ?>" class="logo">
                         <img src="<?= wp_get_attachment_url(get_static_content('logo')) ?>" alt="">
                     </a>
                 </div>
                 <div class="header__block">
                     <nav class="nav mob-hidden">
-                        <? $language_slug = defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : ''; ?>
 
                         <a href="<?= home_url("/$language_slug"); ?>" class="nav__link"><?= get_static_content('home') ?></a>
                         <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('about')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('about') ?></a>
                         <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('blog')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('blog') ?></a>
                         <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('scientists')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('scientists') ?></a>
-                        <a href="<?= esc_url(wc_get_page_permalink( 'shop' )) ?>" class="nav__link"><?= get_static_content('shop') ?></a>
+                        <a href="<?= home_url("/$language_slug" . parse_url(wc_get_page_permalink( 'shop' ), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('shop') ?></a>
                         <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('reviews')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('reviews') ?></a>
                         <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('faq')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('faq') ?></a>
                         <a href="<?= home_url("/$language_slug" . parse_url(get_permalink(get_page_by_path('contacts')), PHP_URL_PATH)); ?>" class="nav__link"><?= get_static_content('contacts') ?></a>
@@ -126,26 +127,32 @@
                         </div>
                         <div class="header__language">
                             <div class="header__element">
-                                <span><?= $_SESSION['lang'] ?></span>
+                                <span><?= function_exists('get_current_language') ? esc_html(get_current_language()) : 'en' ?></span>
                             </div>
                             <div class="menu">
-                                <? global $supported_languages; ?>
-                                <? foreach ($supported_languages as $key => $name) : ?>
-                                    <form method="POST" action="">
-                                        <input type="hidden" name="lang" value="<?= $key ?>">
-                                        <button type="submit" class="menu__item"><?= $name ?></button>
-                                    </form>
-                                <? endforeach; ?>
+                                <?php
+                                global $supported_languages;
+                                $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+                                $segments = $path === '' ? [] : explode('/', $path);
+                                if (!empty($segments) && !empty($supported_languages) && array_key_exists($segments[0], $supported_languages)) {
+                                    array_shift($segments);
+                                }
+                                $path_without_lang = implode('/', $segments);
+                                foreach ($supported_languages as $key => $name) :
+                                    $lang_url = $path_without_lang === '' ? home_url('/' . $key . '/') : home_url('/' . $key . '/' . $path_without_lang . '/');
+                                ?>
+                                    <a href="<?= esc_url($lang_url) ?>" class="menu__item"><?= esc_html($name) ?></a>
+                                <?php endforeach; ?>
                             </div>
                         </div>
-                        <div data-url="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" <?= is_user_logged_in() ? 'logged-in' : '' ?> class="header__user">
+                        <div data-url="<?= esc_url(home_url('/' . $language_slug . parse_url(get_permalink(get_option('woocommerce_myaccount_page_id')), PHP_URL_PATH))) ?>" <?= is_user_logged_in() ? 'logged-in' : '' ?> class="header__user">
                             <div class="header__element">
                                 <svg class="icon">
                                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-person"></use>
                                 </svg>
                             </div>
                         </div>
-                        <a href="<?= esc_url(wc_get_cart_url()); ?>" class="header__cart">
+                        <a href="<?= esc_url(biodonatum_url_with_lang(wc_get_cart_url())); ?>" class="header__cart">
                             <div class="header__element">
                                 <svg class="icon">
                                     <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-cart"></use>
@@ -203,7 +210,7 @@
                     </a>
                 </li>
                 <li class="mobile-menu__item">
-                    <a href="<?= esc_url(wc_get_page_permalink( 'shop' )) ?>" class="mobile-menu__link">
+                    <a href="<?= esc_url(biodonatum_url_with_lang(wc_get_page_permalink('shop'))) ?>" class="mobile-menu__link">
                         <?= get_static_content('shop') ?>
                     </a>
                 </li>

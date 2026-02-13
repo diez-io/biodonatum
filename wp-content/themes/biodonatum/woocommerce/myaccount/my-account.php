@@ -36,7 +36,7 @@ if (!$isViewOrderPage) : ?>
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                <a href="<?= esc_url(biodonatum_url_with_lang(home_url('/'))); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
                 <span class="breadcrumbs__link"><?= get_static_content('personal_account') ?></span>
             </div>
             <div class="account">
@@ -81,7 +81,7 @@ if (!$isViewOrderPage) : ?>
 							</button>
 						</div>
 						<div class="island">
-							<a class="account__logout" href="<?= esc_url( wc_logout_url(home_url()) ) ?>"><?= get_static_content('log_out') ?></a>
+							<a class="account__logout" href="<?= esc_url( wc_logout_url( biodonatum_url_with_lang( home_url( '/' ) ) ) ); ?>"><?= get_static_content('log_out') ?></a>
 						</div>
 					</div>
 					<div class="account__edit__col2">

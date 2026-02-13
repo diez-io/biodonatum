@@ -68,6 +68,15 @@ function parseAcceptLanguage() {
     return 'en';
 }
 
+/**
+ * Returns the current language slug (e.g. 'en', 'de'). Language is determined from URL prefix only.
+ *
+ * @return string
+ */
+function get_current_language() {
+    return defined('CURRENT_LANGUAGE') ? CURRENT_LANGUAGE : 'en';
+}
+
 function check_lang_version() {
     if (get_option('lang_version') === false) {
         update_option('lang_version', time());
@@ -142,9 +151,7 @@ function initSessionLang() {
         session_start();
     }
 
-    if (!isset($_SESSION['lang']) && $acceptLang = parseAcceptLanguage()) {
-        $_SESSION['lang'] = $acceptLang;
-    }
+    // Language is no longer stored in session; it is derived from URL in template_redirect.
 }
 
 add_action('init', 'initSessionLang');
@@ -263,34 +270,31 @@ add_action('wp_head', 'add_hreflang_tags');
 add_action('template_redirect', function () {
     global $supported_languages;
 
-    // Parse the current URL
-    $requested_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-    $segments = explode('/', $requested_path);
+    // Parse the current URL (path only)
+    $request_uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $requested_path = $request_uri_path ? trim($request_uri_path, '/') : '';
+    $segments = $requested_path === '' ? [] : explode('/', $requested_path);
 
-    // Detect if a language slug is present
-    $language_slug = array_key_exists($segments[0], $supported_languages) ? $segments[0] : null;
+    // Detect if a language slug is present in the first segment
+    $language_slug = !empty($segments) && array_key_exists($segments[0], $supported_languages) ? $segments[0] : null;
 
-    // Logic to redirect
-    if (isset($_SESSION['lang'])) {
-        // If language slug is present and doesn't match the preferred language, redirect to the non-slug version
-        if ($language_slug) {
-            array_shift($segments); // Remove the language slug
-            $new_path = '/' . implode('/', $segments);
-            wp_safe_redirect(home_url($new_path));
-            exit;
-        }
-    }
-    else {
-        // If no preferred language is set, ensure the language slug is present
-        if (!$language_slug) {
-            // Default to English if no language slug is present
-            $default_language = 'en'; // Adjust if needed
-            wp_safe_redirect(home_url('/' . $default_language . '/' . $requested_path));
-            exit;
-        }
-        // Set the detected language in the session
-        $_SESSION['lang'] = $language_slug;
+    if ($language_slug) {
+        // Valid language prefix in URL: use it as current language (do not store in session)
         define('CURRENT_LANGUAGE', $language_slug);
+    } else {
+        // No language prefix: redirect to same path with default language prefix
+        $default_language = parseAcceptLanguage();
+        if (!$default_language || !array_key_exists($default_language, $supported_languages)) {
+            $default_language = 'en';
+        }
+        $new_path = $requested_path === '' ? $default_language : $default_language . '/' . $requested_path;
+        $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+        $redirect_url = home_url('/' . $new_path . '/');
+        if ($query) {
+            $redirect_url .= '?' . $query;
+        }
+        wp_safe_redirect($redirect_url);
+        exit;
     }
 });
 
@@ -486,7 +490,8 @@ if (file_exists(DEFAULT_TRANSLATIONS_FILE)) {
 
 function get_static_content($slug) {
     global $wpdb;
-    $transient_key = "static_content_{$slug}_{$_SESSION['lang']}";
+    $lang = get_current_language();
+    $transient_key = "static_content_{$slug}_{$lang}";
 
     // Check if the content is cached
     $cached_content = get_transient($transient_key);
@@ -497,7 +502,7 @@ function get_static_content($slug) {
     // Define the taxonomy and meta keys
     $taxonomy = 'taxonomy_language';
     $meta_key = "static_{$slug}";
-    $language = sanitize_text_field($_SESSION['lang']); // Sanitize the language
+    $language = sanitize_text_field($lang);
 
     // SQL query to get the post ID that matches the slug and language
     $query = $wpdb->prepare("

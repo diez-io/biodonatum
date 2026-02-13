@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit; ?>
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                <a href="<?= esc_url(biodonatum_url_with_lang(home_url('/'))); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
                 <span class="breadcrumbs__link"><?= get_static_content('cart') ?></span>
             </div>
             <div class="cart">
@@ -64,7 +64,7 @@ defined( 'ABSPATH' ) || exit; ?>
                                         [
                                             'taxonomy' => 'taxonomy_language',
                                             'field'    => 'slug',
-                                            'terms'    => $_SESSION['lang'],
+                                            'terms'    => function_exists('get_current_language') ? get_current_language() : 'en',
                                         ],
                                     ],
                                 ];
@@ -176,7 +176,7 @@ defined( 'ABSPATH' ) || exit; ?>
                             <div class="cart__total--title"><?= get_static_content('total') ?></div>
                             <div class="cart__total--total"><?= WC()->cart->get_cart_total() ?></div>
                         </div>
-                        <a href="<?= esc_url(wc_get_checkout_url()) ?>" class="button button--wide mt-20">
+                        <a href="<?= esc_url(biodonatum_url_with_lang(wc_get_checkout_url())); ?>" class="button button--wide mt-20">
                             <?= get_static_content('validate_the_order') ?>
                         </a>
                     </div>

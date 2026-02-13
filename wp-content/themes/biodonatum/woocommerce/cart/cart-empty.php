@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
     <section class="section pt-50">
         <div class="container">
             <div class="breadcrumbs mb-40">
-                <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                <a href="<?= esc_url(biodonatum_url_with_lang(home_url('/'))); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
                 <span class="breadcrumbs__link"><?= get_static_content('cart') ?></span>
             </div>
             <div class="cart">
@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 
 					if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
 						<p class="return-to-shop">
-							<a class="button wc-backward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+							<a class="button wc-backward<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" href="<?php echo esc_url( biodonatum_url_with_lang( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) ); ?>">
 								<?php
 									/**
 									 * Filter "Return To Shop" text.

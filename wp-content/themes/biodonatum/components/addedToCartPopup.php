@@ -9,7 +9,7 @@
             <?= get_static_content('product_added_to_cart') ?>
         </h2>
         <div class="product-added-to-cart-popup__btns">
-            <a href="<?= esc_url(wc_get_cart_url()); ?>" class="button button--wide">
+            <a href="<?= esc_url(biodonatum_url_with_lang(wc_get_cart_url())); ?>" class="button button--wide">
                 <?= get_static_content('go_to_cart') ?>
             </a>
         </div>

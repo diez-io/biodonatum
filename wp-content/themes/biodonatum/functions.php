@@ -57,44 +57,171 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
 add_action('wp_head', 'google_fonts');
 
 function handle_language_switch() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['lang'])) {
-        $language = sanitize_text_field($_POST['lang']);
-        session_start(); // Start the session if not already started
-        $_SESSION['lang'] = $language;
-
-        // Get the current URL
-        $current_url = $_SERVER['REQUEST_URI'];
-
-        // Get the current post ID (if applicable)
-        if (is_singular()) {
-            $current_post_id = get_the_ID();
-
-            // Try to find a translated post for the chosen language
-            $translated_post = get_translated_post($current_post_id, $_SESSION['lang']);
-
-            if ($translated_post) {
-                // Redirect to the translated post
-                wp_safe_redirect(get_permalink($translated_post->ID));
-                exit;
-            }
-        }
-
-        // // If not a singular post or no translation found, rewrite the URL with the chosen language
-        // $home_url = home_url('/');
-        // $current_url_relative = str_replace($home_url, '', $current_url);
-
-        // // Add the chosen language to the URL
-        // $redirect_url = '/' . ltrim($current_url_relative, '/');
-
-        // wp_safe_redirect($redirect_url);
-        // exit;
-
-
-        wp_safe_redirect(home_url($current_url));
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['lang'])) {
+        return;
     }
+    $language = sanitize_text_field($_POST['lang']);
+    global $supported_languages;
+    if (empty($supported_languages) && function_exists('fetchSupportedLanguages')) {
+        fetchSupportedLanguages();
+    }
+    if (empty($supported_languages) || !array_key_exists($language, $supported_languages)) {
+        return;
+    }
+
+    // If singular and a translation exists, redirect to the translated post URL (with language prefix)
+    if (is_singular()) {
+        $current_post_id = get_the_ID();
+        $translated_post = function_exists('get_translated_post') ? get_translated_post($current_post_id, $language) : null;
+        if ($translated_post) {
+            wp_safe_redirect(get_permalink($translated_post->ID));
+            exit;
+        }
+    }
+
+    // Build path with new language prefix: replace or add /lang/ at the start
+    $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    $segments = $path === '' ? [] : explode('/', $path);
+    if (!empty($segments) && !empty($supported_languages) && array_key_exists($segments[0], $supported_languages)) {
+        array_shift($segments);
+    }
+    $rest = implode('/', $segments);
+    $new_path = $rest === '' ? $language : $language . '/' . $rest;
+    $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+    $redirect_url = home_url('/' . $new_path . '/');
+    if ($query) {
+        $redirect_url .= '?' . $query;
+    }
+    wp_safe_redirect($redirect_url);
+    exit;
 }
 
 add_action('template_redirect', 'handle_language_switch');
+
+/**
+ * Returns URL with current language prefix in path (e.g. /en/cart/). Use for cart, checkout, myaccount, shop, home.
+ */
+function biodonatum_url_with_lang($url) {
+    $lang = function_exists('get_current_language') ? get_current_language() : '';
+    if ($lang === '') {
+        return $url;
+    }
+    $path = parse_url($url, PHP_URL_PATH);
+    if ($path === null || $path === '') {
+        return home_url('/' . $lang . '/');
+    }
+    $path = trim($path, '/');
+    return $path === '' ? home_url('/' . $lang . '/') : home_url('/' . $lang . '/' . $path . '/');
+}
+
+/**
+ * SEO meta: early computation of post_object + language_slug, find seo_meta record, store in global, start output buffer.
+ * Buffer callback (late) replaces <title> and <meta name="description"> in final HTML.
+ */
+function biodonatum_seo_meta_early_run() {
+    if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
+        return;
+    }
+    if (!function_exists('get_current_language')) {
+        return;
+    }
+
+    $post_object = null;
+    if (is_front_page()) {
+        $front_id = (int) get_option('page_on_front');
+        if ($front_id > 0) {
+            $post_object = get_post($front_id);
+        }
+    } elseif (is_singular()) {
+        $post_object = get_queried_object();
+        if (!($post_object instanceof WP_Post)) {
+            $post_object = get_post(get_queried_object_id());
+        }
+    }
+    if (!$post_object || !($post_object instanceof WP_Post)) {
+        return;
+    }
+
+    $language_slug = get_current_language();
+
+    $q = new WP_Query([
+        'post_type' => 'seo-meta',
+        'post_status' => 'publish',
+        'posts_per_page' => 1,
+        'no_found_rows' => true,
+        'tax_query' => [
+            [
+                'taxonomy' => 'taxonomy_language',
+                'field' => 'slug',
+                'terms' => $language_slug,
+            ],
+        ],
+        'meta_query' => [
+            [
+                'key' => 'post_object',
+                'value' => $post_object->ID,
+                'compare' => '=',
+            ],
+        ],
+    ]);
+
+    if (!$q->have_posts()) {
+        return;
+    }
+    $seo_post = $q->posts[0];
+    wp_reset_postdata();
+
+    if (function_exists('get_field')) {
+        $GLOBALS['biodonatum_seo_meta'] = [
+            'title' => trim(get_field('title', $seo_post->ID)),
+            'description' => trim(get_field('description', $seo_post->ID)),
+            'keywords' => implode(', ', array_map(fn($row) => $row['keyword'] ?? '', get_field('keywords', $seo_post->ID) ?: []))
+        ];
+
+        ob_start('biodonatum_seo_meta_buffer_callback');
+    }
+}
+add_action('template_redirect', 'biodonatum_seo_meta_early_run', 20);
+
+/**
+ * Buffer callback: replace <title> and <meta name="description"> in final HTML with values from seo_meta.
+ */
+function biodonatum_seo_meta_buffer_callback($html) {
+    if (!is_string($html) || empty($GLOBALS['biodonatum_seo_meta'])) {
+        return $html;
+    }
+    $meta = $GLOBALS['biodonatum_seo_meta'];
+    $title = isset($meta['title']) ? $meta['title'] : '';
+    $description = isset($meta['description']) ? $meta['description'] : '';
+    $keywords = isset($meta['keywords']) ? $meta['keywords'] : '';
+
+    if ($title !== '') {
+        $escaped_title = esc_html($title);
+        $html = preg_replace('/<title>\s*.*?\s*<\/title>/s', '<title>' . $escaped_title . '</title>', $html, 1);
+    }
+
+    if ($description !== '') {
+        $escaped_description = esc_attr(str_replace(["\r", "\n"], ' ', $description));
+        if (preg_match('/<meta\s+name=["\']description["\']\s+content=["\']([^"\']*)["\']/i', $html)) {
+            $html = preg_replace('/(<meta\s+name=["\']description["\']\s+content=)(["\'])([^\2]*?)\2/i', '$1$2' . $escaped_description . '$2', $html, 1);
+        } else {
+            $tag = '<meta name="description" content="' . $escaped_description . '">';
+            $html = preg_replace('/<\/head>/i', $tag . "\n</head>", $html, 1);
+        }
+    }
+
+    if ($keywords !== '') {
+        $escaped_keywords = esc_attr(str_replace(["\r", "\n"], ' ', $keywords));
+        if (preg_match('/<meta\s+name=["\']keywords["\']\s+content=["\']([^"\']*)["\']/i', $html)) {
+            $html = preg_replace('/(<meta\s+name=["\']keywords["\']\s+content=)(["\'])([^\2]*?)\2/i', '$1$2' . $escaped_keywords . '$2', $html, 1);
+        } else {
+            $tag = '<meta name="keywords" content="' . $escaped_keywords . '">';
+            $html = preg_replace('/<\/head>/i', $tag . "\n</head>", $html, 1);
+        }
+    }
+
+    return $html;
+}
 
 add_action('wp_enqueue_scripts', function() {
     wp_deregister_style('contact-form-7');
@@ -110,7 +237,8 @@ function remove_cf7_br_tags($form) {
 
 function get_cf7_form_by_title($title, $htmlClass = 'form-custom') {
     if (class_exists('WPCF7_ContactForm')) {
-        $forms = WPCF7_ContactForm::find(array('title' => $title . '_' . $_SESSION['lang']));
+        $lang = function_exists('get_current_language') ? get_current_language() : 'en';
+        $forms = WPCF7_ContactForm::find(array('title' => $title . '_' . $lang));
 
         if (!empty($forms) && is_array($forms)) {
             $form = reset($forms); // Get the first matching form
@@ -179,10 +307,11 @@ function custom_available_payment_gateways($gateways) {
 }
 
 function wc_update_locale_in_stripe_element_options( $options ) {
+    $locale = function_exists('get_current_language') ? get_current_language() : 'en';
     return array_merge(
         $options,
         array(
-            'locale' => $_SESSION['lang'] ?? 'en',
+            'locale' => $locale,
         )
     );
 };
@@ -292,7 +421,7 @@ function move_dynamic_acf_post_types_under_menu() {
 
 
 add_filter('locale', function() {
-    return $_SESSION['lang'] ?? 'en';
+    return function_exists('get_current_language') ? get_current_language() : 'en';
 });
 
 // Remove sanctioned countries from WooCommerce country dropdowns

@@ -56,7 +56,7 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 				[
 					'taxonomy' => 'taxonomy_language',
 					'field'    => 'slug',
-					'terms'    => $_SESSION['lang'],
+					'terms'    => function_exists('get_current_language') ? get_current_language() : 'en',
 				],
 			],
 		];

@@ -6,6 +6,6 @@
             </svg>
         </div>
         <div class="registration__title"><?= get_static_content('password_has_been_reset') ?></div>
-        <a href="<?= get_permalink( get_option('woocommerce_myaccount_page_id')) ?>" class="button button--wide"><?= get_static_content('go_to_profile') ?></a>
+        <a href="<?= esc_url(biodonatum_url_with_lang(get_permalink(get_option('woocommerce_myaccount_page_id')))); ?>" class="button button--wide"><?= get_static_content('go_to_profile') ?></a>
     </div>
 </div>

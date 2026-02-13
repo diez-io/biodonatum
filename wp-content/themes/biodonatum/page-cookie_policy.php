@@ -7,7 +7,7 @@
                 <section class="section pt-50">
                     <div class="container">
                         <div class="breadcrumbs mb-40">
-                            <a href="<?= home_url(); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
+                            <a href="<?= esc_url(biodonatum_url_with_lang(home_url('/'))); ?>" class="breadcrumbs__link"><?= get_static_content('home') ?></a>
                             <span class="breadcrumbs__link"><?= get_static_content('cookie_policy') ?></span>
                         </div>
                         <div class="head">

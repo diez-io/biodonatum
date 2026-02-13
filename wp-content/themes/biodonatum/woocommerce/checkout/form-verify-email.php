@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit;
 		printf(
 			/* translators: 1: opening login link 2: closing login link */
 			esc_html__( 'To view this page, you must either %1$slogin%2$s or verify the email address associated with the order.', 'woocommerce' ),
-			'<a href="' . esc_url( wc_get_page_permalink( 'myaccount' ) ) . '">',
+			'<a href="' . esc_url( biodonatum_url_with_lang( wc_get_page_permalink( 'myaccount' ) ) ) . '">',
 			'</a>'
 		);
 		?>
