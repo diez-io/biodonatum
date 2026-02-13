@@ -51,6 +51,69 @@
                                 </picture>
                             </a>
                         </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.12.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.11.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.10.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.09-1.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.09.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.08.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.07-1.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.07.jpeg">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <picture>
+                                    <img src="/wp-content/uploads/2025/09/photo_2025-08-30-16.37.05.jpeg">
+                                </picture>
+                            </a>
+                        </div>
                     </div>
                     <div class="teasers-pagination-wrapper">
                         <div><?= get_static_content('swipe_left_right') ?></div>

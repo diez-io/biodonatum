@@ -1,3 +1,62 @@
+<?
+
+$order_raw = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'featured';
+$allowed_orders = ['featured','newest','highest','lowest'];
+$order = in_array($order_raw, $allowed_orders, true) ? $order_raw : 'featured';
+
+$query_args = [
+    'post_type'      => 'review',
+    'post_status'    => 'publish',
+    'posts_per_page' => -1,
+    'tax_query' => [
+        [
+            'taxonomy' => 'taxonomy_language',
+            'field'    => 'slug',
+            'terms'    => $_SESSION['lang'],
+        ],
+    ],
+];
+
+if (get_query_var('product_link')) {
+    $query_args['meta_query'] = [[
+        'key'     => 'product_link',
+        'value'   => (int)get_query_var('product_link'),
+        'compare' => '=',
+    ]];
+}
+
+switch ($order) {
+    case 'highest':
+        $query_args['meta_key'] = 'rating';
+        $query_args['orderby'] = ['meta_value_num' => 'DESC', 'date' => 'DESC'];
+        break;
+
+    case 'lowest':
+        $query_args['meta_key'] = 'rating';
+        $query_args['orderby'] = ['meta_value_num' => 'ASC', 'date' => 'DESC'];
+        break;
+
+    default:
+        $query_args['orderby'] = ['date' => 'DESC'];
+        break;
+}
+
+$reviews_query = new WP_Query($query_args);
+
+$columns = array_fill(0, 4, []);
+foreach ($reviews_query->posts ?? [] as $i => $review)
+    $columns[$i % 4][] = $review;
+
+$total_reviews = (int)$reviews_query->found_posts;
+
+$sort_items = [
+    'featured' => 'sort_by_featured',
+    'newest'   => 'sort_by_newest',
+    'highest'  => 'sort_by_highest_rating',
+    'lowest'   => 'sort_by_lowest_rating',
+];
+    
+?>
 <section class="section pt-50">
     <div class="container">
         <div class="reviews">
@@ -6,10 +65,10 @@
             </div>
             <div class="reviews__filter">
                 <div class="reviews__filter__something">
-                    253 <?= get_static_content('reviews') ?>
-                    <svg>
+                    <?=$total_reviews?> <?= get_static_content('reviews') ?>
+                    <?/*<svg>
                         <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-chevrone"></use>
-                    </svg>
+                    </svg>*/?>
                 </div>
                 <div class="reviews__filter__popup popup">
                     <div class="reviews__filter__popup-btn popup-btn">
@@ -21,482 +80,61 @@
                         <div class="reviews__filter__title">
                             <?= get_static_content('sort_by') ?>:
                         </div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_featured') ?></div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_newest') ?></div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_highest_rating') ?></div>
-                        <div class="reviews__filter__item"><?= get_static_content('sort_by_lowest_rating') ?></div>
+                        <?foreach ($sort_items as $key => $static_key):?>
+                            <a 
+                                href="<?=esc_url(add_query_arg(['order' => $key]))?>" 
+                                class="reviews__filter__item <?=($order == $key) ? ' is-active' : ''?>" 
+                                data-order="<?php echo esc_attr($key); ?>"
+                                role="link"
+                            >
+                                <?=get_static_content($static_key); ?>
+                            </a>
+                        <?endforeach; ?>
                     </div>
                 </div>
             </div>
             <div class="reviews__tiles">
-                <div class="reviews__tiles__col load-more-items">
-                    <article class="article-reviews">
-                        <div class="article-reviews__wrapper">
-                            <picture class="article-reviews__picture">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-1.jpg" alt="">
-                            </picture>
-                            <div class="article-reviews__content">
-                                <div class="article-reviews__title">
-                                    <div class="article-reviews__author">
-                                        Peter N.
-                                    </div>
-                                    <div class="article-reviews__date">
-                                        03.09.2023
-                                    </div>
-                                </div>
-                                <div class="article-reviews__rating">
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                    </svg>
-                                </div>
-                                <div class="article-reviews__text">
-                                    I feel calm, more open and of course a little stress. Thank you very much.
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <div class="article-reviews__wrapper">
-                            <picture class="article-reviews__picture">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-5.jpg" alt="">
-                            </picture>
-                            <div class="article-reviews__content">
-                                <div class="article-reviews__title">
-                                    <div class="article-reviews__author">
-                                        Bob Dollah
-                                    </div>
-                                    <div class="article-reviews__date">
-                                        03.09.2023
+                <?foreach ($columns as $column):?>
+                    <div class="reviews__tiles__col load-more-items">
+                        <?foreach ($column as $review):?>
+                            <?
+                            global $post;
+                            $post = $review;
+
+                            $review_id = get_the_ID();
+                            $rating = intval(get_field('rating', $review_id));
+
+                            ?>
+                            <article class="article-reviews">
+                                <div class="article-reviews__wrapper">
+                                    <picture class="article-reviews__picture">
+                                        <?the_post_thumbnail('medium');?>
+                                    </picture>
+                                    <div class="article-reviews__content">
+                                        <div class="article-reviews__title">
+                                            <div class="article-reviews__author"><?=the_title()?></div>
+                                            <div class="article-reviews__date"><?get_the_date();?></div>
+                                        </div>
+                                        <div class="article-reviews__rating">
+                                            <?for ($i = 0; $i < 5; $i++):?>
+                                                <?if ($rating > $i):?>
+                                                    <svg class="star">
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
+                                                    </svg>
+                                                <?else:?>
+                                                    <svg class="star">
+                                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
+                                                    </svg>
+                                                <?endif;?>
+                                            <?endfor;?>
+                                        </div>
+                                        <div class="article-reviews__text"><?=$review->post_content?></div>
                                     </div>
                                 </div>
-                                <div class="article-reviews__rating">
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                    </svg>
-                                </div>
-                                <div class="article-reviews__text">
-                                    This probiotic is demonstrably capable of reducing leaky gut issues and allergies. Within the past two years, I had my microbiome tested in a top-notch lab in Germany (BioVis) for the purpose of assessing the state of my gut, ranging from general microbiome composition, presence of pathogens, inflammatory markers, zonulin, and many others. Taking this product has had a positive influence on me.
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <div class="article-reviews__wrapper">
-                            <picture class="article-reviews__picture">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-1.jpg" alt="">
-                            </picture>
-                            <div class="article-reviews__content">
-                                <div class="article-reviews__title">
-                                    <div class="article-reviews__author">
-                                        Peter N.
-                                    </div>
-                                    <div class="article-reviews__date">
-                                        03.09.2023
-                                    </div>
-                                </div>
-                                <div class="article-reviews__rating">
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                    </svg>
-                                    <svg class="star">
-                                        <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                    </svg>
-                                </div>
-                                <div class="article-reviews__text">
-                                    I feel calm, more open and of course a little stress. Thank you very much.
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="reviews__tiles__col load-more-items">
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-2.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Larsen Bui
-                                </div>
-                                <div class="article-reviews__date">
-                                    03.09.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                Probiotiques efficaces, je suis plus en forme et moins stressée.
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-6.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Sadjik
-                                </div>
-                                <div class="article-reviews__date">
-                                    03.09.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                Im pleased. my stomach aches are getting better. What about pill called curcuma? Should i eat it or put it in food? Ema Item type: 28 Sachets à 3 g
-                            </div>
-                            <div class="reviews__reply">
-                                Shop replied:
-                            </div>
-                            <div class="article-reviews__text">
-                                Thank you very much for your feedback! META-CARE® Kurkuma is taken after meals with some liquid.
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-2.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Larsen Bui
-                                </div>
-                                <div class="article-reviews__date">
-                                    03.09.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                Probiotiques efficaces, je suis plus en forme et moins stressée.
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="reviews__tiles__col load-more-items">
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-3.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Bob Dollah
-                                </div>
-                                <div class="article-reviews__date">
-                                    24.10.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                This probiotic is demonstrably capable of reducing leaky gut issues and
-                                allergies. Within the past two years, I had my microbiome tested in a top-notch
-                                lab in Germany (BioVis) for the purpose of assessing the state of my gut,
-                                ranging from general microbiome composition, presence of pathogens, inflammatory
-                                markers, zonulin, and many others. Taking this product has had a positive
-                                influence on me.
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-7.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Peter N.
-                                </div>
-                                <div class="article-reviews__date">
-                                    24.10.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                I feel calm, more open and of course a little stress. Thank you very much.
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-3.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Bob Dollah
-                                </div>
-                                <div class="article-reviews__date">
-                                    24.10.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                This probiotic is demonstrably capable of reducing leaky gut issues and
-                                allergies. Within the past two years, I had my microbiome tested in a top-notch
-                                lab in Germany (BioVis) for the purpose of assessing the state of my gut,
-                                ranging from general microbiome composition, presence of pathogens, inflammatory
-                                markers, zonulin, and many others. Taking this product has had a positive
-                                influence on me.
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="reviews__tiles__col load-more-items">
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-4.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Sadjik
-                                </div>
-                                <div class="article-reviews__date">
-                                    03.09.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                Im pleased. my stomach aches are getting better. What about pill called curcuma?
-                                Should i eat it or put it in food? Ema
-                                Item type:
-                                28 Sachets à 3 g
-                            </div>
-                            <div class="reviews__reply">
-                                Shop replied:
-                            </div>
-                            <div class="article-reviews__text">
-                                Thank you very much for your feedback! META-CARE® Kurkuma is taken after meals with some liquid.
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-8.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Larsen Bui
-                                </div>
-                                <div class="article-reviews__date">
-                                    24.10.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                Probiotiques efficaces, je suis plus en forme et moins stressée.
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-reviews">
-                        <picture class="article-reviews__picture">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/reviews/reviews-4.jpg" alt="">
-                        </picture>
-                        <div class="article-reviews__content">
-                            <div class="article-reviews__title">
-                                <div class="article-reviews__author">
-                                    Sadjik
-                                </div>
-                                <div class="article-reviews__date">
-                                    03.09.2023
-                                </div>
-                            </div>
-                            <div class="article-reviews__rating">
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star"></use>
-                                </svg>
-                                <svg class="star star--not-filled">
-                                    <use xlink:href="<?= get_template_directory_uri(); ?>/assets/sprite.svg#icon-star-not-filled"></use>
-                                </svg>
-                            </div>
-                            <div class="article-reviews__text">
-                                Im pleased. my stomach aches are getting better. What about pill called curcuma?
-                                Should i eat it or put it in food? Ema
-                                Item type:
-                                28 Sachets à 3 g
-                            </div>
-                            <div class="reviews__reply">
-                                Shop replied:
-                            </div>
-                            <div class="article-reviews__text">
-                                Thank you very much for your feedback! META-CARE® Kurkuma is taken after meals with some liquid.
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                            </article>
+                        <?endforeach;?>
+                    </div>
+                <?endforeach;?>
             </div>
             <div class="button load-more-btn">
                 <?= get_static_content('load_more') ?>
@@ -504,3 +142,5 @@
         </div>
     </div>
 </section>
+
+<?wp_reset_postdata();?>

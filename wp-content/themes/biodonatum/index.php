@@ -6,11 +6,11 @@
         get_template_part('components/teasers');
 
         get_template_part('components/productDetail', null, [
-            'woo_id' => 210,
-            'subscription_woo_id' => 622,
+            'woo_id' => 1126,
+            'subscription_woo_id' => 1126,
         ]);
 
-        get_template_part('components/videoAnimation');
+//        get_template_part('components/videoAnimation');
         get_template_part('components/partners');
         get_template_part('components/feedback');
     ?>

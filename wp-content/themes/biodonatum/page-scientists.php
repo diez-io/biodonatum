@@ -14,7 +14,7 @@
                         <div class="head">
                             <h2 class="title"><?= get_static_content('scientists_title') ?></h2>
                         </div>
-                        <div class="island">
+                        <div class="island board">
                             <?= get_static_content('scientists_text_1') ?>
                             <?= get_static_content('scientists_text_2') ?>
                         </div>
@@ -30,7 +30,7 @@
                                                 'terms'    => $_SESSION['lang'],
                                             ],
                                         ],
-                                        //'posts_per_page' => 10,
+                                        'posts_per_page' => 100,
                                     );
 
                                     $loop = new WP_Query($args);

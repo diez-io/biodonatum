@@ -22,141 +22,72 @@
                     </p>
                 </div>
                 <div class="about__stories">
-                    <div class="about__stories__block">
-                        <div class="about__stories__block__picture">
-                            <picture class="about__stories__block__picture--main">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-1.jpg" alt="">
-                            </picture>
-                            <picture class="about__stories__block__picture--sub">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-1-1.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="about__stories__block__text">
-                            <div class="about__stories__block__text--title">
-                                <?= get_static_content('story_1_title') ?>
+                    <?
+                    $stories = new WP_Query([
+                        'post_type' => 'story',
+                        'tax_query' => [
+                            [
+                                'taxonomy' => 'taxonomy_language',
+                                'field'    => 'slug',
+                                'terms'    => $_SESSION['lang'],
+                            ],
+                        ],
+                        'orderby' => 'date',
+                        'order'   => 'ASC',
+                    ]);
+                    ?>
+                    <?while ($stories->have_posts()): $stories->the_post();?>
+                        <div class="about__stories__block">
+                            <div class="about__stories__block__picture">
+                                <?if (has_post_thumbnail()):?>
+                                    <picture class="about__stories__block__picture--main">
+                                        <img src="<?=get_the_post_thumbnail_url(get_the_ID(), 'full');?>" alt="">
+                                    </picture>
+                                <?endif;?>
+                                <?if (get_field('sub_picture')):?>
+                                    <picture class="about__stories__block__picture--sub">
+                                        <img src="<?=get_field('sub_picture')['url']?>" alt="<?=esc_attr(get_field('sub_picture')['alt'])?>">
+                                    </picture>
+                                <?endif;?>
                             </div>
-                            <div class="about__stories__block__text--epigraph">
-                                <?= get_static_content('story_1_epigraph') ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about__stories__block">
-                        <div class="about__stories__block__picture">
-                            <picture class="about__stories__block__picture--main">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-2.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="about__stories__block__text">
-                            <div class="about__stories__block__text--title">
-                                <?= get_static_content('story_2_title') ?>
-                            </div>
-                            <div class="about__stories__block__text--epigraph">
-                                <?= get_static_content('story_2_epigraph') ?>
-                            </div>
-                            <div class="about__stories__block__text--text">
-                                <?= get_static_content('story_2_text') ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about__stories__block">
-                        <div class="about__stories__block__picture">
-                            <picture class="about__stories__block__picture--main">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-3.jpg" alt="">
-                            </picture>
-                            <picture class="about__stories__block__picture--sub">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-3-3.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="about__stories__block__text">
-                            <div class="about__stories__block__text--title">
-                                <?= get_static_content('story_3_title') ?>
-                            </div>
-                            <div class="about__stories__block__text--epigraph">
-                                <?= get_static_content('story_3_epigraph') ?>
-                            </div>
-                            <div class="about__stories__block__text--text">
-                                <?= get_static_content('story_3_text') ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about__stories__block">
-                        <div class="about__stories__block__picture">
-                            <picture class="about__stories__block__picture--main">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-4.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="about__stories__block__text">
-                            <div class="about__stories__block__text--title">
-                                <?= get_static_content('story_4_title') ?>
-                            </div>
-                            <div class="about__stories__block__text--epigraph">
-                                <?= get_static_content('story_4_epigraph') ?>
-                            </div>
-                            <div class="about__stories__block__text--text">
-                                <?= get_static_content('story_4_text') ?>
-                            </div>
-                            <div class="about__stories__block__text--quote">
-                                <?= get_static_content('story_4_quote') ?>
+                            <div class="about__stories__block__text">
+
+                                <?if (get_the_title()):?>
+                                    <div class="about__stories__block__text--title">
+                                        <?the_title()?>
+                                    </div>
+                                <?endif;?>
+
+                                <?if (get_field('epigraph')):?>
+                                    <div class="about__stories__block__text--epigraph">
+                                        <?=get_field('epigraph')?>
+                                    </div>
+                                <?endif;?>
+
+                                <?if (get_the_content()):?>
+                                    <div class="about__stories__block__text--text">
+                                        <?the_content()?>
+                                    </div>
+                                <?endif;?>
+
+                                <?if (get_field('quote')):?>
+                                    <div class="about__stories__block__text--quote">
+                                        <?=get_field('quote')?>
+                                    </div>
+                                <?endif;?>
                             </div>
                         </div>
-                    </div>
-                    <div class="about__stories__block">
-                        <div class="about__stories__block__picture">
-                            <picture class="about__stories__block__picture--main">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-5.jpg" alt="">
-                            </picture>
-                            <picture class="about__stories__block__picture--sub">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-5-5.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="about__stories__block__text">
-                            <div class="about__stories__block__text--title">
-                                <?= get_static_content('story_5_title') ?>
-                            </div>
-                            <div class="about__stories__block__text--epigraph">
-                                <?= get_static_content('story_5_epigraph') ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about__stories__block">
-                        <div class="about__stories__block__picture">
-                            <picture class="about__stories__block__picture--main">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-6.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="about__stories__block__text">
-                            <div class="about__stories__block__text--title">
-                                <?= get_static_content('story_6_title') ?>
-                            </div>
-                            <div class="about__stories__block__text--epigraph">
-                                <?= get_static_content('story_6_epigraph') ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about__stories__block">
-                        <div class="about__stories__block__picture">
-                            <picture class="about__stories__block__picture--main">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/about/about-7.jpeg" alt="">
-                            </picture>
-                        </div>
-                        <div class="about__stories__block__text">
-                            <div class="about__stories__block__text--title">
-                                <?= get_static_content('story_7_title') ?>
-                            </div>
-                            <div class="about__stories__block__text--epigraph">
-                                <?= get_static_content('story_7_epigraph') ?>
-                            </div>
-                        </div>
-                    </div>
+                    <?endwhile;?>
+                    <?wp_reset_postdata();?>
                 </div>
             </div>
         </div>
     </section>
     <section class="section section--bg about__wide" style="background-image: url('<?= get_template_directory_uri(); ?>/assets/images/about/about-wide.png')">
-        <div class="about__wide__content">
+        <?/*<div class="about__wide__content">
             <div class="about__wide__content-big"><?= get_static_content('about_text_3') ?></div>
             <div class="about__wide__content-small"><?= get_static_content('about_text_4') ?></div>
-        </div>
+        </div>*/?>
     </section>
 
     <? get_template_part('components/feedback'); ?>

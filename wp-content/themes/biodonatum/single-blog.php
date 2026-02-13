@@ -11,8 +11,6 @@
                     </div>
                 </div>
             </section>
-            <section class="section section--bg section--hero blog-detail__hero" style="background-image: url('<?= esc_url(get_field('blog_image')['url']); ?>')">
-            </section>
             <section class="section pt-50">
                 <div class="container">
                     <div class="blog-detail">
@@ -31,7 +29,18 @@
                     </div>
                 </div>
             </section>
-
+            <?$blog_text_4 = get_static_content('blog_text_4');?>
+            <?if ($blog_text_4 != ''):?>
+                <section class="section mt-100">
+                    <div class="container">
+                        <div class="island board">
+                            <?=$blog_text_4?>
+                        </div>
+                    </div>
+                </section>
+                <?endif;?>
+            <section class="section section--bg section--hero blog-detail__hero mt-200" style="background-image: url('<?= esc_url(get_field('blog_image')['url']); ?>')"></section>
+        
             <? get_template_part('components/feedback'); ?>
 
         </main>

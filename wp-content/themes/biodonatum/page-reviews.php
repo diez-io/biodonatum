@@ -12,8 +12,8 @@
                     </div>
                 </div>
             </section>
-
             <? get_template_part('components/reviews'); ?>
+            
             <? get_template_part('components/feedback'); ?>
         </div>
 

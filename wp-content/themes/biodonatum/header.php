@@ -7,7 +7,7 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= get_static_content('title') ?></title>
-    <!-- Google tag (gtag.js) -->
+    <?/* Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20S32199Y4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -16,9 +16,37 @@
 
         gtag('config', 'G-20S32199Y4');
         gtag('config', 'AW-16544789369');
-    </script>
+    </script>*/?>
 
     <? wp_head(); ?>
+	<?/* Google tag (gtag.js) --> 
+	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16544789369"></script> 
+	<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-16544789369'); </script>*/?>
+	<!-- Google tag (gtag.js) --> 
+	<!--<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16544789369"></script> -->
+	<!--<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-16544789369'); </script>-->
+	<!-- Google tag (gtag.js) -->
+<!--<script async src="https://www.googletagmanager.com/gtag/js?id=G-1DB26EL8F5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1DB26EL8F5');
+</script>
+-->
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1DB26EL8F5"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-1DB26EL8F5');
+	</script>
+
+	
 </head>
 
 <body>

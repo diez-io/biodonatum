@@ -298,19 +298,52 @@ add_filter('locale', function() {
 // Remove sanctioned countries from WooCommerce country dropdowns
 add_filter( 'woocommerce_countries_allowed_countries', function( $countries ) {
     $blocked = [
-        'IR', // Иран
-        'CU', // Куба
-        'KP', // Северная Корея
-        'SD', // Судан
-        'SS', // Южный Судан
-        'UA', // Украина
-        'SY', // Сирия
-        'RU', // Российская Федерация
-        'MM', // Мьянма
-        'YE', // Йемен
+//         'IR', // Иран
+//         'KP', // Северная Корея
+//         'SD', // Судан
+//         'SS', // Южный Судан
+//         'UA', // Украина
+//         'SY', // Сирия
+//         'RU', // Российская Федерация
+//         'MM', // Мьянма
+//         'YE', // Йемен
     ];
     foreach ( $blocked as $code ) {
         unset( $countries[ $code ] );
     }
     return $countries;
 });
+
+add_action('template_redirect', function() {
+    if (is_singular('review')) { 
+        global $wp_query;
+        $wp_query->set_404();
+        status_header(404);
+        exit;
+    }
+});
+
+add_filter( 'woocommerce_get_price_html', 'my_add_discount_to_variation_price_html', 10, 2 );
+/**
+ * Добавляет блок "Скидка" к HTML цены для вариаций.
+ *
+ * @param string $price_html HTML текущей цены.
+ * @param WC_Product $product Product object (может быть variation).
+ * @return string Изменённый HTML
+ */
+function my_add_discount_to_variation_price_html( $price_html, $product ) {
+    if ( ! $product instanceof WC_Product )
+        return $price_html;
+
+    if ( $product->is_type( 'variation' ) ) {
+        $regular = (float) $product->get_regular_price();
+        $price   = (float) $product->get_price();
+
+        if ( $regular > 0 && $price < $regular ) {
+            $diff = $regular - $price;
+            $price_html .= '<span class="product-discount_container"><span class="product-discount">'.get_static_content('benefit').': '.wc_price( $diff ).'</span></span>';
+        }
+    }
+
+    return $price_html;
+}

@@ -6,6 +6,22 @@
         $advanced_product_id = null;
         $isDetailedProductPage = !isset($args['woo_id']);
 
+		if ($isDetailedProductPage) {
+			$product = wc_get_product(get_field($post_type_prefix . 'woo_id'));
+			if ($product) {
+				$main_image_id = $product->get_image_id();
+				$gallery_image_ids = $product->get_gallery_image_ids();
+
+				$all_image_ids = $main_image_id ? array_merge([$main_image_id], $gallery_image_ids) : $gallery_image_ids;
+
+				$all_images = [];
+				foreach ($all_image_ids as $image_id) {
+					$all_images[] = wp_get_attachment_image_url($image_id, 'full');
+				}
+			} else $all_images = [];
+		} else 
+			$all_images = [];
+		
         if (!$isDetailedProductPage) {
             $product_id = $args['woo_id'];
 
@@ -30,8 +46,20 @@
             $query = new WP_Query($queryArgs);
 
             if ($query->have_posts()) {
+                $query->the_post();
                 $advanced_product_id = $query->posts[0]->ID;
                 $woo_product = wc_get_product($product_id);
+
+                $main_image_id = $woo_product->get_image_id();
+				$gallery_image_ids = $woo_product->get_gallery_image_ids();
+
+				$all_image_ids = $main_image_id ? array_merge([$main_image_id], $gallery_image_ids) : $gallery_image_ids;
+
+				$all_images = [];
+				foreach ($all_image_ids as $image_id) {
+					$all_images[] = wp_get_attachment_image_url($image_id, 'full');
+				}
+
             }
 
 
@@ -68,6 +96,8 @@
             $isVariable = $woo_product->get_type() === 'variable';
         }
 
+        set_query_var('product_link', $product_id); 
+
         if ($advanced_product_id) : ?>
             <div class="product-detail">
                 <div class="product-detail__left">
@@ -75,16 +105,26 @@
                         <div class="swiper">
                             <div class="swiper-wrapper">
                                 <?
-                                $images = get_field($post_type_prefix . 'images', $advanced_product_id);
+								if (!empty($all_images)) {
+									foreach ($all_images as $image) : ?>
+										<div class="swiper-slide">
+											<picture>
+												<img class="product-swiper-img" src="<?= esc_url($image); ?>" alt="">
+											</picture>
+										</div>
+									<? endforeach;
+								} else {
+									$images = get_field($post_type_prefix . 'images', $advanced_product_id);
 
-                                foreach ($images as $image_row) : ?>
-                                    <div class="swiper-slide">
-                                        <picture>
-                                            <? $image = $image_row[$post_type_prefix . 'images_item']; ?>
-                                            <img class="product-swiper-img" src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>">
-                                        </picture>
-                                    </div>
-                                <? endforeach; ?>
+									foreach ($images as $image_row) : ?>
+										<div class="swiper-slide">
+											<picture>
+												<? $image = $image_row[$post_type_prefix . 'images_item']; ?>
+												<img class="product-swiper-img" src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>">
+											</picture>
+										</div>
+									<? endforeach;
+								}?>
                             </div>
                             <div class="slider__control">
                                 <div class="slider__btn slider__btn--prev">
@@ -165,27 +205,34 @@
                 <div class="product-detail__right">
                     <div class="product-detail__header" id="product-detail__header">
                         <h2 class="title"><?= get_field($post_type_prefix . 'name', $advanced_product_id) ?></h2>
-                        <? if ($isDetailedProductPage) : ?>
+                        <?/* if ($isDetailedProductPage) : ?>
                             <div class="product-detail__product-amount">
                                 <?= $woo_product->get_price_html() ?>
                             </div>
-                        <? endif; ?>
+                        <? endif; */?>
                         <p><?= get_field($post_type_prefix . 'short_description', $advanced_product_id) ?></p>
                     </div>
 
                     <div class="product-detail__card">
                         <article class="article-product">
                             <h3 class="title--extra-small title--blue"><?= get_field($post_type_prefix . 'feature_title', $advanced_product_id) ?></h3>
-                            <ul>
-                                <?
-                                $features = get_field($post_type_prefix . 'features_features', $advanced_product_id);
+                            <?=get_field('advanced_product_description', $advanced_product_id)?>
+                            <?$features = get_field($post_type_prefix . 'features_features', $advanced_product_id);?>
 
-                                foreach ($features as $feature_row) :
-                                    $feature = $feature_row[$post_type_prefix . 'features_features_item']; ?>
-                                    <li><?= $feature ?></li>
-                                <? endforeach; ?>
-                            </ul>
-                            <p class="text--semi-bold"><?= get_field($post_type_prefix . 'weight', $advanced_product_id) ?></p>
+                            <?if ($features):?>
+                                <ul>
+                                    <?foreach ($features as $feature_row) :
+                                        $feature = $feature_row[$post_type_prefix . 'features_features_item']; ?>
+                                        <li><?= $feature ?></li>
+                                    <?endforeach;?>
+                                </ul>
+                            <?endif;?>
+
+                            <?$weight = get_field($post_type_prefix . 'weight', $advanced_product_id);?>
+                            <?if ($weight):?>
+                                <p class="text--semi-bold"><?=$weight?></p>
+                            <?endif;?>
+                            
                             <p class="text--semi-bold"><?= get_static_content('product_donation') ?></p>
                             <!--p class="title--extra-small">Buy <span class="text--blue">1 pack now</span></p-->
                             <? if(!$isDetailedProductPage) : ?>
@@ -269,6 +316,24 @@
                                 <? endif; ?>
                         </article>
                         <? if ($isDetailedProductPage && $isVariable) : ?>
+							<style>
+								/* Когда есть текущая цена (ins) — стиль для неё */
+								.product-detail__product-price .price:has(ins) ins span,
+								.product-detail__product-price .price:has(.product-detail__product-amount) .product-detail__product-amount {
+								  text-decoration: none;
+								  color: #27AAE2;
+								}
+
+								/* Когда НЕТ ins и НЕТ .product-detail__product-amount — применяем стиль к del или к последнему видимому элементу */
+								.product-detail__product-price .price:not(:has(ins, .product-detail__product-amount)) del span,
+								.product-detail__product-price .price:not(:has(ins, .product-detail__product-amount)) > :not(.screen-reader-text):last-child {
+									text-decoration: none;
+									span, bdi {
+										text-decoration: none;
+										color: #27AAE2;
+									}
+								}
+							</style>
                             <div class="product-detail__product-price" style="display:none;" data-subscription-from-string="<?= htmlspecialchars(sprintf(get_static_content('from_s'), $first_subscription_variation['price_html']), ENT_QUOTES, 'UTF-8') ?>">
                                 <?php if ($first_subscription_variation): ?>
                                     <span class="product-detail__product-price-from" data-subscription-from-price="<?= htmlspecialchars($first_subscription_variation['price_html'], ENT_QUOTES, 'UTF-8') ?>">
@@ -295,6 +360,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="page-content">
+                <?the_content();?>
             </div>
             <div class="tabs product-detail__tabs" data-slider="tabs">
                 <div thumbsSlider="" class="swiper tabs__header">

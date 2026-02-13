@@ -15,10 +15,12 @@
                 </div>
                 <div class="shop__cards load-more-items">
                     <?
+
                     $args = [
                         'limit' => -1, // -1 for all products
                         'orderby' => 'date',
                         'order' => 'ASC',
+						'status'  => 'publish',
                         'return' => 'ids', // Return product IDs only for better performance
                     ];
 
@@ -30,6 +32,23 @@
 
                         foreach ($products as $product_id) {
                             $product = wc_get_product($product_id);
+
+                            $first_variation = null;
+                            foreach ($product->get_children() as $var_id) {
+                                $first_variation = wc_get_product($var_id);
+                                break;
+                            }
+							
+							$main_image_id = $product->get_image_id();
+							$gallery_image_ids = $product->get_gallery_image_ids();
+
+							$all_image_ids = $main_image_id ? array_merge([$main_image_id], $gallery_image_ids) : $gallery_image_ids;
+							
+							$all_images = [];
+							foreach ($all_image_ids as $image_id) {
+								$all_images[] = wp_get_attachment_image_url($image_id, 'full');
+							}
+							
                             $isVariable = $product->get_type() === 'variable';
                             $post_type = 'advanced_product';
                             $post_type_prefix = $post_type . '_';
@@ -64,16 +83,26 @@
                                         <div class="swiper">
                                             <div class="swiper-wrapper">
                                                 <?
-                                                $images = get_field($post_type_prefix . 'images', $advanced_product_id);
+												if (!empty($all_images)) {
+													foreach ($all_images as $image) : ?>
+														<div class="swiper-slide">
+															<picture>
+																<img src="<?= esc_url($image); ?>" alt="">
+															</picture>
+														</div>
+													<? endforeach;
+												} else {
+													$images = get_field($post_type_prefix . 'images', $advanced_product_id);
 
-                                                foreach ($images as $image_row) : ?>
-                                                    <div class="swiper-slide">
-                                                        <picture>
-                                                            <? $image = $image_row[$post_type_prefix . 'images_item']; ?>
-                                                            <img src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>">
-                                                        </picture>
-                                                    </div>
-                                                <? endforeach; ?>
+													foreach ($images as $image_row) : ?>
+														<div class="swiper-slide">
+															<picture>
+																<? $image = $image_row[$post_type_prefix . 'images_item']; ?>
+																<img src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>">
+															</picture>
+														</div>
+													<? endforeach;
+												}?>
                                             </div>
                                             <div class="slider__control">
                                                 <div class="slider__btn slider__btn--prev">
@@ -100,7 +129,7 @@
                                         <div class="card__price">
                                             <div class="card__price__title"><?= get_static_content('price') ?>:</div>
                                             <div class="card__price__price">
-                                                <?= $isVariable ? sprintf(get_static_content('from_s'), $product->get_price_html()) : $product->get_price_html() ?>
+                                                <?= $first_variation ? $first_variation->get_price_html() : ($isVariable ? sprintf(get_static_content('from_s'), $product->get_price_html()) : $product->get_price_html()) ?>
                                             </div>
                                         </div>
                                         <button class="card__buy-btn">

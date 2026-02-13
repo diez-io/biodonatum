@@ -14,10 +14,11 @@
                         <div class="head">
                             <h2 class="title"><?= get_static_content('blog') ?></h2>
                         </div>
-                        <div class="island">
-                            <?= get_static_content('blog_text_1') ?>
-                            <?= get_static_content('blog_text_2') ?>
-                            <?= get_static_content('blog_text_3') ?>
+                        <div class="island board">
+                            <?= get_static_content('blog_cloud_1') ?>
+                        </div>
+						<div class="island board">
+                            <?= get_static_content('blog_cloud_2') ?>
                         </div>
                         <div class="blog__cards load-more-items">
 

@@ -15,9 +15,7 @@
                             <h2 class="title"><?= get_static_content('vacancy') ?></h2>
                         </div>
                         <div class="editor">
-                            <p>
-                                <?= get_static_content('vacancy_text') ?>
-                            </p>
+                            <?= get_static_content('vacancy_text') ?>
                         </div>
                         <div class="vacancy__cards load-more-items">
                             <?
@@ -86,7 +84,7 @@
                 </div>
             </section>
             <div class="vacancy__section-wrapper">
-                <section class="section section--bg section--hero" style="background-image: url('<?= get_template_directory_uri(); ?>/assets/images/vacancy/team.jpg')">
+                <section class="section section--bg section--hero" style="background-image: url('/wp-content/uploads/2025/08/photo_2025-08-18-12.16.29.jpeg')">
                 </section>
                 <section class="section pt-50 vacancy__section-wrapper__form">
                     <div class="container">

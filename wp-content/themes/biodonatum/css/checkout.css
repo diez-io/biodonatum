@@ -113,7 +113,7 @@ textarea::placeholder {
 }
 
 .checkout tfoot td {
-	padding-right: 40px;
+	// padding-right: 40px;
 }
 
 .checkout tfoot tr:last-child th,
@@ -234,7 +234,7 @@ textarea::placeholder {
 		padding-left: 20px;
 	}
 	.checkout tfoot td {
-		padding-right: 20px;
+		// padding-right: 20px;
 		text-align: right;
 	}
 
@@ -285,4 +285,17 @@ textarea::placeholder {
 
 .revolut-payment-method-save input {
 	all: revert;
+}
+
+
+.woocommerce-shipping-methods:has(> :nth-child(2)) {
+  margin-left 10px;
+  li label { padding: 10px; }
+  li:has(input:checked) {
+	  label {
+		  background-color: #f9f9f9;
+		  border: 1px solid #f9f9f9;
+		  border-radius: 10px;
+	  }
+	}
 }
